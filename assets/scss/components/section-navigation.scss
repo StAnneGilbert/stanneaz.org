@@ -1,0 +1,31 @@
+/*========================
+ Section sub-navigation below header
+ =======================*/
+.section-navigation {
+  background:#fff;
+  box-shadow:0 0 2px #C3BFB7;
+  font-size:15px;
+  line-height:20px;
+  padding:20px 0 8px;
+  text-align:center;
+  border-bottom:1px solid #D3D1CB;
+
+  ul {
+    margin:0;
+  }
+  li {
+    display:inline-block;
+    vertical-align:top;
+    margin:0 12px 12px;
+  }
+
+  a {
+    color:$dark-gray;
+    text-decoration:none;
+    &:hover { text-decoration:underline; }
+  }
+  .selected a {
+    color:$dark-brown;
+    font-weight:600;
+  }
+}

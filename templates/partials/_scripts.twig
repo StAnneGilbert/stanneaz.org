@@ -1,0 +1,22 @@
+{% if craft.config.devMode %}
+<script src='/assets/js/site.js'></script>
+{% else %}
+<script src='/assets/js/site.min.js'></script>
+{% endif %}
+<script>
+var WebFontConfig = {
+    google: {
+        families: [ 'Open+Sans:300italic,400italic,400,300,600,700' ]
+    },
+    timeout: 2000
+};
+
+(function(){
+    var wf = document.createElement("script");
+    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+        '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.async = 'true';
+    document.head.appendChild(wf);
+})();
+</script>
+{{ siteWideContent.embedCode|raw }}

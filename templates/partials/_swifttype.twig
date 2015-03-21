@@ -1,0 +1,15 @@
+{% if entry.pageImage|length %}
+  <meta class='swiftype' name='image' data-type='enum' content="{{ entry.pageImage[0].getUrl('tf280') }}">
+{% else %}
+    {% if entry.profileImage|length %}
+      <meta class='swiftype' name='image' data-type='enum' content="{{ entry.profileImage[0].getUrl('tf280') }}">
+    {% endif %}
+{% endif %}
+
+{% if entry.heading is not empty %}
+  <meta class='swiftype' name='title' data-type='string' content='{{ entry.heading }}' />
+{% else %}
+  <meta class='swiftype' name='title' data-type='string' content='{{ entry.title }}' />
+{% endif %}
+
+<meta class='swiftype' name='published_at' data-type='date' content='{{ entry.postDate|date('c') }}' />

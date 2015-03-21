@@ -1,0 +1,54 @@
+{% set q = craft.request.getParam('q')|split(":") %}
+{% set filterFor = q[0] %}
+{% set filterId = q[1] %}
+{% set messageList = "" %}
+{% if filterFor == "month" %}
+    {% set monthValue = filterId|split("|") %}
+    {% set yrmo = monthValue[1]|split("-") %}
+    {% set year = yrmo[0] %}
+    {% set month = yrmo[1] %}
+
+    {% set firstDayOfMonth = year ~ "-" ~ month ~ "-01" %}
+    {% set daysInThisMonth = firstDayOfMonth|date('t') %}
+    {% set lastDayOfMonth  = year ~ "-" ~ month ~ "-" ~ daysInThisMonth %}
+
+    {% set thisMonthsEntries = craft.entries.section('media').mediaDate('and', '>= ' ~ firstDayOfMonth, '<= ' ~ lastDayOfMonth) %}
+    {% set messageList = thisMonthsEntries %}
+{% else %}
+  {% set messageList = craft.entries.section('media').relatedTo({ targetElement: filterId }) %}
+{% endif %}
+
+{% paginate messageList.limit(10) as entries %}
+  <div class="content-summary-list">
+
+    {% for post in entries %}
+      <div class="content-summary-block">
+        {% if post.speaker|length %}
+          {% if post.speaker[0].profileImage|length %}
+            <div class="media">
+              <img src="{{ post.speaker[0].profileImage[0].getUrl('tf160') }}" alt="" class="round-avatar" />
+            </div>
+          {% endif %}
+        {% endif %}
+        <div class="description">
+          <h5><a href="{{ post.url }}">{{ post.title }}</a></h5>
+          {% set topics = post.mediaTopic %}
+          {% for topic in topics %}
+              <a href='?q=topic:{{ topic.id }}'>{{ topic.title }}</a>{% if not loop.last %},{% endif %}
+          {% endfor %}
+          {% if post.mediaSeason|length %}
+            <a href="?q=season:{{ post.mediaSeason[0].id }}" class="item-url">{{ post.mediaSeason[0].title }}</a>,
+          {% endif %}
+          <div class="excerpt">
+            <p>{{ post.body | trimit(120) }} <a href="{{ post.url }}">{{ "Read more"|t }}</a></p>
+            <p class="muted">{{ post.mediaDate|date('F d, Y') }} {% if post.speaker|length %} &nbsp;&middot;&nbsp;{{ post.speaker[0].title }} {% endif %}</p>
+          </div>
+        </div>
+      </div> <!-- .content-summary-block -->
+    {% endfor %}
+
+  </div> <!-- .search-results-list -->
+
+  {% include "partials/_pagination" %}
+
+{% endpaginate %}

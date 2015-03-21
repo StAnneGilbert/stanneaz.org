@@ -1,0 +1,69 @@
+/*========================
+ Circular links with icons inside
+ =======================*/
+.social-circles {
+  li {
+    display:inline-block;
+    vertical-align:top;
+  }
+  a {
+    display:block;
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    text-align:center;
+    padding:8px 0;
+  }
+  i {
+    color:#fff;
+    font-size:20px;
+    line-height:20px;
+    display:inline-block;
+    vertical-align:top;
+    position:relative;
+  }
+
+  .bg-email {
+    background:#63A9C0;
+    &:hover {
+      background:darken(#63A9C0, 8%);
+    }
+  }
+  .bg-twitter {
+    background:#00ACED;
+    &:hover {
+      background:darken(#00ACED, 8%);
+    }
+  }
+  .bg-facebook {
+    background:#3B5998;
+    &:hover {
+      background:darken(#3B5998, 8%);
+    }
+    i {
+      top:1px;
+    }
+  }
+  .bg-google-plus {
+    background:#DD4B39;
+    &:hover {
+      background:darken(#DD4B39, 8%);
+    }
+    i {
+      top:2px;
+      left:2px;
+    }
+  }
+  .bg-not-sure {
+    background:#517FA4;
+    &:hover {
+      background:darken(#517FA4, 8%);
+    }
+  }
+  .bg-flickr {
+    background:#FF0084;
+    &:hover {
+      background:darken(#FF0084, 8%);
+    }
+  }
+}

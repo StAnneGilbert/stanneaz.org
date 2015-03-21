@@ -1,0 +1,33 @@
+{% extends "layouts/_layout" %}
+
+{% block pagetype %}
+  {% switch entry.type %}
+    {% case "ministryLanding" %}
+      <meta class='swiftype' name='type' data-type='enum' content='ministry' />
+    {% case "contactUs" %}
+      <meta class='swiftype' name='type' data-type='enum' content='contact' />
+    {% case "featured" %}
+      <meta class='swiftype' name='type' data-type='enum' content='featured events' />
+    {% default %}
+      <meta class='swiftype' name='type' data-type='enum' content='page' />
+  {% endswitch %}
+{% endblock %}
+
+{# {% block header %}
+  {% if entry.type == "seriesLibrary" %}
+      {% include "page/_headers/_series" %}
+  {% elseif entry.type == "pages" or entry.type == "staffLanding" or entry.type == "ministrySubPage" or entry.type == "subPage" %}
+    {% include "page/_headers/_pages" %}
+  {% elseif entry.type == "contactUs" %}
+    {% include "page/_headers/_contactUs" %}
+  {% elseif entry.type == "ministryLanding" %}
+    {% include "page/_headers/_ministry" %}
+  {% elseif entry.type == "starthere" %}
+  {% else %}
+    {% include "page/_headers/_default" %}
+  {% endif %}
+{% endblock %} #}
+
+{% block content %}
+  {%- include "page/_types/" ~ entry.type -%}
+{% endblock %}

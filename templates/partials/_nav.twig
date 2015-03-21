@@ -1,0 +1,78 @@
+<!-- .sf-header must contain the links bar and the traditional header for the sticky footer layout -->
+<div class="sf-header nav-slide-element">
+  <div class="links-bar">
+    <div class="container">
+    {% if craft.locale == 'en_us' %}
+      <ul class="">
+        <li><a href="/es"><i class="fa fa-refresh"></i> En Espa&ntilde;ol</a></li>
+        <li><a href="/connect/events"><i class="fa fa-calendar"></i> Event Calendar</a></li>
+        <li><a href="https://stanneaz.onthecity.org/session/new" target='_blank'><i class="fa fa-user"></i> My St. Anne</a></li>
+        <li><a href="/about/contact-us"><i class="fa fa-envelope"></i> Contact Us</a></li>
+      </ul>
+    {% elseif craft.locale == 'es_us' %}
+        
+      <ul class="">
+        <li><a href="/"><i class="fa fa-refresh"></i> English</a></li>
+        <li><a href="/es/about/times-location"><i class="fa fa-clock-o"></i> Horario de Misas</a></li>
+        <li><a href="/es/about"><i class="fa fa-map-marker"></i> Direcciones</a></li>
+      </ul>
+    {% endif %}
+
+      <!-- Start Here button for screen-sm size range, where it doesn't fit in main navigation -->
+      <a href="/start-here" class="btn btn-start-here">{{ "New? Start Here"|t }} &rsaquo;</a>
+    </div> <!-- .container -->
+  </div> <!-- .toolbar -->
+  <header class="site-header">
+    <div class="container clearfix">
+      <div class="logo">
+      {% if craft.locale == 'en_us' %}
+        <a href="/"><img src="/assets/img/logo.svg" alt="St. Anne Roman Catholic Parish" /></a>
+      {% elseif craft.locale == 'es_us' %}
+        <a href="/es/"><img src="/assets/img/logo.svg" alt="St. Anne Roman Catholic Parish" /></a>
+      {% endif %}
+      </div>
+      <div class="mobile-menu-toggle visible-xs" data-toggle="mobile-menu">
+        <i class="icon-mobile-menu"></i>
+      </div>
+      <div class="site-menu hidden-xs">
+        <ul>
+          {% set pages = craft.entries.section('pages') %}
+          {% for page in pages %}
+            {% if page.level == 1 %}
+            {% set hasmenu = page.hasDescendants() ? "has-menu" : "" %}
+            <li class='{{ hasmenu }} {% if page.id == entry.id or entry.isDescendantOf(page) %}current-page{%endif%}'>
+              {{ page.getLink() }}
+              <ul class='sub-menu'>
+            {% endif %}
+
+              {% if page.hasDescendants() %}
+                {% set children = page.getDescendants(1) %}
+                {% for child in children %}
+                  {% if child.level == 2 %}
+                    <li>{{ child.getLink() }}</li>
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+
+            {% if page.level == 1 %}
+                </ul>
+              </li>
+            {% endif %}
+          {% endfor %}
+          <li class="search" id="menusearch">
+            <a href="#" class='search-open'><i class="fa fa-search"></i></a>
+            <form action="/search" id="nav-search" class="search-form">
+              <div class="search-input-wrap">
+                <i class="fa fa-search"></i>
+                <input type="text" name="q" id='nav-search-query' placeholder="{{ "I'm searching for"|t }}..." />
+              </div>
+            </form>
+          </li>
+          <li>
+            <a href="/start-here" class="btn btn-light-blue">{{ "Start Here"|t }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+</div> <!-- .sf-header -->

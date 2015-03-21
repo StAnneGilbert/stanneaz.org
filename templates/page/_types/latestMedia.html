@@ -1,0 +1,23 @@
+{% set spanish = "1:00pm" %}
+{% set english = "5:00pm" %}
+{% set latest = "/media/media-library" %}
+{% set break = 0 %}
+{% if craft.locale == "en_us" %}
+  {% for item in craft.entries.section('media').order('mediaDate DESC') if break == 0 %}
+      {% set time = item.mediaDate|date('g:ia') %}
+      {% if time == english %}
+        {% set break = 1 %}
+        {% set latest = item.url %}
+      {% endif %}
+  {% endfor %}
+{% elseif craft.locale == "es_us" %}
+  {% for item in craft.entries.section('media').order('mediaDate DESC') if break == 0 %}
+      {% set time = item.mediaDate|date('g:ia') %}
+      {% if  time == spanish %}
+        {% set break = 1 %}
+        {% set latest = item.url %}
+      {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% redirect latest %} 

@@ -1,0 +1,53 @@
+<!-- .sf-footer must contain @Pontifex and the traditional footer for the sticky footer layout -->
+{% if craft.locale == "en_us" %}
+  {% set tweets = craft.twitter.get('statuses/user_timeline',{'screen_name':'pontifex'},[],false, 1) %}
+{% elseif craft.locale == "es_us" %}
+  {% set tweets = craft.twitter.get('statuses/user_timeline',{'screen_name':'pontifex_es'},[],false, 1) %}
+{% endif %}
+<div class="sf-footer nav-slide-element">
+  {% if tweets %}
+    {% set user = tweets[0].user %}
+    {% set url = 'https://twitter.com/' ~ user.screen_name ~ '/status/' ~ tweets[0].id %}
+    <div class="pontifex-tweets">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
+            <img src="/assets/img/avatar-pope-francis.png" alt="Pope Francis" class="avatar round-avatar" />
+            <div class="recent-tweet">
+              <div class="tweet-contents">
+                {{ tweets[0].text|parseTwitter|raw }}
+              </div>
+              <div class="tweet-meta">
+                <a href="{{ url }}"><i class="fa fa-twitter"></i>{{ tweets[0].created_at|relativeDate|t }}</a>
+                <span class="dot">&middot;</span>
+                <a href="{{ url }}">@{{ user.screen_name }}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  <footer class="site-footer">
+    <div class="container">
+      <div class="copyright">
+        &copy; {{ "now"|date('Y') }} {{ "St. Anne Roman Catholic Parish"|t }}
+
+        <div class="links">
+          {% for item in siteWideContent.footerLinks %}
+              {% set link = item.footerLink %}
+              <span class="dot">&middot;</span>
+              <a href='{{ link.url }}' {{ link.target ? ' target="_blank"' }}>{{ link.linkText }}</a>
+          {% endfor %}
+          
+          {# <a href="/contact-us">{{ "Contact Us"|t }}</a>
+          <span class="dot">&middot;</span>
+          <a href="/privacy-terms">{{ "Privacy & Terms"|t }}</a> #}
+        </div>
+      </div>
+      <div class="site-by">
+        <a href="http://tippingmedia.com/" class="credit">Designed with <span class="heart"><i class="fa fa-heart-o"></i></span> by Tipping Media</a>
+      </div>
+    </div>
+  </footer>
+</div> <!-- .sf-footer -->

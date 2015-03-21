@@ -1,0 +1,42 @@
+<div id="mobile-nav-menu">
+  <div class="text-pad">
+    <a href="/start-here" class="btn btn-full-width btn-light-blue">New? Start Here &rsaquo;</a>
+  </div>
+
+  <ul class="main-menu">
+    {% set pages = craft.entries.section('pages').level(1) %}
+    {% nav page in pages %}
+      <li>
+        {{ page.getLink() }}
+        {% if page.level == 1 %}
+          <ul>
+        {% endif %}
+
+          {% if page.hasDescendants() %}
+            {% set children = page.getDescendants(1) %}
+            {% for child in children %}
+              {% if child.level == 2 %}
+                <li>{{ child.getLink() }}</li>
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+       
+        {% if page.level == 1 %}
+          </ul>
+        {% endif %}
+      </li>
+    {% endnav %}
+  </ul>
+
+  <img src="/assets/img/logomark-black.svg" class="logomark">
+
+  <div class="text-pad">
+    <p class="copyright">Copyright &copy; {{ "now"|date("Y") }}<br>St. Anne Catholic Parish</p>
+
+    <p class="links">
+      <a href="/contact-us">Contact Us</a>
+      <span class="dot">&middot;</span>
+      <a href="/privacy-terms">Privacy &amp; Terms</a>
+    </p>
+  </div>
+</div>

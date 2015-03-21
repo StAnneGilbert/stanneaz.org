@@ -1,0 +1,17 @@
+{% if paginate.totalPages > 1 %}
+  <div class='pagination'>
+  {% if paginate.prevUrl %}<a href="{{ paginate.prevUrl }}" class='btn btn-sm btn-light-blue btn-prev' title='Go to previous page'>&lsaquo; Prev</a>{% endif %}
+  <ul class='pages'>
+    {% for page, url in paginate.getPrevUrls(5) %}
+        <li><a href="{{ url }}" title='Go to page {{ page }}'>{{ page }}</a></li>
+    {% endfor %}
+
+    <li class="current-page"><a href='#'>{{ paginate.currentPage }}</a></li>
+
+    {% for page, url in paginate.getNextUrls(5) %}
+        <li><a href="{{ url }}" title='Go to page {{ page }}'>{{ page }}</a></li>
+    {% endfor %}
+  </ul>
+  {% if paginate.nextUrl %}<a href="{{ paginate.nextUrl }}" class="btn btn-sm btn-light-blue btn-next" title='Go to next page'>Next &rsaquo;</a>{% endif %}
+  </div>{#  end pagination #}
+{% endif %}

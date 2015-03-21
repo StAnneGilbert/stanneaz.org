@@ -1,0 +1,83 @@
+.welcome-hero {
+  background:url('../img/bg-welcome.png') no-repeat bottom center;
+  background-size:cover;
+
+  h1, h2 {
+    font-weight:400;
+    margin:0;
+  }
+  h1 {
+    color:#fff;
+  }
+  h2 {
+    color:$light-body;
+  }
+
+  .play-video {
+    background:rgba(0,0,0,.5);
+    border-radius:50%;
+    display:block;
+    color:#fff;
+    text-align:center;
+    cursor:pointer;
+
+    i {
+      margin-left:8px;
+    }
+
+    &:hover {
+      background:$dark-blue;
+    }
+  }
+
+  @media screen and (max-width:$screen-sm-max) {
+    .text-pad {
+      padding-top:54px;
+      padding-bottom:30px;
+    }
+
+    .play-video {
+      width:90px;
+      height:90px;
+      font-size:42px;
+      line-height:48px;
+      padding:21px 0;
+      margin:0 auto 42px;
+    }
+
+    h1 {
+      font-size:30px;
+      line-height:36px;
+    }
+    h2 {
+      font-size:20px;
+      line-height:26px;
+    }
+  }
+  @media screen and (min-width:$screen-md-min) {
+    .text-pad {
+      padding-top:20%;
+      padding-bottom:5%;
+    }
+
+    .play-video {
+      width:120px;
+      height:120px;
+      font-size:48px;
+      line-height:60px;
+      padding:30px 0;
+      margin:0 auto 72px;
+    }
+
+    h1 {
+      font-size:48px;
+      line-height:64px;
+      color:#fff;
+    }
+    h2 {
+      font-size:24px;
+      line-height:34px;
+      color:$light-body;
+    }
+  }
+}

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss 
+    xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" 
+    xmlns:content="http://purl.org/rss/1.0/modules/content/"
+    xmlns:atom="http://www.w3.org/2005/Atom" 
+    version="2.0">
+<channel>
+    <atom:link href="http://stanneaz.org/rss/messages.xml" rel="self" type="application/rss+xml" />
+    <title>Preston Trail Community Church Podcast</title>
+    <link><![CDATA[{{ siteUrl }}]]></link>
+    <copyright><![CDATA[© 2014]]></copyright>
+    <description><![CDATA[{{ siteWideContent.siteDescription }}]]></description>
+    <language>en-us</language>
+    <pubDate>{{ now.rss }}</pubDate>
+    <lastBuildDate>{{ now.rss }}</lastBuildDate>
+    {% if fallbacks.fallbackSermonImage|length %}
+      <image>
+        <url>{{ fallbacks.fallbackSermonImage[0].url }}</url>
+        <title>{{ siteName }}</title>
+        <link>{{ siteUrl }}</link>
+      </image>
+      <itunes:image href="{{ feeds.podcastImage[0].url }}" />
+    {% endif %}
+    <itunes:summary><![CDATA[{{ siteWideContent.siteDescription }}]]></itunes:summary>
+    <itunes:keywords>St. Anne,podcast,homilies,catholic</itunes:keywords>
+    <itunes:author>St. Anne's Roman Catholic Parish</itunes:author>
+    <itunes:explicit>clean</itunes:explicit>
+    <itunes:owner>
+        <itunes:email>info@stanneaz.org</itunes:email>
+        <itunes:name>St. Anne's Roman Catholic Parish</itunes:name>
+    </itunes:owner>
+
+    <itunes:block>no</itunes:block>
+    <itunes:category text="Religion &amp; Spirituality">
+        <itunes:category text="Christianity"/>
+    </itunes:category>
+    {% for entry in craft.entries.section('homilies').limit('50').find() %}
+        {% if entry.audio|length %}
+        {% set audio = entry.audio[0].url %}
+        <item>
+            <title>{{ entry.title }}</title>
+            <link>{{ entry.url }}</link>
+            <pubDate>{{ entry.postDate.rss }}</pubDate>
+        {% if entry.speaker|length %}
+            <itunes:author>{{ entry.speaker[0].title }}</itunes:author>
+        {% endif %}
+            <author>info@stanneaz.org (St. Anne's Roman Catholic Parish)</author>
+            <guid>{{ audio }}</guid>
+            <description><![CDATA[{{ entry.mediaDescription }}]]></description>
+            <enclosure
+                url="{{ audio }}"
+                type="audio/mpeg"
+                length="3600000"
+            />
+        {% if entry.sermonImage|length %}
+            <itunes:image href="{{ entry.postImage[0].url }}" />
+        {% endif %}
+            <itunes:keywords>
+        {% spaceless %}
+            St. Anne's, Podcast, Homily, 
+        {% endspaceless %}
+            </itunes:keywords>
+        </item>
+        {% endif %}
+    {% endfor %}
+</channel></rss>

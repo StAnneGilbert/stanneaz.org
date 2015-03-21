@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>{{ siteName }}</title>
+        <link>{{ siteUrl }}</link>
+        <atom:link href="{{ craft.request.url }}" rel="self" type="application/rss+xml" />
+        <description>{{ siteWideContent.siteDescription }}</description>
+        <language>en-us</language>
+        <pubDate>{{ now.rss }}</pubDate>
+        <lastBuildDate>{{ now.rss }}</lastBuildDate>
+        {% if feeds.podcastImage|length %}
+          <image>
+            <url>{{ feeds.podcastImage[0].getUrl('tf240') }}</url>
+            <title>{{ siteName }}</title>
+            <link>{{ siteUrl }}</link>
+          </image>
+        {% endif %}
+        {% for entry in craft.entries.section('newsUpdates').limit('80').find() %}
+            <item>
+                <title>{{ entry.title }}</title>
+                <link>{{ entry.url }}</link>
+                <pubDate>{{ entry.postDate.rss }}</pubDate>
+                {% if entry.postAuthor|length %}
+                    <author>{{ entry.postAuthor[0].title }}</author>   
+                {% endif %}
+                <guid>{{ entry.url }}</guid>
+                <description><![CDATA[
+                    {{ entry.body }}
+                ]]></description>
+            </item>
+        {% endfor %}
+    </channel>
+</rss>

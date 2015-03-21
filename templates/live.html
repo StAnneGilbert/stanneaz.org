@@ -1,0 +1,59 @@
+{# Homepage Template #}
+{% extends "layouts/_layout" %}
+
+{% block content %}
+  <!-- .sf-content for flex sticky footer -->
+  <div class="sf-content nav-slide-element">
+    <div class="section-navigation">
+      <div class="container">
+        <ul>
+          <li><a href="/media/media-library">Media Library</a></li>
+          <li class="selected"><a href="{# watch-live.html #}">Watch Live</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="page-content-container">
+      <div class="container standard-container">
+
+        <div class="featured-video-container">
+          <div class="video-placeholder">
+            {# <div class="video-actions">
+              <div class="action-icon">
+                <i class="fa fa-play"></i>
+              </div>
+            </div> #}
+           {#  <div class="countdown">
+              Watch <span class="red">LIVE</span> in 2 days 19 hrs 38 min 19 sec
+            </div> #}
+            {# {% if liveBroadcastSettings.placeholderImage|length %}
+              <img src="{{ liveBroadcastSettings.placeholderImage[0].url }}" alt="Live Broadcast" />
+            {% endif %} #}
+            {{ liveBroadcastSettings.liveBroadcastVideoEmbed | raw }}
+          </div>
+        </div>
+
+        <div class="section-title">
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <h3>Live Broadcast</h3>
+              {# <h3 class="small">June 9, 2014 &nbsp;&middot;&nbsp; 12:00pm</h3> #}
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 action-links addthis_toolbox" data-title='Watch LIVE right now.' 
+          addthis:title='Watch LIVE right now.' addthis:url="{{ siteUrl }}live" >
+              <a href="#" class="addthis_button_more btn btn-light-brown-border"><i class="fa fa-share"></i> Share This &amp; Invite</a>
+            </div>
+          </div>
+        </div>
+
+        {% if entry.lead is not empty %}
+          <p class="lead">{{ entry.lead }}</p>
+        {% endif %}
+        {{ entry.body }}
+
+
+
+      </div> <!-- .container -->
+    </div> <!-- .page-content-container -->
+  </div> <!-- .sf-content -->
+{% endblock %}

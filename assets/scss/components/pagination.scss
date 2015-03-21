@@ -1,0 +1,40 @@
+/*========================
+ Number-based pagination with optional prev/next links
+ =======================*/
+.pagination {
+  position:relative;
+  font-size:16px;
+  line-height:20px;
+
+  .btn {
+    position:absolute;
+    top:0;
+  }
+  .btn-prev {
+    left:0;
+  }
+  .btn-next {
+    right:0;
+  }
+
+  ul {
+    text-align:center;
+    line-height:28px;
+    padding:0 80px;
+  }
+  li {
+    display:inline-block;
+    vertical-align:top;
+    margin:0 4px;
+  }
+  li a {
+    color:$light-blue;
+    text-decoration:none;
+    &:hover {
+      color:$dark-blue;
+    }
+  }
+  .current-page a {
+    color:$dark-brown;
+  }
+}

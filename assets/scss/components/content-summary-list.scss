@@ -1,0 +1,97 @@
+/*========================
+ Content summary lists – title, subtitlie, and summary; optional thumbnail
+ =======================*/
+
+// List container padding
+@media screen and (min-width:($screen-xs+1)) {
+  .content-summary-list {
+    padding-top:48px;
+    margin-bottom:40px;
+  }
+}
+@media screen and (max-width:$screen-xs) {
+  .content-summary-list {
+    padding-top:24px;
+    margin-bottom:30px;
+  }
+}
+
+// Individual content blocks
+.content-summary-block {
+  @include clearfix();
+
+  padding:30px 0;
+  border-bottom:1px solid $border;
+  font-size:16px;
+  line-height:26px;
+
+  .media {
+    float:right;
+  }
+  .media img {
+    width:160px;
+    height:auto;
+    display:block;
+  }
+  .media + .description {
+    margin-right:190px;
+  }
+
+  h5 {
+    margin-bottom:4px;
+  }
+  h5 a {
+    color:$dark-gray;
+    text-decoration:none;
+    &:hover {
+      text-decoration:underline;
+    }
+  }
+
+  a.item-url {
+    display:inline-block;
+    font-size:14px;
+    line-height:18px;
+    font-weight:400;
+    color:$light-blue;
+    text-decoration:none;
+    word-break:break-all;
+    &:hover {
+      text-decoration:underline;
+    }
+  }
+
+  .excerpt {
+    padding-top:6px;
+  }
+
+  p {
+    margin-bottom:0;
+  }
+
+  @media screen and (max-width:$screen-xs-max) {
+    font-size:14px;
+    line-height:20px;
+  }
+  @media screen and (min-width:($screen-xs+1)) and (max-width:$screen-xs-max) {
+    .media img {
+      width:100px;
+    }
+    .media + .description {
+      margin-right:120px;
+    }
+  }
+  @media screen and (max-width:$screen-xs) {
+    .media {
+      float:left;
+    }
+    .media img {
+      max-width:60px;
+      max-height:60px;
+    }
+    .media + .description {
+      margin-right:0;
+      margin-left:76px;
+    }
+  }
+}

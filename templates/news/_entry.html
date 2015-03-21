@@ -1,0 +1,112 @@
+{# Homepage Template #}
+{% extends "layouts/_layout" %}
+
+{% block pagetype %}{% endblock %}
+
+{% block content %} 
+ <!-- .sf-content for flex sticky footer -->
+  <div class="sf-content nav-slide-element">
+    <div class="page-content-container">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-10 col-lg-offset-1">
+
+            <div class="row bottom-padding">
+              <div class="col-xs-6">
+                <div class='addthis_native_toolbox' data-url="{{ entry.url }}" data-title="{{ entry.title }}">
+                  <a class='addthis_button_facebook_like' fb:like:layout="button_count"></a>
+                  <a class='addthis_button_tweet'></a>
+                  <a class='addthis_button_compact'></a>
+                  <div class="atclear"></div>
+                </div>
+              </div>
+              <div class="col-xs-6 text-right font-size-14">
+                <a href="{{ siteUrl }}media/news-updates">{{ "View more news & updates"|t }} &rsaquo;</a>
+              </div>
+            </div>
+            
+            {% if entry.postImage|length %}
+              <div class="featured-image-container">
+                <img src="{{ entry.postImage[0].url }}" alt="" />
+              </div>
+            {% endif %}
+
+            <div class="row">
+              <div class="col-md-8 col-sm-7">
+                <h3>{{ entry.title }}</h3>
+                {% if entry.postAuthor|length %}
+                  <h3 class="small">{{ entry.postAuthor.title }}</h3>
+                {% endif %}
+
+                <div class="blog-post">
+                  {% if entry.lead is not empty %}
+                    <p class="lead">{{ entry.lead }}</p>
+                  {% endif %}
+
+                  {{ entry.body }}
+
+                  <p class="published">{{ "Published"|t }} {{ entry.postDate|date('F d, Y') }}
+                  {% set topics = entry.newsTopics %}
+                  {% for topic in topics %}
+                      {% if loop.first %},{% endif %}
+                      <a href='#topic:{{ topic.id }}'>{{ topic.title }}</a>{% if not loop.last %},{% endif %}
+                  {% endfor %}</p>
+                </div>
+              </div>
+
+              <div class="col-md-4 col-sm-5 blog-sidebar">
+                {% if entry.postAuthor|length %}
+                  {% set author = entry.postAuthor[0] %}
+                  <div class="author-bio clearfix">
+                    {% if author.profileImage|length %}
+                     <img src="{{ author.profileImage[0].getUrl('tf160') }}" alt="" class="avatar round-avatar" />
+                    {% endif %}
+
+                    <div class="bio">
+                      <h5>{{ author.title }}</h5>
+                      <p>{{ author.personFirstName }} is a {{ author.professionalTitle }} at St. Anne's.</p>
+
+                      <ul class="links">
+                        {% if author.socialLinks|length %}
+                          {% for service in author.socialLinks %}
+                          {% set link = service.serviceUrl %}
+                            <li><a href='{{ link.url }}' class='{{ service.service | lower }} social__link'><i class='fa fa-{{ service.service }}'></i></a></li>
+                          {% endfor %}
+                        {% endif %}
+                      </ul>
+                    </div>
+                  </div> <!-- .author-bio -->
+                {% endif %}
+                <hr>
+                
+                {% if siteWideSocialLinks.socialLinks|length %}
+                  <h6>{{ "Connect with us"|t }}</h6>
+                  <ul class="social-circles">
+                    {% for service in siteWideSocialLinks.socialLinks %}
+                      {% set link = service.serviceUrl %}
+                        <li>
+                          <a href="{{ link.url }}" class="bg-{{ service.service }}">
+                            <i class='fa fa-{{ service.service }}'></i>
+                          </a>
+                        </li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+
+                <h6>{{ "Subscribe"|t }}</h6>
+                <p>{{ "Get the latest news and updates from St. Anne’s in your RSS feed or email inbox"|t }}!</p>
+                {% if feeds.rssFeedUrl is not empty %}
+                  <a href="{{ feeds.rssFeedUrl.url }}" class="btn btn-light-brown-border"><i class="fa fa-rss"></i> {{"RSS Feed"|t }}</a>
+                {% endif %}
+                {% if feeds.podcastSubscribeEmailLink is not empty %}
+                  <a href="{{ feeds.podcastSubscribeEmailLink.url }}" class="btn btn-light-brown-border"><i class="fa fa-envelope"></i> {{ "Email Me"|t }}</a>
+                {% endif %}
+
+              </div> <!-- .col -->
+            </div> <!-- .row -->
+          </div> <!-- .col -->
+        </div> <!-- .row -->
+      </div> <!-- .container -->
+    </div> <!-- .page-content-container -->
+  </div> <!-- .sf-content -->
+{% endblock %}

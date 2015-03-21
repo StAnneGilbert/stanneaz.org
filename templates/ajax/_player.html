@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{ siteName }} Audio Player</title>
+  <style>
+    body{
+      margin: 0px;
+      height: 0px;
+      line-height: 1;
+      background-color: #313131;
+    }
+    body > div{
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      width: 100%;
+      height: 100%;
+      background-repeat: no-repeat;
+      background-position: center center;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
+  </style>
+  <link rel="stylesheet" href="/assets/audioplayer/audio_player.css">
+  <link rel="stylesheet" href="/assets/audioplayer/theme_2.css">
+  <script src='/assets/audioplayer/audio_player.js'></script>
+</head>
+<body>
+  
+
+  {% set item = craft.entries.id(number).first() %}
+  {{ item.title }}
+  {% set audio = "" %}
+  {% if item.audio|length %}
+    {% set audio = item.audio[0].url %}
+  {% endif %}
+  {% set image = "" %}
+  {% if item.postImage|length %}
+    {% set image = item.postImage[0].getUrl('tf780x438') %}
+  {% endif %}
+  <div style='background-image:url({{ image }})'>
+    <audio controls style='display:none;' autoplay><source src='{{ audio }}' type='audio/mp3'></audio>
+  </div>
+  <script>
+    var elm = document.querySelector('audio'),
+        player = new AUDIO_PLAYER(elm,function(el){
+          el.style.display = "block";
+          el.className += ' ' + 'live';
+          player.audio_object.play();
+        });
+  </script>
+</body>
+</html>

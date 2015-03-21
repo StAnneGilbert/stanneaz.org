@@ -1,0 +1,56 @@
+
+{%- macro map_link(address) -%} 
+ http://maps.google.com/?q={{ address | url_encode }} 
+{%- endmacro -%}
+
+{%- macro vimeo_video(id, autoplay = 0, min = 0, sec = 0, width = "780", height = "438" ) -%}
+  {%- set time = "0" -%}
+  {% if min > 0 and sec > 0 %}
+    {% set time = min * 60 + sec  %}
+  {% elseif min == 0 and sec > 0 %}
+    {% set time = sec  %}
+  {% elseif min > 0 and sec == 0 %}
+    {% set time = min * 60  %}
+  {% endif %}
+
+  <div class="fitvids"><iframe src="//player.vimeo.com/video/{{ id }}?api=1&amp;autoplay={{ autoplay }}" width="{{ width }}" height="{{ height }}" data-time="{{ time }}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+{%- endmacro -%}
+
+{%- macro month_options(filter,year) -%}
+    
+    {% set months = ['January','February','March','April','May','June','July','August','September','October','November','December'] %}
+
+    <option value=''>{{ "Month"|t }}</option>
+    {% for yr in range(now|date('Y'),year) %}
+      <optgroup label="--------------------">
+        {% for mo in range(1,12) %}
+            {% set value = yr ~ "-" ~ mo %}
+            <option 
+              value='{{ months[mo - 1] }}|{{ value }}' 
+              {% if filter == value %} selected {% endif %}
+              >{{ months[mo - 1] }} {{ yr }}</option>
+        {% endfor %}
+      </optgroup>
+    {% endfor %}
+{%- endmacro -%}
+
+
+{%- macro page_image(image,move="nomove") -%}
+  {% if image|length %}
+    {% if craft.lj_mobiledetect.type == "phone" %} 
+      <div class='{{move}}' style='background-image:url({{ image[0].getUrl('tf360x418') }})'></div>
+    {% elseif craft.lj_mobiledetect.type == "tablet" %}
+      <div class='{{move}}' style='background-image:url({{ image[0].getUrl('tf780x438') }})'></div>
+    {% else %}
+      <div class='{{move}}' style='background-image:url({{ image[0].url }})'></div>
+    {% endif %}
+  {% else %}
+    {% if craft.lj_mobiledetect.type == "phone" %} 
+      <div class='{{move}}' style='background-image:url({{ siteWideContent.defaultPageImage[0].getUrl('tf360x418') }})'></div>
+    {% elseif craft.lj_mobiledetect.type == "tablet" %}
+      <div class='{{move}}' style='background-image:url({{ siteWideContent.defaultPageImage[0].getUrl('tf780x438') }})'></div>
+    {% else %}
+      <div class='{{move}}' style='background-image:url({{ siteWideContent.defaultPageImage[0].url }})'></div>
+    {% endif %}
+  {% endif %}
+{%- endmacro -%}

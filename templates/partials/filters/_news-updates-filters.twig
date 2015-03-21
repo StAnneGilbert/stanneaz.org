@@ -1,0 +1,47 @@
+{% set q = {} %}
+{% set filterFor = "" %}
+{% set filterId = "" %}
+{% set month = "" %}
+{% set value = "" %}
+{% if craft.request.getParam('q') %}
+  {% set q = craft.request.getParam('q')|split(":") %}
+  {% set filterFor = q[0] %}
+  {% set filterId = q[1] %}
+{% endif %}
+
+{% if filterFor == 'month' %}
+  {% set monthValue = filterId|split("|") %}
+  {% set month = monthValue[0] %}
+  {% set value = monthValue[1] %}
+{% endif %}
+
+<form action="" class="content-filters">
+  <label class="select" data-action='byspeaker'>
+    {% set entryIds = craft.entries.section('newsUpdates').ids() %}
+    {% set authors = craft.entries.section('people').relatedTo({ sourceElement: entryIds }) %}
+    <select name="" id="">
+       <option value=''>Author</option>
+      {% for category in authors %}
+        <option value='{{ category.id }}' {% if filterId == category.id %} selected {% endif %}>{{ category.title }}</option>
+      {% endfor %}﻿
+    </select>
+  </label>
+  <label class="select" data-action='bytopic'>
+    {% set categories = craft.categories.relatedTo({ sourceElement: entryIds }).group('newsTopics').find() %}
+    <select name="" id="">
+       <option value=''>Topic</option>
+      {% for category in categories %}
+        <option value='{{ category.id }}' {% if filterId == category.id %} selected {% endif %}>{{ category.title }}</option>
+      {% endfor %}﻿
+    </select>
+  </label>
+  <label class="select" data-action='bymonth'>
+  {% set lastPost = craft.entries.section('newsUpdates').postDate('<=' ~ (now.date)).order('postDate DESC').first() %}
+  {% if lastPost|length %}
+  {% set lastYear = lastPost.postDate|date('Y') %}
+    <select name="" id="">
+      {{ helpers.month_options(value,lastYear) }} 
+    </select>
+  {% endif %}
+  </label>
+</form>

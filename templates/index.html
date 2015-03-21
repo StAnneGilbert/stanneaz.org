@@ -1,0 +1,169 @@
+{# Homepage Template #}
+{% extends "layouts/_layout" %}
+
+{% block content %}
+  <!-- .sf-content for flex sticky footer -->
+  <div class="sf-content nav-slide-element">    
+    {% if craft.lj_cookies.get('visited') %}
+      <div class="featured-content-hero nopad" {% if entry.pageImage|length %}style=" background-image:url({{ entry.pageImage[0].url }})" {% endif %}>
+        {# <div class="container">
+          <h2 class="caps-header">{{ "Featured at"|t }} <br>St. Anne</h2>
+        </div> #}
+        <div class=''>
+         <div class="featured-items">
+            <div id="featured-content-slider" class=''>
+              {% if entry.featuredAtStAnne | length %}
+              {% set thumb = {
+                mode: 'crop',
+                width: 2000,
+                height: 690,
+                quality: 75,
+                position: 'top-center'
+            } %}
+                <ul class='bxslider'>
+                {% for item in entry.featuredAtStAnne %}
+                  {% set link = item.contentLink %}
+                    <li>
+                      {% if item.vimeoVideoId != 0 %}
+                        <iframe src="//player.vimeo.com/video/{{ item.vimeoVideoId }}?api=1&amp;autoplay=false" width=""  frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                      {% else %}
+                        {% if item.contentLink is not empty %}<a href="{{ link.url }}" {{ link.target ? ' target="_blank"' }}>{% endif %}<img src="{{ item.eventImage[0].getUrl(thumb) }}" />
+                         {% if item.contentLink is not empty %} </a>{% endif %}
+                      {% endif %}
+                      {# <div class="caption">
+                        <h3>{% if item.contentLink is not empty %}<a href="{{ link.url }}" {{ link.target ? ' target="_blank"' }}>{{ item.title }}</a>{% else %}{{ item.title }}{% endif %}</h3>
+                        <p>{{ item.description|trimit('170') }}</p>
+                      </div> #}
+                    </li>
+                {% endfor %}
+                </ul>
+              
+
+              <div id="bx-pager">
+                {% set thumb2 = {
+                    mode: 'crop',
+                    width: 80,
+                    height: 80,
+                    quality: 75,
+                    position: 'top-center'
+                } %}
+              {% for item in entry.featuredAtStAnne %}
+                <a data-slide-index="{{ loop.index - 1 }}" href=""><img src="{{ item.eventImage[0].getUrl(thumb2) }}" /></a>
+              {% endfor %}
+              </div>
+            {% endif %}
+            </div> <!-- #featured-content-slider -->
+            <span id="responsiveFlag"></span>
+          </div>
+        </div> <!-- .featured-items -->
+      </div> <!-- .block-featured-content -->
+    {% else %}
+      <div class="welcome-hero" {% if entry.pageImage|length %}style=" background-image:url({{ entry.pageImage[0].url }})" {% endif %}>
+      <div class="container">
+        <div class="text-pad">
+
+          <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
+              <div class="featured-video-container">
+                <div class="video-holder"></div>
+
+                <div class="video-placeholder">
+                  <div class="video-actions">
+                    {% if entry.vimeoVideoId != 0 %}
+                      {% set min = 0 %}
+                      {% set sec = 0 %}
+                       {% if entry.vimeoTimecode|length %}
+                            {% set min = entry.vimeoTimecode[0].minutes %}
+                            {% set sec = entry.vimeoTimecode[0].seconds %}
+                       {% endif %}
+                      {% set video = helpers.vimeo_video(entry.vimeoVideoId,entry.autoplay,min,sec) %}
+                      <div data-video='embed' class="action-icon">
+                        <i class="fa fa-play"></i>
+                      </div>
+                       <script type='text/template' id='video-embed'>{{ video }}</script>
+                    {% endif %}
+                  </div>
+
+                  <!-- invisible (0 opacity) image to keep the aspect ratio -->
+                  {% if entry.placeholderImage|length %}
+                    <img src="{{ entry.placeholderImage[0].getUrl() }}" alt="" width='780' height='438' />
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="welcome-text">
+            <h1>{{ entry.heading }}</h1>
+            <h2>{{ entry.subHeading }}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    <div class="giant-block-links clearfix">
+      {% if entry.quicklinks|length %}
+        {% set qlinks = entry.quicklinks  %}
+        {% for item in qlinks %}
+          {% set link = item.qlink %}
+          {% if loop.index == 1 %}
+            <a href="{{ link.url }}" class="bg-dark-brown"><i class="fa fa-clock-o"></i> {{ link.linkText }}</a>
+          {% elseif loop.index == 2 %}
+            <a href="{{ link.url }}" class="bg-light-blue"><i class="fa fa-bullseye"></i> {{ link.linkText }}</a>
+          {% else %}
+            <a href="{{ link.url }}" class="bg-dark-blue"><i class="fa fa-envelope"></i> {{ link.linkText }}</a>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    <div class="page-content-container">
+      <div class="container news-grid">
+      <h4 class="caps-header text-center">{{ "News & Updates"|t }}</h4>
+
+      <hr class="short-divider centered">
+
+      <div class="row news-blocks">
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+          <h6><i class="fa fa-rss"></i> {{ "Subscribe to News & Updates"|t }}</h6>
+          <p class="excerpt">{{ "Get the latest news from St. Anne’s sent to your email inbox. No spam, we promise."|t }}</p>
+          <form class='email-subscribe-form' action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open('https://feedburner.google.com/fb/a/mailverify?uri=stannenewsandupdates', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true"><div class='input-container clearfix'><input type="text" style="width:140px" name="email" placeholder="{{ "Enter your email address"|t }}..."/><input type="hidden" value="stannenewsandupdates" name="uri"/><input type="hidden" name="loc" value="en_US"/><button type="submit" class="btn btn-sm btn-light-blue"><i class="fa fa-check"></i> {{ "Subscribe"|t }}</button></div></form>
+        {#   <form action="" class="email-subscribe-form">
+            <div class="input-container clearfix">
+              <input type="email" name="" id="" placeholder="{{ "Enter your email address"|t }}...">
+              <button type="submit" class="btn btn-sm btn-light-blue"><i class="fa fa-check"></i> {{ "Subscribe"|t }}</button>
+            </div>
+          </form> #}
+        </div>
+       {% set posts = craft.entries.section('newsUpdates').limit(5) %}
+       {% for post in posts %}
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+          <h5><a href="{{ post.url }}">{{ post.title }}</a></h5>
+          <p class="excerpt">{{ post.body | trimit(120) }} <a href="{{ post.url }}">{{ "Read More"|t }}</a></p>
+          <p class="posted-on">{{ post.postDate|relativeDate }}</p>
+        </div>
+        {% endfor %}
+      </div> <!-- .row -->
+
+      <hr class="short-divider centered">
+      <div class="text-center news-action-links">
+        {% if entry.subLinks|length %}
+        {% set sublinks = entry.subLinks %}
+          {% for item in sublinks %}
+            {% set link = item.subLinks %}
+            <a href="{{ link.url }}" class="btn btn-light-brown-border"><i class="fa fa-rss"></i> {{ link.linkText }}</a>
+          {% endfor %}
+          <!-- <a href="/news-updates" class="btn btn-light-brown-border"><i class="fa fa-rss"></i> More News</a>
+          <a href="/events" class="btn btn-light-brown-border"><i class="fa fa-calendar"></i> Event Calendar</a> -->
+        {% endif %}
+      </div>
+    </div> <!-- .container -->
+    </div> <!-- .page-content-container -->
+  </div> <!-- .sf-content -->
+
+
+  {# Set visited cookie #}
+  {% if not craft.lj_cookies.get('visited') %}
+    {{ craft.lj_cookies.set('visited', 'true', now | date_modify("+30 days").timestamp, '/' ) }}
+  {% endif %}
+{% endblock %}

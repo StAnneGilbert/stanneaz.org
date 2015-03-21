@@ -1,0 +1,64 @@
+<div class="page-content-container">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+
+        <div class="section-title">
+          <div class="row">
+            <div class="col-lg-4 col-md-5 col-sm-5">
+              <h3>Event Calendar</h3>
+              <div class='addthis_native_toolbox' data-url="{{ entry.url }}" data-title="{{ entry.title }}">
+                <a class='addthis_button_facebook_like' fb:like:layout="button_count"></a>
+                <a class='addthis_button_tweet'></a>
+                <a class='addthis_button_compact'></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="featured-media-grid clearfix">
+          {% set feedurl = entry.eventFeedUrl %}
+          {% set limit = 30 %}
+          {% set cache = "P0M" %}
+          {% set items = craft.feeds.getFeedItems(feedurl, limit,0, cache) %}
+          {% for item in items %}
+            <div class="featured-media-box">
+              {# <div class="image-wrap">
+                <img src="assets/feature-st-james.jpg" alt="" />
+              </div> #}
+              <div class="details">
+                <h4 class='seth'><a href="{{ item.permalink }}" target='_blank'>{{ item.title }}</a></h4>
+                <div>{{ item.summary}}</div>
+                <p class="more muted">
+                  {{ item.date|date('F d, Y') }}
+                  <span class="dot">&middot;</span>
+                  {{ item.date|date('g:ia') }}
+                  <span class="dot">&middot;</span>
+                  <a href="{{ item.permalink }}" target='_blank'>Read More</a>
+                </p>
+              </div>
+            </div>
+          {% endfor %}
+          
+        </div> <!-- .row -->
+
+{#         <hr>
+
+        <div class="pagination">
+          <a href="#" class="btn btn-sm btn-light-blue btn-prev">&lsaquo; August 2014</a>
+          <ul class="pages">
+            <li class="current-page"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">6</a></li>
+          </ul>
+          <a href="#" class="btn btn-sm btn-light-blue btn-next">October 2014 &rsaquo;</a>
+        </div> #}
+
+          </div> <!-- .col -->
+        </div> <!-- .row -->
+      </div> <!-- .container -->
+    </div> <!-- .page-content-container -->
+  </div> <!-- .sf-content -->

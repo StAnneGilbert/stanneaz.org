@@ -1,0 +1,160 @@
+  {%-set parent = craft.entries.section('pages').slug(craft.request.getSegment(2)).first()-%}
+{%- set children = parent.getDescendants(2)-%}
+  <!-- .sf-content for flex sticky footer -->
+  <div class="sf-content nav-slide-element" data-swiftype-name="body" data-swiftype-type="text">
+    <div class="page-photo-title" {% if entry.pageImage|length %}style=" background-image:url({{ entry.pageImage[0].url }})" {% endif %}>
+      <div class="overlay">
+        <div class="container">
+          <h1 class="caps-header">{{ entry.title }}</h1>
+
+        </div>
+      </div>
+    </div>
+    {% if children|length %}
+      <div class="section-navigation">
+        <div class="container">
+          <ul>
+            <li><a href='{{ parent.url }}'>{{ parent.title }}</a>
+              {% nav page in children %}
+              <li {% if page.id == entry.id or entry.isDescendantOf(page) %}class="selected"{% endif %}>
+                  {% if page.id == entry.id %}
+                    <span>{{page.title}}</span>
+                  {% else %}
+                    {{ page.getLink() }}
+                  {% endif %}
+              </li>
+              {% endnav %}
+          </ul>
+        </div>
+      </div>
+    {% endif %}
+
+    <div class="page-content-container">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+            <div class="section-title">
+              <h3>{{ entry.heading }}</h3>
+              <h3 class="small">{{ entry.subHeading }}</h3>
+              <div class='addthis_native_toolbox' data-url="{{ entry.url }}" data-title="{{ entry.title }}">
+                <a class='addthis_button_facebook_like' fb:like:layout="button_count"></a>
+                <a class='addthis_button_tweet'></a>
+                <a class='addthis_button_compact'></a>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-8">
+
+                <div class="contact-form">
+                  {% macro errorList(errors) %}
+                        {% if errors %}
+                            <ul class="errors">
+                                {% for error in errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    {% endmacro %}
+
+                  {% from _self import errorList %}
+                  <form method="post" action="" accept-charset="UTF-8" class='general'>
+                    <input type="hidden" name="action" value="contactForm/sendMessage">
+                    <input type='text' name='shivermetimbers' id='shivermetimbers' style='display:none;'/>
+                    <input type='hidden' name='message[Subject]' value="General Contact" />
+                    <div class="form-group">
+                      <h5>{{ "How can we help you"|t }}?</h5>
+                      {% if entry.contactUsFormOptions|length %}
+                        <div class="form-row">
+                          <label class="select input-full-width">
+                            <select name="toEmail" id="toEmail">
+                              <option value="">{{ "Choose an option"|t }}...</option>
+                              {% for option in entry.contactUsFormOptions %}
+                                  <option value="{{ option.optionValue }}">{{ option.optionName }}</option>
+                              {% endfor %}
+                            </select>
+                          </label>
+                        </div>
+                      {% endif %}
+                      <div class="form-row">
+                        <textarea name="message[body]" id="" rows="8" class="input-full-width" placeholder="{{ "Type your specific comment, question, or issue here"|t }} ...">{% if message is defined %}{{ message.message }}{% endif %}</textarea>
+                        <span class="field-error">{% if message is defined %}{{ errorList(message.getErrors('message')) }}{% endif %}</span>
+                      </div>
+                    </div> <!-- .form-group -->
+
+                    <div class="form-group">
+                      <h5>{{ "Please share your contact info below"|t }}:</h5>
+                      <div class="form-row {% if message is defined %} form-error {% endif %}">
+                        <div class="input-wrap">
+                          <input type="text" name="fromName" id="fromName" class="input-full-width" placeholder="{{ "First & Last Name"|t }} *" value="{% if message is defined %}{{ message.fromName }}{% endif %}" required>
+                        </div>
+                        <span class="field-error">{% if message is defined %}{{ errorList(message.getErrors('fromName')) }}{% endif %}</span>
+                      </div> <!-- .form-row -->
+
+                      <div class="form-row {% if message is defined %} form-error {% endif %}">
+                        <input type="email" name="fromEmail" id="" class="input-full-width" value="{% if message is defined %}{{ message.fromEmail }}{% endif %}" placeholder="{{ "Email"|t }} *" required>
+                        <span class="field-error">{% if message is defined %}{{ errorList(message.getErrors('fromEmail')) }}{% endif %}</span>
+                      </div>
+                      <div class="form-row">
+                        <input type="text" name="message[Phone]" id="message[Phone]" class="input-full-width" placeholder="{{ "Phone Number"|t }}">
+                      </div>
+
+                    </div> <!-- .form-group -->
+
+                    <button type="submit" class="btn btn-lg btn-light-blue btn-full-width"><span class='button__text'>{{ "Send Now"|t }}</span></button>
+                    <p class="text-center muted">{{ "We are usually able to respond within 1-3 days."|t }}</p>
+                  </form>
+                </div> <!-- .contact-form -->
+
+              </div> <!-- .col -->
+
+              <div class="col-sm-4 contact-options">
+                <p>
+                  {{ siteWideContent.parishAddress }}<span class="dot">&middot;</span> <a href="{{ helpers.map_link(siteWideContent.parishAddress) }}" target="_blank">{{ "Map"|t }}</a><br>
+                  <strong>{{ "OFFICE"|t }}</strong> {{ siteWideContent.parishPhoneNumber }}<br>
+                  <strong>{{ "FAX"|t }}</strong> {{ siteWideContent.parishFaxNumber }}
+                </p>
+
+                {% if siteWideSocialLinks.socialLinks|length %}
+                  <ul class="social-circles">
+                    {% for service in siteWideSocialLinks.socialLinks %}
+                      {% set link = service.serviceUrl %}
+                        <li>
+                          <a href="{{ link.url }}" class="bg-{{ service.service | slugify }}">
+                            <i class='fa fa-{{ service.service | slugify }}'></i>
+                          </a>
+                        </li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+
+                <hr>
+                
+                <h6>{{ "Parish office hours"|t }}</h6>
+                {% if siteWideContent.parishOfficeHours|length %}
+                  <p>
+                    {% for item in siteWideContent.parishOfficeHours[0].hoursTable %}
+                      {% spaceless %}
+                        <strong>{{ item.dayOfTheWeek }}</strong>
+                        {% if item.redLabel == 1 %}
+                          <span class="red"> {{ item.times }} </span>
+                        {% else %}
+                            {{ item.times }}
+                        {% endif %}
+                        {% if item.exception == 1 %}<span class="muted">*</span> {% endif %} {% if not loop.last %}<br>{% endif %}
+                      {% endspaceless %}
+                    {% endfor %}
+                  </p>
+                  {% if siteWideContent.parishOfficeHours[0].exceptionReference is not empty %}
+                    <p class="muted">*{{ siteWideContent.parishOfficeHours[0].exceptionReference }}</p>
+                  {% endif %}
+                {% endif %}
+              </div>
+            </div>
+
+          </div> <!-- .col -->
+        </div> <!-- .row -->
+      </div> <!-- .container -->
+    </div> <!-- .page-content-container -->
+  </div> <!-- .sf-content -->

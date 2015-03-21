@@ -1,0 +1,81 @@
+{# Homepage Template #}
+{% extends "layouts/_layout" %}
+
+{% block content %}
+  {% set query = craft.request.getParam('q') %}
+  {% set entries = craft.entries.search(query).order('score') %}
+   <!-- .sf-content for flex sticky footer -->
+  <div class="sf-content nav-slide-element">
+    <div class="page-content-container">
+      <div class="container standard-container">
+
+        <div class="section-title">
+          <h3>Here's what we found</h3>
+          {% if entries|length %}
+            <h3 class='small'>{{ entries|length }} results for &ldquo;{{ query }}&rdquo;</h3>
+          {% endif %}
+        </div>
+
+        
+        
+        <form action="/search" id='main-search-form'>
+          <div class="search-input-wrap jumbo">
+            <input type="text" name="q" id='st-search-input' placeholder="Search for something else..." class="input-full-width" value="{{ query }}" />
+            <i class="fa fa-search"></i>
+          </div>
+        </form>
+        {% paginate entries.limit(10) as items %}
+
+          <div id='st-results' class="content-summary-list search-results-list">
+            {% for item in items %}
+              <div class="content-summary-block">
+                {% switch item.section %}
+                  {% case "Pages" %}
+                    {% if item.pageImage|length %}
+                      <div class="media">
+                          <img src="{{ item.pageImage[0].getUrl('tf160') }}" alt="{{ item.title }}" />
+                      </div>
+                    {% endif %}
+                  {% case "Single Pages" %}
+                      {% if item.pageImage|length %}
+                        <div class="media">
+                          <img src="{{ item.pageImage[0].getUrl('tf160') }}" alt="{{ item.title }}" />
+                        </div>
+                      {% endif %}
+                  {% case "Homilies" %}
+                      {% if item.postImage|length %}
+                        <div class="media">
+                          <img src="{{ item.postImage[0].getUrl('tf160') }}" alt="{{ item.title }}" />
+                        </div>
+                      {% endif %}
+                  {% case "News & Updates" %}
+                      {% if item.postImage|length %}
+                        <div class="media">
+                          <img src="{{ item.postImage[0].getUrl('tf160') }}" alt="{{ item.title }}" />
+                        </div>
+                      {% endif %}
+                  {% default %}
+                    {% if item.pageImage|length %}
+                        <div class="media">
+                          <img src="{{ item.pageImage[0].getUrl('tf160') }}" alt="{{ item.title }}" />
+                        </div>
+                      {% endif %}
+                {% endswitch %}
+                <div class="description">
+                  <h5><a href="{{ item.url }}">{{ item.title }}</a></h5>
+                  <a href="{{ item.url }}" class="item-url">{{ item.url }}</a>
+                  <div class="excerpt">
+                    <p>{{ item.body|trimit(200) }}</p>
+                  </div>
+                </div>
+              </div> <!-- .content-summary-block -->
+            {% endfor %}
+          </div> <!-- .search-results-list -->
+
+        {% include "partials/_pagination" %}
+      {% endpaginate %}
+
+      </div> <!-- .container -->
+    </div> <!-- .page-content-container -->
+  </div> <!-- .sf-content -->
+{% endblock %}

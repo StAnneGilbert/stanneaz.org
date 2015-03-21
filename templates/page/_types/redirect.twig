@@ -1,0 +1,6 @@
+{% if entry.redirectUrl|length %}
+  {% set link = entry.redirectUrl %}
+  {% redirect link.url %}
+{% else %}
+  {% redirect '/start-here' %}
+{% endif %}

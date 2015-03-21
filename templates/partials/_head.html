@@ -1,0 +1,35 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>
+{% spaceless %}{% if entry.title is defined %}
+    {% if entry.title == "Homepage"%}
+        {{ siteName }}
+    {% else %}
+        {{ entry.title }} - {{ siteName }}
+    {% endif %}
+  {% endif %}
+{% endspaceless %}</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+<meta name="base_url" content="{{ siteUrl }}">
+
+{% set currentURL = craft.request.getUrl() %}
+<meta property='og:title' content='{{ siteName }}'/>
+{% if entry.pageImage|length %}
+  {% set pageImage = entry.pageImage[0].getUrl('tf280') %}
+{% endif %}
+
+
+
+<meta property='og:type'  content='website'/>
+<meta property='og:url' content='{{ currentURL }}'/>
+<meta property='og:site_name' content=''/>
+<meta name="twitter:card" content="summary">
+<meta name="twitter:url" content="http://stanneaz.org">
+<meta name="twitter:site" content="@stanneaz">
+
+
+<link rel='shortcut icon' href='http://stanneaz.org/assets/img/favicon.ico'/>
+<link rel="prerender" href="/start-here" />
+
+<link href='/assets/css/global.css' rel='stylesheet'/>
