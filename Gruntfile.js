@@ -14,7 +14,7 @@ module.exports = function(grunt) {
 
     autoprefixer: {
       options: {
-        browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1']
+        browsers: ['last 6 versions', 'Firefox ESR', 'Firefox >= 20', 'Opera 12.1']
       },
       single_file: {
         src: 'assets/css/global.css',
