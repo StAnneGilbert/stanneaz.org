@@ -6,6 +6,24 @@
 .featured-media-grid {
   padding:20px 0;
 
+  .featured-media-box.full{
+    margin: 0px 0px 3% 0px !important;
+    float: none;
+    width: 100%;
+    img{
+      width: auto;
+    }
+    h4 ~ div{
+      position: relative;
+      height: auto;
+      margin-bottom: 14px;
+      overflow: hidden;
+    }
+    h4.seth{
+      height: auto;
+    }
+  }
+
   @media screen and (min-width:$screen-md-min) {
     .featured-media-box {
       float:left;
@@ -47,6 +65,12 @@
   @include shadow-box();
   overflow:hidden;
 
+  img {
+    display:block;
+    width:100%;
+    height:auto;
+  }
+
   .image-wrap {
     width:100%;
     background:#D8D8D8;
@@ -55,7 +79,11 @@
       display:block;
       width:100%;
       height:auto;
+      transition:opacity .2s ease;
     }
+  }
+  .image-wrap a:hover img {
+    opacity:.8;
   }
   .details {
     padding:12px 16px;
@@ -68,6 +96,25 @@
     font-weight:600;
     margin:0 0 8px;
   }
+  h4.seth{
+    height: 75px;
+  }
+  h4 ~ div{
+    position: relative;
+    height: 400px;
+    margin-bottom: 14px;
+    overflow: hidden;
+  }
+  // h4 ~ div:after{
+  //   position: absolute;
+  //   content: "…";
+  //   font-size: 16px;
+  //   color: #111111;
+  //   bottom: 0px;
+  //   right: 0px; 
+  //   background-color: #ffffff;
+  // }
+
   h4 a {
     color:$dark-gray;
     text-decoration:none;

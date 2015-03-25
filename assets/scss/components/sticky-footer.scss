@@ -1,10 +1,10 @@
 // Sticky footer: http://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/
 
-body {
-  display:flex;
-  min-height:100vh;
-  flex-direction:column;
-}
+// body {
+//   display:flex;
+//   min-height:100vh;
+//   flex-direction:column;
+// }
 
 .sf-header {
   position:relative;
@@ -12,10 +12,10 @@ body {
 }
 .sf-content {
   flex:1;
-  position:relative;
-  z-index:$zindex-content;
+//   // position:relative;
+//   z-index:$zindex-content;
 }
-.sf-footer {
-  position:relative;
-  z-index:$zindex-footer;
-}
+// .sf-footer {
+//   // position:relative;
+//   z-index:$zindex-footer;
+// }

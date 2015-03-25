@@ -27,9 +27,26 @@
   }
 }
 
+ .container.featured-slider{
+    @include clearfix();
+    padding: 0px !important;
+    @media (min-width: $screen-sm-min) {
+      width: 100%;
+      padding: 0px;
+    } 
+    @media (min-width: $screen-md-min) {
+      width: $container-md;
+      padding: 0px;
+    }
+    @media (min-width: $screen-lg-min) {
+      width: $container-lg;
+      padding: 0px;
+    }
+  }
+
 // the standard max container width is 810px; apply this class to use it
 .standard-container {
-  max-width: 810px;
+  max-width: 840px;
 }
 
 // Use .page-content-container to apply standard amount of top-bottom padding to page content area

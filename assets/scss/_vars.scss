@@ -33,17 +33,6 @@ $input-border: #E1DFDB;
 $input-border-focus: darken(#C3BFB7, 10%);
 
 
-// Mobile menu variables
-// Define the maximum width at which the mobile menu is used.
-$mobile-nav-breakpoint: 4000px;
-// Width of mobile menu
-$mobile-nav-width: 260px;
-// Animation speed for mobile menu
-$mobile-nav-animation-speed: 620ms;
-// Easing curve for mobile menu
-$mobile-nav-animation-easing: cubic-bezier(0.23, 1, 0.32, 1);
-
-
 //-- Z-index master list
 //
 // Warning: Avoid customizing these values. They're used for a bird's eye view
@@ -102,6 +91,7 @@ $screen-sm-max:              ($screen-md-min - 1) !default;
 $screen-md-max:              ($screen-lg-min - 1) !default;
 
 
+
 //== Grid system
 //
 //## Define your custom responsive grid.
@@ -135,3 +125,14 @@ $container-md:                 $container-desktop !default;
 $container-large-desktop:      ((1140px + $grid-gutter-width)) !default;
 //** For `$screen-lg-min` and up.
 $container-lg:                 $container-large-desktop !default;
+
+
+// Mobile menu variables
+// Define the maximum width at which the mobile menu is used.
+$mobile-nav-breakpoint: $screen-sm-min;
+// Width of mobile menu
+$mobile-nav-width: 260px;
+// Animation speed for mobile menu
+$mobile-nav-animation-speed: 620ms;
+// Easing curve for mobile menu
+$mobile-nav-animation-easing: cubic-bezier(0.23, 1, 0.32, 1);

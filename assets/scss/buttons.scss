@@ -32,7 +32,10 @@
 
   }
   &[disabled="disabled"] {
-
+    background:$light-brown !important;
+    border-color:transparent !important;
+    color:#fff !important;
+    cursor:default;
   }
 
   i:not(:only-child) {
@@ -48,6 +51,7 @@
   text-align:center;
   width:100%;
 }
+
 
 // Additional button sizes
 .btn-sm {
@@ -73,6 +77,16 @@
 
   &:hover {
     background:$light-blue-hover;
+  }
+}
+.btn-light-grey,
+button.btn:disabled {
+  background:#777777 !important;
+  border:none;
+  color:#fff !important;
+
+  &:hover {
+    background:#777777;
   }
 }
 .btn-dark-blue {
@@ -120,4 +134,29 @@
   &:hover {
     background:rgba(255,255,255,.7) !important;
   }
+}
+
+.spinner{
+  padding-left: 5px;
+  >i{
+    -webkit-animation-name: rotateThis;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-iteration-count:infinite;
+    -webkit-animation-timing-function:linear;
+  }
+}
+@-webkit-keyframes rotateThis {
+  from {-webkit-transform:scale(0.8) rotate(0deg);}
+  to {-webkit-transform:scale(0.8) rotate(360deg);}
+}
+
+.addthis_button_compact > span{
+  display: inline-block !important;
+}
+
+.addthis_native_toolbox + p{
+  margin-top: 15px;
+}
+h3 + .addthis_native_toolbox{
+  margin-top: 15px;
 }
