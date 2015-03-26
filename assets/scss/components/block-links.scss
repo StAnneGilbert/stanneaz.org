@@ -29,7 +29,7 @@
     &:hover { background:$dark-blue-hover; }
   }
 
-  @media screen and (min-width:800px) {
+  @media screen and (min-width:1147px) {
     a {
       font-size:24px;
       line-height:30px;
@@ -38,16 +38,17 @@
       width:33.333333333%;
     }
   }
-  @media screen and (min-width:700px) and (max-width:799px) {
-    a {
-      font-size:20px;
-      line-height:26px;
-      padding:20px 0;
-      float:left;
-      width:33.333333333%;
-    }
-  }
-  @media screen and (max-width:699px) {
+  
+  // @media screen and (min-width:700px) and (max-width:799px) {
+  //   a {
+  //     font-size:20px;
+  //     line-height:26px;
+  //     padding:20px 0;
+  //     float:left;
+  //     width:33.333333333%;
+  //   }
+  // }
+  @media screen and (max-width:1146px) {
     // use flexbox to force equal height on all 3 links
     display:flex;
     flex-direction:row;

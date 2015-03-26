@@ -2,11 +2,21 @@
  Large video container with placeholder image & play button
  =======================*/
 .featured-video-container {
-  background:#D8D8D8;
+  // background:#D8D8D8;
   margin-bottom:36px;
+  position:relative;
 
+  .video-holder {
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:10;
+    opacity:0;
+    width:100%;
+  }
   .video-placeholder {
     position:relative;
+    z-index:15;
   }
 
   .video-placeholder img {
@@ -37,13 +47,15 @@
     cursor:pointer;
     color:#fff;
     text-decoration:none;
+    transition:background .25s ease, transform .3s ease;
 
     .fa-play {
       margin-left:8px;
     }
 
     &:hover {
-      background:$dark-blue;
+      transform:scale(1.1);
+      background:rgba(0,0,0,.75);
     }
   }
 
@@ -60,6 +72,22 @@
 
     .red {
       color:$red;
+    }
+  }
+
+  // when the video is embedded, the .video-embedded class gets added to the player container
+  &.video-embedded {
+    .video-placeholder {
+      transition:opacity .3s ease, z-index 0s .3s linear;
+      opacity:0;
+      z-index:10;
+    }
+    .video-holder {
+      transition:z-index 0s .3s linear, opacity .4s .3s ease, transform .4s .3s ease;
+      z-index:15;
+      opacity:1;
+      transform:none;
+      box-shadow:0 1px 7px rgba(0,0,0,.2);
     }
   }
 

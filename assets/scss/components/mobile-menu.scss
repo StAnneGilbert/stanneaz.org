@@ -1,7 +1,7 @@
 // Mobile navigation
 @media screen and (max-width:$mobile-nav-breakpoint) {
   .nav-slide-element {
-    transform:translate(0, 0);
+    // transform:translate(0, 0);
   }
 }
 
@@ -48,10 +48,22 @@
       font-size:18px;
       line-height:20px;
       padding:14px 18px;
+      font-weight: 600 !important;
     }
     li {
       border-bottom:1px solid #444;
     }
+    ul{
+      a{
+        padding-left: 32px !important;
+        font-size: 16px;
+        font-weight: 300 !important;
+      }
+      ul{
+        display: none;
+      }
+    }
+
   }
 
   .copyright, .links {

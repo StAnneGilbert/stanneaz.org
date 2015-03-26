@@ -72,7 +72,7 @@ p {
 .lead {
   font-size:24px;
   line-height:36px;
-  color:$light-body;
+  color:darken($light-body,20%);
 
   @media screen and (max-width:$screen-xs) {
     font-size:20px;
@@ -221,9 +221,21 @@ h5, .h5, h6, .h6 {
 }
 h5, .h5 {
   color:$dark-gray;
+  a, a:hover {
+    color:$dark-gray;
+  }
+  a:hover {
+    text-decoration:underline;
+  }
 }
 h6, .h6 {
   color:$dark-brown;
+  a, a:hover {
+    color:$dark-brown;
+  }
+  a:hover {
+    text-decoration:underline;
+  }
 }
 
 
@@ -324,6 +336,42 @@ h6, .h6 {
   @media screen and (max-width:$screen-xs-max) {
     .action-links {
       text-align:left;
+    }
+  }
+}
+
+.standard-container{
+  ul{
+    margin-left: 8%;
+    margin-bottom: 5%;
+    list-style-type: disc;
+    li{
+      margin-bottom: 1.3em;
+    }
+  }
+  ol{
+    margin-left: 8%;
+    margin-bottom: 5%;
+    list-style-type: decimal;
+    li{
+      margin-bottom: 1.3em;
+    }
+  }
+}
+
+@media screen and (max-width:$screen-xs-max) {
+  .standard-container{
+    img{
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+@media screen and (min-width:$screen-sm-min) and (max-width:$screen-sm-max) {
+  .standard-container{
+    img{
+      width: 100%;
+      height: auto;
     }
   }
 }
