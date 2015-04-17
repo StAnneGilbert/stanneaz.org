@@ -21,7 +21,7 @@
           {% set limit = 30 %}
           {% set cache = "P0M" %}
           {% set items = craft.feeds.getFeedItems(feedurl, limit,0, cache) %}
-          {% for item in items %}
+          {% for item in items|reverse %}
             <div class="featured-media-box">
               {# <div class="image-wrap">
                 <img src="assets/feature-st-james.jpg" alt="" />
