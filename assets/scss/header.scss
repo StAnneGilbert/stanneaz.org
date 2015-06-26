@@ -245,10 +245,14 @@
   @media screen and (min-width:$screen-md-min) and (max-width:$screen-md-max) {
     > ul > li > a:not(.btn) {
       font-size:16px;
+      padding-left:8px;
+      padding-right:8px;
+    }
+    > ul.es_us > li > a:not(.btn) {
       padding-left:4px;
       padding-right:4px;
     }
-  }
+  }	
 
   @media screen and (min-width:$screen-sm-min) and (max-width:$screen-sm-max) {
     > ul {
@@ -256,6 +260,10 @@
     }
     > ul > li > a:not(.btn) {
       font-size:16px;
+      padding-left:8px;
+      padding-right:8px;
+    }
+    > ul.es_us > li > a:not(.btn) {
       padding-left:4px;
       padding-right:4px;
     }

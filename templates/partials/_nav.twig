@@ -36,7 +36,7 @@
         <i class="icon-mobile-menu"></i>
       </div>
       <div class="site-menu hidden-xs">
-        <ul>
+        <ul{% if craft.locale == 'es_us' %} class="es_us"{% endif %}>
           {% set pages = craft.entries.section('pages') %}
           {% for page in pages %}
             {% if page.level == 1 %}
