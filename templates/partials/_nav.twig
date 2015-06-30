@@ -36,30 +36,26 @@
         <i class="icon-mobile-menu"></i>
       </div>
       <div class="site-menu hidden-xs">
-        <ul>
-          {% set pages = craft.entries.section('pages') %}
-          {% for page in pages %}
-            {% if page.level == 1 %}
-            {% set hasmenu = page.hasDescendants() ? "has-menu" : "" %}
-            <li class='{{ hasmenu }} {% if page.id == entry.id or entry.isDescendantOf(page) %}current-page{%endif%}'>
-              {{ page.getLink() }}
-              <ul class='sub-menu'>
-            {% endif %}
+      
 
-              {% if page.hasDescendants() %}
-                {% set children = page.getDescendants(1) %}
-                {% for child in children %}
-                  {% if child.level == 2 %}
-                    <li>{{ child.getLink() }}</li>
-                  {% endif %}
-                {% endfor %}
-              {% endif %}
 
-            {% if page.level == 1 %}
-                </ul>
-              </li>
-            {% endif %}
-          {% endfor %}
+
+    <ul {% if craft.locale == 'es_us' %} class="es_us"{% endif %}>
+        {% set pages = craft.entries.section('pages').level('<= 3') %}
+        {% nav page in pages %}
+        
+            <li {% if page.level == 1 or page.level == 2 %}{% if page.hasDescendants() %}class='has-menu{% if page.level == 2 %}2{%endif%}{% if page.id == entry.id or entry.isDescendantOf(page) %} current-page{%endif%}'{% endif %}{%endif%}>
+                {{ page.getLink() }}
+
+                {% ifchildren %}
+                    <ul class="{% if page.level == 1 %}sub-menu{%endif%}{% if page.level == 2 %}sub-menu2{%endif%}">
+                        {% children %}
+                    </ul>
+                {% endifchildren %}
+            </li>
+        {% endnav %}
+      
+        
           <li class="search" id="menusearch">
             <a href="#" class='search-open'><i class="fa fa-search"></i></a>
             <form action="/search" id="nav-search" class="search-form">

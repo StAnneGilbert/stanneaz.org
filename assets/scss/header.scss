@@ -150,13 +150,13 @@
     transition:all .3s ease, visibility 0s .3s linear;
   }
 
-  .sub-menu {
+  .sub-menu, .sub-menu2 {
     display:none;
     position:absolute;
     top:100%;
     left:0;
     margin:-1px 0 0 -1px;
-    width:200px;
+    width:220px;
     border-radius:2px;
     border:1px solid #C3BFB7;
     background:#fff;
@@ -176,6 +176,12 @@
       }
     }
   }
+  .sub-menu2 {
+      top:-5px;
+      left:215px;
+  }
+  
+  li.has-menu2{position:relative;}
 }
 
 .site-menu {
@@ -214,7 +220,18 @@
     .sub-menu {
       display:block;
     }
+    
+    > ul > li.has-menu2:hover {
+      .sub-menu2 {
+        display:block;
+      }
+    }
+  
+  
   }
+  
+  
+  
   > ul > li > a:not(.btn) {
     // 40px target height
     font-size:18px;
@@ -245,10 +262,14 @@
   @media screen and (min-width:$screen-md-min) and (max-width:$screen-md-max) {
     > ul > li > a:not(.btn) {
       font-size:16px;
+      padding-left:8px;
+      padding-right:8px;
+    }
+    > ul.es_us > li > a:not(.btn) {
       padding-left:4px;
       padding-right:4px;
     }
-  }
+  }	
 
   @media screen and (min-width:$screen-sm-min) and (max-width:$screen-sm-max) {
     > ul {
@@ -256,6 +277,10 @@
     }
     > ul > li > a:not(.btn) {
       font-size:16px;
+      padding-left:8px;
+      padding-right:8px;
+    }
+    > ul.es_us > li > a:not(.btn) {
       padding-left:4px;
       padding-right:4px;
     }
