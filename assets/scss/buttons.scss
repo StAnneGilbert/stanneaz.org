@@ -160,3 +160,9 @@ button.btn:disabled {
 h3 + .addthis_native_toolbox{
   margin-top: 15px;
 }
+.addthis_native_toolbox div,.addthis_native_toolbox span,.addthis_native_toolbox iframe {
+  vertical-align:middle
+}
+.addthis_button_tweet{
+  padding:0 10px
+}

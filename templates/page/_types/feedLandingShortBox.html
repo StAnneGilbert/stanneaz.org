@@ -23,7 +23,7 @@
           {% set cache = "P0M" %}
           {% set items = craft.feeds.getFeedItems(feedurl, limit, 0, cache) %}
           {% for item in items %}
-            <div class="featured-media-box">
+            <div class="featured-media-box short">
                 {# <div class="image-wrap">
                   <img src="assets/feature-st-james.jpg" alt="" />
                 </div> #}
@@ -35,7 +35,7 @@
                     <span class="dot">&middot;</span>
                     {{ item.date|date('g:ia') }}
                     <span class="dot">&middot;</span>
-                    <a href="{{ item.permalink }}" target="_blank">Read More</a>
+                    <a href="{{ item.permalink }}" target='_blank'>Read More</a>
                   </p>
                 </div>
               </div>
