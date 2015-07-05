@@ -23,6 +23,12 @@
       height: auto;
     }
   }
+  
+  .featured-media-box.short{
+    h4 ~ div{
+      height:210px;
+    }
+  }
 
   @media screen and (min-width:$screen-md-min) {
     .featured-media-box {
