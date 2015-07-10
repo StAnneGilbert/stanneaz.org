@@ -18,7 +18,7 @@
 
         
         
-        <form action="/search" id='main-search-form'>
+        <form {% if craft.locale == 'es_us' %}action="/es/buscar"{% else %}action="/search"{% endif %} id='main-search-form'>
           <div class="search-input-wrap jumbo">
             <input type="text" name="q" id='st-search-input' placeholder="Search for something else..." class="input-full-width" value="{{ query }}" />
             <i class="fa fa-search"></i>
