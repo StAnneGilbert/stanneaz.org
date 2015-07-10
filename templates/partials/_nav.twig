@@ -58,15 +58,15 @@
         
           <li class="search" id="menusearch">
             <a href="#" class='search-open'><i class="fa fa-search"></i></a>
-            <form action="/search" id="nav-search" class="search-form">
+            <form {% if craft.locale == 'es_us' %}action="/es/buscar"{% else %}action="/search"{% endif %} id="nav-search" class="search-form">
               <div class="search-input-wrap">
                 <i class="fa fa-search"></i>
-                <input type="text" name="q" id='nav-search-query' placeholder="{{ "I'm searching for"|t }}..." />
+                <input type="text" name="q" id='nav-search-query' {% if craft.locale == 'es_us' %}placeholder="{{ "Estoy Buscando"|t }}..."{% else %}placeholder="{{ "I'm searching for"|t }}..."{% endif %} />
               </div>
             </form>
           </li>
           <li>
-            <a href="/start-here" class="btn btn-light-blue">{{ "Start Here"|t }}</a>
+            <a {% if craft.locale == 'es_us' %}href="/es/comience-aqui"{% else %}href="/start-here"{% endif %} class="btn btn-light-blue">{{ "Start Here"|t }}</a>
           </li>
         </ul>
       </div>
