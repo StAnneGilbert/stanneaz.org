@@ -184,8 +184,10 @@
   li.has-menu2{position:relative}
   .has-menu2 > a {white-space:nowrap}
   .has-menu2 > a:after{
+      color:#a0a0a0;
       content: "▼";
       display: inline-block;
+      font-size:90%;
       margin:0 0 0 5px;
       -webkit-transform: rotate(-90deg);
       -moz-transform: rotate(-90deg);
