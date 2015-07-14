@@ -178,10 +178,29 @@
   }
   .sub-menu2 {
       top:-5px;
-      left:215px;
+      left:210px;
   }
   
-  li.has-menu2{position:relative;}
+  li.has-menu2{position:relative}
+  .has-menu2 > a {white-space:nowrap}
+  .has-menu2 > a:after{
+      content: "▼";
+      display: inline-block;
+      margin:0 0 0 5px;
+      -webkit-transform: rotate(-90deg);
+      -moz-transform: rotate(-90deg);
+      -ms-transform: rotate(-90deg);
+      -o-transform: rotate(-90deg);
+      transform: rotate(-90deg);
+      text-decoration: none;
+  }
+  .has-menu2:hover > a:after{
+      -webkit-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+  }
 }
 
 .site-menu {
