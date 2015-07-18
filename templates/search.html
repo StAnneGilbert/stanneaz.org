@@ -65,7 +65,11 @@
                   <h5><a href="{{ item.url }}">{{ item.title }}</a></h5>
                   <a href="{{ item.url }}" class="item-url">{{ item.url }}</a>
                   <div class="excerpt">
-                    <p>{{ item.body|trimit(200) }}</p>
+                    {% if item.bodysr|length %}
+                        <p>{{ item.bodysr|trimit(200) }}</p>
+                    {% else %}
+                        <p>{{ item.body|trimit(200) }}</p>
+                    {% endif %}
                   </div>
                 </div>
               </div> <!-- .content-summary-block -->
