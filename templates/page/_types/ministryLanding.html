@@ -1,0 +1,116 @@
+
+{%- set parent = craft.entries.section('pages').slug(craft.request.getSegment(1)).first() -%}
+{%- set children = entry.getDescendants(1) -%}
+
+{% macro recursiveChildren(page) %}
+  {% if page.hasDescendants and page.slug == craft.request.getSegment(page.level) %}
+    <ul>
+      {% for subpage in page.children %}
+          <li{% if subpage.slug == craft.request.getSegment(subpage.level) %} class="selected"{% endif %}>
+            {{ subpage.link }}
+            {{ _self.recursiveChildren(subpage) }}
+          </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endmacro %}
+  <!-- .sf-content for flex sticky footer -->
+  <div class="sf-content nav-slide-element" data-swiftype-name="body" data-swiftype-type="text">
+    <div class="page-photo-title" {% if entry.pageImage|length %}style=" background-image:url({{ entry.pageImage[0].url }})" {% endif %}>
+      <div class="overlay">
+        <div class="container">
+          <h1 class="caps-header">{{ entry.heading }}</h1>
+        </div>
+      </div>
+    </div>
+    {% if children|length %}
+      <div class="section-navigation fixedsticky">
+        <div class="container">
+          <ul>
+            {% if entry.parent %}
+              <li style='font-weight:600;'> {{ entry.parent.link }} </li>
+            {% endif %}
+              {% nav page in children %}
+                <li {% if page.id == entry.id or entry.isDescendantOf(page) %}class="selected"{% endif %}>
+                    {% if page.id == entry.id %}
+                      <span>{{page.title}}</span>
+                    {% else %}
+                      {{ page.getLink() }}
+                    {% endif %}
+                </li>
+              {% endnav %}
+          </ul>
+        </div>
+      </div>
+    {% else %}
+      {% set children = entry.getSiblings() %}
+       <div class="section-navigation fixedsticky">
+        <div class="container">
+          <ul>
+          {% if entry.parent %}
+            <li style='font-weight:600;'> {{ entry.parent.link }} </li>
+          {% endif %}
+              {% nav page in children %}
+                <li {% if page.id == entry.id or entry.isDescendantOf(page) %}class="selected"{% endif %}>
+                    {% if page.id == entry.id %}
+                      <span>{{page.title}}</span>
+                    {% else %}
+                      {{ page.getLink() }}
+                    {% endif %}
+                </li>
+              {% endnav %}
+          </ul>
+        </div>
+      </div> 
+    {% endif %}
+
+
+    <div class="page-content-container">
+      <div class="container standard-container">
+        <div class='addthis_native_toolbox' data-url="{{ entry.url }}" data-title="{{ entry.title }}">
+          <a class='addthis_button_facebook_like' fb:like:layout="button_count"></a>
+          <a class='addthis_button_tweet'></a>
+          <a class='addthis_button_compact'></a>
+        </div>
+        <br/>
+        {{ entry.body }}
+        
+        {% if entry.feedUrl is not empty %}
+          {% if craft.locale == 'es_us' %}
+            <h3>Mensajes recientes para este grupo en el "City Plaza"</h3>
+          {% else %}
+            <h3>Latest posts for this group on The City Plaza</h3>
+          {% endif %}
+        <div class="featured-media-grid clearfix">
+          {% set feedurl = entry.feedUrl|raw %}
+          {% set limit = 3 %}
+          {% set cache = "P0M" %}
+          {% set items = craft.feeds.getFeedItems(feedurl, limit, 0, cache) %}
+          {% for item in items %}
+            <div class="featured-media-box short">
+                {# <div class="image-wrap">
+                  <img src="assets/feature-st-james.jpg" alt="" />
+                </div> #}
+                <div class="details">
+                  <h4 class='seth'><a href="{{ item.permalink }}" target="_blank">{{ item.title }}</a></h4>
+                  <div>{{ item.summary }}</div>
+                  <p class="more muted">
+                    {{ item.date|date('F d, Y') }}
+                    <span class="dot">&middot;</span>
+                    {{ item.date|date('g:ia') }}
+                    <span class="dot">&middot;</span>
+                    <a href="{{ item.permalink }}" target='_blank'>{% if craft.locale == 'es_us' %}Lee Mas{% else %}Read More{% endif %}</a>
+                  </p>
+                </div>
+              </div>
+            {% endfor %}
+        </div> <!-- .row -->
+
+        <h4 style="padding:0;margin:0"><a href="{{ entry.plazaUrl }}">{% if craft.locale == 'es_us' %}Ver más mensajes de este grupo{% else %}View more posts from this group{% endif %}</a></h4>
+        
+        {% endif %}
+        
+        	
+      </div> <!-- .container -->
+    </div> <!-- .page-content-container -->
+  </div> <!-- .sf-content -->
