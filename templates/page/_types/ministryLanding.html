@@ -76,16 +76,20 @@
         {{ entry.body }}
         
         {% if entry.feedUrl is not empty %}
-          {% if craft.locale == 'es_us' %}
-            <h3>Mensajes recientes para este grupo en el "City Plaza"</h3>
-          {% else %}
-            <h3>Latest posts for this group on The City Plaza</h3>
-          {% endif %}
-        <div class="featured-media-grid clearfix">
           {% set feedurl = entry.feedUrl|raw %}
           {% set limit = 3 %}
           {% set cache = "P0M" %}
           {% set items = craft.feeds.getFeedItems(feedurl, limit, 0, cache) %}
+
+          {% if items|length %}
+          
+            {% if craft.locale == 'es_us' %}
+              <h3>Mensajes recientes para este grupo en el "City Plaza"</h3>
+            {% else %}
+            <h3>Latest posts for this group on The City Plaza</h3>
+            {% endif %}
+          
+        <div class="featured-media-grid clearfix">
           {% for item in items %}
             <div class="featured-media-box short">
                 {# <div class="image-wrap">
@@ -97,8 +101,6 @@
                   <p class="more muted">
                     {{ item.date|date('F d, Y') }}
                     <span class="dot">&middot;</span>
-                    {{ item.date|date('g:ia') }}
-                    <span class="dot">&middot;</span>
                     <a href="{{ item.permalink }}" target='_blank'>{% if craft.locale == 'es_us' %}Lee Mas{% else %}Read More{% endif %}</a>
                   </p>
                 </div>
@@ -106,7 +108,9 @@
             {% endfor %}
         </div> <!-- .row -->
 
-        <h4 style="padding:0;margin:0"><a href="{{ entry.plazaUrl }}">{% if craft.locale == 'es_us' %}Ver más mensajes de este grupo{% else %}View more posts from this group{% endif %}</a></h4>
+        <h4 style="padding:0;margin:0"><a href="{{ entry.plazaUrl }}" target="_blank">{% if craft.locale == 'es_us' %}Ver más mensajes de este grupo{% else %}View more posts from this group{% endif %}</a></h4>
+        
+          {% endif %}
         
         {% endif %}
         
