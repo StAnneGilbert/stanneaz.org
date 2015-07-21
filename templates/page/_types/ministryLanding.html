@@ -109,9 +109,11 @@
             {% endfor %}
         </div> <!-- .row -->
 
-        <strong><a href="http://stanneaz.onthecity.org/plaza?group_id={{ citygroupid }}" target="_blank">{% if craft.locale == 'es_us' %}Ver más mensajes {% else %}View more posts {% endif %}</a> | <a href="http://stanneaz.onthecity.org/groups/{{ citygroupid }}/info" target="_blank">{% if craft.locale == 'es_us' %}Página de información del Grupo{% else %}Group Information Page{% endif %}</a></strong>
+        <strong><a href="http://stanneaz.onthecity.org/plaza?group_id={{ citygroupid }}" target="_blank">{% if craft.locale == 'es_us' %}Ver más mensajes {% else %}View more posts {% endif %}</a> | 
         
-          {% endif %}
+        {% endif %}
+        
+        <a href="http://stanneaz.onthecity.org/groups/{{ citygroupid }}/info" target="_blank">{% if craft.locale == 'es_us' %}Página de información del Grupo en "The City"{% else %}Group Information Page on The City{% endif %}</a></strong>
         
         {% endif %}
         
