@@ -76,7 +76,8 @@
         {{ entry.body }}
         
         {% if entry.feedUrl is not empty %}
-          {% set feedurl = entry.feedUrl|raw %}
+          {% set citygroupid = entry.cityGroupId|raw %}
+          {% set feedurl = "http://stanneaz.onthecity.org/plaza?group_id=#{citygroupid}&format=rss" %}
           {% set limit = 3 %}
           {% set cache = "P0M" %}
           {% set items = craft.feeds.getFeedItems(feedurl, limit, 0, cache) %}
@@ -108,7 +109,7 @@
             {% endfor %}
         </div> <!-- .row -->
 
-        <h4 style="padding:0;margin:0"><a href="{{ entry.plazaUrl }}" target="_blank">{% if craft.locale == 'es_us' %}Ver más mensajes de este grupo{% else %}View more posts from this group{% endif %}</a></h4>
+        <strong><a href="http://stanneaz.onthecity.org/plaza?group_id={{ citygroupid }}" target="_blank">{% if craft.locale == 'es_us' %}Ver más mensajes {% else %}View more posts {% endif %}</a> | <a href="http://stanneaz.onthecity.org/groups/{{ citygroupid }}/info" target="_blank">{% if craft.locale == 'es_us' %}Página de información del Grupo{% else %}Group Information Page{% endif %}</a></strong>
         
           {% endif %}
         
