@@ -75,7 +75,7 @@
         <br/>
         {{ entry.body }}
         
-        {% if entry.feedUrl is not empty %}
+        {% if entry.cityGroupId is not empty %}
           {% set citygroupid = entry.cityGroupId|raw %}
           {% set feedurl = "http://stanneaz.onthecity.org/plaza?group_id=#{citygroupid}&format=rss" %}
           {% set limit = 3 %}
