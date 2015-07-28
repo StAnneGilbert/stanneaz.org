@@ -6,7 +6,7 @@
         <div class="section-title">
           <div class="row">
             <div class="col-lg-4 col-md-5 col-sm-5">
-              <h3>Event Calendar</h3>
+              <h3>{% if craft.locale == 'es_us' %}Calendario de eventos{% else %}Event Calendar{% endif %}</h3>
               <div class='addthis_native_toolbox' data-url="{{ entry.url }}" data-title="{{ entry.title }}">
                 <a class='addthis_button_facebook_like' fb:like:layout="button_count"></a>
                 <a class='addthis_button_tweet'></a>
@@ -30,11 +30,16 @@
                 <h4 class='seth'><a href="{{ item.permalink }}" target='_blank'>{{ item.title }}</a></h4>
                 <div>{{ item.summary}}</div>
                 <p class="more muted">
-                  {{ item.date|date('F d, Y') }}
+                  
+                  {% if craft.locale == 'es_us' %}
+                    {{ item.date|date('d F, Y') }}
+                  {% else %}
+                    {{ item.date|date('F d, Y') }}
+                  {% endif %}
                   <span class="dot">&middot;</span>
                   {{ item.date|date('g:ia') }}
                   <span class="dot">&middot;</span>
-                  <a href="{{ item.permalink }}" target='_blank'>Read More</a>
+                  <a href="{{ item.permalink }}" target='_blank'>{% if craft.locale == 'es_us' %}Lee mas{% else %}Read More{% endif %}</a>
                 </p>
               </div>
             </div>
