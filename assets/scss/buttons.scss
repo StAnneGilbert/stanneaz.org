@@ -155,14 +155,17 @@ button.btn:disabled {
 }
 
 .addthis_native_toolbox + p{
-  margin-top: 15px;
+  margin-top: 15px
 }
 h3 + .addthis_native_toolbox{
-  margin-top: 15px;
+  margin-top: 15px
 }
 .addthis_native_toolbox div,.addthis_native_toolbox span,.addthis_native_toolbox iframe {
-  vertical-align:middle
+  vertical-align:top
 }
 .addthis_button_tweet{
   padding:0 10px
+}
+.addthis_button_facebook_like{
+  margin-left: 15px
 }
