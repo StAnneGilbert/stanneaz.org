@@ -119,7 +119,7 @@
 
     <div class="page-content-container">
       <div class="container news-grid">
-      <h4 class="caps-header text-center">{{ "News & Updates"|t }}</h4>
+      <h4 class="caps-header text-center"><a href="{{ siteUrl }}connect/news-updates">{{ "News & Updates"|t }}</a></h4>
 
       <hr class="short-divider centered">
 
@@ -143,6 +143,51 @@
           <p class="posted-on">{{ post.postDate|relativeDate }}</p>
         </div>
         {% endfor %}
+      </div> <!-- .row -->
+      
+      
+      <h4 class="caps-header text-center">
+        {% if craft.locale == 'es_us' %}
+          <a href="/es/connect/eventos">Eventos</a>
+        {% else %}
+          <a href="/connect/events">Events</a>
+        {% endif %}
+      </h4>
+
+      <hr class="short-divider centered">
+
+      <div class="row news-blocks">
+       {% set feedurl = entry.eventFeedUrl %}
+       {% set limit = 3 %}
+       {% if craft.locale == 'es_us' %}
+           {% set offset = 0 %}
+       {% else %}
+           {% set offset = 3 %}
+       {% endif %}
+       {% set cache = "P0M" %}
+       {% set items = craft.feeds.getFeedItems(feedurl, limit, offset, cache) %}
+       {% for item in items|reverse %}
+
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+          <h5><a href="{{ item.permalink }}">{{ item.title }}</a></h5>
+          <p class="excerpt">{{ item.summary | trimit(120) }} <a href="{{ item.permalink }}">{{ "Read More"|t }}</a></p>
+          <p class="posted-on">
+              {% if craft.locale == 'es_us' %}
+                    {{ item.date|date('d F, Y') }}
+              {% else %}
+                    {{ item.date|date('F d, Y') }}
+              {% endif %}
+          </p>
+        </div>
+        {% endfor %}
+        
+        <h3 style="text-align:center">
+        {% if craft.locale == 'es_us' %}
+          <a href="/es/connect/eventos">Ver Todos Eventos &rsaquo;</a>
+        {% else %}
+          <a href="/connect/events">See All Events &rsaquo;</a>
+        {% endif %}
+        </h3>
       </div> <!-- .row -->
 
       <hr class="short-divider centered">
