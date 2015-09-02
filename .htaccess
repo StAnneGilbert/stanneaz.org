@@ -63,12 +63,12 @@ AddType image/svg+xml svg svgz
 
 
 Redirect /announcements-left http://stanneaz.org/connect/events
-Redirect /announcements-right http://stanneaz.org/media/news-updates
+Redirect /announcements-right http://stanneaz.org/connect/news-updates
 Redirect /clergy/homilies/october-2013 http://stanneaz.org/media/media-library
 Redirect /clergy/homilies http://stanneaz.org/media/media-library
 Redirect /clergy/priests-deacons http://stanneaz.org/about/our-leadership
 Redirect /clergy http://stanneaz.org/about/our-leadership
-Redirect /component/content/featured http://stanneaz.org/media/news-updates
+Redirect /component/content/featured http://stanneaz.org/connect/news-updates
 Redirect /connect/community-of-communities/ministries-1/social-outreach/giving-tree http://stanneaz.org/connect/community-of-communities/ministries-1/social-outreach
 Redirect /contact-us http://stanneaz.org/about/contact-us 
 Redirect /en/clergy/homilies http://stanneaz.org/media/media-library
@@ -88,8 +88,8 @@ Redirect /groups/spirituality-groups/adoration http://stanneaz.org/about/times-l
 Redirect /groups/spirituality-groups http://stanneaz.org/connect/community-of-communities/communities-and-movements
 Redirect /home/9-ministries-menu/138-giving-tree http://stanneaz.org/connect/community-of-communities/ministries-1/social-outreach
 Redirect /home/10-groups-menu http://stanneaz.org
-Redirect /home/21-announcements http://stanneaz.org/media/news-updates
-Redirect /home/24-announcements-right http://stanneaz.org/media/news-updates
+Redirect /home/21-announcements http://stanneaz.org/connect/news-updates
+Redirect /home/24-announcements-right http://stanneaz.org/connect/news-updates
 Redirect /home http://stanneaz.org
 Redirect /links http://stanneaz.org/resources/links
 Redirect /media-files/live-stream/daily-mass http://stanneaz.org/media/web-streams/daily-mass
@@ -103,7 +103,7 @@ Redirect /ministries/committees http://stanneaz.org/connect/community-of-communi
 Redirect /ministries/outreach-ministries/giving-tree http://stanneaz.org/connect/community-of-communities/ministries-1/social-outreach
 Redirect /ministries http://stanneaz.org/connect/community-of-communities/ministries-1
 Redirect /my-st-anne https://stanneaz.onthecity.org
-Redirect /news/events.html http://stanneaz.org/media/news-updates
+Redirect /news/events.html http://stanneaz.org/connect/news-updates
 Redirect /our-parish/mass-confession-times http://stanneaz.org/about/times-location
 Redirect /our-parish http://stanneaz.org/about
 Redirect /parish-bulletins http://stanneaz.org/media/weekly-bulletin
