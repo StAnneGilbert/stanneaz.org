@@ -4,18 +4,18 @@
     <div class="container">
     {% if craft.locale == 'en_us' %}
       <ul class="">
-        <li><a href="/es"><i class="fa fa-refresh"></i> En Espa&ntilde;ol</a></li>
-        <li><a href="/connect/events"><i class="fa fa-calendar"></i> Events</a></li>
-        <li><a href="https://stanneaz.onthecity.org" target='_blank'><i class="fa fa-user"></i> My St. Anne on The City</a></li>
-        <li><a href="/about/contact-us"><i class="fa fa-envelope"></i> Contact Us</a></li>
+        <li><a href="/es" title="En Espa&ntilde;ol"><i class="fa fa-refresh"></i> En Espa&ntilde;ol</a></li>
+        <li><a href="/connect/events" title="Events"><i class="fa fa-calendar"></i> Events</a></li>
+        <li><a href="https://stanneaz.onthecity.org" target='_blank' title="My St. Anne on The City"><i class="fa fa-user"></i> My St. Anne on The City</a></li>
+        <li><a href="/about/contact-us" title="Contact Us"><i class="fa fa-envelope"></i> Contact Us</a></li>
       </ul>
     {% elseif craft.locale == 'es_us' %}
         
       <ul class="">
-        <li><a href="/"><i class="fa fa-refresh"></i> English</a></li>
-        <li><a href="/es/connect/eventos"><i class="fa fa-calendar"></i> Eventos</a></li>
-        <li><a href="/es/about/times-location"><i class="fa fa-clock-o"></i> Horario de Misas</a></li>
-        <li><a href="https://www.google.com/maps/dir//440+E+Elliot+Rd,+Gilbert,+AZ+85234/@33.351169,-111.780032,17z/data=!4m13!1m4!3m3!1s0x872ba93f28ba0e83:0x98949b9d24239822!2s440+E+Elliot+Rd,+Gilbert,+AZ+85234!3b1!4m7!1m0!1m5!1m1!1s0x872ba93f28ba0e83:0x98949b9d24239822!2m2!1d-111.780032!2d33.351169" target="_blank"><i class="fa fa-map-marker"></i> Direcciones</a></li>
+        <li><a href="/" title="English"><i class="fa fa-refresh"></i> English</a></li>
+        <li><a href="/es/connect/eventos" title="Eventos"><i class="fa fa-calendar"></i> Eventos</a></li>
+        <li><a href="/es/about/times-location" title="Horario de Misas"><i class="fa fa-clock-o"></i> Horario de Misas</a></li>
+        <li><a href="https://www.google.com/maps/dir//440+E+Elliot+Rd,+Gilbert,+AZ+85234/@33.351169,-111.780032,17z/data=!4m13!1m4!3m3!1s0x872ba93f28ba0e83:0x98949b9d24239822!2s440+E+Elliot+Rd,+Gilbert,+AZ+85234!3b1!4m7!1m0!1m5!1m1!1s0x872ba93f28ba0e83:0x98949b9d24239822!2m2!1d-111.780032!2d33.351169" target="_blank" title="Direcciones"><i class="fa fa-map-marker"></i> Direcciones</a></li>
       </ul>
     {% endif %}
 
@@ -30,16 +30,25 @@
   </div> <!-- .toolbar -->
   <header class="site-header">
     <div class="container clearfix">
-      <div class="logo">
+      <div class="logo" style="float:left">
       {% if craft.locale == 'en_us' %}
         <a href="/"><img src="/assets/img/logo.svg" alt="St. Anne Roman Catholic Parish" /></a>
       {% elseif craft.locale == 'es_us' %}
         <a href="/es/"><img src="/assets/img/logo.svg" alt="St. Anne Roman Catholic Parish" /></a>
       {% endif %}
       </div>
+      
       <div class="mobile-menu-toggle visible-xs" data-toggle="mobile-menu">
-        <i class="icon-mobile-menu"></i>
+        <i class="icon-mobile-menu""></i>
       </div>
+      
+      <form {% if craft.locale == 'es_us' %}action="http://stanneaz.org/es/buscar"{% else %}action="http://stanneaz.org/search"{% endif %} id="nav-search-small">
+            <div class="search-input-wrap">
+                <input type="text" name="q" id="nav-search-query3" />
+                <input type="submit" {% if craft.locale == 'es_us' %}value="{{ "Buscar"|t }}"{% else %}value="{{ "Search"|t }}"{% endif %} class="btn btn-light-blue nav-search-btn-small"/>
+            </div>
+      </form>
+      
       <div class="site-menu hidden-xs">
       
 
@@ -62,10 +71,10 @@
       
         
           <li class="search" id="menusearch">
-            <a href="#" class='search-open'><i class="fa fa-search"></i></a>
+            <a href="#" class='search-open' title="Search"><i class="fa fa-search"></i></a>
             <form {% if craft.locale == 'es_us' %}action="/es/buscar"{% else %}action="/search"{% endif %} id="nav-search" class="search-form">
               <div class="search-input-wrap">
-                <i class="fa fa-search"></i>
+                <i class="fa fa-search" title="Search"></i>
                 <input type="text" name="q" id='nav-search-query' {% if craft.locale == 'es_us' %}placeholder="{{ "Estoy Buscando"|t }}..."{% else %}placeholder="{{ "I'm searching for"|t }}..."{% endif %} />
               </div>
             </form>
