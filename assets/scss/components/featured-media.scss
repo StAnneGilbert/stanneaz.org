@@ -63,6 +63,10 @@
         margin-bottom:0;
       }
     }
+    .featured-media-box h4 {
+      font-size:16px;
+      line-height:18px;
+    }
   }
 }
 
@@ -141,4 +145,8 @@
     color:$light-body;
     margin:0 3px;
   }
+}
+.standard-container .featured-media-box h4.seth {
+  font-size:16px;
+  line-height:18px;
 }
