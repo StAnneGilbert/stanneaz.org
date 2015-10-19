@@ -1,11 +1,17 @@
 {% set spanish = "1:00pm" %}
-{% set english = "5:00pm" %}
+{% set english = "11:00am" %}
 {% set latest = "/media/media-library" %}
+{% set topics = "sometopic" %}
+{% set topicTitle = "Homilies" %}
 {% set break = 0 %}
 {% if craft.locale == "en_us" %}
   {% for item in craft.entries.section('media').order('mediaDate DESC') if break == 0 %}
       {% set time = item.mediaDate|date('g:ia') %}
-      {% if time == english %}
+      {% set topics = item.mediaTopic %}
+      {% for topic in topics %}
+          {% set topicTitle = topic.title %}
+      {% endfor %}
+      {% if time == english and topicTitle == "Homilies" %}
         {% set break = 1 %}
         {% set latest = item.url %}
       {% endif %}
@@ -13,7 +19,11 @@
 {% elseif craft.locale == "es_us" %}
   {% for item in craft.entries.section('media').order('mediaDate DESC') if break == 0 %}
       {% set time = item.mediaDate|date('g:ia') %}
-      {% if  time == spanish %}
+      {% set topics = item.mediaTopic %}
+      {% for topic in topics %}
+          {% set topicTitle = topic.title %}
+      {% endfor %}
+      {% if time == spanish and topicTitle == "Homilias" %}
         {% set break = 1 %}
         {% set latest = item.url %}
       {% endif %}
