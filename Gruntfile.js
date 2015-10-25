@@ -16,10 +16,12 @@ module.exports = function(grunt) {
       options: {
         browsers: ['last 6 versions', 'Firefox ESR', 'Firefox >= 20', 'Opera 12.1']
       },
-      single_file: {
-        src: 'assets/css/global.css',
-        dest: 'assets/css/global.css'
-      }
+      dist: {
+            files: {
+                'assets/css/global.css': 'assets/css/global.css',
+                'assets/css/phoneApp.css': 'assets/css/phoneApp.css',
+            }
+        }
     },
 
     concat: {
@@ -53,7 +55,8 @@ module.exports = function(grunt) {
           style: 'compressed'
         },
         files: {
-          'assets/css/global.css': 'assets/scss/global.scss'
+          'assets/css/global.css': 'assets/scss/global.scss',
+          'assets/css/phoneApp.css': 'assets/scss/phoneApp.scss'
         }
       }
     },

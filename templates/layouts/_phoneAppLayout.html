@@ -1,0 +1,19 @@
+{% import "_helpers" as helpers %} 
+<!DOCTYPE HTML>
+<html class="no-js">
+<head>
+  {% include "partials/_head" %}
+  {% block pagetype %}{% endblock %}
+</head>
+
+<body>
+
+  <div id="wraparound">
+    {% block content %}{% endblock %}
+  </div>
+
+{{ siteWideContent.embedCode|raw }}
+  
+</body>
+
+</html>
