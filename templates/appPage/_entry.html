@@ -1,0 +1,9 @@
+{# Phone App Template #}
+{% extends "layouts/_phoneAppLayout" %}
+
+{% block pagetype %}
+{% endblock %}
+
+{% block content %}
+  {%- include "appPage/_types/" ~ entry.type -%}
+{% endblock %}

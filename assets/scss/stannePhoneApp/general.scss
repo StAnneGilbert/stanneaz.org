@@ -1,0 +1,13 @@
+
+// Use .page-content-container to apply standard amount of top-bottom padding to page content area
+.page-content-container {
+  @media screen and (max-width:$screen-xs-max) {
+    padding:25px 0 60px;
+  }
+  @media screen and (min-width:$screen-sm-min) and (max-width:$screen-sm-max) {
+    padding:25px 0 60px;
+  }
+  @media screen and (min-width:$screen-md-min) {
+    padding:25px 0 60px;
+  }
+}
