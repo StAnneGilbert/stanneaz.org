@@ -225,9 +225,9 @@ h3.bottom-border {
 }
 
 h5, .h5, h6, .h6 {
-  font-size:20px;
-  line-height:24px;
-  font-weight:600;
+  font-size:14px;
+  line-height:18px;
+  font-weight:400;
   margin:30px 0 6px;
 
   &:first-child {
@@ -235,9 +235,9 @@ h5, .h5, h6, .h6 {
   }
 }
 h5, .h5 {
-  color:$dark-gray;
+  color:$dark-brown;
   a, a:hover {
-    color:$dark-gray;
+    color:$dark-brown;
   }
   a:hover {
     text-decoration:underline;
