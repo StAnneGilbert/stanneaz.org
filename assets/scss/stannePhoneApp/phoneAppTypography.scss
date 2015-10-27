@@ -258,11 +258,30 @@ h6, .h6 {
 .page-photo-title {
   background:url('http://s3.amazonaws.com/media.stanneaz.com/craft/assets/bg-page-photo-title.jpg') no-repeat top center;
   background-size:cover;
-  height:250px;
-
-  @media screen and (max-width:$screen-xs) {
-     height:220px;
+  padding-top:24%;
+  height:338px;
+  width:600px;
+  margin:0 auto;
+  
+  .overlay {
+    width:100%;
+    padding:20px 0;
+    text-align:center;
   }
+  .caps-header {
+    font-size:30px;
+    line-height:36px;
+    letter-spacing:3px;
+    color:#fff;
+    margin:0;
+  }
+  
+  @media screen and (max-width: 600px) {
+    padding-top:44%;
+    width:100%;
+    height:auto;
+  }
+
 }
 
 // section title with optional right-aligned action links
