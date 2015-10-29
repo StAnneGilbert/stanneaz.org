@@ -6,7 +6,7 @@
         <div class="section-title">
           <div class="row">
             <div class="col-md-5">
-              <h3>{% if craft.locale == 'es_us' %}Eventos{% else %}Events{% endif %}</h3>
+              <h3>{{ "Events"|t }}</h3>
               <div class='addthis_native_toolbox' data-url="{{ entry.url }}" data-title="{{ entry.title }}">
                 <a class='addthis_button_facebook_like' fb:like:layout="button_count"></a>
                 <a class='addthis_button_tweet'></a>
@@ -39,7 +39,7 @@
                   <span class="dot">&middot;</span>
                   {{ item.date|date('g:ia') }}
                   <span class="dot">&middot;</span>
-                  <a href="{{ item.permalink }}" target='_blank'>{% if craft.locale == 'es_us' %}Lee mas{% else %}Read More{% endif %}</a>
+                  <a href="{{ item.permalink }}" target='_blank'>{{ "Read More"|t }}</a>
                 </p>
               </div>
             </div>

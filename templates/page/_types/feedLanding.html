@@ -35,7 +35,7 @@
                     <span class="dot">&middot;</span>
                     {{ item.date|date('g:ia') }}
                     <span class="dot">&middot;</span>
-                    <a href="{{ item.permalink }}" target="_blank">{% if craft.locale == 'es_us' %}Lee mas{% else %}Read More{% endif %}</a>
+                    <a href="{{ item.permalink }}" target="_blank">{{ "Read More"|t }}</a>
                   </p>
                 </div>
               </div>

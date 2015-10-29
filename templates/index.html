@@ -147,11 +147,7 @@
       
       
       <h4 class="caps-header text-center">
-        {% if craft.locale == 'es_us' %}
-          <a href="/es/connect/eventos">Eventos</a>
-        {% else %}
-          <a href="/connect/events">Events</a>
-        {% endif %}
+          <a href="{% if craft.locale == 'es_us' %}/es/connect/eventos{% else %}/connect/events{% endif %}">{{ "Events"|t }}</a>
       </h4>
 
       <hr class="short-divider centered">
@@ -182,11 +178,7 @@
         {% endfor %}
         
         <h3 style="text-align:center">
-        {% if craft.locale == 'es_us' %}
-          <a href="/es/connect/eventos">Ver Todos Eventos &rsaquo;</a>
-        {% else %}
-          <a href="/connect/events">See All Events &rsaquo;</a>
-        {% endif %}
+          <a href="{% if craft.locale == 'es_us' %}/es/connect/eventos{% else %}/connect/events{% endif %}">{{ "See All Events"|t }} &rsaquo;</a>
         </h3>
       </div> <!-- .row -->
 
