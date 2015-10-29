@@ -10,9 +10,9 @@
       <div class="container standard-container">
 
         <div class="section-title">
-          <h3>Here's what we found</h3>
+          <h3>{{ "Here's what we found"|t }}</h3>
           {% if entries|length %}
-            <h3 class='small'>{{ entries|length }} results for &ldquo;{{ query }}&rdquo;</h3>
+            <h3 class='small'>{{ entries|length }} {{ "results for"|t }} &ldquo;{{ query }}&rdquo;</h3>
           {% endif %}
         </div>
 
