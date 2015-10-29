@@ -84,11 +84,7 @@
 
           {% if items|length %}
           
-            {% if craft.locale == 'es_us' %}
-              <h3>Mensajes recientes para este grupo en el "City Plaza"</h3>
-            {% else %}
-            <h3>Latest posts for this group on The City Plaza</h3>
-            {% endif %}
+            <h3>{{ "Latest posts for this group on The City Plaza"|t }}</h3>
           
         <div class="featured-media-grid clearfix">
           {% for item in items %}
@@ -102,18 +98,18 @@
                   <p class="more muted">
                     {{ item.date|date('F d, Y') }}
                     <span class="dot">&middot;</span>
-                    <a href="{{ item.permalink }}" target='_blank'>{% if craft.locale == 'es_us' %}Lee Mas{% else %}Read More{% endif %}</a>
+                    <a href="{{ item.permalink }}" target='_blank'>{{ "Read More"|t }}</a>
                   </p>
                 </div>
               </div>
             {% endfor %}
         </div> <!-- .row -->
 
-        <strong><a href="http://stanneaz.onthecity.org/plaza?group_id={{ citygroupid }}" target="_blank">{% if craft.locale == 'es_us' %}Ver más mensajes {% else %}View more posts {% endif %}</a> | 
+        <strong><a href="http://stanneaz.onthecity.org/plaza?group_id={{ citygroupid }}" target="_blank">{{ "View more posts"|t }}</a> | 
         
         {% endif %}
         
-        <a href="http://stanneaz.onthecity.org/groups/{{ citygroupid }}/info" target="_blank">{% if craft.locale == 'es_us' %}Página de información del Grupo en "The City"{% else %}Group Information Page on The City{% endif %}</a></strong>
+        <a href="http://stanneaz.onthecity.org/groups/{{ citygroupid }}/info" target="_blank">{{ "Group Information Page on The City"|t }}</a></strong>
         
         {% endif %}
         

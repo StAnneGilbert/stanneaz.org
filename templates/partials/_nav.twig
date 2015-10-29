@@ -40,7 +40,7 @@
       <form {% if craft.locale == 'es_us' %}action="http://stanneaz.org/es/buscar"{% else %}action="http://stanneaz.org/search"{% endif %} id="nav-search-small">
             <div class="search-input-wrap">
                 <input type="text" name="q" id="nav-search-query3" />
-                <input type="submit" {% if craft.locale == 'es_us' %}value="{{ "Buscar"|t }}"{% else %}value="{{ "Search"|t }}"{% endif %} class="btn btn-light-blue nav-search-btn-small"/>
+                <input type="submit" value="{{ "Search"|t }}" class="btn btn-light-blue nav-search-btn-small"/>
             </div>
       </form>
       
@@ -70,7 +70,7 @@
             <form {% if craft.locale == 'es_us' %}action="/es/buscar"{% else %}action="/search"{% endif %} id="nav-search" class="search-form">
               <div class="search-input-wrap">
                 <i class="fa fa-search" title="Search"></i>
-                <input type="text" name="q" id='nav-search-query' {% if craft.locale == 'es_us' %}placeholder="{{ "Estoy Buscando"|t }}..."{% else %}placeholder="{{ "I'm searching for"|t }}..."{% endif %} />
+                <input type="text" name="q" id='nav-search-query' placeholder="{{ "I'm searching for"|t }}..." />
               </div>
             </form>
           </li>
