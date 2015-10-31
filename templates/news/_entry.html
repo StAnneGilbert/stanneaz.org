@@ -10,12 +10,6 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-10 col-lg-offset-1">
-
-            <div class="row bottom-padding">
-              <div class="col-xs-6 text-right font-size-14">
-                <a href="{{ siteUrl }}connect/news-updates">{{ "View more news & updates"|t }} &rsaquo;</a>
-              </div>
-            </div>
             
             {% if entry.postImage|length %}
               <div class="featured-image-container">
@@ -69,6 +63,10 @@
                     </div>
                   </div> <!-- .author-bio -->
                 {% endif %}
+                
+                <div style="margin:5px 0 40px"><a href="{{ siteUrl }}connect/news-updates">{{ "View more news & updates"|t }} &rsaquo;</a>
+                </div>
+                
                 <hr>
                 
                 {% if siteWideSocialLinks.socialLinks|length %}
