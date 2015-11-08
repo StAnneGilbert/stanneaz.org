@@ -20,6 +20,7 @@
                 quality: 75,
                 position: 'top-center'
             } %}
+                {% cache globally %}
                 <ul class='bxslider'>
                 {% for item in entry.featuredAtStAnne %}
                   {% set link = item.contentLink %}
@@ -37,6 +38,7 @@
                     </li>
                 {% endfor %}
                 </ul>
+                {% endcache %}
               
 
               <div id="bx-pager">
@@ -135,6 +137,7 @@
             </div>
           </form> #}
         </div>
+       {% cache globally %}
        {% set posts = craft.entries.section('newsUpdates').limit(5) %}
        {% for post in posts %}
         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
@@ -144,6 +147,7 @@
         </div>
         {% endfor %}
       </div> <!-- .row -->
+      {% endcache %}
       
       
       <h4 class="caps-header text-center">
@@ -161,6 +165,8 @@
            {% set offset = 3 %}
        {% endif %}
        {% set cache = "P0M" %}
+       
+       {% cache globally %}
        {% set items = craft.feeds.getFeedItems(feedurl, limit, offset, cache) %}
        {% for item in items|reverse %}
 
@@ -176,6 +182,7 @@
           </p>
         </div>
         {% endfor %}
+        {% endcache %}
         
         <h3 style="text-align:center">
           <a href="{% if craft.locale == 'es_us' %}/es/connect/eventos{% else %}/connect/events{% endif %}">{{ "See All Events"|t }} &rsaquo;</a>
