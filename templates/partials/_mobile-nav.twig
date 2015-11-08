@@ -10,6 +10,7 @@
       </div>
   </form>
 
+  {% cache globally %}
   <ul class="main-menu">
     {% set pages = craft.entries.section('pages').level(1) %}
     {% nav page in pages %}
@@ -34,6 +35,7 @@
       </li>
     {% endnav %}
   </ul>
+  {% endcache %}
 
   <img src="/assets/img/logomark-black.svg" class="logomark">
 

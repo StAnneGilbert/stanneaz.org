@@ -49,6 +49,7 @@
 
 
 
+    {% cache globally %}
     <ul {% if craft.locale == 'es_us' %} class="es_us"{% endif %}>
         {% set pages = craft.entries.section('pages').level('<= 3') %}
         {% nav page in pages %}
@@ -78,6 +79,7 @@
             <a {% if craft.locale == 'es_us' %}href="/es/comience-aqui"{% else %}href="/start-here"{% endif %} class="btn btn-light-blue">{{ "Start Here"|t }}</a>
           </li>
         </ul>
+    {% endcache %}
       </div>
     </div>
   </header>
