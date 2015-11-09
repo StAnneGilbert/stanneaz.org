@@ -68,7 +68,7 @@
           <div class="row">
             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
               <h3>{{ entry.title }}</h3>
-              <h3 class="small">{{ entry.mediaDate|date('F d, Y g:i a') }} &nbsp;&middot;&nbsp; {% if entry.speaker|length %} &nbsp;&middot;&nbsp;{{ entry.speaker[0].title }} {% endif %}</h3>
+              <h3 class="small">{{ entry.mediaDate|date('F d, Y g:i a') }} {% if entry.speaker|length %} &nbsp;&middot;&nbsp;{{ entry.speaker[0].title }} {% endif %}</h3>
               <p class="links">
                 {% set topics = entry.mediaTopic %}
                   {% for topic in topics %}
