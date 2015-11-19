@@ -71,7 +71,7 @@
             <form {% if craft.locale == 'es_us' %}action="/es/buscar"{% else %}action="/search"{% endif %} id="nav-search" class="search-form">
               <div class="search-input-wrap">
                 <i class="fa fa-search" title="Search"></i>
-                <input type="text" name="q" id='nav-search-query' placeholder="{{ "I'm searching for"|t }}..." />
+                <input type="text" name="q" id='nav-search-query' placeholder="{{ "I'm searching for"|t }}..." title="{{ "I'm searching for"|t }}..." />
               </div>
             </form>
           </li>
