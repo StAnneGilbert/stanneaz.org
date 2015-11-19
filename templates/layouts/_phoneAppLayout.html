@@ -1,6 +1,6 @@
 {% import "_helpers" as helpers %} 
 <!DOCTYPE HTML>
-<html class="no-js">
+<html class="no-js"{% if craft.locale == 'es_us' %} lang="es"{% else %} lang="en"{% endif %}>
 <head>
   {% include "partials/_head" %}
   {% block pagetype %}{% endblock %}

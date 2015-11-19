@@ -129,10 +129,10 @@
         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
           <h6><i class="fa fa-rss"></i> {{ "Subscribe to News & Updates"|t }}</h6>
           <p class="excerpt">{{ "Get the latest news from St. Anne’s sent to your email inbox. No spam, we promise."|t }}</p>
-          <form class='email-subscribe-form' action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open('https://feedburner.google.com/fb/a/mailverify?uri=stannenewsandupdates', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true"><div class='input-container clearfix'><input type="text" style="width:140px" name="email" placeholder="{{ "Enter your email address"|t }}..."/><input type="hidden" value="stannenewsandupdates" name="uri"/><input type="hidden" name="loc" value="en_US"/><button type="submit" class="btn btn-sm btn-light-blue"><i class="fa fa-check"></i> {{ "Subscribe"|t }}</button></div></form>
+          <form class='email-subscribe-form' action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open('https://feedburner.google.com/fb/a/mailverify?uri=stannenewsandupdates', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true"><div class='input-container clearfix'><input type="text" style="width:140px" name="email" placeholder="{{ "Enter your email address"|t }}..." title="{{ "Enter your email address"|t }}"/><input type="hidden" value="stannenewsandupdates" name="uri"/><input type="hidden" name="loc" value="en_US"/><button type="submit" class="btn btn-sm btn-light-blue"><i class="fa fa-check"></i> {{ "Subscribe"|t }}</button></div></form>
         {#   <form action="" class="email-subscribe-form">
             <div class="input-container clearfix">
-              <input type="email" name="" id="" placeholder="{{ "Enter your email address"|t }}...">
+              <input type="email" name="" id="" placeholder="{{ "Enter your email address"|t }}..." title="{{ "Enter your email address"|t }}">
               <button type="submit" class="btn btn-sm btn-light-blue"><i class="fa fa-check"></i> {{ "Subscribe"|t }}</button>
             </div>
           </form> #}
