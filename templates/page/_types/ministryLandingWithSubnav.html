@@ -1,0 +1,113 @@
+
+{%- set parent = craft.entries.section('pages').slug(craft.request.getSegment(1)).first() -%}
+{%- set children = entry.getDescendants(1) -%}
+
+{% macro recursiveChildren(page) %}
+  {% if page.hasDescendants and page.slug == craft.request.getSegment(page.level) %}
+    <ul>
+      {% for subpage in page.children %}
+          <li{% if subpage.slug == craft.request.getSegment(subpage.level) %} class="selected"{% endif %}>
+            {{ subpage.link }}
+            {{ _self.recursiveChildren(subpage) }}
+          </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endmacro %}
+  <!-- .sf-content for flex sticky footer -->
+  <div class="sf-content nav-slide-element" data-swiftype-name="body" data-swiftype-type="text">
+    <div class="page-photo-title" {% if entry.pageImage|length %}style=" background-image:url({{ entry.pageImage[0].url }})" {% endif %}>
+      <div class="overlay">
+        <div class="container">
+          <h1 class="caps-header">{{ entry.heading }}</h1>
+        </div>
+      </div>
+    </div>
+    {% if children|length %}
+      <div class="section-navigation fixedsticky">
+        <div class="container">
+          <ul>
+            {% if entry.parent %}
+              <li style='font-weight:600;'> {{ entry.parent.link }} </li>
+            {% endif %}
+              {% nav page in children %}
+                <li {% if page.id == entry.id or entry.isDescendantOf(page) %}class="selected"{% endif %}>
+                    {% if page.id == entry.id %}
+                      <span>{{page.title}}</span>
+                    {% else %}
+                      {{ page.getLink() }}
+                    {% endif %}
+                </li>
+              {% endnav %}
+          </ul>
+        </div>
+      </div>
+    {% else %}
+      {% set children = entry.getSiblings() %}
+       <div class="section-navigation fixedsticky">
+        <div class="container">
+          <ul>
+          {% if entry.parent %}
+            <li style='font-weight:600;'> {{ entry.parent.link }} </li>
+          {% endif %}
+              {% nav page in children %}
+                <li {% if page.id == entry.id or entry.isDescendantOf(page) %}class="selected"{% endif %}>
+                    {% if page.id == entry.id %}
+                      <span>{{page.title}}</span>
+                    {% else %}
+                      {{ page.getLink() }}
+                    {% endif %}
+                </li>
+              {% endnav %}
+          </ul>
+        </div>
+      </div> 
+    {% endif %}
+
+
+    <div class="page-content-container">
+      <div class="container standard-container">
+        {{ entry.body }}
+        
+        {% if entry.cityGroupId is not empty %}
+          {% set citygroupid = entry.cityGroupId|raw %}
+          {% set feedurl = "http://stanneaz.onthecity.org/plaza?group_id=#{citygroupid}&format=rss" %}
+          {% set limit = 3 %}
+          {% set cache = "P0M" %}
+          {% set items = craft.feeds.getFeedItems(feedurl, limit, 0, cache) %}
+
+          {% if items|length %}
+          
+            <h3>{{ "Latest posts for this group on The City Plaza"|t }}</h3>
+          
+        <div class="featured-media-grid clearfix">
+          {% for item in items %}
+            <div class="featured-media-box short">
+                {# <div class="image-wrap">
+                  <img src="assets/feature-st-james.jpg" alt="" />
+                </div> #}
+                <div class="details">
+                  <h4 class='seth'><a href="{{ item.permalink }}" target="_blank">{{ item.title }}</a></h4>
+                  <div>{{ item.summary }}</div>
+                  <p class="more muted">
+                    {{ item.date|date('F d, Y') }}
+                    <span class="dot">&middot;</span>
+                    <a href="{{ item.permalink }}" target='_blank'>{{ "Read More"|t }}</a>
+                  </p>
+                </div>
+              </div>
+            {% endfor %}
+        </div> <!-- .row -->
+
+        <strong><a href="http://stanneaz.onthecity.org/plaza?group_id={{ citygroupid }}" target="_blank">{{ "View more posts"|t }}</a> | 
+        
+        {% endif %}
+        
+        <a href="http://stanneaz.onthecity.org/groups/{{ citygroupid }}/info" target="_blank">{{ "Group Information Page on The City"|t }}</a></strong>
+        
+        {% endif %}
+        
+        	
+      </div> <!-- .container -->
+    </div> <!-- .page-content-container -->
+  </div> <!-- .sf-content -->

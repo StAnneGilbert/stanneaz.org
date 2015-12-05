@@ -13,7 +13,7 @@
 
         <div class="featured-media-grid clearfix">
           {% set feedurl = entry.eventFeedUrl %}
-          {% set limit = 30 %}
+          {% set limit = 40 %}
           {% set cache = "P0M" %}
           {% set items = craft.feeds.getFeedItems(feedurl, limit,0, cache) %}
           {% for item in items|reverse %}
