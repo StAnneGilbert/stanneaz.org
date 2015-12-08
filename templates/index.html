@@ -159,16 +159,12 @@
       <div class="row news-blocks">
        {% set feedurl = entry.eventFeedUrl %}
        {% set limit = 3 %}
-       {% if craft.locale == 'es_us' %}
-           {% set offset = 0 %}
-       {% else %}
-           {% set offset = 3 %}
-       {% endif %}
+       {% set offset = 0 %}
        {% set cache = "P0M" %}
        
        {% cache globally %}
        {% set items = craft.feeds.getFeedItems(feedurl, limit, offset, cache) %}
-       {% for item in items|reverse %}
+       {% for item in items %}
 
         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
           <h5><a href="{{ item.permalink }}">{{ item.title }}</a></h5>
