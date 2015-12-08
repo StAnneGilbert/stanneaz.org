@@ -137,7 +137,7 @@
             </div>
           </form> #}
         </div>
-       {% cache globally %}
+       {% cache globally for 2 weeks %}
        {% set posts = craft.entries.section('newsUpdates').limit(5) %}
        {% for post in posts %}
         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
@@ -160,9 +160,9 @@
        {% set feedurl = entry.eventFeedUrl %}
        {% set limit = 3 %}
        {% set offset = 0 %}
-       {% set cache = "P0M" %}
+       {% set cache = "P1D" %}
        
-       {% cache globally %}
+       {% cache globally for 1 day %}
        {% set items = craft.feeds.getFeedItems(feedurl, limit, offset, cache) %}
        {% for item in items %}
 
