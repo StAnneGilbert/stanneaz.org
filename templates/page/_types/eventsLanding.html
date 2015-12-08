@@ -15,6 +15,7 @@
           {% set feedurl = entry.eventFeedUrl %}
           {% set limit = 40 %}
           {% set cache = "P0M" %}
+          {% cache globally for 1 hour %}
           {% set items = craft.feeds.getFeedItems(feedurl, limit,0, cache) %}
           {% for item in items|reverse %}
             <div class="featured-media-box">
@@ -39,6 +40,7 @@
               </div>
             </div>
           {% endfor %}
+          {% endcache %}
           
         </div> <!-- .row -->
 
