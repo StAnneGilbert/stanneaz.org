@@ -50,7 +50,7 @@ body {
 
 // default links
 a {
-  color:$light-blue;
+  color:$dark-blue;
   text-decoration:none;
 
   &:hover {
@@ -60,7 +60,6 @@ a {
 
 // paragraphs
 p {
-  color:$dark-blue;
   margin:0;
   text-decoration: italic;
 
@@ -187,18 +186,18 @@ h1, .h1 {
   line-height:64px;
 }
 h2, .h2 {
-  color:$dark-blue;
+  color:$dark-brown;
   font-size: 24px;
   font-weight:600;
   line-height: 28px;
-  margin:0px;
+  margin:0 0 18px;
 }
 h3, .h3 {
-  color:$dark-blue;
+  color:$dark-brown;
   font-size: 24px;
   font-weight:200;
   line-height: 24px;
-  margin:30px 0 0;
+  margin:30px 0 18px;
 
   @media screen and (max-width:$screen-xs) {
     font-size:24px;
@@ -244,9 +243,9 @@ h5, .h5 {
   }
 }
 h6, .h6 {
-  color:$dark-blue;
+  color:$dark-brown;
   a, a:hover {
-    color:$dark-blue;
+    color:$dark-brown;
   }
   a:hover {
     text-decoration:underline;
