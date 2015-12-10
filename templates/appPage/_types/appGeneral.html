@@ -11,7 +11,20 @@
 
     <div class="page-content-container">
       <div class="container standard-container">
+        {% if (siteWideContent.scheduleChange) and (entry.slug == 'mass-confession-schedule') %}
+          <p id="scheduleMessage" style="color:#a00">
+            {{ siteWideContent.scheduleChange }}
+          </p>
+        {% endif %}
         {{ entry.body }}
       </div> <!-- .container -->
     </div> <!-- .page-content-container -->
   </div> <!-- .sf-content -->
+  
+  {% if (siteWideContent.scheduleChange) and (entry.slug == 'mass-confession-schedule') %}
+<script>
+if (document.getElementById("confessionMsg") && document.getElementById("scheduleMessage")) {
+document.getElementById("confessionMsg").innerHTML = '<span style="color:#a00">' + document.getElementById("scheduleMessage").innerHTML + '</span>';
+}
+</script>
+{% endif %}
