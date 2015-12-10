@@ -60,12 +60,8 @@ a {
 
 // paragraphs
 p {
-  margin:0;
+  margin:0 0 18px;
   text-decoration: italic;
-
-  @media screen and (max-width:$screen-xs) {
-    margin:0;
-  }
 
   &:last-child {
     margin-bottom:0;
