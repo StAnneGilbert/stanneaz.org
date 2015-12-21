@@ -68,9 +68,9 @@
     <div class="page-content-container">
       <div class="container standard-container">
         {% if (siteWideContent.scheduleChange) and (entry.slug == 'times-location') %}
-          <p id="scheduleMessage" style="color:#a00">
+          <div id="scheduleMessage">
             {{ siteWideContent.scheduleChange }}
-          </p>
+          </div>
         {% endif %}
         {{ entry.body }}
       </div> <!-- .container -->
@@ -80,7 +80,7 @@
 {% if (siteWideContent.scheduleChange) and (entry.slug == 'times-location') %}
 <script>
 if (document.getElementById("confessionMsg") && document.getElementById("scheduleMessage")) {
-document.getElementById("confessionMsg").innerHTML = '<span style="color:#a00">' + document.getElementById("scheduleMessage").innerHTML + '</span>';
+document.getElementById("confessionMsg").innerHTML = document.getElementById("scheduleMessage").innerHTML;
 }
 </script>
 {% endif %}
