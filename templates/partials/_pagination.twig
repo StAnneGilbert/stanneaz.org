@@ -1,5 +1,5 @@
-{% set q = {} %}
-{% set t = {} %}
+{% set q = "" %}
+{% set t = "" %}
 {% if craft.request.getParam('q') %}
     {% set q = "?q=" ~ craft.request.getParam('q') %}
 {% endif %}
