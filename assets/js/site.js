@@ -2162,7 +2162,7 @@ var TMF = (function ($, tm, window, document, undefined) {
           video: true,
           useCSS: false,
           auto: true,
-          pause: 6000
+          pause: 9000
         });
       });
     };
