@@ -26,7 +26,19 @@
 
     <div class="page-content-container">
       <div class="container standard-container">
+        {% if (siteWideContent.scheduleChange) and (entry.slug == 'times-location') %}
+          <div id="scheduleMessage">
+            {{ siteWideContent.scheduleChange }}
+          </div>
+        {% endif %}
         {{ entry.body }}
       </div> <!-- .container -->
     </div> <!-- .page-content-container -->
   </div> <!-- .sf-content -->
+{% if (siteWideContent.scheduleChange) and (entry.slug == 'times-location') %}
+<script>
+if (document.getElementById("confessionMsg") && document.getElementById("scheduleMessage")) {
+document.getElementById("confessionMsg").innerHTML = document.getElementById("scheduleMessage").innerHTML;
+}
+</script>
+{% endif %}
