@@ -181,7 +181,7 @@ countdown(2016,03,20);
 .no-clicky, .yes-clicky{position:absolute;top:0;left:0;}
 .no-clicky{left:100px;}
 .cdaq{padding-top:3px;margin-top:0;margin-bottom:12px;}
-.cdap{position:relative;z-index:90;padding-top:0;margin-top:0}
+.cdap{position:relative;z-index:90;padding:0 0 20px 0;margin-top:0}
 </style>
 <h4 class="cdaq">{{"Will you donate to the CDA?"|t }}</h4>
 <p class="cdap">
@@ -234,7 +234,7 @@ $(function(){
        {% if loop.index == 3 %}
         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
             <h6><i class="fa fa-rss"></i> {{ "Subscribe to Announcements"|t }}</h6>
-          <p class="excerpt"><a href="http://stanneaz.onthecity.org/groups/{% if craft.locale == 'es_us' %}170927{% else %}159435{% endif %}/instant_self_join" target="_blank">{{ "Join the Announcements group on The City"|t }}</a> {{"(account required)"|t }}. {{ "Or, receive them via email:"|t }}</p>
+          <p class="excerpt"><a href="http://stanneaz.onthecity.org/groups/{% if craft.locale == 'es_us' %}170927{% else %}159435{% endif %}" target="_blank">{{ "Join the Announcements group on The City"|t }}</a> {{"(account required)"|t }}. {{ "Or, receive them via email:"|t }}</p>
           <form class='email-subscribe-form' action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open('https://feedburner.google.com/fb/a/mailverify?uri={% if craft.locale == 'es_us' %}AnunciosParaStaAna{% else %}StAnneAnnouncements{% endif %}', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true"><div class='input-container clearfix'><input type="text" style="width:140px" name="email" placeholder="{{ "Enter your email address"|t }}..." title="{{ "Enter your email address"|t }}"/><input type="hidden" value="{% if craft.locale == 'es_us' %}AnunciosParaStaAna{% else %}StAnneAnnouncements{% endif %}" name="uri"/><input type="hidden" name="loc" value="en_US"/><button type="submit" class="btn btn-sm btn-light-blue"><i class="fa fa-check"></i> {{ "Subscribe"|t }}</button></div></form>
         </div>             
        {% endif %}
@@ -261,7 +261,7 @@ $(function(){
       
       <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
             <h6><i class="fa fa-rss"></i> {{ "Subscribe to Events"|t }}</h6>
-          <p class="excerpt"><a href="http://stanneaz.onthecity.org/groups/{% if craft.locale == 'es_us' %}155455{% else %}145022{% endif %}/instant_self_join" target="_blank">{{ "Join the Events group on The City"|t }}</a> {{"(account required)"|t }}. {{ "Or, receive them via email:"|t }}</p>
+          <p class="excerpt"><a href="http://stanneaz.onthecity.org/groups/{% if craft.locale == 'es_us' %}155455{% else %}145022{% endif %}" target="_blank">{{ "Join the Events group on The City"|t }}</a> {{"(account required)"|t }}. {{ "Or, receive them via email:"|t }}</p>
           <form class='email-subscribe-form' action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open('https://feedburner.google.com/fb/a/mailverify?uri={% if craft.locale == 'es_us' %}EventosStaAna{% else %}StAnneEvents{% endif %}', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true"><div class='input-container clearfix'><input type="text" style="width:140px" name="email" placeholder="{{ "Enter your email address"|t }}..." title="{{ "Enter your email address"|t }}"/><input type="hidden" value="{% if craft.locale == 'es_us' %}EventosStaAna{% else %}StAnneEvents{% endif %}" name="uri"/><input type="hidden" name="loc" value="en_US"/><button type="submit" class="btn btn-sm btn-light-blue"><i class="fa fa-check"></i> {{ "Subscribe"|t }}</button></div></form>
         </div>
         
