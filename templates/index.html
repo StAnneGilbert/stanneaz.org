@@ -172,7 +172,7 @@ if(dday==0&&dhour==0&&dmin==0&&dsec==1){
 }
 else
 document.getElementById("countTimer").innerHTML='<div class="countInner"><div class="ctWrap"><div class="ctInner"><span class="ctDay">' + dday + '</span><span class="ctDay-text">{{"days"|t }} </span></div></div><div class="ctWrap"><div class="ctInner"><span class="ctHour">' + dhour + '</span><span class="ctHour-text">hrs</span></div></div><div class="ctWrap"><div class="ctInner"><span class="ctMin">' + dmin + '</span><span class="ctMin-text">min</span></div></div><div class="ctWrap"><div class="ctInner"><span class="ctSec">' +dsec+ '</span><span class="ctSec-text">sec </span></div></div><div style="clear:both"><span class="time-end"> ' +before;
-setTimeout("countdown(theyear,themonth,theday)",1000) +'</span></div></div></div>';
+setTimeout("countdown(theyear,themonth,theday)",1000) +'</span></div></div>';
 }
 //enter the count down date using the format year/month/day
 countdown(2016,03,20);
@@ -247,6 +247,8 @@ $(function(){
         {% endfor %}
         {% endcache %}
         
+        </div>
+        
         <div style="clear:both"></div>
     
       
@@ -256,6 +258,8 @@ $(function(){
       </h4>
 
       <hr class="short-divider centered">
+
+      <div class="row news-blocks">
       
       <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
             <h6><i class="fa fa-rss"></i> {{ "Subscribe to Events"|t }}</h6>
@@ -290,7 +294,7 @@ $(function(){
         <h3 style="clear:both;text-align:center">
           <a href="{% if craft.locale == 'es_us' %}/es/connect/eventos{% else %}/connect/events{% endif %}">{{ "See All Events"|t }} &rsaquo;</a>
         </h3>
-
+      </div> <!-- .row -->
 
       <hr class="short-divider centered">
       <div class="text-center news-action-links">
