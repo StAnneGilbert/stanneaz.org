@@ -227,7 +227,7 @@ $(function(){
        {% set anOffset = 0 %}
        {% set anCache = "P1D" %}
        
-       {% cache globally for 1 day %}
+       {% cache globally for 1 hour %}
        {% set anItems = craft.feeds.getFeedItems(anFeedurl, anLimit, anOffset, anCache) %}
        {% for anItem in anItems|reverse %}
        
@@ -256,8 +256,6 @@ $(function(){
       </h4>
 
       <hr class="short-divider centered">
-
-      <div class="row news-blocks">
       
       <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
             <h6><i class="fa fa-rss"></i> {{ "Subscribe to Events"|t }}</h6>
@@ -270,7 +268,7 @@ $(function(){
        {% set offset = 0 %}
        {% set cache = "P1D" %}
        
-       {% cache globally for 1 day %}
+       {% cache globally for 1 hour %}
        {% set items = craft.feeds.getFeedItems(feedurl, limit, offset, cache) %}
        {% for item in items|reverse %}
 
@@ -292,7 +290,7 @@ $(function(){
         <h3 style="clear:both;text-align:center">
           <a href="{% if craft.locale == 'es_us' %}/es/connect/eventos{% else %}/connect/events{% endif %}">{{ "See All Events"|t }} &rsaquo;</a>
         </h3>
-      </div> <!-- .row -->
+
 
       <hr class="short-divider centered">
       <div class="text-center news-action-links">
