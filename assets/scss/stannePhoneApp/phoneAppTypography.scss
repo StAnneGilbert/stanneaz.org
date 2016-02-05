@@ -188,12 +188,13 @@ h2, .h2 {
   line-height: 28px;
   margin:0 0 18px;
 }
+
 h3, .h3 {
-  color:$dark-brown;
+  color:$dark-blue;
   font-size: 24px;
   font-weight:200;
   line-height: 24px;
-  margin:30px 0 18px;
+  margin:30px 0 5px;
 
   @media screen and (max-width:$screen-xs) {
     font-size:24px;
