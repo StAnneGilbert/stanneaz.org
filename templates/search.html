@@ -3,7 +3,7 @@
 
 {% block content %}
   {% set query = craft.request.getParam('q') %}
-  {% set entries = craft.entries.search(query).order('score').section('and, not phoneAppPages, not featuredEvents, not search') %}
+  {% set entries = craft.entries.search(query).order('score').section('and, not pagesNoSearch, not phoneAppPages, not featuredEvents, not search') %}
    <!-- .sf-content for flex sticky footer -->
   <div class="sf-content nav-slide-element">
     <div class="page-content-container">
