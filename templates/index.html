@@ -177,6 +177,9 @@ setTimeout("countdown(theyear,themonth,theday)",1000) +'</span></div></div>';
 //enter the count down date using the format year/month/day
 countdown(2016,03,20);
 </script>
+{% if entry.cdaTotalPledged is not empty %}
+<div>{{"Pledged:"|t }} <strong>{{ entry.cdaTotalPledged }}</strong> &nbsp; {{"Goal:"|t }} <strong>{{ entry.cdaFinancialGoal }}</strong></div>
+{% endif %}
 <style>
 .no-clicky, .yes-clicky{position:absolute;top:0;left:0;}
 .no-clicky{left:100px;}
