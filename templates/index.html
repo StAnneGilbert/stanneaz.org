@@ -232,7 +232,7 @@ $(function(){
        
        {% cache globally for 1 hour %}
        {% set anItems = craft.feeds.getFeedItems(anFeedurl, anLimit, anOffset, anCache) %}
-       {% for anItem in anItems|reverse %}
+       {% for anItem in anItems %}
        
        {% if loop.index == 3 %}
         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
