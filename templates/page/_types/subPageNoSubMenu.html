@@ -26,19 +26,36 @@
 
     <div class="page-content-container">
       <div class="container standard-container">
-        {% if (siteWideContent.scheduleChange) and (entry.slug == 'times-location') %}
-          <div id="scheduleMessage">
-            {{ siteWideContent.scheduleChange }}
-          </div>
+        {% if ((siteWideContent.scheduleChange) or (siteWideContent.massScheduleChange)) and (entry.slug == 'times-location') %}
+            <h3>{{ "Schedule Change Messages"|t }}</h3>
+            <div style="padding-bottom:20px">
+            {% if (siteWideContent.scheduleChange) and (entry.slug == 'times-location') %}
+              <div id="scheduleMessage">
+                {{ siteWideContent.scheduleChange }}
+              </div>
+            {% endif %}
+            {% if (siteWideContent.massScheduleChange) and (entry.slug == 'times-location') %}
+              <div id="massScheduleMessage">
+                {{ siteWideContent.massScheduleChange }}
+              </div>
+            {% endif %}
+            </div>
         {% endif %}
         {{ entry.body }}
       </div> <!-- .container -->
     </div> <!-- .page-content-container -->
   </div> <!-- .sf-content -->
-{% if (siteWideContent.scheduleChange) and (entry.slug == 'times-location') %}
-<script>
-if (document.getElementById("confessionMsg") && document.getElementById("scheduleMessage")) {
-document.getElementById("confessionMsg").innerHTML = document.getElementById("scheduleMessage").innerHTML;
+{% if ((siteWideContent.scheduleChange) or (siteWideContent.massScheduleChange)) and (entry.slug == 'times-location') %}
+  <script>
+  {% if (siteWideContent.scheduleChange) and (entry.slug == 'times-location') %}
+    if (document.getElementById("confessionMsg") && document.getElementById("scheduleMessage")) {
+        document.getElementById("confessionMsg").innerHTML = document.getElementById("scheduleMessage").innerHTML;
+    }
+  {% endif %}
+  {% if (siteWideContent.massScheduleChange) and (entry.slug == 'times-location') %}
+    if (document.getElementById("massMsg") && document.getElementById("massScheduleMessage")) {
+        document.getElementById("massMsg").innerHTML = document.getElementById("massScheduleMessage").innerHTML;
 }
+  {% endif %}
 </script>
 {% endif %}
