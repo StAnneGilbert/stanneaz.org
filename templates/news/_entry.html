@@ -64,7 +64,7 @@
                   </div> <!-- .author-bio -->
                 {% endif %}
                 
-                <div style="margin:5px 0 40px"><a href="{{ siteUrl }}connect/news-updates">{{ "View more news & updates"|t }} &rsaquo;</a>
+                <div style="margin:5px 0 40px"><a href="{{ siteUrl }}news-updates">{{ "View more news & updates"|t }} &rsaquo;</a>
                 </div>
                 
                 <hr>
@@ -85,12 +85,39 @@
 
                 <h6>{{ "Subscribe"|t }}</h6>
                 <p>{{ "Get the latest news and updates from St. Anne’s in your RSS feed or email inbox"|t }}!</p>
-                {% if feeds.rssFeedUrl is not empty %}
-                  <a href="{{ feeds.rssFeedUrl.url }}" class="btn btn-light-brown-border"><i class="fa fa-rss"></i> {{"RSS Feed"|t }}</a>
+                {% if craft.locale == 'es_us' %}
+                
+                    {% if feeds.announcementsFeedUrlSpanish is not empty %}
+                    <a href="{{ feeds.announcementsFeedUrlSpanish.url }}" class="btn btn-light-brown-border" target="_blank"><i class="fa fa-rss"></i> {{"Announcements RSS"|t }}</a><br/>
+                    {% endif %}
+                    {% if feeds.eventsFeedUrlSpanish is not empty %}
+                    <a href="{{ feeds.eventsFeedUrlSpanish.url }}" class="btn btn-light-brown-border" target="_blank"><i class="fa fa-rss"></i> {{"Events RSS"|t }}</a><br/>
+                    {% endif %}
+                    {% if feeds.parishCalendarFeedUrlSpanish is not empty %}
+                    <a href="{{ feeds.parishCalendarFeedUrlSpanish.url }}" class="btn btn-light-brown-border" target="_blank"><i class="fa fa-rss"></i> {{"Parish Calendar RSS"|t }}</a><br/>
+                    {% endif %}
+                    {% if feeds.podcastFeedUrlSpanish is not empty %}
+                    <a href="{{ feeds.podcastFeedUrlSpanish.url }}" class="btn btn-light-brown-border" target="_blank"><i class="fa fa-rss"></i> {{ "Podcasts RSS"|t }}</a>
+                    {% endif %}
+                    
+                {% else %}
+                
+                    {% if feeds.announcementsFeedUrl is not empty %}
+                    <a href="{{ feeds.announcementsFeedUrl.url }}" class="btn btn-light-brown-border" target="_blank"><i class="fa fa-rss"></i> {{"Announcements RSS"|t }}</a><br/>
+                    {% endif %}
+                    {% if feeds.eventsFeedUrl is not empty %}
+                    <a href="{{ feeds.eventsFeedUrl.url }}" class="btn btn-light-brown-border"><i class="fa fa-rss" target="_blank"></i> {{"Events RSS"|t }}</a><br/>
+                    {% endif %}
+                    {% if feeds.parishCalendarFeedUrl is not empty %}
+                    <a href="{{ feeds.parishCalendarFeedUrl.url }}" class="btn btn-light-brown-border" target="_blank"><i class="fa fa-rss"></i> {{"Parish Calendar RSS"|t }}</a><br/>
+                    {% endif %}
+                    {% if feeds.podcastRss is not empty %}
+                    <a href="{{ feeds.podcastRss.url }}" class="btn btn-light-brown-border" target="_blank"><i class="fa fa-rss"></i> {{ "Podcasts RSS"|t }}</a>
+                    {% endif %}
+                
                 {% endif %}
-                {% if feeds.podcastSubscribeEmailLink is not empty %}
-                  <a href="{{ feeds.podcastSubscribeEmailLink.url }}" class="btn btn-light-brown-border"><i class="fa fa-envelope"></i> {{ "Email Me"|t }}</a>
-                {% endif %}
+                
+                
 
               </div> <!-- .col -->
             </div> <!-- .row -->

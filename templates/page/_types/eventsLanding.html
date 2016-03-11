@@ -5,7 +5,30 @@
       
       {{ entry.body }}
       
-      <h3>{{ "Events"|t }}</h3>
+      <a name="eva"></a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-5 col-md-5 col-sm-5">
+        <h3>{{ "Events"|t }}</h3>
+      </div>
+      <div class="col-lg-7 col-md-7 col-sm-7 action-links" style="text-align:right">
+        {% if craft.locale == "en_us" %}
+          {% if feeds.eventsFeedUrl is not empty %}
+            <a style="display:inline-block" href="{{ feeds.eventsFeedUrl.url }}" target="_blank"><i class="fa fa-rss"></i> {{ "Events RSS"|t }}</a>
+          {% endif %}
+        {% elseif craft.locale == "es_us" %}
+          {% if feeds.eventsFeedUrlSpanish is not empty %}
+            <a style="display:inline-block" href="{{ feeds.eventsFeedUrlSpanish.url }}" target="_blank"><i class="fa fa-rss"></i> {{ "Eventos RSS"|t }}</a>
+          {% endif %}
+        {% endif %}
+              
+        <form style="display:inline-block" action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open('https://feedburner.google.com/fb/a/mailverify?uri={% if craft.locale == 'es_us' %}EventosStaAna{% else %}StAnneEvents{% endif %}', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true"> <input type="text" style="margin:0 10px 0 5px;vertical-align:middle;width:160px" name="email" placeholder="{{ "Enter your email"|t }}...." title="{{ "Enter your email address"|t }}"/><input type="hidden" value="{% if craft.locale == 'es_us' %}EventosStaAna{% else %}StAnneEvents{% endif %}" name="uri"/><input type="hidden" name="loc" value="en_US"/><button type="submit" class="btn btn-sm btn-light-blue" style="vertical-align:middle;"><i class="fa fa-check"></i> {{ "Subscribe"|t }}</button></form>
+              
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
 
         <div class="featured-media-grid clearfix">
           {% set feedurl = entry.eventFeedUrl %}
@@ -55,7 +78,7 @@
           <a href="#" class="btn btn-sm btn-light-blue btn-next">October 2014 &rsaquo;</a>
         </div> #}
 
-          </div> <!-- .col -->
+          </div>
         </div> <!-- .row -->
       </div> <!-- .container -->
     </div> <!-- .page-content-container -->

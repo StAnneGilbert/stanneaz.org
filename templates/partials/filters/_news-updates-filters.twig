@@ -36,7 +36,7 @@
     </select>
   </label>
   <label class="select" data-action='bymonth'>
-  {% set lastPost = craft.entries.section('newsUpdates').postDate('<=' ~ (now.date)).order('postDate DESC').first() %}
+  {% set lastPost = craft.entries.section('newsUpdates').postDate('<=' ~ (now.date)).order('postDate ASC').first() %}
   {% if lastPost|length %}
   {% set lastYear = lastPost.postDate|date('Y') %}
     <select name="" id="">

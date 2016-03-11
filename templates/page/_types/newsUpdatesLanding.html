@@ -11,22 +11,7 @@
               <h3 class="small">{{ "Find and filter posts below"|t }}</h3>
             </div>
             <div class="col-lg-7 col-md-7 col-sm-7 action-links">
-              {{"Subscribe with"|t}}:
-              {% if craft.locale == "en_us" %}
-                {% if feeds.rssFeedUrl is not empty %}
-                  <a href="{{ feeds.rssFeedUrl.url }}"><i class="fa fa-rss"></i> RSS Feed</a>
-                {% endif %}
-                {% if feeds.podcastSubscribeEmailLink is not empty %}
-                  <a href="{{ feeds.podcastSubscribeEmailLink.url }}"><i class="fa fa-envelope"></i> Email</a>
-                {% endif %}
-              {% elseif craft.locale == "es_us" %}
-                {% if feeds.rssFeedUrlSpanish is not empty %}
-                  <a href="{{ feeds.rssFeedUrlSpanish.url }}"><i class="fa fa-rss"></i> {{ "RSS Feed"|t }}</a>
-                {% endif %}
-                {% if feeds.podcastSubscribeEmailLinkSpanish is not empty %}
-                  <a href="{{ feeds.podcastSubscribeEmailLinkSpanish.url }}"><i class="fa fa-envelope"></i> {{ "Email"|t }}</a>
-                {% endif %}
-              {% endif %}
+             
             </div>
           </div>
         </div>
