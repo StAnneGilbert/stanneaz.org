@@ -133,6 +133,7 @@
 #countTimer .ctWrap span{color: #333333;font-size: 12px;display: inline-block;text-transform: uppercase;font-weight: bold}
 #countTimer .ctWrap span.time-end{font-size: 14px;font-weight:normal;text-transform: none;}
 #countTimer .ctWrap span.ctDay, #countTimer .ctWrap span.ctHour, #countTimer .ctWrap span.ctMin, #countTimer .ctWrap span.ctSec{ font-size: 22px;color: #895022;margin-right: 2px;min-width: 18px;}
+#countTimer .pdWrap.time-end, #countTimer .pdWrap.ctWrap span, #countTimer .pdWrap.ctWrap span.ctDay, #countTimer .pdWrap.ctWrap span.ctHour, #countTimer .pdWrap.ctWrap span.ctMin, #countTimer .pdWrap.ctWrap span.ctSec{color: #c00}
 </style>
 
 <p id="countTimer">
@@ -146,7 +147,7 @@ By JavaScript Kit (www.javascriptkit.com)
 Over 200+ free scripts here!
 */
 var before="{{'The countdown is on to reach our Goal!'|t }}";
-var current="{{'Today we hope we met our goal.'|t }}";
+var after="{{'Counting past due date. Goal not met, yet'|t }}";
 var montharray=new  Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec");
 
 function countdown(yr,m,d){
@@ -166,8 +167,9 @@ dday=Math.floor(dd/(60*60*1000*24)*1);
 dhour=Math.floor((dd%(60*60*1000*24))/(60*60*1000)*1);
 dmin=Math.floor(((dd%(60*60*1000*24))%(60*60*1000))/(60*1000)*1);
 dsec=Math.floor((((dd%(60*60*1000*24))%(60*60*1000))%(60*1000))/1000*1);
-if(dday==0&&dhour==0&&dmin==0&&dsec==1){
-  document.getElementById("countTimer").innerHTML =current;
+if(dday<0){
+  document.getElementById("countTimer").innerHTML='<div class="countInner"><div class="pdWrap ctWrap"><div class="ctInner"><span class="ctDay">' + dday + '</span><span class="ctDay-text">{{"days"|t }} </span></div></div><div class="pdWrap ctWrap"><div class="ctInner"><span class="ctHour">' + dhour + '</span><span class="ctHour-text">hrs</span></div></div><div class="pdWrap ctWrap"><div class="ctInner"><span class="ctMin">' + dmin + '</span><span class="ctMin-text">min</span></div></div><div class="pdWrap ctWrap"><div class="ctInner"><span class="ctSec">' +dsec+ '</span><span class="ctSec-text">sec </span></div></div><div style="clear:both"><span class="pdWrap time-end"> ' +after;
+setTimeout("countdown(theyear,themonth,theday)",1000) +'</span></div></div>';
   return
 }
 else
@@ -175,7 +177,7 @@ document.getElementById("countTimer").innerHTML='<div class="countInner"><div cl
 setTimeout("countdown(theyear,themonth,theday)",1000) +'</span></div></div>';
 }
 //enter the count down date using the format year/month/day
-countdown(2016,03,20);
+countdown(2016,03,21);
 </script>
 {% if entry.cdaTotalPledged is not empty %}
 <div>{{"Pledged:"|t }} <strong>{{ entry.cdaTotalPledged }}</strong> &nbsp; {{"Goal:"|t }} <strong>{{ entry.cdaFinancialGoal }}</strong></div>
@@ -225,7 +227,7 @@ $(function(){
 
         </div>
         
-        {% set anFeedurl = entry.announcementsFeedUrl %}
+        {% set anFeedurl = entry.homeAnnouncementsFeedUrl %}
        {% set anLimit = 4 %}
        {% set anOffset = 0 %}
        {% set anCache = "P1D" %}
