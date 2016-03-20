@@ -21,15 +21,15 @@
             <div class="col-lg-7 col-md-7 col-sm-7 action-links">
               {% if craft.locale == "en_us" %}
                 {% if feeds.podcastRss is not empty %}
-                  <a style="display:inline-block" href="{{ feeds.podcastRss.url }}" target="_blank"><i class="fa fa-rss"></i> {{ "Podcast RSS"|t }}</a>
+                  <a style="display:inline-block;padding:5px 0" href="{{ feeds.podcastRss.url }}" target="_blank"><i class="fa fa-rss"></i> {{ "Podcast RSS"|t }}:</a>
                 {% endif %}
               {% elseif craft.locale == "es_us" %}
                 {% if feeds.podcastFeedUrlSpanish is not empty %}
-                  <a style="display:inline-block" href="{{ feeds.podcastFeedUrlSpanish.url }}" target="_blank"><i class="fa fa-rss"></i> {{ "Audios RSS"|t }}</a>
+                  <a style="display:inline-blockpadding:5px 0" href="{{ feeds.podcastFeedUrlSpanish.url }}" target="_blank"><i class="fa fa-rss"></i> {{ "Audios RSS"|t }}:</a>
                 {% endif %}
               {% endif %}
               
-              <form style="display:inline-block" action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open('https://feedburner.google.com/fb/a/mailverify?uri={% if craft.locale == 'es_us' %}AudiosdeParroquiaStaAna{% else %}stannecatholicpodcast{% endif %}', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true"> <input type="text" style="margin:0 10px 0 5px;vertical-align:middle;width:160px" name="email" placeholder="{{ "Enter your email"|t }}...." title="{{ "Enter your email address"|t }}"/><input type="hidden" value="{% if craft.locale == 'es_us' %}AudiosdeParroquiaStaAna{% else %}stannecatholicpodcast{% endif %}" name="uri"/><input type="hidden" name="loc" value="en_US"/><button type="submit" class="btn btn-sm btn-light-blue" style="vertical-align:middle;"><i class="fa fa-check"></i> {{ "Subscribe"|t }}</button></form>
+              <form style="display:inline-block;text-align:left;" action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open('https://feedburner.google.com/fb/a/mailverify?uri={% if craft.locale == 'es_us' %}AudiosdeParroquiaStaAna{% else %}stannecatholicpodcast{% endif %}', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true"> <div style="color:#888;padding:0 0 5px 5px">{{ "Would you like to receive podcast emails?"|t }}</div><input type="text" style="margin:0 10px 0 5px;vertical-align:middle;width:160px" name="email" placeholder="{{ "Enter your email"|t }}...." title="{{ "Enter your email address"|t }}"/><input type="hidden" value="{% if craft.locale == 'es_us' %}AudiosdeParroquiaStaAna{% else %}stannecatholicpodcast{% endif %}" name="uri"/><input type="hidden" name="loc" value="en_US"/><button type="submit" class="btn btn-sm btn-light-blue" style="vertical-align:middle;"><i class="fa fa-check"></i> {{ "Subscribe"|t }}</button></form>
               
             </div>
           </div>
