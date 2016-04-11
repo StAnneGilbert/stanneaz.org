@@ -195,11 +195,6 @@ button.action{
     text-overflow: '';
     padding-right: 1rem;
   }
-
-  /* <option> elements inherit styles from <select>, so reset them. */
-  .select option {
-    background-color: white;
-  }
 }
 
 /* IE9 hack to hide the arrow */
