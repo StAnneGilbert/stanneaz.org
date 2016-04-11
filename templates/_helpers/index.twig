@@ -19,11 +19,22 @@
 {%- macro month_options(filter,year) -%}
     
     {% set months = ['January','February','March','April','May','June','July','August','September','October','November','December'] %}
+    
+    {% set max_month = now|date('m') %}
+    {% set max_year = now|date('Y') %}
+    {% set last_month = 12 %}
 
     <option value=''>{{ "Month"|t }}</option>
     {% for yr in range(now|date('Y'),year) %}
       <optgroup label="--------------------">
-        {% for mo in range(1,12) %}
+      
+        {% if yr == max_year %}
+        {%   set last_month = max_month %}
+        {% else %}
+        {%   set last_month = 12 %}
+        {% endif %}
+
+        {% for mo in range(last_month,1) %}
             {% set value = yr ~ "-" ~ mo %}
             <option 
               value='{{ months[mo - 1] }}|{{ value }}' 
