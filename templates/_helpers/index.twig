@@ -18,7 +18,11 @@
 
 {%- macro month_options(filter,year) -%}
     
-    {% set months = ['January','February','March','April','May','June','July','August','September','October','November','December'] %}
+    {% if craft.locale == 'es_us' %}
+        {% set months = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'] %}
+    {% else %}
+        {% set months = ['January','February','March','April','May','June','July','August','September','October','November','December'] %}
+    {% endif %}
     
     {% set max_month = now|date('m') %}
     {% set max_year = now|date('Y') %}
