@@ -126,105 +126,15 @@
       <hr class="short-divider centered">
 
       <div class="row news-blocks">
+      
         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-<style>
-#countTimer .countInner .ctWrap{float: left;height: 32px;}
-#countTimer .countInner .ctWrap .ctInner{padding: 0 16px 0 0;min-width: 40px;}
-#countTimer .ctWrap span{color: #333333;font-size: 12px;display: inline-block;text-transform: uppercase;font-weight: bold}
-#countTimer .ctWrap span.time-end{font-size: 14px;font-weight:normal;text-transform: none;}
-#countTimer .ctWrap span.ctDay, #countTimer .ctWrap span.ctHour, #countTimer .ctWrap span.ctMin, #countTimer .ctWrap span.ctSec{ font-size: 22px;color: #895022;margin-right: 2px;min-width: 18px;}
-#countTimer .pdWrap.time-end, #countTimer .pdWrap.ctWrap span, #countTimer .pdWrap.ctWrap span.ctDay, #countTimer .pdWrap.ctWrap span.ctHour, #countTimer .pdWrap.ctWrap span.ctMin, #countTimer .pdWrap.ctWrap span.ctSec{color: #c00}
-</style>
-
-<p id="countTimer">
-&nbsp;
-</p>
-
-<script>
-/*
-Count down until any date script-
-By JavaScript Kit (www.javascriptkit.com)
-Over 200+ free scripts here!
-*/
-var before="{{'The countdown is on to reach our Goal!'|t }}";
-var after="{{'Counting past due date. Goal not met, yet'|t }}";
-var montharray=new  Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec");
-
-function countdown(yr,m,d){
-theyear=yr;themonth=m;theday=d;
-var today=new Date();
-var todayy=today.getYear();
-if (todayy < 1000){todayy+=1900}
-var todaym=today.getMonth();
-var todayd=today.getDate();
-var todayh=today.getHours();
-var todaymin=today.getMinutes();
-var todaysec=today.getSeconds();
-var todaystring=montharray[todaym]+" "+todayd+", "+todayy+" "+todayh+":"+todaymin+":"+todaysec;
-futurestring=montharray[m-1]+" "+d+", "+yr;
-dd=Date.parse(futurestring)-Date.parse(todaystring);
-dday=Math.floor(dd/(60*60*1000*24)*1);
-dhour=Math.floor((dd%(60*60*1000*24))/(60*60*1000)*1);
-dmin=Math.floor(((dd%(60*60*1000*24))%(60*60*1000))/(60*1000)*1);
-dsec=Math.floor((((dd%(60*60*1000*24))%(60*60*1000))%(60*1000))/1000*1);
-if(dday<0){
-  document.getElementById("countTimer").innerHTML='<div class="countInner"><div class="pdWrap ctWrap"><div class="ctInner"><span class="ctDay">' + dday + '</span><span class="ctDay-text">{{"days"|t }} </span></div></div><div class="pdWrap ctWrap"><div class="ctInner"><span class="ctHour">' + dhour + '</span><span class="ctHour-text">hrs</span></div></div><div class="pdWrap ctWrap"><div class="ctInner"><span class="ctMin">' + dmin + '</span><span class="ctMin-text">min</span></div></div><div class="pdWrap ctWrap"><div class="ctInner"><span class="ctSec">' +dsec+ '</span><span class="ctSec-text">sec </span></div></div><div style="clear:both"><span class="pdWrap time-end"> ' +after;
-setTimeout("countdown(theyear,themonth,theday)",1000) +'</span></div></div>';
-  return
-}
-else
-document.getElementById("countTimer").innerHTML='<div class="countInner"><div class="ctWrap"><div class="ctInner"><span class="ctDay">' + dday + '</span><span class="ctDay-text">{{"days"|t }} </span></div></div><div class="ctWrap"><div class="ctInner"><span class="ctHour">' + dhour + '</span><span class="ctHour-text">hrs</span></div></div><div class="ctWrap"><div class="ctInner"><span class="ctMin">' + dmin + '</span><span class="ctMin-text">min</span></div></div><div class="ctWrap"><div class="ctInner"><span class="ctSec">' +dsec+ '</span><span class="ctSec-text">sec </span></div></div><div style="clear:both"><span class="time-end"> ' +before;
-setTimeout("countdown(theyear,themonth,theday)",1000) +'</span></div></div>';
-}
-//enter the count down date using the format year/month/day
-countdown(2016,03,21);
-</script>
-{% if entry.cdaTotalPledged is not empty %}
-<div>{{"Pledged:"|t }} <strong>{{ entry.cdaTotalPledged }}</strong> &nbsp; {{"Goal:"|t }} <strong>{{ entry.cdaFinancialGoal }}</strong></div>
-{% endif %}
-<style>
-.no-clicky, .yes-clicky{position:absolute;top:0;left:0;}
-.no-clicky{left:100px;}
-.cdaq{padding-top:3px;margin-top:0;margin-bottom:12px;}
-.cdap{position:relative;z-index:90;padding:0 0 20px 0;margin-top:0}
-</style>
-<h4 class="cdaq">{{"Will you donate to the CDA?"|t }}</h4>
-<p class="cdap">
-<a class="yes-clicky btn-sm btn-light-blue" href="https://phoenix.onedesa.com"> <i class="fa fa-check"></i> {{"Yes"|t }} &nbsp;</a>
-<a class="no-clicky btn-sm btn-light-blue">&nbsp;&nbsp; No &nbsp;&nbsp;</a>
-</p>
-<script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
-<script>
-var moused = 0;
-$(function(){
-    $(".no-clicky").on({
-        mouseover:function(){
-            if (moused == 0){
-                $(this).css({
-                    left:(Math.random()*200)+"px",
-                    top:(Math.random()*-150)+"px",
-                });
-                moused = 1;
-            } else {
-                $(this).css({
-                    left:(Math.random()*200)+"px",
-                    top:(Math.random()*150)+"px",
-                });
-                moused = 0;
-            }
-        }
-    });
-    $(".no-clicky").on({
-        click:function(){
-            $(this).css({
-                left:(Math.random()*200)+"px",
-                top:(Math.random()*-150)+"px",
-            });
-        }
-    });
-});
-</script>
-
+        {% if craft.locale == 'es_us' %}
+          <h5><a href="/es/stewardship/cda-campaign">¡Gracias por contribuir al CDA!</a></h5>
+          <p class="excerpt">Hemos alcanzado nuestro objetivo en la Campaña de Caridad y Desarrollo de este año. <a href="/es/stewardship/cda-campaign">{{ "Read More"|t }}</a></p>
+        {% else %}
+          <h5><a href="/stewardship/cda-campaign">Thank you for contributing to the CDA!</a></h5>
+          <p class="excerpt">We have met the goal for this year's Charity and Development Appeal. <a href="/stewardship/cda-campaign">{{ "Read More"|t }}</a></p>
+        {% endif %}
         </div>
         
         {% set anFeedurl = entry.homeAnnouncementsFeedUrl %}
