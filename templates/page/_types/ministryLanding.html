@@ -69,7 +69,7 @@
       <div class="container standard-container">
         {{ entry.body }}
         
-        {% if entry.cityGroupId is not empty %}
+    {% if entry.cityGroupId is not empty %}
           {% set citygroupid = entry.cityGroupId|raw %}
           {% set feedurl = "http://stanneaz.onthecity.org/plaza?group_id=#{citygroupid}&format=rss" %}
           {% set limit = 3 %}
@@ -78,7 +78,11 @@
 
           {% if items|length %}
           
-            <h3>{{ "Latest posts for this group on The City Plaza"|t }}</h3>
+            {% if entry.title == "Funerals" %}
+                <h3>{{ "Recent and Upcoming Funerals"|t }}</h3>
+            {% else %}
+                <h3>{{ "Activities, Events, News, and Information"|t }}</h3>
+            {% endif %}
           
         <div class="featured-media-grid clearfix">
           {% for item in items %}
@@ -97,13 +101,20 @@
             {% endfor %}
         </div> <!-- .row -->
 
-        <strong><a href="http://stanneaz.onthecity.org/plaza?group_id={{ citygroupid }}" target="_blank">{{ "View more posts"|t }}</a> | 
+        <strong><a href="http://stanneaz.onthecity.org/plaza?group_id={{ citygroupid }}" target="_blank">{% if entry.title == "Funerals" %}
+                {{ "See More Funeral Information"|t }}
+            {% else %}
+                {{ "View More"|t }}
+            {% endif %}</a>
         
         {% endif %}
         
-        <a href="http://stanneaz.onthecity.org/groups/{{ citygroupid }}/info" target="_blank">{{ "Group Information Page on The City"|t }}</a></strong>
-        
+        {% if entry.title != "Funerals" %}
+            | <a href="http://stanneaz.onthecity.org/groups/{{ citygroupid }}/info" target="_blank">{{ "Group Information Page on The City"|t }}</a>
         {% endif %}
+        </strong>
+        
+    {% endif %}
         
         	
       </div> <!-- .container -->
