@@ -124,17 +124,27 @@
       <h4 class="caps-header text-center">{{ "Announcements"|t }}</h4>
 
       <hr class="short-divider centered">
+      
+      <style>
+      .downAppArea{padding-top:10px}
+      .downAppArea a img{vertical-align:middle}
+      .downAppArea a span{display:inline-block;text-align:center;vertical-align:middle;width:85px}
+      @media screen and (max-width: 610px) {
+          .downAppArea a span{width:65px}
+      }
+      </style>
 
       <div class="row news-blocks">
       
         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
         {% if craft.locale == 'es_us' %}
-          <h5><a href="/es/stewardship/cda-campaign">¡Gracias por contribuir al CDA!</a></h5>
-          <p class="excerpt">Hemos alcanzado nuestro objetivo en la Campaña de Caridad y Desarrollo de este año. <a href="/es/stewardship/cda-campaign">{{ "Read More"|t }}</a></p>
+          <h5><a href="http://subsplash.com/stanne/app" target="_blank">¡Descarga nuestras aplicaciones de teléfono!</a></h5>
         {% else %}
-          <h5><a href="/stewardship/cda-campaign">Thank you for contributing to the CDA!</a></h5>
-          <p class="excerpt">We have met the goal for this year's Charity and Development Appeal. <a href="/stewardship/cda-campaign">{{ "Read More"|t }}</a></p>
+          <h5><a href="http://subsplash.com/stanne/app" target="_blank">Download Our Parish Mobile Phone Apps!</a></h5>
         {% endif %}
+        <p class="excerpt downAppArea"><a href="http://www.acstechnologies.com/products/the-city/features/the-city-app" target="_blank"><img src="http://s3.amazonaws.com/media.stanneaz.com/craft/assets/appIconTheCity2.jpg?mtime=20160704191707" alt="The City App" width="60" height="60" /><span>The City App</span></a> 
+        &nbsp;&nbsp;&nbsp; 
+        <a href="http://subsplash.com/stanne/app" target="_blank"><img src="http://s3.amazonaws.com/media.stanneaz.com/craft/assets/appIconStAnne2.jpg?mtime=20160704191656" alt="St. Anne App" width="60" height="60" /><span>St. Anne App</span></a></p>
         </div>
         
         {% set anFeedurl = entry.homeAnnouncementsFeedUrl %}
@@ -176,11 +186,6 @@
 
       <div class="row news-blocks">
       
-      <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-            <h6><i class="fa fa-rss"></i> {{ "Subscribe to Events"|t }}</h6>
-          <p class="excerpt"><a href="http://stanneaz.onthecity.org/groups/{% if craft.locale == 'es_us' %}155455{% else %}145022{% endif %}" target="_blank">{{ "Join the Events group on The City"|t }}</a> {{"(account required)"|t }}. {{ "Or, receive them via email:"|t }}</p>
-          <form class='email-subscribe-form' action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open('https://feedburner.google.com/fb/a/mailverify?uri={% if craft.locale == 'es_us' %}EventosStaAna{% else %}StAnneEvents{% endif %}', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true"><div class='input-container clearfix'><input type="text" style="width:140px" name="email" placeholder="{{ "Enter your email address"|t }}..." title="{{ "Enter your email address"|t }}"/><input type="hidden" value="{% if craft.locale == 'es_us' %}EventosStaAna{% else %}StAnneEvents{% endif %}" name="uri"/><input type="hidden" name="loc" value="en_US"/><button type="submit" class="btn btn-sm btn-light-blue"><i class="fa fa-check"></i> {{ "Subscribe"|t }}</button></div></form>
-        </div>
         
        {% set feedurl = entry.eventFeedUrl %}
        {% set limit = 5 %}
@@ -190,6 +195,14 @@
        {% cache globally for 1 hour %}
        {% set items = craft.feeds.getFeedItems(feedurl, limit, offset, cache) %}
        {% for item in items|reverse %}
+       
+       {% if loop.index == 4 %}
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+            <h6><i class="fa fa-rss"></i> {{ "Subscribe to Events"|t }}</h6>
+          <p class="excerpt"><a href="http://stanneaz.onthecity.org/groups/{% if craft.locale == 'es_us' %}155455{% else %}145022{% endif %}" target="_blank">{{ "Join the Events group on The City"|t }}</a> {{"(account required)"|t }}. {{ "Or, receive them via email:"|t }}</p>
+          <form class='email-subscribe-form' action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open('https://feedburner.google.com/fb/a/mailverify?uri={% if craft.locale == 'es_us' %}EventosStaAna{% else %}StAnneEvents{% endif %}', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true"><div class='input-container clearfix'><input type="text" style="width:140px" name="email" placeholder="{{ "Enter your email address"|t }}..." title="{{ "Enter your email address"|t }}"/><input type="hidden" value="{% if craft.locale == 'es_us' %}EventosStaAna{% else %}StAnneEvents{% endif %}" name="uri"/><input type="hidden" name="loc" value="en_US"/><button type="submit" class="btn btn-sm btn-light-blue"><i class="fa fa-check"></i> {{ "Subscribe"|t }}</button></div></form>
+        </div>             
+       {% endif %}
 
         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
           <h5><a href="{{ item.permalink }}">{{ item.title }}</a></h5>
