@@ -52,7 +52,7 @@
         {% set pages = craft.entries.section('pages').level('<= 3') %}
         {% nav page in pages %}
         
-            <li {% if page.level == 1 or page.level == 2 %}{% if page.hasDescendants() %}class='has-menu{% if page.level == 2 %}2{%endif%}{% if page.id == entry.id or entry.isDescendantOf(page) %} current-page{%endif%}'{% endif %}{%endif%}>
+            <li {% if page.level == 1 or page.level == 2 %}{% if page.hasDescendants() %}class='has-menu{% if page.level == 2 %}2{%endif%}{% if page.id == entry.id or entry.isDescendantOf(page) %} current-page{%endif%}{% if page.title == "Ministries" or page.title == "Movements" or page.title == "Ministerios" or page.title == "Movimientos"  %} menuIndent{%endif%}'{% endif %}{%endif%}>
                 {{ page.getLink() }}
 
                 {% ifchildren %}
