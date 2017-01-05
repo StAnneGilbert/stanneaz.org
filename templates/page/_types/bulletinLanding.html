@@ -23,46 +23,6 @@
         </div>
       </div>
     </div>
-    {% if children|length %}
-      <div class="section-navigation fixedsticky">
-        <div class="container">
-          <ul>
-            {% if entry.parent %}
-              <li style='font-weight:600;'> {{ entry.parent.link }} </li>
-            {% endif %}
-              {% nav page in children %}
-                <li {% if page.id == entry.id or entry.isDescendantOf(page) %}class="selected"{% endif %}>
-                    {% if page.id == entry.id %}
-                      <span>{{page.title}}</span>
-                    {% else %}
-                      {{ page.getLink() }}
-                    {% endif %}
-                </li>
-              {% endnav %}
-          </ul>
-        </div>
-      </div>
-    {% else %}
-      {% set children = entry.getSiblings() %}
-       <div class="section-navigation fixedsticky">
-        <div class="container">
-          <ul>
-          {% if entry.parent %}
-            <li style='font-weight:600;'> {{ entry.parent.link }} </li>
-          {% endif %}
-              {% nav page in children %}
-                <li {% if page.id == entry.id or entry.isDescendantOf(page) %}class="selected"{% endif %}>
-                    {% if page.id == entry.id %}
-                      <span>{{page.title}}</span>
-                    {% else %}
-                      {{ page.getLink() }}
-                    {% endif %}
-                </li>
-              {% endnav %}
-          </ul>
-        </div>
-      </div> 
-    {% endif %}
 
 
     <div class="page-content-container">
