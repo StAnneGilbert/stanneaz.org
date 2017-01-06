@@ -33,6 +33,7 @@
 
 {% paginate craft.entries.section('bulletins').order('bulletinDate DESC').limit(28) as bulletins %}
 
+{% cache for 1 hour %}
     {% for bulletin in bulletins %}
       <p class="bulletinItem">
         {% if bulletin.bulletinDate is not empty %}
@@ -41,6 +42,7 @@
         {% endif %}
       </p> <!-- .bulletinItem -->
     {% endfor %}
+{% endcache %}
     
 <p class="clearfix"><br></p>
 
