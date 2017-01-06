@@ -61,49 +61,25 @@ SetOutputFilter DEFLATE
 
 AddType image/svg+xml svg svgz
 
+Redirect /videoLoader http://98.174.242.120/axis-cgi/mjpg/video.cgi?camera=1&timestamp=1445451619661
 
-Redirect /announcements-left http://stanneaz.org/connect/events
-Redirect /announcements-right http://stanneaz.org/connect/news-updates
 Redirect /clergy/homilies/october-2013 http://stanneaz.org/media/media-library
 Redirect /clergy/homilies http://stanneaz.org/media/media-library
 Redirect /clergy/priests-deacons http://stanneaz.org/about/our-leadership
 Redirect /clergy http://stanneaz.org/about/our-leadership
-Redirect /component/content/featured http://stanneaz.org/connect/news-updates
-Redirect /connect/community-of-communities/ministries-1/social-outreach/giving-tree http://stanneaz.org/connect/community-of-communities/ministries-1/social-outreach
 Redirect /contact-us http://stanneaz.org/about/contact-us 
 Redirect /en/clergy/homilies http://stanneaz.org/media/media-library
 Redirect /en/clergy/priests-deacons http://stanneaz.org/about/our-leadership
 Redirect /en/clergy http://stanneaz.org/about/our-leadership
 Redirect /en/sacraments http://stanneaz.org/about/sacraments
-Redirect /faith-formation/catechesis-of-the-good-shepherd http://stanneaz.org/connect/community-of-communities/ministries-1/children
-Redirect /faith-formation/high-school http://stanneaz.org/connect/community-of-communities/ministries-1/high-school
-Redirect /faith-formation/junior-high http://stanneaz.org/connect/community-of-communities/ministries-1/jr-high
-Redirect /faith-formation/rite-of-christian-initiation-of-adults-rcia http://stanneaz.org/connect/community-of-communities/ministries-1/rcia
-Redirect /groups/2013-11-03-12-38-53/audio-visual http://stanneaz.org/connect/community-of-communities/ministries-1/liturgy/media-shout
-Redirect /groups/2013-11-03-12-38-53/sacristans http://stanneaz.org/connect/community-of-communities/ministries-1/liturgy/sacristan
-Redirect /groups/committees/evangelization http://stanneaz.org/connect/community-of-communities/ministries-1/social-outreach
 Redirect /groups/committees/stewardship http://stanneaz.org/stewardship
-Redirect /groups/outreach-ministries/respect-for-life http://stanneaz.org/connect/community-of-communities/ministries-1/social-outreach
-Redirect /groups/spirituality-groups/adoration http://stanneaz.org/about/times-location
-Redirect /groups/spirituality-groups http://stanneaz.org/connect/community-of-communities/communities-and-movements
-Redirect /home/9-ministries-menu/138-giving-tree http://stanneaz.org/connect/community-of-communities/ministries-1/social-outreach
-Redirect /home/10-groups-menu http://stanneaz.org
-Redirect /home/21-announcements http://stanneaz.org/connect/news-updates
-Redirect /home/24-announcements-right http://stanneaz.org/connect/news-updates
 Redirect /home http://stanneaz.org
-Redirect /links http://stanneaz.org/resources/links
 Redirect /media-files/live-stream/daily-mass http://stanneaz.org/media/web-streams/daily-mass
 Redirect /media-files/live-stream/weekend-mass-video-stream http://stanneaz.org/media/web-streams/weekend-mass
 Redirect /media-files/video/reverence-2012 http://vimeo.com/43783573
 Redirect /media/latest-homily http://stanneaz.org/media/media-library
-Redirect /ministries/2013-11-03-12-38-53/audio-visual http://stanneaz.org/connect/community-of-communities/ministries-1/liturgy/media-shout
-Redirect /ministries/2013-11-03-12-38-53/extraordinary-ministers http://stanneaz.org/connect/community-of-communities/ministries-1/liturgy/extraordinary-ministers
-Redirect /ministries/2013-11-03-12-38-53/sacristans http://stanneaz.org/connect/community-of-communities/ministries-1/liturgy/sacristan
-Redirect /ministries/committees http://stanneaz.org/connect/community-of-communities/ministries-1
-Redirect /ministries/outreach-ministries/giving-tree http://stanneaz.org/connect/community-of-communities/ministries-1/social-outreach
-Redirect /ministries http://stanneaz.org/connect/community-of-communities/ministries-1
 Redirect /my-st-anne https://stanneaz.onthecity.org
-Redirect /news/events.html http://stanneaz.org/connect/news-updates
+Redirect /news/events.html http://stanneaz.org/connect/events
 Redirect /our-parish/mass-confession-times http://stanneaz.org/about/times-location
 Redirect /our-parish http://stanneaz.org/about
 Redirect /parish-bulletins http://stanneaz.org/media/weekly-bulletin
