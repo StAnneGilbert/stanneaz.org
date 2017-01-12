@@ -73,7 +73,7 @@
         {% if entry.title != "Funerals" %}
           {% set citygroupid = entry.cityGroupId|raw %}
           {% set feedurl = "http://stanneaz.onthecity.org/plaza?group_id=#{citygroupid}&format=rss" %}
-          {% set limit = 3 %}
+          {% set limit = 6 %}
           {% set cache = "P0M" %}
           {% set items = craft.feeds.getFeedItems(feedurl, limit, 0, cache) %}
 
