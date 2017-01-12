@@ -63,23 +63,51 @@
           
         </div> <!-- .row -->
 
-{#         <hr>
+          </div>
+        </div> <!-- .row -->
+        
+        <h3>{{ "Events from the Diocese of Phoenix"|t }} (<a href="http://dphx.org/events/" target="_blank">dphx.org/events</a>)</h3>
+        <div class="row">
+        <div class="col-lg-12">
 
-        <div class="pagination">
-          <a href="#" class="btn btn-sm btn-light-blue btn-prev">&lsaquo; August 2014</a>
-          <ul class="pages">
-            <li class="current-page"><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">6</a></li>
-          </ul>
-          <a href="#" class="btn btn-sm btn-light-blue btn-next">October 2014 &rsaquo;</a>
-        </div> #}
+        <div class="featured-media-grid clearfix">
+          {% set dphxFeed = "http://dphx.org/events/feed/" %}
+          {% set limit = 40 %}
+          {% set cache = "P0M" %}
+          {% cache globally for 1 hour %}
+          {% set phxitems = craft.feeds.getFeedItems(dphxFeed, limit,0, cache) %}
+          {% for phxitem in phxitems|reverse %}
+            <div class="featured-media-box">
+              <div class="details">
+                <h4 class='seth'><a href="{{ phxitem.permalink }}" target='_blank'>{{ phxitem.title }}</a></h4>
+                <div>
+                  <a href="{{ phxitem.permalink }}" target='_blank'><img src="http://s3.amazonaws.com/media.stanneaz.com/craft/thecity/logos/dphxLogo.jpg?mtime=20170110180129" alt="Diocese of Phoenix Event" width="321" height="200" style="margin-bottom:20px" /></a>
+                  {{ phxitem.summary}}
+                </div>
+                <p class="more muted">
+                  
+                  {% if craft.locale == 'es_us' %}
+                    {{ phxitem.date|date('d F, Y') }}
+                  {% else %}
+                    {{ phxitem.date|date('F d, Y') }}
+                  {% endif %}
+                  <span class="dot">&middot;</span>
+                  {{ phxitem.date|date('g:ia') }}
+                  <span class="dot">&middot;</span>
+                  <a href="{{ phxitem.permalink }}" target='_blank'>{{ "Read More"|t }}</a>
+                </p>
+              </div>
+            </div>
+          {% endfor %}
+          {% endcache %}
+          
+        </div> <!-- .row -->
+
 
           </div>
         </div> <!-- .row -->
+        
+        
       </div> <!-- .container -->
     </div> <!-- .page-content-container -->
   </div> <!-- .sf-content -->
