@@ -18,7 +18,7 @@
 <form action="" class="content-filters">
   <label class="select" data-action='byspeaker'>
     {% set entryIds = craft.entries.section('media').ids() %}
-    {% set authors = craft.entries.section('people').relatedTo({ sourceElement: entryIds }) %}
+    {% set authors = craft.entries.section('people').relatedTo({ sourceElement: entryIds }).order('title') %}
     <select name="" id="">
        <option value=''>{{ "Speaker"|t }}</option>
       {% for category in authors %}
@@ -27,7 +27,7 @@
     </select>
   </label>
   <label class="select" data-action='bytopic'>
-    {% set categories = craft.categories.relatedTo({ sourceElement: entryIds }).group('mediaTopic').find() %}
+    {% set categories = craft.categories.relatedTo({ sourceElement: entryIds }).group('mediaTopic').order('title').find() %}
     <select name="" id="">
        <option value=''>{{ "Topic"|t }}</option>
       {% for category in categories %}
@@ -38,7 +38,7 @@
   <label class="select" data-action='byseason'>
     <select name="" id="">
        <option value=''>{{ "Season"|t }}</option>
-      {% set seasons = craft.categories.relatedTo({ sourceElement: entryIds }).group('mediaSeason').find() %}
+      {% set seasons = craft.categories.relatedTo({ sourceElement: entryIds }).group('mediaSeason').order('title').find() %}
       {% for category in seasons %}
         <option value='{{ category.id }}' {% if filterId == category.id %} selected {% endif %}>{{ category.title|t }}</option>
       {% endfor %}﻿
