@@ -4,7 +4,7 @@
 {% block content %}
   <!-- .sf-content for flex sticky footer -->
   <div class="sf-content nav-slide-element">
-    <div class="section-navigation">
+    <div class="nonstickSection">
       <div class="container">
         <ul>
           <li><a href="/media/media-library">Media Library</a></li>
@@ -16,6 +16,12 @@
 
     <div class="page-content-container">
       <div class="container standard-container">
+      
+      
+      {% if entry.lead is not empty %}
+          <p class="lead">{{ entry.lead }}</p>
+        {% endif %}
+        {{ entry.body }}
 
         <div class="featured-video-container">
           <div class="video-placeholder">
@@ -43,10 +49,6 @@
           </div>
         </div-->
 
-        {% if entry.lead is not empty %}
-          <p class="lead">{{ entry.lead }}</p>
-        {% endif %}
-        {{ entry.body }}
 
 
 
