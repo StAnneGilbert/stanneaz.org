@@ -37,28 +37,21 @@
           {% for item in siteWideContent.footerLinks %}
               {% set link = item.footerLink %}
               <span class="dot">&middot;</span>
-              <a href='{{ link.url }}' {{ link.target ? ' target="_blank"' }}>{{ link.linkText }}</a>
+              <a href='{{ link.url }}' {{ link.target ? ' target="_blank"' }}>{{ link.text }}</a>
           {% endfor %}
           
           {# <a href="/contact-us">{{ "Contact Us"|t }}</a>
           <span class="dot">&middot;</span>
           <a href="/privacy-terms">{{ "Privacy & Terms"|t }}</a> #}
           <ul class="social-circles" style="display:inline-block">
-            <li class="socialSm">
-              <a href="https://www.facebook.com/Stannegilbert" class="bg-facebook">
-                <i class="fa fa-facebook"></i>
-              </a>
-            </li>
-            <li class="socialSm">
-              <a href="https://twitter.com/StAnneGilbert" class="bg-twitter">
-                <i class="fa fa-twitter"></i>
-              </a>
-            </li>
-            <li class="socialSm">
-              <a href="https://plus.google.com/110180200209551867910/posts" class="bg-google-plus">
-              <i class="fa fa-google-plus"></i>
-              </a>
-            </li>
+          {% for service in siteWideSocialLinks.socialLinks %}
+              {% set link = service.serviceUrl %}
+              <li class="socialSm">
+                <a href='{{ link.url }}' class='bg-{{ service.service | lower }} social__link'>
+                  <i class='fa fa-{{ service.service | lower }}'></i>
+                </a>
+              </li>
+          {% endfor %}
           </ul>
         </div>
       </div>
