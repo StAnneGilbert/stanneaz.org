@@ -109,11 +109,11 @@
         {% for item in qlinks %}
           {% set link = item.qlink %}
           {% if loop.index == 1 %}
-            <a href="{{ link.url }}" class="bg-dark-brown"><i class="fa fa-clock-o"></i> {{ link.linkText }}</a>
+            <a href="{{ link.url }}" class="bg-dark-brown"><i class="fa fa-clock-o"></i> {{ link.text }}</a>
           {% elseif loop.index == 2 %}
-            <a href="{{ link.url }}" class="bg-light-blue"><i class="fa fa-bullseye"></i> {{ link.linkText }}</a>
+            <a href="{{ link.url }}" class="bg-light-blue"><i class="fa fa-bullseye"></i> {{ link.text }}</a>
           {% else %}
-            <a href="{{ link.url }}" class="bg-dark-blue"><i class="fa fa-envelope"></i> {{ link.linkText }}</a>
+            <a href="{{ link.url }}" class="bg-dark-blue"><i class="fa fa-envelope"></i> {{ link.text }}</a>
           {% endif %}
         {% endfor %}
       {% endif %}
@@ -230,7 +230,7 @@
         {% set sublinks = entry.subLinks %}
           {% for item in sublinks %}
             {% set link = item.subLinks %}
-            <a href="{{ link.url }}" class="btn btn-light-brown-border"><i class="fa fa-rss"></i> {{ link.linkText }}</a>
+            <a href="{{ link.url }}" class="btn btn-light-brown-border"><i class="fa fa-rss"></i> {{ link.text }}</a>
           {% endfor %}
           <!-- <a href="/news-updates" class="btn btn-light-brown-border"><i class="fa fa-rss"></i> More News</a>
           <a href="/events" class="btn btn-light-brown-border"><i class="fa fa-calendar"></i> Event Calendar</a> -->
