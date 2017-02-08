@@ -57,6 +57,12 @@
       top:1px;
     }
   }
+  .bg-youtube {
+    background:#cc181e;
+    &:hover {
+      background:darken(#cc181e, 8%);
+    }
+  }
   .bg-google-plus {
     background:#DD4B39;
     &:hover {
@@ -71,12 +77,6 @@
     i {
       top:1px;
       left:0px;
-    }
-  }
-  .bg-instagram {
-    background:#517FA4;
-    &:hover {
-      background:darken(#517FA4, 8%);
     }
   }
   .bg-flickr {
