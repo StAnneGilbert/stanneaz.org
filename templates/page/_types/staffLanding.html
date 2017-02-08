@@ -21,15 +21,13 @@
               <span class="job-title">{{ person.professionalTitle }}</span>
             </div>
             {% if person.phoneNumber is not empty %}
-              {% set link = person.phoneNumber %}
               <div class="col col-phone">
-                <a href="tel:{{ person.phoneNumber.tel }}" class="btn btn-sm btn-light-blue"><i class="fa fa-phone"></i> {{ person.phoneNumber.tel }}</a>
+                <a href="{{ person.phoneNumber.url }}" class="btn btn-sm btn-light-blue"><i class="fa fa-phone"></i> {{ person.phoneNumber.text }}</a>
               </div>
             {% endif %}
             {% if person.emailAddress is not empty %}
-              {% set link = person.emailAddress %}
               <div class="col col-email">
-                <a href="mailto:{{ link.email }}" class="btn btn-sm btn-light-blue"><i class="fa fa-envelope"></i> Email</a>
+                <a href="{{ person.emailAddress.url }}" class="btn btn-sm btn-light-blue"><i class="fa fa-envelope"></i> Email</a>
               </div>
             {% endif %}
             
