@@ -26,33 +26,53 @@
 
     <div class="page-content-container">
       <div class="container standard-container">
-        {% if ((siteWideContent.scheduleChange) or (siteWideContent.massScheduleChange)) and (entry.slug == 'times-location') %}
+        
+        {% if craft.locale == 'es_us' %}
+            {% set cMsg = scheduleChanges.confessionScheduleChangeMessageSpanish %}
+            {% set mMsg = scheduleChanges.massScheduleChangeMessageSpanish %}
+        {% else %}
+            {% set cMsg = scheduleChanges.confessionScheduleChangeEnglish %}
+            {% set mMsg = scheduleChanges.massScheduleChangeEnglish %}
+        {% endif %}
+        
+        {% set showCMMsg = 'false' %}
+        {% set displayConfMsg = 'false' %}
+        {% set displayMassMsg = 'false' %}
+        {% if ((cMsg) or (mMsg)) and (entry.slug == 'times-location') %}
+            {% set showCMMsg = 'true' %}
+            {% if (cMsg) %}
+                {% set displayConfMsg = 'true' %}
+            {% endif %}
+            {% if (mMsg) %}
+                {% set displayMassMsg = 'true' %}
+            {% endif %}
+        {% endif %}
+        
+          {% if (showCMMsg == 'true') %}
             <h3>{{ "Schedule Change Messages"|t }}</h3>
             <div style="padding-bottom:20px">
-            {% if (siteWideContent.scheduleChange) and (entry.slug == 'times-location') %}
-              <div id="scheduleMessage">
-                {{ siteWideContent.scheduleChange }}
-              </div>
+            {% if (displayConfMsg == 'true') %}
+              <div id="scheduleMessage">{{ cMsg }}</div>
             {% endif %}
-            {% if (siteWideContent.massScheduleChange) and (entry.slug == 'times-location') %}
-              <div id="massScheduleMessage">
-                {{ siteWideContent.massScheduleChange }}
-              </div>
+            {% if (displayMassMsg == 'true') %}
+              <div id="massScheduleMessage">{{ mMsg }}</div>
             {% endif %}
             </div>
-        {% endif %}
+          {% endif %}
+          
+        
         {{ entry.body }}
       </div> <!-- .container -->
     </div> <!-- .page-content-container -->
   </div> <!-- .sf-content -->
-{% if ((siteWideContent.scheduleChange) or (siteWideContent.massScheduleChange)) and (entry.slug == 'times-location') %}
+{% if (showCMMsg == 'true') %}
   <script>
-  {% if (siteWideContent.scheduleChange) and (entry.slug == 'times-location') %}
+  {% if (displayConfMsg == 'true') %}
     if (document.getElementById("confessionMsg") && document.getElementById("scheduleMessage")) {
         document.getElementById("confessionMsg").innerHTML = document.getElementById("scheduleMessage").innerHTML;
     }
   {% endif %}
-  {% if (siteWideContent.massScheduleChange) and (entry.slug == 'times-location') %}
+  {% if (displayMassMsg == 'true') %}
     if (document.getElementById("massMsg") && document.getElementById("massScheduleMessage")) {
         document.getElementById("massMsg").innerHTML = document.getElementById("massScheduleMessage").innerHTML;
 }

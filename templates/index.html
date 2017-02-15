@@ -147,16 +147,56 @@
         <a href="http://subsplash.com/stanne/app" target="_blank"><img src="http://s3.amazonaws.com/media.stanneaz.com/craft/assets/appIconStAnne2.jpg?mtime=20160704191656" alt="St. Anne App" width="60" height="60" /><span>St. Anne App</span></a></p>
         </div>
         
-        {% set anFeedurl = entry.homeAnnouncementsFeedUrl %}
-       {% set anLimit = 4 %}
+        {% if craft.locale == 'es_us' %}
+            {% set cTitle = scheduleChanges.confessionAnnouncementTitleSpanish %}
+            {% set cMsg = scheduleChanges.confessionScheduleChangeMessageSpanish %}
+            {% set mTitle = scheduleChanges.massAnnouncementTitleSpanish %}
+            {% set mMsg = scheduleChanges.massScheduleChangeMessageSpanish %}
+            {% set msgUrl = 'http://stanneaz.org/es/about/times-location' %}
+        {% else %}
+            {% set cTitle = scheduleChanges.confessionAnnouncementTitleEnglish %}
+            {% set cMsg = scheduleChanges.confessionScheduleChangeEnglish %}
+            {% set mTitle = scheduleChanges.massAnnouncementTitleEnglish %}
+            {% set mMsg = scheduleChanges.massScheduleChangeEnglish %}
+            {% set msgUrl = 'http://stanneaz.org/about/times-location' %}
+        {% endif %}
+        
+        {% if (cTitle is not empty) %}
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                <h5><a href="{{msgUrl}}">{{ cTitle }}</a></h5>
+                <p class="excerpt">{{ cMsg|trimit(120) }} <a href="{{msgUrl}}">{{ "Read More"|t }}</a></p>
+            </div>       
+        {% endif %}
+        
+        {% if (mTitle is not empty) %}
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                <h5><a href="{{msgUrl}}">{{ mTitle }}</a></h5>
+                <p class="excerpt">{{ mMsg|trimit(120) }} <a href="{{msgUrl}}">{{ "Read More"|t }}</a></p>
+            </div>         
+        {% endif %}
+
+        
+       {% set anFeedurl = entry.homeAnnouncementsFeedUrl %}
+       
+       {% if (cTitle is not empty) and (mTitle is not empty) %}
+           {% set anLimit = 2 %}
+           {% set loopNumber = 1 %}
+       {% elseif ((cTitle is not empty) and (mTitle is empty)) or ((cTitle is empty) and (mTitle is not empty))  %}
+           {% set anLimit = 3 %}
+           {% set loopNumber = 2 %}
+       {% else %}
+           {% set anLimit = 4 %}
+           {% set loopNumber = 3 %}
+       {% endif %}
+       
        {% set anOffset = 0 %}
        {% set anCache = "P1D" %}
        
-       {% cache globally for 1 hour %}
+       {% cache globally for 5 minutes %}
        {% set anItems = craft.feeds.getFeedItems(anFeedurl, anLimit, anOffset, anCache) %}
        {% for anItem in anItems %}
        
-       {% if loop.index == 3 %}
+       {% if loop.index == loopNumber %}
         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
             <h6><i class="fa fa-rss"></i> {{ "Subscribe to Announcements"|t }}</h6>
           <p class="excerpt"><a href="http://stanneaz.onthecity.org/groups/{% if craft.locale == 'es_us' %}170927{% else %}159435{% endif %}" target="_blank">{{ "Join the Announcements group on The City"|t }}</a> {{"(account required)"|t }}. {{ "Or, receive them via email:"|t }}</p>
