@@ -142,9 +142,9 @@
         {% else %}
           <h5><a href="http://subsplash.com/stanne/app" target="_blank">Download Our Parish Mobile Phone Apps!</a></h5>
         {% endif %}
-        <p class="excerpt downAppArea"><a href="http://www.acstechnologies.com/products/the-city/features/the-city-app" target="_blank"><img src="http://s3.amazonaws.com/media.stanneaz.com/craft/assets/appIconTheCity2.jpg?mtime=20160704191707" alt="The City App" width="60" height="60" /><span>The City App</span></a> 
+        <p class="excerpt downAppArea"><a href="http://www.acstechnologies.com/products/the-city/features/the-city-app" target="_blank"><img src="http://assets.stanneaz.org/craft/general/assets/appIconTheCity2.jpg?mtime=20160704191707" alt="The City App" width="60" height="60" /><span>The City App</span></a> 
         &nbsp;&nbsp;&nbsp; 
-        <a href="http://subsplash.com/stanne/app" target="_blank"><img src="http://s3.amazonaws.com/media.stanneaz.com/craft/assets/appIconStAnne2.jpg?mtime=20160704191656" alt="St. Anne App" width="60" height="60" /><span>St. Anne App</span></a></p>
+        <a href="http://subsplash.com/stanne/app" target="_blank"><img src="http://assets.stanneaz.org/craft/general/assets/appIconStAnne2.jpg?mtime=20160704191656" alt="St. Anne App" width="60" height="60" /><span>St. Anne App</span></a></p>
         </div>
         
         {% if craft.locale == 'es_us' %}
@@ -192,7 +192,7 @@
        {% set anOffset = 0 %}
        {% set anCache = "P1D" %}
        
-       {% cache globally for 5 minutes %}
+
        {% set anItems = craft.feeds.getFeedItems(anFeedurl, anLimit, anOffset, anCache) %}
        {% for anItem in anItems %}
        
@@ -210,7 +210,6 @@
           <p class="excerpt">{{ anSummary|raw }} <a href="{{ anItem.permalink }}">{{ "Read More"|t }}</a></p>
         </div>
         {% endfor %}
-        {% endcache %}
         
         </div>
         
