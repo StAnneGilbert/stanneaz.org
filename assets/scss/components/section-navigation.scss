@@ -86,3 +86,5 @@
     display: block;
   }
 
+/* This style prevents the youtube videos from covering the navbar. */
+.section-navigation {z-index:1}
