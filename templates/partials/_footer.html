@@ -39,10 +39,6 @@
               <span class="dot">&middot;</span>
               <a href='{{ link.url }}' {{ link.target ? ' target="_blank"' }}>{{ link.text }}</a>
           {% endfor %}
-          
-          {# <a href="/contact-us">{{ "Contact Us"|t }}</a>
-          <span class="dot">&middot;</span>
-          <a href="/privacy-terms">{{ "Privacy & Terms"|t }}</a> #}
           <ul class="social-circles" style="display:inline-block">
           {% for service in siteWideSocialLinks.socialLinks %}
               {% set link = service.serviceUrl %}

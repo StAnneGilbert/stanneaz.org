@@ -43,9 +43,11 @@
     <p class="copyright">Copyright &copy; {{ "now"|date("Y") }}<br>St. Anne Catholic Parish</p>
 
     <p class="links">
-      <a href="/contact-us">Contact Us</a>
-      <span class="dot">&middot;</span>
-      <a href="/privacy-terms">Privacy &amp; Terms</a>
+      {% for item in siteWideContent.footerLinks %}
+          {% set link = item.footerLink %}
+          <span class="dot">&middot;</span>
+          <a href='{{ link.url }}' {{ link.target ? ' target="_blank"' }}>{{ link.text }}</a>
+      {% endfor %}
     </p>
   </div>
 </div>
