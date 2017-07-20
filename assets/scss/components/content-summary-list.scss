@@ -99,3 +99,9 @@
     }
   }
 }
+.downAppArea{padding-top:10px}
+.downAppArea a img{vertical-align:middle}
+.downAppArea a span{display:inline-block;text-align:center;vertical-align:middle;width:85px}
+  @media screen and (max-width: 610px) {
+	  .downAppArea a span{width:65px}
+}

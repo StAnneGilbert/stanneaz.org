@@ -88,7 +88,7 @@
 
                   <!-- invisible (0 opacity) image to keep the aspect ratio -->
                   {% if entry.placeholderImage|length %}
-                    <img src="{{ entry.placeholderImage[0].getUrl() }}" alt="" width='780' height='438' />
+                    <img src="{{ entry.placeholderImage[0].getUrl() }}" alt="St. Anne Video Area" width='780' height='438' />
                   {% endif %}
                 </div>
               </div>
@@ -125,14 +125,6 @@
 
       <hr class="short-divider centered">
       
-      <style>
-      .downAppArea{padding-top:10px}
-      .downAppArea a img{vertical-align:middle}
-      .downAppArea a span{display:inline-block;text-align:center;vertical-align:middle;width:85px}
-      @media screen and (max-width: 610px) {
-          .downAppArea a span{width:65px}
-      }
-      </style>
 
       <div class="row news-blocks">
       
@@ -284,4 +276,13 @@
   {% if not craft.lj_cookies.get('visited') %}
     {{ craft.lj_cookies.set('visited', 'true', now | date_modify("+30 days").timestamp, '/' ) }}
   {% endif %}
+  
+<style>
+  .downAppArea{padding-top:10px}
+  .downAppArea a img{vertical-align:middle}
+  .downAppArea a span{display:inline-block;text-align:center;vertical-align:middle;width:85px}
+  @media screen and (max-width: 610px) {
+	  .downAppArea a span{width:65px}
+  }
+</style>
 {% endblock %}

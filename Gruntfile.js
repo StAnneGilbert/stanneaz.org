@@ -77,14 +77,14 @@ module.exports = function(grunt) {
         ],
         tasks: ['sass', 'autoprefixer'],
         options: {
-          spawn: false
+          //spawn: false
         }
       },
       scripts: {
         files: ['assets/js/vendor/*.js', 'assets/js/tm/*.js'],
         tasks: ['concat:scripts', 'uglify:scripts'],
         options: {
-          spawn: false
+          //spawn: false
         }
       }
     }
