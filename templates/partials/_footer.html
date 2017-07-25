@@ -1,4 +1,5 @@
 <!-- .sf-footer must contain @Pontifex and the traditional footer for the sticky footer layout -->
+{% cache globally for 1 day %}
 {% if craft.locale == "en_us" %}
   {% set tweets = craft.twitter.get('statuses/user_timeline',{'screen_name':'pontifex'},[],false, 1) %}
 {% elseif craft.locale == "es_us" %}
@@ -34,20 +35,20 @@
         &copy; {{ "now"|date('Y') }} {{ "St. Anne Roman Catholic Parish"|t }}
 
         <div class="links">
-          {% for item in siteWideContent.footerLinks %}
+            {% for item in siteWideContent.footerLinks %}
               {% set link = item.footerLink %}
               <span class="dot">&middot;</span>
               <a href='{{ link.url }}' {{ link.target ? ' target="_blank"' }}>{{ link.text }}</a>
-          {% endfor %}
+            {% endfor %}
           <ul class="social-circles" style="display:inline-block">
-          {% for service in siteWideSocialLinks.socialLinks %}
+            {% for service in siteWideSocialLinks.socialLinks %}
               {% set link = service.serviceUrl %}
               <li class="socialSm">
                 <a href='{{ link.url }}' class='bg-{{ service.service | lower }} social__link'>
                   <i class='fa fa-{{ service.service | lower }}'></i>
                 </a>
               </li>
-          {% endfor %}
+            {% endfor %}
           </ul>
         </div>
       </div>
@@ -57,3 +58,4 @@
     </div>
   </footer>
 </div> <!-- .sf-footer -->
+{% endcache %}

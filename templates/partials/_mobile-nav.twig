@@ -10,7 +10,7 @@
       </div>
   </form>
 
-  {% cache globally %}
+  {% cache globally for 2 days %}
   <ul class="main-menu">
     {% set pages = craft.entries.section('pages').level(1) %}
     {% nav page in pages %}
@@ -43,11 +43,13 @@
     <p class="copyright">Copyright &copy; {{ "now"|date("Y") }}<br>St. Anne Catholic Parish</p>
 
     <p class="links">
-      {% for item in siteWideContent.footerLinks %}
+      {% cache globally for 1 month %}
+        {% for item in siteWideContent.footerLinks %}
           {% set link = item.footerLink %}
           <span class="dot">&middot;</span>
           <a href='{{ link.url }}' {{ link.target ? ' target="_blank"' }}>{{ link.text }}</a>
-      {% endfor %}
+        {% endfor %}
+      {% endcache %}
     </p>
   </div>
 </div>

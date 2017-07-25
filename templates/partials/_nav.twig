@@ -47,12 +47,12 @@
       <div class="site-menu hidden-xs">
       
 
-
+{% cache globally for 2 days %}
     <ul {% if craft.locale == 'es_us' %} class="es_us"{% endif %}>
         {% set pages = craft.entries.section('pages').level('<= 3') %}
         {% nav page in pages %}
         
-            <li {% if page.level == 1 or page.level == 2 %}{% if page.hasDescendants() %}class='has-menu{% if page.level == 2 %}2{%endif%}{% if page.id == entry.id or entry.isDescendantOf(page) %} current-page{%endif%}{% if page.title == "Ministries" or page.title == "Movements" or page.title == "Ministerios" or page.title == "Movimientos"  %} menuIndent{%endif%}'{% endif %}{%endif%}>
+            <li {% if page.level == 1 or page.level == 2 %}{% if page.hasDescendants() %}class='has-menu{% if page.level == 2 %}2{%endif%}{% if page.title == "Ministries" or page.title == "Movements" or page.title == "Ministerios" or page.title == "Movimientos"  %} menuIndent{%endif%}'{% endif %}{%endif%}>
                 {{ page.getLink() }}
 
                 {% ifchildren %}
@@ -77,7 +77,7 @@
             <a {% if craft.locale == 'es_us' %}href="/es/comience-aqui"{% else %}href="/start-here"{% endif %} class="btn btn-light-blue">{{ "Start Here"|t }}</a>
           </li>
         </ul>
-
+{% endcache %}
       </div>
     </div>
   </header>

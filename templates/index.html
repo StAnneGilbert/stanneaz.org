@@ -20,7 +20,7 @@
                 quality: 75,
                 position: 'top-center'
             } %}
-                {% cache globally %}
+                {% cache globally for 1 day %}
                 <ul class='bxslider'>
                 {% for item in entry.featuredAtStAnne %}
                   {% set link = item.contentLink %}
@@ -42,6 +42,7 @@
               
 
               <div id="bx-pager">
+              {% cache globally for 1 day %}
                 {% set thumb2 = {
                     mode: 'crop',
                     width: 80,
@@ -49,9 +50,10 @@
                     quality: 75,
                     position: 'top-center'
                 } %}
-              {% for item in entry.featuredAtStAnne %}
+                {% for item in entry.featuredAtStAnne %}
                 <a data-slide-index="{{ loop.index - 1 }}" href=""><img src="{{ item.eventImage[0].getUrl(thumb2) }}" /></a>
-              {% endfor %}
+                {% endfor %}
+              {% endcache %}
               </div>
             {% endif %}
             </div> <!-- #featured-content-slider -->
