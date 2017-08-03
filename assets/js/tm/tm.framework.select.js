@@ -48,8 +48,10 @@ TMF.select = (function ($, sel, window, document, undefined) {
         }
 
         if(action === 'download'){
-          $this.parent().parent().find('[name=id]').attr('value',value);
-          $this.parent().parent().submit();
+          if(value != ""){
+           $this.parent().parent().find('[name=id]').attr('value',value);
+           $this.parent().parent().submit();
+          }
           //window.location.href = value;
         }
 
@@ -68,4 +70,14 @@ TMF.select = (function ($, sel, window, document, undefined) {
 
 }($, TMF || {}, this, this.document));
 
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+var frmApp = getParameterByName('app');
+if(frmApp){
+    document.getElementById('topHeader').style.display='none';
+}
 
