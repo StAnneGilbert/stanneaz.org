@@ -1,13 +1,8 @@
 /**
- * BxSlider v4.1.2 - Fully loaded, responsive content slider
- * http://bxslider.com
- *
- * Written by: Steven Wanderski, 2014
- * http://stevenwanderski.com
- * (while drinking Belgian ales and listening to jazz)
- *
- * CEO and founder of bxCreative, LTD
- * http://bxcreative.com
+ * bxSlider v4.2.12
+ * Copyright 2013-2015 Steven Wanderski
+ * Written while drinking Belgian ales and listening to jazz
+ * Licensed under MIT (http://opensource.org/licenses/MIT)
  */
 
 
@@ -16,40 +11,47 @@
 
 .bx-wrapper {
   position: relative;
-  margin: 0 auto 0px;
+  margin: 0 auto;
   padding: 0;
   *zoom: 1;
+  -ms-touch-action: pan-y;
+  touch-action: pan-y;
 }
 
 .bx-wrapper img {
   max-width: 100%;
   display: block;
-  width: 100%;
+}
+
+.bxslider {
+  margin: 0;
+  padding: 0;
+}
+
+ul.bxslider {
+  list-style: none;
+}
+
+.bx-viewport {
+  /*fix other elements on the page moving (on Chrome)*/
+  -webkit-transform: translatez(0);
 }
 
 /** THEME
 ===================================*/
 
-.bx-wrapper .bx-viewport {
+.bx-wrapper {
   -moz-box-shadow: 0 0 0px #ccc;
   -webkit-box-shadow: 0 0 0px #ccc;
   box-shadow: 0 0 0px #ccc;
   border:  0px solid #fff;
-  left: 0px;
   background: #fff;
-  
-  /*fix other elements on the page moving (on Chrome)*/
-  -webkit-transform: translatez(0);
-  -moz-transform: translatez(0);
-      -ms-transform: translatez(0);
-      -o-transform: translatez(0);
-      transform: translatez(0);
 }
 
 .bx-wrapper .bx-pager,
 .bx-wrapper .bx-controls-auto {
   position: absolute;
-  bottom:5px;
+  bottom:15px;
   /*bottom: -30px;*/
   width: 100%;
 }
@@ -78,13 +80,6 @@
   padding-top: 20px;
 }
 
-.bx-wrapper .bx-pager .bx-pager-item,
-.bx-wrapper .bx-controls-auto .bx-controls-auto-item {
-  display: inline-block;
-  *zoom: 1;
-  *display: inline;
-}
-
 .bx-wrapper .bx-pager.bx-default-pager a {
   background: #666;
   text-indent: -9999px;
@@ -99,8 +94,20 @@
 }
 
 .bx-wrapper .bx-pager.bx-default-pager a:hover,
-.bx-wrapper .bx-pager.bx-default-pager a.active {
+.bx-wrapper .bx-pager.bx-default-pager a.active,
+.bx-wrapper .bx-pager.bx-default-pager a:focus {
   background: #000;
+}
+.bx-wrapper .bx-pager-item,
+.bx-wrapper .bx-controls-auto .bx-controls-auto-item {
+  display: inline-block;
+  vertical-align: bottom;
+  *zoom: 1;
+  *display: inline;
+}
+.bx-wrapper .bx-pager-item {
+  font-size: 0;
+  line-height: 0;
 }
 
 /* DIRECTION CONTROLS (NEXT / PREV) */
@@ -110,16 +117,18 @@
   background: url('http://assets.stanneaz.org/craft/general/assets/controls.png') no-repeat 0 -32px;
 }
 
+.bx-wrapper .bx-prev:hover,
+.bx-wrapper .bx-prev:focus {
+  background-position: 0 0;
+}
+
 .bx-wrapper .bx-next {
   right: 10px;
   background: url('http://assets.stanneaz.org/craft/general/assets/controls.png') no-repeat -43px -32px;
 }
 
-.bx-wrapper .bx-prev:hover {
-  background-position: 0 0;
-}
-
-.bx-wrapper .bx-next:hover {
+.bx-wrapper .bx-next:hover,
+.bx-wrapper .bx-next:focus {
   background-position: -43px 0;
 }
 
@@ -155,7 +164,8 @@
 }
 
 .bx-wrapper .bx-controls-auto .bx-start:hover,
-.bx-wrapper .bx-controls-auto .bx-start.active {
+.bx-wrapper .bx-controls-auto .bx-start.active,
+.bx-wrapper .bx-controls-auto .bx-start:focus {
   background-position: -86px 0;
 }
 
@@ -170,12 +180,13 @@
 }
 
 .bx-wrapper .bx-controls-auto .bx-stop:hover,
-.bx-wrapper .bx-controls-auto .bx-stop.active {
+.bx-wrapper .bx-controls-auto .bx-stop.active,
+.bx-wrapper .bx-controls-auto .bx-stop:focus {
   background-position: -86px -33px;
 }
 
-
 /* CUSTOM CAPTION */
+
 .bxslider{
   .caption{
     position: absolute;
@@ -225,10 +236,6 @@
     }
 }
 
-
-
-
-
 /* PAGER WITH AUTO-CONTROLS HYBRID LAYOUT */
 
 .bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-pager {
@@ -247,7 +254,7 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  background: #666\9;
+  background: #666;
   background: rgba(80, 80, 80, 0.75);
   width: 100%;
 }
@@ -259,4 +266,3 @@
   font-size: .85em;
   padding: 10px;
 }
-

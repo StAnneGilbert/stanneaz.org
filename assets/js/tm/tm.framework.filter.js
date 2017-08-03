@@ -16,6 +16,7 @@ TMF.filter = ( function ($, ftr, window, document, undefined) {
           url.query.clear();
 
     if(value == ""){
+      url.query.clear();
       ftr.updateUrl( url );
     }else{
 
@@ -34,6 +35,10 @@ TMF.filter = ( function ($, ftr, window, document, undefined) {
       } else if (route === 'bible') {
 
         ftr.updateUrl(  ftr.getQuery(data, "bible") );
+
+      } else if (route === 'media' || route === 'bymedia') {
+
+        ftr.updateUrl(  ftr.getQuery(data,"media") );
 
       } else if (route === 'season') {
 

@@ -117,7 +117,8 @@ var TMF = (function ($, tm, window, document, undefined) {
       tm.runIf(elements);
 
       if ($(".standard-container").length > 0) {
-          $(".standard-container").fitVids({ customSelector: "iframe[src^='http://worshipmedia.tv']"});
+          $(".standard-container").fitVids();
+          //{ customSelector: "iframe[src^='http://worshipmedia.tv']"}
       };
       
     };
@@ -339,7 +340,11 @@ var TMF = (function ($, tm, window, document, undefined) {
 
     tm.Audio.win = function(id,title){
       var params = tm.Helpers.parseURL(window.location);
-      window.open( "http://" + params.host + "/audio/"+ id, "Audio Player - " + title, "width=650,height=430","location=no","status=no");
+      if (params.segments[0] === "es") {
+        window.open( "http://" + params.host + "/es/audio/"+ id, "Audio Player - " + title, "width=650,height=430","location=no","status=no");
+      }else{
+        window.open( "http://" + params.host + "/audio/"+ id, "Audio Player - " + title, "width=650,height=430","location=no","status=no");
+      };
     };
 
 
@@ -415,39 +420,57 @@ var TMF = (function ($, tm, window, document, undefined) {
     };
 
 
-    tm.Slider.init = function (elm) {
-      var el = $(elm),
-        $dragdealer = el;
+    // tm.Slider.init = function (elm) {
+    //   var el = $(elm),
+    //     $dragdealer = el;
 
-      el.owlCarousel({
-        itemsCustom: [
-          [1200,3],
-          [992,3],
-          [768,2],
-          [580,2],
-          [0, 1]
-        ],
-        slideSpeed: 700,
-        easing: $.bez([0.215, 0.61, 0.355, 1]), // custom cubic bezier easing string
-        scrollPerPage: true, // scroll all visible items at once vs. one item per advance
-        addClassActive: true, // add active class to each visible slide to set opacity/visibility
-        pagination: true, // add pagination dots
-        rewindNav: false // prevent slider from rewinding (not looping) back to beginning
+    //   el.owlCarousel({
+    //     itemsCustom: [
+    //       [1200,3],
+    //       [992,3],
+    //       [768,2],
+    //       [580,2],
+    //       [0, 1]
+    //     ],
+    //     slideSpeed: 700,
+    //     easing: $.bez([0.215, 0.61, 0.355, 1]), // custom cubic bezier easing string
+    //     scrollPerPage: true, // scroll all visible items at once vs. one item per advance
+    //     addClassActive: true, // add active class to each visible slide to set opacity/visibility
+    //     pagination: true, // add pagination dots
+    //     rewindNav: false // prevent slider from rewinding (not looping) back to beginning
+    //   });
+
+    //   var owl = el.data('owlCarousel');
+
+    //   // prev/next buttons
+    //   $(document).on('click', '.carousel-nav', function (e) {
+    //     e.preventDefault();
+
+    //     if($(this).attr('data-direction') == 'prev') {
+    //       owl.prev();
+    //     } else if($(this).attr('data-direction') == 'next') {
+    //       owl.next();
+    //     }
+    //   });
+
+    // };
+    // 
+    
+    tm.Slider.init = function(){
+      $(document).ready(function(){
+        $('.bxslider').bxSlider({
+          video: true,
+          useCSS: false,
+          auto: true,
+          pause: 8000
+        });
+        $('#slider3').bxSlider({
+          minSlides: 2,
+          maxSlides: 7,
+          slideWidth: 125,
+          slideMargin: 10
+        });
       });
-
-      var owl = el.data('owlCarousel');
-
-      // prev/next buttons
-      $(document).on('click', '.carousel-nav', function (e) {
-        e.preventDefault();
-
-        if($(this).attr('data-direction') == 'prev') {
-          owl.prev();
-        } else if($(this).attr('data-direction') == 'next') {
-          owl.next();
-        }
-      });
-
     };
 
     /* --------------------------------------------- *\
