@@ -7,6 +7,25 @@
 .clear {
   clear:both;
 }
+.imgR {
+  float:right;
+  padding: 0 0 20px 20px;
+}
+.imgL {
+  float:left;
+  padding: 0 20px 20px 0;
+}
+@media screen and (max-width: 510px) {
+    .imgR,.imgL{
+        float:none;
+        padding:0 0 20px 0;
+        width:98%;
+        height:auto;
+    }
+    .imgR img,.imgL img{
+        width:100% 
+    }  
+}
 .hide, .hidden {
   display:none;
 }
