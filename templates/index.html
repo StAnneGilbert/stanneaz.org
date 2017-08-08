@@ -21,7 +21,7 @@
                 position: 'top-center'
             } %}
                 {% cache globally for 1 day %}
-                <ul class='bxslider'>
+                <ul class='bxslider' id="slider1">
                 {% for item in entry.featuredAtStAnne %}
                   {% set link = item.contentLink %}
                     <li>

@@ -1,0 +1,395 @@
+
+{%- set parent = craft.entries.section('pages').slug(craft.request.getSegment(1)).first() -%}
+{%- set children = entry.getDescendants(1) -%}
+
+{% macro recursiveChildren(page) %}
+  {% if page.hasDescendants and page.slug == craft.request.getSegment(page.level) %}
+    <ul>
+      {% for subpage in page.children %}
+          <li{% if subpage.slug == craft.request.getSegment(subpage.level) %} class="selected"{% endif %}>
+            {{ subpage.link }}
+            {{ _self.recursiveChildren(subpage) }}
+          </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endmacro %}
+  <!-- .sf-content for flex sticky footer -->
+  <div class="sf-content nav-slide-element" data-swiftype-name="body" data-swiftype-type="text">
+    <div class="page-photo-title" {% if entry.pageImage|length %}style=" background-image:url({{ entry.pageImage[0].url }})" {% endif %}>
+      <div class="overlay">
+        <div class="container">
+          <h1 class="caps-header">{{ entry.heading }}</h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-content-container">
+      <div class="container">
+        
+        {{ entry.body }}
+
+<link type="text/css" rel="stylesheet" href="/assets/magiczoom/magiczoom.css"/>
+<script type="text/javascript" src="/assets/magiczoom/magiczoom.js"></script>        
+<style>
+.iconContent{display:none}
+#iconIntro.iconContent{display:block;text-align:center}
+@media screen and (max-width: 510px) {
+    .iconContent img{width:98%;height:auto}   
+}
+.mbxContain{margin:0 40px}
+.bx-wrapper {margin-bottom: 60px;padding: 0}
+.bx-wrapper .bx-pager,.bx-wrapper .bx-controls-auto {bottom: -30px}
+.bx-wrapper {
+  -moz-box-shadow: 0 0 5px #ccc;
+  -webkit-box-shadow: 0 0 5px #ccc;
+  box-shadow: 0 0 5px #ccc;
+  border: 5px solid #fff;
+}
+.bx-wrapper .bx-next{right:-45px}
+.bx-wrapper .bx-prev{left:-45px}
+</style>
+
+<div class="mbxContain" id="featured-content-slider">
+<ul class="bxslider" id="slider2">
+  <li><a href="#" onclick="revContent('ourLadyPainting');return false;"><img src="http://assets.stanneaz.org/craft/general/icons/painting-ourLadyGuadalupe125x170.jpg"  alt="Our Lady of Guadalupe Painting" width="125" height="175" /></a></li>
+  <li><a href="#" onclick="revContent('ourLady');return false;"><img src="http://assets.stanneaz.org/craft/general/icons/icon-ourLady125x175.jpg" alt="Our Lady of Guadalupe Icon" width="125" height="175" /></a></li>
+  <li><a href="#" onclick="revContent('stAnnePainting');return false;"><img src="http://assets.stanneaz.org/craft/general/icons/painting-StAnne125x175.jpg?mtime=20170804125406" alt="St. Anne Painting" width="125" height="175" /></a></li>
+  <li><a href="#" onclick="revContent('stAnneFamily');return false;"><img src="http://assets.stanneaz.org/craft/general/icons/icon-StAnneFamily125x175.jpg?mtime=20170804125304" alt="St. Anne Family" width="125" height="175" /></a></li>
+  <li><a href="#" onclick="revContent('divineMercy');return false;"><img src="http://assets.stanneaz.org/craft/general/icons/icon-DivineMercy125x175.jpg" alt="Divine Mercy" width="125" height="175" /></a></li>
+  <li><a href="#" onclick="revContent('prodigalSon');return false;"><img src="http://assets.stanneaz.org/craft/general/icons/icon-prodigalSon125x175.jpg" alt="The Prodigal Son" width="125" height="175" /></a></li>
+  <li><a href="#" onclick="revContent('christTheKing');return false;"><img src="http://assets.stanneaz.org/craft/general/icons/icon-ChristTheKing125x175.jpg" alt="Christ Enthroned" width="125" height="175" /></a></li>
+  <li><a href="#" onclick="revContent('JohnTheBaptist');return false;"><img src="http://assets.stanneaz.org/craft/general/icons/icon-StJohnTheBaptist125x170.jpg?mtime=20170804125255" alt="St. John The Baptist" width="125" height="175" /></a></li>
+  <li><a href="#" onclick="revContent('resurrection');return false;"><img src="http://assets.stanneaz.org/craft/general/icons/icon-resurrection125x175.jpg?mtime=20170804125353" alt="The Resurrection" width="125" height="175" /></a></li>
+  <li><a href="#" onclick="revContent('lastSupper');return false;"><img src="http://assets.stanneaz.org/craft/general/icons/icon-theLastSupper125x175.jpg" alt="The Last Supper" width="125" height="175" /></a></li>
+  <li><a href="#" onclick="revContent('crucifixion');return false;"><img src="http://assets.stanneaz.org/craft/general/icons/icon-crucifixion125x175.jpg?mtime=20170804125401" alt="The Crucifixion" width="125" height="175" /></a></li>
+  <li><a href="#" onclick="revContent('goodShepherd');return false;"><img src="http://assets.stanneaz.org/craft/general/icons/icon-goodShepherd125x175.jpg?mtime=20170804125424" alt="The Good Shepherd" width="125" height="175" /></a></li>
+  <li><a href="#" onclick="revContent('sowerSeed');return false;"><img src="http://assets.stanneaz.org/craft/general/icons/icon-seedSower125x175.jpg?mtime=20170804124939" alt="Sower of Seed" width="125" height="175" /></a></li>
+  <li><a href="#" onclick="revContent('nativity');return false;"><img src="http://assets.stanneaz.org/craft/general/icons/icon-Nativity125x175.jpg?mtime=20170804125248" alt="The Nativity" width="125" height="175" /></a></li>
+  <li><a href="#" onclick="revContent('virginMtCarmel');return false;"><img src="http://assets.stanneaz.org/craft/general/icons/icon-VirginMtCarmel125x175.jpg?mtime=20170804125417" alt="Virgin of Mt. Carmel" width="125" height="175" /></a></li>
+  <li><a href="#" onclick="revContent('JesusInTemple');return false;"><img src="http://assets.stanneaz.org/craft/general/icons/icon-JesusInTemple125x175.jpg?mtime=20170804125242" alt="Jesus In The Temple" width="125" height="175" /></a></li>
+  <li><a href="#" onclick="revContent('Trinity');return false;"><img src="http://assets.stanneaz.org/craft/general/icons/icon-HolyTrinity125x175.jpg?mtime=20170804125300" alt="The Most Holy Trinity" width="125" height="175" /></a></li>
+</ul>
+</div>
+
+<script>
+function revContent(idName){
+    var divsToHide = document.getElementsByClassName("iconContent"); //divsToHide is an array
+    for(var i = 0; i < divsToHide.length; i++){
+        divsToHide[i].style.display = "none";
+    }
+    document.getElementById(idName).style.display = 'block';
+}
+</script>
+
+
+<div id="iconIntro" class="iconContent">
+<p>
+Click on icon thumbnails in the slider above to see icon descriptions.
+</p>
+</div>
+
+<div class="iconContent" id="christTheKing">
+<h3>Christ Upon the Throne</h3>
+<div class="imgR"><a href="http://assets.stanneaz.org/craft/general/icons/icon-ChristTheKing1166x2100.jpg" class="MagicZoom" data-options="zoomMode: magnifier; zoomPosition: inner;"><img src="http://assets.stanneaz.org/craft/general/icons/icon-ChristTheKing350x630.jpg" alt="Christ Enthroned" width="350" height="630" /></a></div>
+<p>
+This icon is inspired by the scripture The Lord God says, 'I am the Alpha and the Omega, the One who is and who was and who is to come, the Almighty' (Rv 1:8) along with a similar scripture I am the Alpha and the Omega, the First and the Last, the Beginning and the End (Rv 22:13). Other names for icons of this type are, "Christ Pantocrator", "Christ the Teacher", and "Christ Enthroned". The Greek word Pantokrator translates as "The Ruler of All" or "The Almighty".
+</p>
+<p>
+In our icon, Jesus is sitting on a throne with the wounds from the cross visible. Together these symbolize that after completing his work here on earth, Jesus again took his seat 'at the Father's right hand'. Christ is holding a closed book with the first and last letters of the Greek alphabet, alpha (Α) and omega (Ω), on the front. His right hand is positioned in the sign of blessing with the thumb, pinky, and ring finger all touching. Traditionally, the three touching fingers symbolize either the Trinity or the two natures of Christ coming together in one being. The cross of the upright fingers symbolizes Christ's death on the cross. Christ is wearing a two-piece robe which symbolizes his two natures. The tunic (chiton) is red symbolizing his human nature. The cape (himation) is blue symbolizing his divine nature. The gold band over his right shoulder is known as a clavus. It comes from the Roman imperial court and indicates a high official status. The halo surrounding Christ's head is a well-known symbol which denotes a holy or sanctified state. The Greek letters όώN in the cross behind his head mean "the one who is". Above Jesus' shoulders are the initials IC XC. They are the first and last letters of the two Greek words for Jesus Christ.
+</p>
+<p>
+Christ's throne is surrounded by the faces of many angels above and below. This again indicates he is in a heavenly state. In each of the four corners of the red background are the emblems for the four evangelists. Each emblem includes a book which represents the Gospels. St. Matthew's emblem is in the upper left corner. It is a winged man. St. Mark's emblem, the lion, is in the lower left corner. On the lower right is an ox, the emblem for St. Luke. In the upper right is the eagle, the emblem for St. John. Under Jesus' feet are four fiery winged wheels sometimes called "thrones". The wheels along with many of the other symbols in this icon are described in the visions of the prophet Ezekiel (Ez 1:4-28) and the Book of Revelation (Rv 4:1-11).
+</p>
+</div>
+
+
+<div class="iconContent" id="crucifixion">
+<h3>The Crucifixion</h3>
+<div class="imgR"><a href="http://assets.stanneaz.org/craft/general/icons/icon-crucifixion1166x2100.jpg" class="MagicZoom" data-options="zoomMode: magnifier; zoomPosition: inner;"><img src="http://assets.stanneaz.org/craft/general/icons/icon-crucifixion350x630.jpg" alt="The Crucifixion" width="350" height="630" /></a></div>
+<p>
+This is an icon of Jesus' crucifixion, the greatest act of sacrifice. Jesus is shown hanging on the cross on the Hill of Golgotha outside the city walls of Jerusalem. Golgotha, which is also known as Calvary, literally means "the place of the skull". Below the cross is a cave with a skull and bone it. In tradition, Adam's tomb is said to have been at Golgotha, and his skull and bones were exposed by an earthquake during the Crucifixion. It is said, out of the burial of Adam comes the New Adam's (Jesus) sacrifice. During the time of Jesus, there would have been no tombs inside the city. Because the city has grown and new walls have been built, the place where Christ suffered is now inside the walls of Jerusalem. The Church of the Holy Sepulchre in Jerusalem is located on what is probably the exact spot of the death and burial of Christ.
+</p>
+<p>
+The halo surrounding Christ's head is a well-known symbol which denotes a holy or sanctified state. The letters I AM in the arms of the cross behind his head are the English equivalent of the Greek letters ό ωN, which mean "the one who is". In Exodus 3:14 God spoke to Moses saying "I am who I am". He tells Moses to tell the Israelites that "I AM" sent him (Moses) to them. The letters INRI above Christ's head abbreviate the Latin words for Jesus of Nazareth, King of the Jews. Above the cross is the weeping sun and moon as implied in the scriptures. In the Gospel of Matthew, Jesus foretells of the coming of the Son of Man by saying "the sun will be darkened, and the moon will not give its light" (Mt 24:29). Mary, Mother of Jesus, is below Jesus on the left. Mary Magdelene is to the left of her. John the Evangelist is below Jesus on the right.
+</p>
+<p>
+The Crucifixion is very important to Christians. Christ's suffering on the cross is an especially important part of Good Friday and Passion Sunday. Without it there is no Resurrection. There also is no forgiveness and no reconciliation with the Father. It is the ultimate act of reconciling.
+</p>
+</div>
+
+
+<div class="iconContent" id="divineMercy">
+<h3>The Divine Mercy</h3>
+<div class="imgR"><a href="http://assets.stanneaz.org/craft/general/icons/icon-DivineMercy1166x2100.jpg" class="MagicZoom" data-options="zoomMode: magnifier; zoomPosition: inner;"><img src="http://assets.stanneaz.org/craft/general/icons/icon-DivineMercy350x630.jpg" alt="Divine Mercy" width="350" height="630" /></a></div>
+<p>
+The Blessed Faustina Kowalska, a Polish religious, was granted this vision of Jesus on February 22, 1931. Sister Faustina received the vision while in a contemplative state. She was told by Jesus during his appearance to her that He wanted a painting of Himself made just as she saw him. Although she did her best to have the vision captured in a painting, none ever matched up to what she experienced.
+</p>
+<p>
+The most striking element of the image is the two rays. Jesus explained to Sister Faustina that they come from his "agonized heart" which was opened by a lance on the Cross. One ray is pale or white. It stands for the water that makes souls righteous. The other is red. It stands for blood which is the life of souls. Jesus requested that the three Polish words "Jezu, Ufam Tobie" be clearly visible in the painting. The English translation, "Jesus, I Trust in Thee" is on the arch above Jesus' head.
+</p>
+<p>
+This icon also contains several of the traditional symbols of iconography. The halo surrounding Christ's head is a well-known symbol which denotes a holy or sanctified state. The letters I AM in the arms of the cross behind his head are the English equivalent of the Greek letters ό ωN, which mean "the one who is". In Exodus 3:14 God spoke to Moses saying "I am who I am". He tells Moses to tell the Israelites that "I AM" sent him (Moses) to them. Above Jesus' shoulders are the initials IC XC. They are the first and last letters of the two Greek words for Jesus Christ.
+</p>
+</div>
+
+
+
+<div class="iconContent" id="goodShepherd">
+<h3>The Good Shepherd</h3>
+<div class="imgR"><a href="http://assets.stanneaz.org/craft/general/icons/icon-goodShepherd1166x2100.jpg" class="MagicZoom" data-options="zoomMode: magnifier; zoomPosition: inner;"><img src="http://assets.stanneaz.org/craft/general/icons/icon-goodShepherd350x630.jpg" alt="The Good Shepherd" width="350" height="630" /></a></div>
+<p>
+This icon is inspired by Jesus' parable of the Good Shepherd in the Gospel of John (John 10:1-18). The verses illustrated in the icon are:
+</p>
+<p>
+I am the good shepherd; the good shepherd lays down his life for the sheep. The hired hand - who is no shepherd nor owner of the sheep - catches sight of the wolf coming and runs away, leaving the sheep to be snatched and scattered by the wolf. That is because he works for pay; he has no concern for the sheep. I am the good shepherd. I know my sheep and my sheep know me in the same way that the Father knows me and I know the Father; for these sheep I will give my life. I have other sheep that do not belong to this fold. I must lead them, too, and they shall hear my voice. There shall be one flock then, one shepherd.
+</p>
+<p>
+In the icon Jesus is in the center and is much larger than the sheep. This indicates his importance. The marks from the Crucifixion are visible reminding us that He already has layed down His life for us. He is holding a lamb in his arms that clearly knows Him, trusts Him, and is listening to Him. There is one cute little sheep that just barely makes it into the icon. It is entirely on the right with its head up looking directly at you. The wolf is right behind him and yet he is not afraid. The wolf looks like a dog, but in Israel that is what a wolf might look like. Jesus confidently and lovingly stands his ground and the flock does not scatter. Notice that there is one sheep that is not white. It was included intentionally to remind us that just like the sheep we are not all the same, yet Jesus expects us all to be "one flock".
+</p>
+<p>
+The halo surrounding Christ's head is a well-known symbol which denotes a holy or sanctified state. The letters I AM in the arms of the cross behind his head are the English equivalent of the Greek letters ό ωN, which mean "the one who is". In Exodus 3:14 God spoke to Moses saying "I am who I am". He tells Moses to tell the Israelites that "I AM" sent him (Moses) to them.
+</p>
+</div>
+
+
+<div class="iconContent" id="JesusInTemple">
+<h3>Jesus in The Temple</h3>
+<div class="imgR"><a href="http://assets.stanneaz.org/craft/general/icons/icon-JesusInTemple1166x2100.jpg" class="MagicZoom" data-options="zoomMode: magnifier; zoomPosition: inner;"><img src="http://assets.stanneaz.org/craft/general/icons/icon-JesusInTemple350x630.jpg" alt="Jesus In The Temple" width="350" height="630" /></a></div>
+<p>
+This icon is inspired by the story told in the Gospel of Luke (Lk 2:52). In the story, Jesus, at the age of 12, leaves his parents and goes to the temple to listen to and ask questions of the teachers of law. In the icon he is shown sitting on a throne and he is disproportionately larger than the others. This indicates his importance. Joseph is sitting next to him on the left and Mary is sitting on his right. The halos which surround the heads of  Jesus, Joseph, and Mary are a well-known symbol which denotes a holy or sanctified state. The Greek letters ό ώN in the cross behind Jesus' head mean "the one who is". Below Jesus are the teachers. Jesus is revealing to them his extraordinary knowledge of the scriptures and his great spiritual insight.
+</p>
+<p>
+After finding Jesus, Mary asks him "Son, why have you done this to us? You see that your father and I have been searching for you in sorrow." He replies "Why did you search for me? Did you not know I had to be in my Father's house?" (Lk 2:48-49). His reply indicates that at this young age Christ was already aware of his divine mission.
+</p>
+<p>
+Even though this picture appears to be outside, the red curtain across the tops of the buildings indicates that it actually takes place indoors. The colors in the alcove behind  Jesus are the same as the colors of the present carpet and pew cloth of St. Anne's. This brings the image out of a historic setting and into our present. It is a reminder to us that we also can find whatever we are seeking in our own lives in the house of Our Father.
+This icon was painted by Mila Mina of San Diego, California.
+</p>
+</div>
+
+
+<div class="iconContent" id="JohnTheBaptist">
+<h3>St. John the Baptist</h3>
+<div class="imgR"><a href="http://assets.stanneaz.org/craft/general/icons/icon-StJohnTheBaptist1166x2100.jpg" class="MagicZoom" data-options="zoomMode: magnifier; zoomPosition: inner;"><img src="http://assets.stanneaz.org/craft/general/icons/icon-StJohnTheBaptist350x630.jpg?mtime=20170804125255" alt="St. John The Baptist" width="350" height="630" /></a></div>
+<p>
+This icon is used at St. Anne's during the advent season. This is the four weeks before Christmas when we prepare to celebrate the birth of Christ. It is a time of penitence as well as anticipation.
+</p>
+<p>
+John the Baptist is on the left standing on the shore of the Jordan River. He is shown larger than the other figures in the icon to indicate his importance. Consistent with icon convention, John has a thin face, an intense gaze, long shaggy hair and beard, and clothing made of camel hair. The halo which surrounds his head is a well-known symbol which denotes a holy or sanctified state. John is holding his message of repentance and preparation for the coming of the Messiah: Repent, the reign of God is at hand (MT 3:2). This is the same message Jesus delivers when he begins his ministry (MT 4:17). 
+</p>
+<p>
+The crowd on the right is listening and reacting to John's message in various ways. The woman on the far right has raised her covered hand to her mouth. This is a sign of respect to the word she is receiving. By covering her hand in humility, she is recognizing the presence of God in John. At the bottom of the icon on the left side near John's feet is a small leafless tree with an ax in it. It represents John's warning to the hypocrites within the crowd. He tells them: The ax is already at the root of the trees, and every tree that does not produce good fruit will be cut down and thrown into the fire (MT 3:10).
+</p>
+<p>
+There are five figures at the bottom of the icon. They represent a soul's movement from slavery to the passions on the right to a spiritual union with God on the left. The 1st figure on the right has his head completely covered out of shame. He has recognized that he is a sinner but has not yet stepped into the water. The 2nd figure has entered the water and begun to shed his clothing. He has his closed hand to his eye showing he is wiping away tears of repentance. The Eastern Church calls heart-felt weeping the second baptism because it brings God's forgiveness. The 3rd figure has removed all material coverings and is contemplating the teachings of the Lord. He is praying to God for enlightenment. The 4th figure has entered even further into the water. His finger is to his temple showing that God has enlightened him about leading a holy life. The 5th figure is immersed in the water. He has his hands raised and his eyes closed. He has recognized God. He is fully repentant for his sins and is in prayer.
+</p>
+</div>
+
+
+<div class="iconContent" id="lastSupper">
+<h3>The Last Supper</h3>
+<div class="imgR"><a href="http://assets.stanneaz.org/craft/general/icons/icon-theLastSupper1166x2100.jpg" class="MagicZoom" data-options="zoomMode: magnifier; zoomPosition: inner;"><img src="http://assets.stanneaz.org/craft/general/icons/icon-theLastSupper350x630.jpg?mtime=20170726165418" alt="The Last Supper" width="350" height="630" /></a></div>
+<p>
+This is a traditional icon of the Last Supper as described in the Gospels. For the most part it is self-explanatory. Jesus is at the head of the table. He is shown bigger than the other figures to indicate his importance. The other figures at the table are the twelve apostles. Two of the figures do not have beards. The one on the lower left is Thomas and the one by Jesus is John. They do not have beards because it is believed that they were teenagers. Only one of the faces is shown as a profile. It is the face of Judas. Typically, an evil person has two intentions and is telling only one of them. Another word for this is duplicitous, which means two-faced. So, an evil person is often shown displaying only one side of their face and hiding the other. Judas is also identified by the pouch of money he is holding and the fact that he is reaching for food (Matthew 26:14, 23). The halo surrounding Christ's head is a well-known symbol which denotes a holy or sanctified state. The Greek letters όώN in the cross behind his head mean "the one who is". Above Jesus' shoulders are the initials IC XC. They are the first letters of the two Greek words for Jesus Christ.
+</p>
+<p>
+Normally there would not have been a fish at the Passover meal. Similar to the way we fast for one hour before communion, the Greek’s also prepare for communion by fasting. The fish is a sign of fasting for the Orthodox. So, traditionally it is included in Greek versions of this icon. The author requested that a fish be included in our icon and we agreed.
+</p>
+<p>
+The Last Supper took place in Holy Zion, the upper room. This is the room depicted in the icon. Even though this picture appears to be outside, the red curtain across the tops of the buildings indicates that it actually takes place indoors. After the house was gone, a church was built there right away. Even today it is called Holy Zion. It is really the first Christian Church. The Holy Communion of the Last Supper is made present every time mass is celebrated at St. Anne’s. The color behind Jesus in the alcove is the same as the color of the present carpet and pew cloth of St. Anne's. This was done intentionally to encourage us to think of Jesus celebrating in our church in the person of the priest.
+</p>
+<p>
+Father Doug asked the artist to add the empty chair. It is not normally on icons of the Lord’s Supper. It was added so that we could catechize the children and tell them that that is their chair. They must never lose their seat at the Lord’s table. They must do everything necessary to keep it. This is true for adults as well.
+</p>
+</div>
+
+
+<div class="iconContent" id="nativity">
+<h3>The Nativity</h3>
+<div class="imgR"><a href="http://assets.stanneaz.org/craft/general/icons/icon-Nativity1166x2100.jpg" class="MagicZoom" data-options="zoomMode: magnifier; zoomPosition: inner;"><img src="http://assets.stanneaz.org/craft/general/icons/icon-Nativity350x630.jpg" alt="The Nativity" width="350" height="630" /></a></div>
+<p>
+This is an icon of the birth of Jesus. Mary and the baby Jesus are shown inside a cave. The Church of the Holy Nativity in Bethlehem has been authenticated as the cave in which Jesus was born. The cave in the icon is very black. It represents the darkness of the world that Jesus came into. Mary is shown larger than the other figures in the icon to indicate her importance. She has one hand raised pointing to heaven to indicate where the baby has come from. To the right of her head are the Greek letters which stand for the title "Meter Theou" which means "Mother of God". The pillow that Mary is resting on is the middle-eastern type that has both ends tied. Next to her is the infant Jesus wrapped in his swaddling clothes. He is not in a manger, but rather a sarcophagus which is a stone coffin. The swaddling clothes he is wrapped in are said to prefigure Christ's linen shroud after his crucifixion. The sarcophagus foreshadows his tomb. Above Jesus' head are the initials IC XC. They are the first letters of the two Greek words for Jesus Christ. Next to Him are an ox and an ass. They represent the fulfillment of Isaiah's words: "An ox knows its owner, and an ass, its master's manger" ( Is 1:3). Their attentive gaze indicates that this is no ordinary baby.
+</p>
+<p>
+At the top of the icon is the star which points the way to the baby Jesus with its rays. Angels surround the star rejoicing in the arrival of the Savior. The angel on the right is speaking to the shepherds saying, "You have nothing to fear! I come to proclaim good news to you - tidings of great joy to be shared by the whole people. This day in David's city a savior has been born to you, the Messiah and Lord" (Lk 2:10-11). The wise men, who are sometimes referred to as astrologers, are shown on the left. They are very small to indicate that they are coming from far away. On the right is a piper playing music for the new baby. Joseph is below him. He is in a state of wonder and amazement because he has recognized that Mary truly is the Mother of God. He is contemplating what all this means. On the lower left is a young shepherd bringing a gift of bread and cheese to the Holy Family. The lamb he has with him prefigures Jesus' sacrificial role as the paschal lamb.
+</p>
+<p>
+This icon was painted by Mila Mina of San Diego, California.
+</p>
+</div>
+
+
+
+<div class="iconContent" id="prodigalSon">
+<h3>Prodigal Son</h3>
+<div class="imgR"><a href="http://assets.stanneaz.org/craft/general/icons/icon-prodigalSon1166x2100.jpg" class="MagicZoom" data-options="zoomMode: magnifier; zoomPosition: inner;"><img src="http://assets.stanneaz.org/craft/general/icons/icon-prodigalSon350x630.jpg" alt="The Prodigal Son" width="350" height="630" /></a></div>
+<p>
+This is an icon used during Lent, a time of repentance and returning to the Father. The story (Lk 15:11-31) is about a father waiting for the return of his wayward son. When his child returns home, the father does not lecture or scold him, but rather, he celebrates his return. His loving actions depict the great mercy of God our Father.
+</p>
+<p>
+The story starts about half way up on the left-hand side of the icon. The father and son are standing in front of a little house. The son is about to leave home and has asked for his inheritance. The father is handing his son the money in a bag. After leaving, the son goes up the road to a house of ill repute which is shown in the upper left-hand corner. He soon spends all his money there and must leave.
+</p>
+<p>
+Next the son is shown in the upper right-hand corner of the icon sitting in a carob tree. Carob pods, which we grind up and use as a chocolate-like flavoring, are used to feed pigs in the Middle East. The son has taken a very lowly job of feeding pigs and doesn't even have money for food, so he must eat what the pigs eat. The son is thinking about his situation. He realizes that his father's servants have plenty to eat. He would be better off to humble himself as a servant to his father.
+</p>
+<p>
+Farther down on the right side of the icon, the son is walking with a stick that has a little bag of his belongings attached to it. He has decided to return home and is traveling back to his father’s house. He arrives home in the center of the picture. He is very repentant, asking his father's forgiveness. His father, who has been waiting a long while for his child's return is extremely happy. He embraces his son. He shows his pleasure about his son's return in several ways.
+</p>
+<p>
+On the right side of the icon a servant is holding a robe and a ring that are being given to the son by his father. A ring is a sign of high position in a family. This servant will also help to wash and dress the son. At the bottom on the right is a fatted calf that is being slain for a feast that will be given in the son's honor. On the left at the bottom, four figures are dancing in a circle. This represents the celebration of the returned son. Just above them is the banquet. At the table are the father, the older brother, and the son that has just returned home. They are eating the fatted calf.
+</p>
+<p>
+This icon is a beautiful image of not only a one-time need for reconciliation, but the many times it is needed throughout our lives. Jesus came to reconcile us with our Father. "The Waiting Father" is another good name for this story.
+</p>
+</div>
+
+
+<div class="iconContent" id="resurrection">
+<h3>The Resurrection</h3>
+<div class="imgR"><a href="http://assets.stanneaz.org/craft/general/icons/icon-resurrection1166x2100.jpg" class="MagicZoom" data-options="zoomMode: magnifier; zoomPosition: inner;"><img src="http://assets.stanneaz.org/craft/general/icons/icon-resurrection350x630.jpg" alt="The Resurrection" width="350" height="630" /></a></div>
+<p>
+Another title for this icon is "The Descent into the Realm of the Dead". The Realm of the Dead is not Hell, but rather a place of waiting. Jesus is surrounded by the souls that have been waiting for The Redemption. A variety of kings and prophets are represented along with several other well-known biblical figures. Jesus is grasping the wrists of Adam and Eve in each of his hands as he raises them up. They are each being raised from their own open sarcophagus. (A sarcophagus is a stone coffin.) Eve's left hand is respectfully veiled. Behind Adam is Moses holding the Ten Commandments. John the Baptist is standing behind Eve holding doves. The young boy behind him is Abel. In the background are two mountain tops. They are shaped like uplifted hands rejoicing in The Resurrection.
+</p>
+<p>
+Jesus is glorious. He is standing over the broken gates to Hell which is the dark abyss below him. Chains, nails, locks, and symbols of other hindrances he has overcome are shown strewn about. His white robes symbolize his state of glory. He is surrounded by a glowing mandorla. Its almond shape is an ancient symbol of the creative force. It is often used to frame the figures of saints, the Virgin, or Christ. Behind Jesus are golden rays on a blue background. The blue represents heaven and the rays are symbolic of the unseen God. The halo surrounding Christ's head is a well-known symbol which denotes a holy or sanctified state. The letters I AM in the arms of the cross behind his head are the English equivalent of the Greek letters ό ωN, which mean "the one who is". In Exodus 3:14 God spoke to Moses saying "I am who I am". He tells Moses to tell the Israelites that "I AM" sent him (Moses) to them. Above Jesus' shoulders are the initials IC XC. They are the first and last letters of the two Greek words for Jesus Christ.
+</p>
+</div>
+
+
+
+<div class="iconContent" id="sowerSeed">
+<h3>The Sower Of Seeds</h3>
+<div class="imgR"><a href="http://assets.stanneaz.org/craft/general/icons/icon-seedSower1166x2100.jpg" class="MagicZoom" data-options="zoomMode: magnifier; zoomPosition: inner;"><img src="http://assets.stanneaz.org/craft/general/icons/icon-seedSower350x630.jpg" alt="Sower of Seed" width="350" height="630" /></a></div>
+<p>
+This icon is inspired by Jesus' parable of the Sower in the Gospels (Lk 8:5-8). The verses illustrated in the icon are:
+</p>
+<p>
+A farmer went out to sow some seed. In the sowing, some fell on the footpath where it was walked on and the birds of the air ate it up. Some fell on rocky ground, sprouted up, then withered through lack of moisture. Some fell among briers, and the thorns growing up with it stifled it. But some fell on good soil, grew up, and yielded grain a hundredfold.
+</p>
+<p>
+In the icon Jesus is shown as the farmer. The rocky soil is in the very front. Whatever might try to grow there will not be able to take root and will quickly shrivel and die. Behind the rocks is the soil that has the bushes with thorns. These plants will choke out the seeds that might try to grow there. Off to the right is the footpath where people are walking. The blackbirds are coming from the back. They will eat the seeds on the path as well as some of  those in the field before they can even begin to grow. Jesus is standing on the good soil in the plowed field. Behind Him is the crop that has grown up and will yield grain a hundredfold.
+</p>
+<p>
+The seed Jesus is throwing on the soil is the word of God. The places where the seed fall represent the different kinds of hearts that Jesus’ word lands on. The stones represent those hearts that appear to accept the word of God but do not allow it to take root. As a result, they lack the conviction to stay true to God's word in the face of challenges. The bushes and thorns represent the passions. That is our anger, rage, lust, and greed. The seed of the Gospel gets sown there and begins to grow, but then our passions choke it out. The footpath represents those hearts that do not accept the word of God. They are readily carried away by evil influences. The ground that is plowed and ready to receive is the heart that is going to grow in the word of God without passions. It has very carefully dug out all of the rocks and bushes and made itself very receptive to what God teaches. This heart will follow God's ways. Saint Theresa was like that. Her heart was a well-prepared field. Both her parents and the Church of her time did a really good job of preparing her.
+</p>
+<p>
+The halo surrounding Christ's head is a well-known symbol which denotes a holy or sanctified state. The letters I AM in the arms of the cross behind his head are the English equivalent of the Greek letters ό ωN, which mean "the one who is". In Exodus 3:14 God spoke to Moses saying "I am who I am". He tells Moses to tell the Israelites that "I AM" sent him (Moses) to them.
+</p>
+<p>
+This icon was painted by Mila Mina of San Diego, California.
+</p>
+</div>
+
+
+
+<div class="iconContent" id="stAnneFamily">
+<h3>St. Anne's Holy Family</h3>
+<div class="imgR"><a href="http://assets.stanneaz.org/craft/general/icons/icon-StAnneFamily1166x2100.jpg" class="MagicZoom" data-options="zoomMode: magnifier; zoomPosition: inner;"><img src="http://assets.stanneaz.org/craft/general/icons/icon-StAnneFamily350x630.jpg" alt="St. Anne Family" width="350" height="630" /></a></div>
+<p>
+This is a very simple icon of Mary’s Holy Family. St. Anne, Mary’s mother, is sitting on the chair with young Mary next to her. Anne’s husband and Mary's father, Joachim, is standing behind Mary. Both Anne and Joachim were very holy people. Mary's spiritual education and religious upbringing were very important to them. When Mary was very young, they moved from Nazareth to Jerusalem where Mary was educated in the Temple.
+</p>
+<p>
+In this icon Anne is teaching little Mary the first and greatest commandment, “You shall love the Lord your God with all your heart, and with all your soul, and with all your mind” (Matthew 22:37). The family’s house in Jerusalem is shown. It is near the Sheep Gate that is called Bethesda (Beth-zatha). This is the place where Jesus later cured the paralytic (John 5:2-9). Even though this picture appears to be outside, the red curtain across the tops of the buildings indicates that it actually takes place indoors.
+</p>
+<p>
+There is a pedestal behind St. Anne’s head to the right. The artist was asked to add roses in a little vase there. Since St. Anne is the patroness of our parish, it was thought she should have some roses from us. They are not in the usual icon, they are added in ours.
+</p>
+<p>
+At the bottom of the icon a peacock is drinking out the Fountain of Living Waters. Because peacocks periodically lose all their beautiful feathers and then grow a new beautiful set, the peacock is often used as a symbol of resurrection and renewed life. Mary holds the promise of this as the future Mother of God.
+</p>
+</div>
+
+
+<div class="iconContent" id="stAnnePainting">
+<h3>St. Anne - Painting</h3>
+<div class="imgR"><a href="http://assets.stanneaz.org/craft/general/icons/painting-StAnne1166x2100.jpg" class="MagicZoom" data-options="zoomMode: magnifier; zoomPosition: inner;"><img src="http://assets.stanneaz.org/craft/general/icons/painting-StAnne350x547.jpg" alt="St. Anne Painting" width="350" height="507" /></a></div>
+<p>
+This is a painting of Mary sitting on the lap of her mother St. Anne. Anne was an industrious and holy woman. She knew that Mary was destined for an important role in God's plan. Her loving care and nurturing of Mary are evident in this picture.
+</p>
+</div>
+
+
+
+<div class="iconContent" id="Trinity">
+<h3>The Holy Trinity</h3>
+<div class="imgR"><a href="http://assets.stanneaz.org/craft/general/icons/icon-HolyTrinity1166x2100.jpg" class="MagicZoom" data-options="zoomMode: magnifier; zoomPosition: inner;"><img src="http://assets.stanneaz.org/craft/general/icons/icon-HolyTrinity350x630.jpg" alt="The Most Holy Trinity" width="350" height="630" /></a></div>
+<p>
+This icon is inspired by the story told in Genesis 18 of the visitation of angels to Abraham and Sara. The Lord appeared to Abraham by the terebinth (oak tree) of Mamre, as he sat in the entrance to his tent, while the day was growing hot. Looking up, he saw three men standing nearby. When he saw them, he ran from the entrance of the tent to greet them; and bowing to the ground, he said: "Sir, if I may ask you this favor, please do not go on past your servant. Let some water be brought that you may bathe your feet, and rest yourselves under the tree. Now that you are this close to your servant, let me bring you a little food, that you may refresh yourselves (Gen 18:1-5).
+</p>
+<p>
+The primary figures in this icon are the three angels sitting at the table. They each have wings and a halo around their head. These are a traditional symbols which indicate that they are heavenly beings. Each of them has their right hand pointed toward the golden chalice sitting on the table. Jesus' face can be see in the wine in the chalice. The table is an altar. Together these foreshadow Jesus' sacrificial role as the Eucharist. Each angel holds a pastoral staff in their left hand. The angel on the left is God the Father. His staff is held upright as a sign of justice. Jesus is the angel in the center. He is identified by his traditional red tunic (chiton) and blue cape (himation). They symbolize his human and divine natures respectively. The gold band over his right shoulder, known as a clavus, comes from the Roman imperial court and indicates a high official status. The angel on the right is the Holy Spirit. His robe is green symbolizing new life. The staffs of Jesus and the Holy Spirit are both tilted to indicate mercy. Their heads are bowed toward the Father to symbolize their willingness to do His will.
+</p>
+<p>
+Behind the three figures are a building, a tree, and a mountain. Although they are very standard in this type of icon, the interpretation of their symbolism varies. The building is usually said to be the house of Abraham. It is vertical like the staff God is holding and is said to represent the Church. The tree is said to be the oak tree of Mamre in the story. It represents the wood of the Cross. The mountain is said to either signify spiritual ascent or to serve as a reminder of the mountain meetings between God and man (e.g. Sinai, Carmel, and Tabor). Both the tree and the mountain are bowed like the figures in front of them. Kneeling down at the front of the icon are Abraham and Sara. They are offering food to the angels. Abraham is holding the calf that was killed for the meal.
+</p>
+<p>
+Other names for this type of icon are "The Hospitality of Abraham" and "The Old Testament Trinity". This icon was painted by Mila Mina of San Diego, California.
+</p>
+</div>
+
+
+
+<div class="iconContent" id="ourLady">
+<h3>Virgin of Guadalupe</h3>
+<div class="imgR"><a href="http://assets.stanneaz.org/craft/general/icons/icon-ourLady1166x2100.jpg" class="MagicZoom" data-options="zoomMode: magnifier; zoomPosition: inner;"><img src="http://assets.stanneaz.org/craft/general/icons/icon-ourLady350x630.jpg" alt="Virgin of Guadalupe Icon" width="350" height="630" /></a></div>
+<p>
+This icon is a very simple representation of the appearance of Mary, Mother of God, to an Indian peasant in Mexico named Juan Diego. She appeared to him for the first time on Tepeyac Hill on the morning of December 9, 1531. During her appearance she requests that a "little house of God" be built for her. She wants a place where people can come to her and receive her love, compassion, help, and protection. She tells Juan Diego to go to the Bishop of Mexico and make her request known.
+</p>
+<p>
+Juan Diego does as he is asked. However, the bishop does not seem to believe the story. On his way home, Juan Diego sees Our Lady a second time. She tells Juan Diego not to be discouraged and to visit the bishop again on the following day. On this visit the bishop agrees to build the "little house" providing he is given a sign that this is truly a request from the Blessed Virgin. On his way home, Juan Diego meets with Our Lady for a third time. She says she will honor the bishop's request. When Juan Diego meets Our Lady for the fourth time, she tells him to climb Tepeyac and pick the flowers he finds there to give as a sign to the bishop. Juan Diego goes to the top of the hill where he finds beautiful full-bloomed flowers growing out of season in the stony ground where usually only cactus and thorns can grow. He picks the flowers and puts them in his tilma, which is a cloak made of cactus fiber. He takes the flowers to the bishop. When he opens the tilma and lets the flowers fall to the floor, an image of Mary appears on it.
+</p>
+<p>
+In the icon, the top of Tepeyac is shown in the background. On the left, Juan Diego is kneeling on the rugged rocks of the hill holding up his tilma filled with the roses that he is taking to the Bishop of Mexico. A cactus, which is normally what would be found growing there is shown behind him. In the foreground are several rose bushes in full bloom. Not only are these plants uncommon to that location, but it is midwinter and nothing should have been blooming.
+</p>
+<p>
+The Virgin of Guadalupe is shown as she appears on Juan Diego's tilma. Many of the traditional symbols of iconography are present in the image. She is surrounded by rays of sunlight which are dispersing the clouds. This is symbolic of the unseen God. Under her feet is the crescent moon, a symbol of her perpetual virginity. Stars, representing heaven, cover her blue mantle. Blue signifies divine contemplation. Her rose-colored robe with the leaf and rosette design represents divine love in its color and paradise in the design. The position of the angel below Our Lady holding up the lower edge of her garments shows that Mary has been raised above the angels as the Mother of God. The red, white, and blue feather's in the angel's wings symbolize loyalty, faith, and fidelity.
+</p>
+</div>
+
+
+
+<div class="iconContent" id="ourLadyPainting">
+<h3>Virgin of Guadalupe - Painting</h3>
+<div class="imgR"><a href="http://assets.stanneaz.org/craft/general/icons/painting-ourLadyGuadalupe1166x1884.jpg" class="MagicZoom" data-options="zoomMode: magnifier; zoomPosition: inner;"><img src="http://assets.stanneaz.org/craft/general/icons/painting-ourLadyGuadalupe390x630.jpg" alt="Our Lady of Guadalupe Painting" width="390" height="630" /></a></div>
+<p>
+This painting is of the Virgin of Guadalupe, Holy Mother of God. It is very similar to the image that appeared on the tilma (cloak) of an Indian peasant in Mexico named Juan Diego. In addition to the image on his tilma, Our Lady appeared to Juan Diego several times as an apparition. She appeared to him for the first time on Tepeyac Hill early in the morning on December 9, 1531. During her appearance she requests that a "little house of God" be built for her. She wants a place where people can come to her and receive her love, compassion, help, and protection. She tells Juan Diego to go to the Bishop of Mexico and make her request known.
+</p>
+<p>
+Over the next four days, Our Lady appears to Juan Diego three more times. In the last apparition she tells Juan Diego to climb Tepeyac and pick the flowers he finds there to give as a sign to the bishop that building the "little house" is truly her request. Juan Diego goes to the top of the hill where he finds beautiful full-bloomed flowers growing out of season in the stony ground where usually only cactus and thorns can grow. He picks the flowers and puts them in his tilma to take to the bishop. When he opens the tilma for the bishop and lets the flowers fall to the floor, a large and very loving image of Mary, Mother of God, appears on the tilma. The tilma, which is made of cactus fiber, along with its original painted image still exist today. They can be seen in the shrine that was built as requested by the Blessed Virgin.
+</p>
+<p>
+This painting contains many of the traditional symbols of iconography that are present in the image on the tilma. Our Lady is surrounded by an aureole, or luminous area, with rays of sunlight extending out of it. This is symbolic of the unseen God. Under her feet is the crescent moon, a symbol of her perpetual virginity. Stars, representing heaven, cover her blue mantle. Blue is used to signify divine contemplation. Her rose-colored robe with the leaf and rosette design represents divine love in its color and paradise in the design. The position of the angel below Our Lady holding up the lower edge of her garments shows that Mary has been raised above the angels as the Mother of God.
+</p>
+<p>
+A few things are included in this painting that are not part of the original image. Mary has a crown on her head indicating her position as Queen of Heaven. In place of the clouds that are on the original image, Mary is surrounded by roses of many colors. These are the roses Juan Diego found on Tepeyac Hill. Below the angel are the words "No estoy yo aqui soy tu madre," which Mary spoke to Juan Diego. They mean "Am I not here, I who am your Mother?"
+</p>
+</div>
+
+
+
+<div class="iconContent" id="virginMtCarmel">
+<h3>Virgin of Mount Carmel</h3>
+<div class="imgR"><a href="http://assets.stanneaz.org/craft/general/icons/icon-VirginMtCarmel-1166x2100.jpg" class="MagicZoom" data-options="zoomMode: magnifier; zoomPosition: inner;"><img src="http://assets.stanneaz.org/craft/general/icons/icon-VirginMtCarmel350x630.jpg" alt="Virgin of Mt. Carmel" width="350" height="630" /></a></div>
+<p>
+This is a representation of Our Lady of Mount Carmel. The Blessed Virgin appeared to St. Simon Stock in 1251 in Cambridge, England. It is believed that as a young man Simon Stock went on a pilgrimage to the Holy Land where he joined a group of Carmelites. The Virgin was greatly revered by this order. Simon became a devout follower. Later he returned to England where he founded many Carmelite Communities. During Mary's appearance to Simon she presented him with a brown scapular. She said to him “Receive, my beloved son, this scapular of thy Order; it is the special sign of my favor, which I have obtained for thee and for thy children of Mount Carmel. He who dies clothed with this habit shall be preserved from eternal fire.” (A scapular consists of two pieces of cloth, one worn on the chest and the other on the back, which are connected by straps or strings passing over the shoulders. Scapular comes from the Latin word "scapula" meaning shoulder blade.)
+</p>
+<p>
+Mary is shown wearing a long brown scapular over a brown dress. Her cape is a lighter brown just like the Carmelite nuns wear. In her right hand she holds the scapular that she gave to Simon. She has a cloth behind it to show respect for it. The child Jesus is shown in a medallion on her breast. He has stars around him representing heaven. Rolled up in his left hand is the proclamation of the gospel. This is the proclamation of His message, His word, and His blessing. There are three stars on Mary: one on each shoulder and one on her head. They symbolize her virginity before, during, and after the birth of Jesus. The printing on either side of her head says "Our Lady of Mt. Carmel". Above the writing are the Greek letters which stand for the title "Meter Theou" which means "Mother of God".
+</p>
+<p>
+Mary is standing on a cloud floating over the water of the Mediterranean. Below Mary on the right side is Mt. Carmel. Mt. Carmel is above the modern city of Hypha which is on the Mediterranean. Mt. Carmel is where the prophet Elijah performed the miracle of setting fire to water soaked wood to prove the existence of God many centuries before Christ was born. The cloud above the mountain is the little cloud that Elijah saw coming that signaled the end of more than three years of drought. Mt. Carmel is also the home of the Carmelites. The black cave represents the darkness of mankind. The light in the cave symbolizes the Word of God given to us through Jesus which leads us out of darkness.
+</p>
+<p>
+This icon was painted by Mila Mina of San Diego, California.
+</p>
+</div>
+
+
+
+
+
+
+      </div> <!-- .container -->
+    </div> <!-- .page-content-container -->
+  </div> <!-- .sf-content -->

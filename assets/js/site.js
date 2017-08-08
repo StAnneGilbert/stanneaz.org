@@ -2162,13 +2162,13 @@ var TMF = (function ($, tm, window, document, undefined) {
     
     tm.Slider.init = function(){
       $(document).ready(function(){
-        $('.bxslider').bxSlider({
+        $('#slider1').bxSlider({
           video: true,
           useCSS: false,
           auto: true,
           pause: 8000
         });
-        $('#slider3').bxSlider({
+        $('#slider2').bxSlider({
           minSlides: 2,
           maxSlides: 7,
           slideWidth: 125,
