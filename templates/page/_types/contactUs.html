@@ -55,6 +55,7 @@
 
                   {% from _self import errorList %}
                   <form method="post" action="" accept-charset="UTF-8" class='general'>
+                    {{ getCsrfInput() }}
                     <input type="hidden" name="action" value="contactForm/sendMessage">
                     <input type='text' name='shivermetimbers' id='shivermetimbers' style='display:none;'/>
                     <input type='hidden' name='message[Subject]' value="General Contact" />
@@ -63,7 +64,7 @@
                       {% if entry.contactUsFormOptions|length %}
                         <div class="form-row">
                           <label class="select input-full-width">
-                            <select name="toEmail" id="toEmail">
+                            <select name="toEmail" id="toEmail" onchange="pageMover(this);">
                               <option value="{{'contact@stanneaz.org'|hash}}">{{ "Choose an option"|t }}...</option>
                               {% for option in entry.contactUsFormOptions %}
                                   <option value="{{option.optionValue|hash}}">{{ option.optionName }}</option>
@@ -165,3 +166,20 @@
       </div> <!-- .container -->
     </div> <!-- .page-content-container -->
   </div> <!-- .sf-content -->
+<script>
+function pageMover(obj){
+	var option_user_selection = obj.options[ obj.selectedIndex ].text;
+	var contactUrl = '';
+	switch(option_user_selection)
+	{
+		case "Choose an option...":
+			break;
+		case "Bulletin Content Submission":
+		    contactUrl="http://bulletin.stanneaz.org";
+			break;
+	}
+	if (contactUrl=='http://bulletin.stanneaz.org'){
+	    window.location.href='http://bulletin.stanneaz.org';
+	}
+}
+</script>
