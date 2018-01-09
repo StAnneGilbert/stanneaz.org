@@ -111,7 +111,7 @@
                   <strong>{{ "OFFICE"|t }}</strong> {{ siteWideContent.parishPhoneNumber }}<br>
                   <strong>{{ "FAX"|t }}</strong> {{ siteWideContent.parishFaxNumber }}
                 </p>
-
+                {% cache globally for 1 year %}
                 {% if siteWideSocialLinks.socialLinks|length %}
                   <ul class="social-circles">
                     {% for service in siteWideSocialLinks.socialLinks %}
@@ -124,6 +124,7 @@
                     {% endfor %}
                   </ul>
                 {% endif %}
+                {% endcache %}
 
                 <hr>
                 
@@ -142,6 +143,7 @@
                 <h6>{{ "Parish office hours"|t }}</h6>
                 {% if siteWideContent.parishOfficeHours|length %}
                   <p>
+                    {% cache globally for 1 month %}
                     {% for item in siteWideContent.parishOfficeHours[0].hoursTable %}
                       {% spaceless %}
                         <strong>{{ item.dayOfTheWeek }}</strong>
@@ -153,6 +155,7 @@
                         {% if item.exception == 1 %}<span class="muted">*</span> {% endif %} {% if not loop.last %}<br>{% endif %}
                       {% endspaceless %}
                     {% endfor %}
+                    {% endcache %}
                   </p>
                   {% if siteWideContent.parishOfficeHours[0].exceptionReference is not empty %}
                     <p class="muted">*{{ siteWideContent.parishOfficeHours[0].exceptionReference }}</p>

@@ -1,5 +1,7 @@
 <div class="page-content-container">
   <div class="container standard-container">
+  
+{% cache globally for 3 months %}
     {% set staff = craft.categories.group('staffGroup') %}
     {% for pos in staff %}
       <h3 class="bottom-border">{{ pos.title }}</h3>
@@ -42,6 +44,8 @@
       {% endfor %}
       </div> <!-- .staff-group -->
     {% endfor %}
+{% endcache %}
+
     </div> <!-- .container -->
   </div> <!-- .page-content-container -->
 </div> <!-- .sf-content -->
