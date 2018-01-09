@@ -10,7 +10,7 @@
       </div>
   </form>
 
-  {% cache globally for 2 days %}
+  {% cache globally for 2 weeks %}
   <ul class="main-menu">
     {% set pages = craft.entries.section('pages').level(1) %}
     {% nav page in pages %}

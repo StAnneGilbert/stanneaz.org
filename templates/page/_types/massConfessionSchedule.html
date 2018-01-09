@@ -1,7 +1,4 @@
 
-{%- set parent = craft.entries.section('pages').slug(craft.request.getSegment(1)).first() -%}
-{%- set children = entry.getDescendants(1) -%}
-
 <style>
 #confessionMsg p,#massMsg p,#sundayMassMsg p{margin:0;padding:0 0 20px}
 #confessionMsg,#massMsg,#sundayMassMsg,.cancelledItem{font-weight:bold;color:#a00}
@@ -9,18 +6,6 @@
 .massConfessionPage p{margin-bottom:10px}
 </style>
 
-{% macro recursiveChildren(page) %}
-  {% if page.hasDescendants and page.slug == craft.request.getSegment(page.level) %}
-    <ul>
-      {% for subpage in page.children %}
-          <li{% if subpage.slug == craft.request.getSegment(subpage.level) %} class="selected"{% endif %}>
-            {{ subpage.link }}
-            {{ _self.recursiveChildren(subpage) }}
-          </li>
-      {% endfor %}
-    </ul>
-  {% endif %}
-{% endmacro %}
   <!-- .sf-content for flex sticky footer -->
   <div class="sf-content nav-slide-element" data-swiftype-name="body" data-swiftype-type="text">
     <div class="page-photo-title" {% if entry.pageImage|length %}style=" background-image:url({{ entry.pageImage[0].url }})" {% endif %}>
@@ -51,6 +36,7 @@
 {{ entry.body }}
         
 <div id="sundayMassMsg">{{ sMsg }}</div>
+{%cache globally%}
 <p><strong>{{ "Saturday Vigil Mass"|t }}:</strong><br></p>
 <ul>
     {% if schedules.saturdayVigilMassTimes|length %}
@@ -69,10 +55,12 @@
         {% endfor %}
     {% endif %}   
 </ul>
+{% endcache %}
 
 {{ entry.bodyBetweenSundayAndWeekdayMass }}
 
 <div id="massMsg">{{ mMsg }}</div>
+{%cache globally%}
 <p><strong>{{ "Monday"|t }}:</strong></p>
 <ul>
     {% if schedules.mondayMassTimes|length %}
@@ -127,10 +115,12 @@
         {% endfor %}
     {% endif %}
 </ul>
+{% endcache %}
 
 {{ entry.bodyBetweenWeekdayMassAndConfessions }}
 
 <div id="confessionMsg">{{ cMsg }}</div>
+{%cache globally%}
 <ul>
     {% if schedules.confessionTimes|length %}
         {% for block in schedules.confessionTimes %}
@@ -139,9 +129,11 @@
       {% endfor %}
     {% endif %}
 </ul>
+{% endcache %}
 
 {{ entry.bodyBetweenConfessionsAndHolyHour }}
 
+{%cache globally%}
 <ul>
     {% if schedules.parishHolyHour|length %}
         {% for block in schedules.parishHolyHour %}
@@ -150,6 +142,7 @@
       {% endfor %}
     {% endif %}
 </ul>
+{% endcache %}
 
 {{ entry.bodyBelowEverything }}
 

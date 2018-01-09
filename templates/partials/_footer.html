@@ -1,11 +1,11 @@
 <!-- .sf-footer must contain @Pontifex and the traditional footer for the sticky footer layout -->
-{% cache globally for 1 day %}
 {% if craft.locale == "en_us" %}
   {% set tweets = craft.twitter.get('statuses/user_timeline',{'screen_name':'pontifex'},[],false, 1) %}
 {% elseif craft.locale == "es_us" %}
   {% set tweets = craft.twitter.get('statuses/user_timeline',{'screen_name':'pontifex_es'},[],false, 1) %}
 {% endif %}
 <div class="sf-footer nav-slide-element">
+{% cache globally for 1 day %}
   {% if tweets %}
     {% set user = tweets[0].user %}
     {% set url = 'https://twitter.com/' ~ user.screen_name ~ '/status/' ~ tweets[0].id %}
@@ -29,6 +29,8 @@
       </div>
     </div>
   {% endif %}
+{% endcache %}
+{% cache globally for 3 months %}
   <footer class="site-footer">
     <div class="container">
       <div class="copyright">
@@ -55,5 +57,5 @@
       <div class="site-by"></div>
     </div>
   </footer>
-</div> <!-- .sf-footer -->
 {% endcache %}
+</div> <!-- .sf-footer -->

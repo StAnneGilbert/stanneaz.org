@@ -105,6 +105,7 @@
       </div>
     </div>
     {% endif %}
+    {% cache globally for 1 year %}
     <div class="giant-block-links clearfix">
       {% if entry.quicklinks|length %}
         {% set qlinks = entry.quicklinks  %}
@@ -120,6 +121,7 @@
         {% endfor %}
       {% endif %}
     </div>
+    {% endcache %}
 
     <div class="page-content-container">
       <div class="container news-grid">
