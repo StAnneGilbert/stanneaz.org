@@ -143,51 +143,12 @@
         <a href="http://subsplash.com/stanne/app" target="_blank"><img src="http://assets.stanneaz.org/craft/general/assets/appIconStAnne2.jpg" alt="St. Anne App" width="60" height="60" /><span>St. Anne App</span></a></p>
         </div>
         
-        {% if craft.locale == 'es_us' %}
-            {% set cTitle = scheduleChanges.confessionAnnouncementTitleSpanish %}
-            {% set cMsg = scheduleChanges.confessionScheduleChangeMessageSpanish %}
-            {% set mTitle = scheduleChanges.massAnnouncementTitleSpanish %}
-            {% set mMsg = scheduleChanges.massScheduleChangeMessageSpanish %}
-            {% set msgUrl = 'http://stanneaz.org/es/about/times' %}
-        {% else %}
-            {% set cTitle = scheduleChanges.confessionAnnouncementTitleEnglish %}
-            {% set cMsg = scheduleChanges.confessionScheduleChangeEnglish %}
-            {% set mTitle = scheduleChanges.massAnnouncementTitleEnglish %}
-            {% set mMsg = scheduleChanges.massScheduleChangeEnglish %}
-            {% set msgUrl = 'http://stanneaz.org/about/times' %}
-        {% endif %}
-        
-        {% if (cTitle is not empty) %}
-            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                <h5><a href="{{msgUrl}}">{{ cTitle }}</a></h5>
-                <p class="excerpt">{{ cMsg|trimit(120) }} <a href="{{msgUrl}}">{{ "Read More"|t }}</a></p>
-            </div>       
-        {% endif %}
-        
-        {% if (mTitle is not empty) %}
-            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                <h5><a href="{{msgUrl}}">{{ mTitle }}</a></h5>
-                <p class="excerpt">{{ mMsg|trimit(120) }} <a href="{{msgUrl}}">{{ "Read More"|t }}</a></p>
-            </div>         
-        {% endif %}
-
-        
        {% set anFeedurl = entry.homeAnnouncementsFeedUrl %}
-       
-       {% if (cTitle is not empty) and (mTitle is not empty) %}
-           {% set anLimit = 2 %}
-           {% set loopNumber = 1 %}
-       {% elseif ((cTitle is not empty) and (mTitle is empty)) or ((cTitle is empty) and (mTitle is not empty))  %}
-           {% set anLimit = 3 %}
-           {% set loopNumber = 2 %}
-       {% else %}
-           {% set anLimit = 4 %}
-           {% set loopNumber = 3 %}
-       {% endif %}
+       {% set anLimit = 4 %}
+       {% set loopNumber = 3 %}
        
        {% set anOffset = 0 %}
        {% set anCache = "P1D" %}
-       
 
        {% set anItems = craft.feeds.getFeedItems(anFeedurl, anLimit, anOffset, anCache) %}
        {% for anItem in anItems %}
