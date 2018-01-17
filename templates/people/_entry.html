@@ -1,0 +1,70 @@
+{# Homepage Template #}
+{% extends "layouts/_layout" %}
+
+{% block pagetype %}
+{% endblock %}
+
+{% block content %}
+    <!-- .sf-content for flex sticky footer -->
+  <div class="sf-content nav-slide-element">
+
+
+    <div class="page-content-container">
+      <div class="container standard-container">
+
+{% cache globally for 3 months %}     
+
+    {% set staff = craft.categories.group('staffGroup') %}
+    {% for pos in staff %}
+      <h3 class="bottom-border">{{ pos.title }}</h3>
+      {% set people = craft.entries.section('people').relatedTo(pos).order('personLastName').find() %}
+      <div class="staff-group">
+      {% for person in people %}
+      
+          <a name="{{ person.slug }}"></a>
+          <div class="staff-member">
+            
+              {% if person.profileImage is not empty %}
+              <div class="col col-avatar">
+                <img src="{{ person.profileImage[0].getUrl('tf160') }}" alt="" class="avatar round-avatar" />
+                </div>
+              {% endif %}
+            
+            <div class="col col-name">
+              <h6>{{ person.title }}</h6>
+              <span class="job-title">{{ person.professionalTitle }}</span>
+            </div>
+            {% if person.phoneNumber is not empty %}
+              {% set link = person.phoneNumber %}
+              <div class="col col-phone">
+                <a href="tel:{{ person.phoneNumber.tel }}" class="btn btn-sm btn-light-blue"><i class="fa fa-phone"></i> {{ person.phoneNumber.tel }}</a>
+              </div>
+            {% endif %}
+            {% if person.emailAddress is not empty %}
+              {% set link = person.emailAddress %}
+              <div class="col col-email">
+                <a href="mailto:{{ link.email }}" class="btn btn-sm btn-light-blue"><i class="fa fa-envelope"></i> Email</a>
+              </div>
+            {% endif %}
+            
+          </div> <!-- .staff-member -->
+          {% if person.bio is not empty %}
+            <div class='staff-member'>
+              <div class='col col-name'>
+              {{ person.bio }}
+              </div>
+            </div>   
+          {% endif %}
+      {% endfor %}
+      </div> <!-- .staff-group -->
+    {% endfor %}
+    
+{% endcache %}
+      
+        
+        {{ entry.body }}
+
+      </div> <!-- .container -->
+    </div> <!-- .page-content-container -->
+  </div> <!-- .sf-content -->
+{% endblock %}
