@@ -42,7 +42,9 @@
         
 {{ entry.body }}
         
-<div id="sundayMassMsg">{{ sMsg }}</div>
+{% if sMsg|length %}
+    <div id="sundayMassMsg">{{ sMsg }}<br><br></div>
+{% endif %}
 {%cache globally%}
 <p><strong>{{ "Saturday Vigil Mass"|t }}:</strong><br></p>
 <ul>
@@ -66,7 +68,9 @@
 
 {{ entry.bodyBetweenSundayAndWeekdayMass }}
 
-<div id="massMsg">{{ mMsg }}</div>
+{% if mMsg|length %}
+    <div id="massMsg">{{ mMsg }}<br><br></div>
+{% endif %}
 {%cache globally%}
 <p><strong>{{ "Monday"|t }}:</strong></p>
 <ul>
@@ -126,7 +130,9 @@
 
 {{ entry.bodyBetweenWeekdayMassAndConfessions }}
 
-<div id="confessionMsg">{{ cMsg }}</div>
+{% if cMsg|length %}
+    <div id="confessionMsg">{{ cMsg }}<br><br></div>
+{% endif %}
 {%cache globally%}
 <ul>
     {% if schedules.confessionTimes|length %}
