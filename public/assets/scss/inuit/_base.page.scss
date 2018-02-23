@@ -31,10 +31,10 @@ html {
 
 // set grain background image on the body
 body {
-  background:url("http://assets.stanneaz.org/craft/general/assets/bg-grain.png");
+  background:url("http://stanneaz.org/img/general/assets/bg-grain.png");
 
   @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dppx) {
-    background:url("http://assets.stanneaz.org/craft/general/assets/bg-grain@2x.png");
+    background:url("http://stanneaz.org/img/general/assets/bg-grain@2x.png");
     background-size:30px 30px;
   }
 }
