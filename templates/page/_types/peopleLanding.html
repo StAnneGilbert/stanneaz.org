@@ -1,0 +1,123 @@
+<!-- .sf-content for flex sticky footer -->
+<div class="sf-content nav-slide-element" data-swiftype-name="body" data-swiftype-type="text">
+    <div class="page-photo-title" {% if entry.pageImage|length %}style=" background-image:url({{ entry.pageImage[0].url }})" {% endif %}>
+        <div class="overlay">
+            <div class="container">
+                <h1 class="caps-header">{{ entry.heading }}</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-content-container">
+  <div class="container standard-container">
+  
+  {{ entry.body }}
+  
+  <!-- Favorite themes:  excite-bike, humanity, pepper-grinder, cupertino -->
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/cupertino/jquery-ui.css">
+        <script src="//code.jquery.com/jquery-2.2.3.min.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+        <style>
+    .ui-widget{font-family: "Open Sans", "Helvetica", "Arial", sans-serif;font-size: 100%;}
+    .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
+        color: #4A4A4A;
+		font-family: "Open Sans", "Helvetica", "Arial", sans-serif;
+		font-size: 16px;
+		line-height: 22px;
+		margin-top:5px;
+		padding: 8px 8px;
+		outline: none;
+		font-weight: 200;
+		resize: none;
+    }
+    .ui-widget-content{
+      		 background:#ffffff !important;
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+    border-radius: 2px;
+    padding: 28px 20px
+    }
+    .ui-widget-content a{color:#6aa29d;}
+    .ui-widget-content a:hover{text-decoration:underline;}
+    .ui-widget-content a.btn:hover{text-decoration:none;}
+    .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited{color:#005F72}
+    .ui-state-hover a:hover, .ui-state-hover a:link, .ui-state-hover a:visited, .ui-state-focus a, .ui-state-focus a:hover, .ui-state-focus a:link, .ui-state-focus a:visited{
+    color:#895022
+}
+.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited{color:#ffffff}
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active{
+    border: 1px solid #99BFBC;
+    background: #99BFBC;
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus{
+    border: 1px solid #99BFBC;
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25)}
+}
+@media only screen and (max-width: 768px) {
+  .ui-accordion .ui-accordion-content {padding:1em 25px}
+}
+@media screen and (max-width: 600px) { 
+    .ui-accordion .ui-accordion-content {padding:1em 20px}
+    .ui-accordion .ui-accordion-header{padding-right:0} 
+}
+    </style>
+  
+{% cache globally for 3 months %}
+    {% set people = craft.entries.section('people').relatedTo(pos).order('title').find() %}
+      <div class="staff-group">
+      {% for person in people %}
+      
+          <a name="{{ person.slug }}"></a>
+          <div class="staff-member">
+              <div class="col col-avatar">
+                {% if person.profileImage is not empty %}
+                  <img src="{{ person.profileImage[0].getUrl('tf160') }}" alt="" class="avatar round-avatar" />
+                {% else %}
+                  <img src="http://stanneaz.org/img/people/_tf160/1524/logoBlueNoWords.jpg" width="160" height="160" alt="" class="avatar round-avatar" />
+                {% endif %}
+              </div>
+            
+            <div class="col col-name">
+              <h6>{{ person.title }}</h6>
+              <span class="job-title">{{ person.professionalTitle }}</span>
+            </div>
+            {% if person.phoneNumber is not empty %}
+              <div class="col col-phone">
+                <a href="{{ person.phoneNumber.url }}" class="btn btn-sm btn-light-blue"><i class="fa fa-phone"></i> {{ person.phoneNumber.text }}</a>
+              </div>
+            {% endif %}
+            {% if person.emailAddress is not empty %}
+              <div class="col col-email">
+                <a href="{{ person.emailAddress.url }}" class="btn btn-sm btn-light-blue"><i class="fa fa-envelope"></i> Email</a>
+              </div>
+            {% endif %}
+            
+          </div> <!-- .staff-member -->
+          {% if person.bio is not empty %}
+            <div class='staff-member'>
+              <div class='col col-name'>
+              {{ person.bio }}
+              </div>
+            </div>   
+          {% endif %}
+      {% endfor %}
+      </div> <!-- .staff-group -->
+{% endcache %}
+
+    </div> <!-- .container -->
+  </div> <!-- .page-content-container -->
+</div> <!-- .sf-content -->
+
+<script>
+$("#accordion").accordion({ header: "h1", collapsible: true, active: false, heightStyle: "content" });
+$("#accordionOpen").accordion({ header: "h1", collapsible: false, active: false, heightStyle: "content" });
+$("#accordion2").accordion({ header: "h3", collapsible: true, active: false, heightStyle: "content" });
+$("#accordion2Open").accordion({ header: "h3", collapsible: false, active: false, heightStyle: "content" });
+$("#accordion3").accordion({ header: "h3", collapsible: true, active: false, heightStyle: "content" });
+$("#accordion3Open").accordion({ header: "h3", collapsible: false, active: false, heightStyle: "content" });
+$("#accordion4").accordion({ header: "h3", collapsible: true, active: false, heightStyle: "content" });
+$("#accordion4Open").accordion({ header: "h3", collapsible: false, active: false, heightStyle: "content" });
+</script>
