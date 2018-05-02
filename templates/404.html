@@ -16,11 +16,24 @@
  # http://buildwithcraft.com/docs/routing
  #}
 
-{% extends "_layout" %}
+{% extends "layouts/_layout" %}
 {% set title = "404" %}
 
 {% block content %}
-	<h1>Page not found</h1>
+<div class="page-content-container">
+    <div class="container standard-container">
+	    <h1>404: Page not found</h1>
 
-	<p>What’s worse, a hilarious 404 page can’t be found either.</p>
+	    <h3>Ahhhhhhhhhhhhhh!  This page doesn't exist.</h3>
+	    
+	    <p>Not to worry.  You can either head back to <a href="/">our homepage</a>, or sit there and listen to a goat scream like a human.</p>
+	    
+	    <p>
+	    <iframe width="560" height="315" src="https://www.youtube.com/embed/nlYlNF30bVg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+	    </p>
+	    
+	    <p><br></p>
+	    <p><em>This 404 page idea is from <a href="https://bluegg.co.uk/404" target="_blank">Bluegg</a>.</em></p>
+	</div>
+</div>
 {% endblock %}
