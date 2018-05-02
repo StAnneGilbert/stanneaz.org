@@ -93,9 +93,7 @@
                     {% if feeds.eventsFeedUrlSpanish is not empty %}
                     <a href="{{ feeds.eventsFeedUrlSpanish.url }}" class="btn btn-light-brown-border" target="_blank"><i class="fa fa-rss"></i> {{"Events RSS"|t }}</a><br/>
                     {% endif %}
-                    {% if feeds.parishCalendarFeedUrlSpanish is not empty %}
-                    <a href="{{ feeds.parishCalendarFeedUrlSpanish.url }}" class="btn btn-light-brown-border" target="_blank"><i class="fa fa-rss"></i> {{"Parish Calendar RSS"|t }}</a><br/>
-                    {% endif %}
+                    <a href="http://feeds.feedburner.com/CalendarioDeStaAna" class="btn btn-light-brown-border" target="_blank"><i class="fa fa-rss"></i> {{"Parish Calendar RSS"|t }}</a><br/>
                     {% if feeds.podcastFeedUrlSpanish is not empty %}
                     <a href="{{ feeds.podcastFeedUrlSpanish.url }}" class="btn btn-light-brown-border" target="_blank"><i class="fa fa-rss"></i> {{ "Podcasts RSS"|t }}</a>
                     {% endif %}
@@ -108,9 +106,7 @@
                     {% if feeds.eventsFeedUrl is not empty %}
                     <a href="{{ feeds.eventsFeedUrl.url }}" class="btn btn-light-brown-border"><i class="fa fa-rss" target="_blank"></i> {{"Events RSS"|t }}</a><br/>
                     {% endif %}
-                    {% if feeds.parishCalendarFeedUrl is not empty %}
-                    <a href="{{ feeds.parishCalendarFeedUrl.url }}" class="btn btn-light-brown-border" target="_blank"><i class="fa fa-rss"></i> {{"Parish Calendar RSS"|t }}</a><br/>
-                    {% endif %}
+                    <a href="http://feeds.feedburner.com/StAnneRomanCatholicParishCalendar" class="btn btn-light-brown-border" target="_blank"><i class="fa fa-rss"></i> {{"Parish Calendar RSS"|t }}</a><br/>
                     {% if feeds.podcastRss is not empty %}
                     <a href="{{ feeds.podcastRss.url }}" class="btn btn-light-brown-border" target="_blank"><i class="fa fa-rss"></i> {{ "Podcasts RSS"|t }}</a>
                     {% endif %}
