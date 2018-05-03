@@ -14,12 +14,9 @@
       </div>
       <div class="col-lg-7 col-md-7 col-sm-7 action-links" style="text-align:right">
         {% if craft.locale == "en_us" %}
-          {% if feeds.eventsFeedUrl is not empty %}
-            <a style="display:inline-block" href="{{ feeds.eventsFeedUrl.url }}" target="_blank"><i class="fa fa-rss"></i> {{ "Events RSS"|t }}</a>
-          {% endif %}
+            <a style="display:inline-block" href="http://feeds.feedburner.com/StAnneEvents" target="_blank"><i class="fa fa-rss"></i> {{ "Events RSS"|t }}</a>
         {% elseif craft.locale == "es_us" %}
-          {% if feeds.eventsFeedUrlSpanish is not empty %}
-            <a style="display:inline-block" href="{{ feeds.eventsFeedUrlSpanish.url }}" target="_blank"><i class="fa fa-rss"></i> {{ "Eventos RSS"|t }}</a>
+            <a style="display:inline-block" href="http://feeds.feedburner.com/EventosStaAna" target="_blank"><i class="fa fa-rss"></i> {{ "Eventos RSS"|t }}</a>
           {% endif %}
         {% endif %}
               
