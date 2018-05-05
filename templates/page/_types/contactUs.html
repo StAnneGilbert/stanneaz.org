@@ -117,8 +117,8 @@
                     {% for service in siteWideSocialLinks.socialLinks %}
                       {% set link = service.serviceUrl %}
                         <li>
-                          <a href="{{ link.url }}" class="bg-{{ service.service | slugify }}">
-                            <i class='fa fa-{{ service.service | slugify }}'></i>
+                          <a href="{{ link.url }}" class="bg-{{ service.service }}">
+                            <i class='fa fa-{{ service.service }}'></i>
                           </a>
                         </li>
                     {% endfor %}
