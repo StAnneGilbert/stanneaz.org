@@ -21,44 +21,40 @@
     <div class="page-content-container">
       <div class="container standard-container">
         
-        {% if craft.locale == 'es_us' %}
-            {% set cMsg = scheduleChanges.confessionScheduleChangeMessageSpanish %}
-            {% set mMsg = scheduleChanges.massScheduleChangeMessageSpanish %}
-            {% set sMsg = scheduleChanges.sundayMassScheduleChangeMessageSpanish %}
+{% paginate craft.entries.section('times').order('title ASC').limit(2) as entries %} 
+        
+{% for post in entries %}
+
+
+       {% if craft.locale == 'es_us' %}
             {% set cancelledOn = "Canceladas el " %}
         {% else %}
-            {% set cMsg = scheduleChanges.confessionScheduleChangeEnglish %}
-            {% set mMsg = scheduleChanges.massScheduleChangeEnglish %}
-            {% set sMsg = scheduleChanges.sundayMassScheduleChangeMessageEnglish %}
             {% set cancelledOn = "Cancelled on " %}
         {% endif %}
         
 <div class="massConfessionPage">
     <div id="topMessageArea">
-{% if scheduleChanges.topOfPageMessage | length %}
+{% if post.topOfPageMessage | length %}
         <p class="cancelledItem">{{ "There are changes to the Mass and Confession schedule.  Scroll down to see the changes."|t }}</p>
 {% endif %}
     </div>     
         
-{{ entry.body }}
+{{ post.body }}
         
-{% if sMsg|length %}
-    <div id="sundayMassMsg">{{ sMsg }}<br><br></div>
-{% endif %}
 {%cache globally%}
-{% if schedules.saturdayVigilMassTimes|length %}
+{% if post.saturdayVigilMassTimes|length %}
     <p><strong>{{ "Saturday Vigil Mass"|t }}:</strong><br></p>
     <ul>
-        {% for block in schedules.saturdayVigilMassTimes %}
+        {% for block in post.saturdayVigilMassTimes %}
             {% set cDate = block.dateCancelledOrChanged %}
             <li>{{ block.hourName }}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{cancelledOn}} {% if craft.locale == 'es_us' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span><script>topMessageDateActive=true</script>{% endif %}{% endif %}</li>
         {% endfor %}
     </ul>
 {% endif %}
-{% if schedules.sundayMassTimes|length %}
+{% if post.sundayMassTimes|length %}
     <p><strong>{{ "Sunday Mass"|t }}:</strong></p>
     <ul>
-        {% for block in schedules.sundayMassTimes %}
+        {% for block in post.sundayMassTimes %}
             {% set cDate = block.dateCancelledOrChanged %}
             <li>{{ block.hourName }}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{cancelledOn}} {% if craft.locale == 'es_us' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span><script>topMessageDateActive=true</script>{% endif %}{% endif %}</li>
         {% endfor %}   
@@ -66,62 +62,58 @@
 {% endif %}
 {% endcache %}
 
-{{ entry.bodyBetweenSundayAndWeekdayMass }}
-
-{% if mMsg|length %}
-    <div id="massMsg">{{ mMsg }}<br><br></div>
-{% endif %}
+{{ post.bodyBetweenSundayAndWeekdayMass }}
 
 {%cache globally%}
-{% if schedules.mondayMassTimes|length %}
+{% if post.mondayMassTimes|length %}
     <p><strong>{{ "Monday"|t }}:</strong></p>
     <ul>
-        {% for block in schedules.mondayMassTimes %}
+        {% for block in post.mondayMassTimes %}
             {% set cDate = block.dateCancelledOrChanged %}
             <li>{{ block.hourName }}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{cancelledOn}} {% if craft.locale == 'es_us' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})<script>topMessageDateActive=true</script></span>{% endif %}{% endif %}</li>
         {% endfor %} 
     </ul>
 {% endif %}
-{% if schedules.tuesdayMassTimes|length %}
+{% if post.tuesdayMassTimes|length %}
     <p><strong>{{ "Tuesday"|t }}:</strong></p>
     <ul>
-        {% for block in schedules.tuesdayMassTimes %}
+        {% for block in post.tuesdayMassTimes %}
             {% set cDate = block.dateCancelledOrChanged %}
             <li>{{ block.hourName }}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{cancelledOn}} {% if craft.locale == 'es_us' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span><script>topMessageDateActive=true</script>{% endif %}{% endif %}</li>
         {% endfor %}
     </ul>
 {% endif %}
-{% if schedules.wednesdayMassTimes|length %} 
+{% if post.wednesdayMassTimes|length %} 
     <p><strong>{{ "Wednesday"|t }}:</strong></p>
     <ul>
-        {% for block in schedules.wednesdayMassTimes %}
+        {% for block in post.wednesdayMassTimes %}
             {% set cDate = block.dateCancelledOrChanged %}
             <li>{{ block.hourName }}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{cancelledOn}} {% if craft.locale == 'es_us' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span><script>topMessageDateActive=true</script>{% endif %}{% endif %}</li>
         {% endfor %} 
     </ul>
 {% endif %}
-{% if schedules.thursdayMassTimes|length %}
+{% if post.thursdayMassTimes|length %}
     <p><strong>{{ "Thursday"|t }}:</strong></p>
     <ul>
-        {% for block in schedules.thursdayMassTimes %}
+        {% for block in post.thursdayMassTimes %}
             {% set cDate = block.dateCancelledOrChanged %}
             <li>{{ block.hourName }}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{cancelledOn}} {% if craft.locale == 'es_us' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span><script>topMessageDateActive=true</script>{% endif %}{% endif %}</li>
         {% endfor %} 
     </ul>
 {% endif %}
-{% if schedules.fridayMassTimes|length %}
+{% if post.fridayMassTimes|length %}
     <p><strong>{{ "Friday"|t }}:</strong>&nbsp;<br></p>
     <ul>
-        {% for block in schedules.fridayMassTimes %}
+        {% for block in post.fridayMassTimes %}
             {% set cDate = block.dateCancelledOrChanged %}
             <li>{{ block.hourName }}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{cancelledOn}} {% if craft.locale == 'es_us' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span><script>topMessageDateActive=true</script>{% endif %}{% endif %}</li>
         {% endfor %}
     </ul>
 {% endif %}
-{% if schedules.saturdayMassTimes|length %}
+{% if post.saturdayMassTimes|length %}
     <p><strong>{{ "Saturday"|t }}:</strong>&nbsp;</p>
     <ul>
-        {% for block in schedules.saturdayMassTimes %}
+        {% for block in post.saturdayMassTimes %}
             {% set cDate = block.dateCancelledOrChanged %}
             <li>{{ block.hourName }}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{cancelledOn}} {% if craft.locale == 'es_us' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span><script>topMessageDateActive=true</script>{% endif %}{% endif %}</li>
         {% endfor %}
@@ -129,15 +121,15 @@
 {% endif %}
 {% endcache %}
 
-{{ entry.bodyBetweenWeekdayMassAndConfessions }}
+{{ post.bodyBetweenWeekdayMassAndConfessions }}
 
 {% if cMsg|length %}
     <div id="confessionMsg">{{ cMsg }}<br><br></div>
 {% endif %}
 {%cache globally%}
-{% if schedules.confessionTimes|length %}
+{% if post.confessionTimes|length %}
     <ul>
-        {% for block in schedules.confessionTimes %}
+        {% for block in post.confessionTimes %}
             {% set cDate = block.dateCancelledOrChanged %}
             <li>{{ block.dayAndTimes }}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{cancelledOn}} {% if craft.locale == 'es_us' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span><script>topMessageDateActive=true</script>{% endif %}{% endif %}</li>
         {% endfor %}
@@ -145,12 +137,12 @@
 {% endif %}
 {% endcache %}
 
-{{ entry.bodyBetweenConfessionsAndHolyHour }}
+{{ post.bodyBetweenConfessionsAndHolyHour }}
 
 {%cache globally%}
-  {% if schedules.parishHolyHour|length %}
+  {% if post.parishHolyHour|length %}
     <ul>
-        {% for block in schedules.parishHolyHour %}
+        {% for block in post.parishHolyHour %}
             {% set cDate = block.dateCancelledOrChanged %}
             <li>{{ block.hourName }}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{cancelledOn}} {% if craft.locale == 'es_us' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span><script>topMessageDateActive=true</script>{% endif %}{% endif %}</li>
         {% endfor %}
@@ -158,16 +150,16 @@
   {% endif %}
 {% endcache %}
 
-{{ entry.bodyBelowEverything }}
+{{ post.bodyBelowEverything }}
 
 
 </div>
 
 
 
-
-
-
+{% endfor %}
+        
+        
       </div> <!-- .container -->
     </div> <!-- .page-content-container -->
   </div> <!-- .sf-content -->
