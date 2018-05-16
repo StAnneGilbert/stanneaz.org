@@ -123,9 +123,6 @@
 
 {{ post.bodyBetweenWeekdayMassAndConfessions }}
 
-{% if cMsg|length %}
-    <div id="confessionMsg">{{ cMsg }}<br><br></div>
-{% endif %}
 {%cache globally%}
 {% if post.confessionTimes|length %}
     <ul>
