@@ -23,13 +23,8 @@
               <span class="job-title">{{ person.professionalTitle }}</span>
             </div>
             {% if person.phoneNumber is not empty %}
-              <div class="col col-phone">
-                <a href="{{ person.phoneNumber.url }}" class="btn btn-sm btn-light-blue"><i class="fa fa-phone"></i> {{ person.phoneNumber.text }}</a>
-              </div>
-            {% endif %}
-            {% if person.emailAddress is not empty %}
               <div class="col col-email">
-                <a href="{{ person.emailAddress.url }}" class="btn btn-sm btn-light-blue"><i class="fa fa-envelope"></i> Email</a>
+                <a href="{{ person.phoneNumber.url }}" class="btn btn-sm btn-light-blue"><i class="fa fa-phone"></i> {{ person.phoneNumber.text }}</a>
               </div>
             {% endif %}
             

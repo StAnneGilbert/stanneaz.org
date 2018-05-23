@@ -51,6 +51,7 @@
                 </div>
                 <div class='action-icon'>
                   <form method="post" action="" accept-charset="UTF-8">
+                      <input type="hidden" name="{{ craft.config.csrfTokenName }}" value="{{ craft.request.csrfToken }}">
                       <input type="hidden" name="action" value="downloadassets/generate/downloadAsset">
                       <input type='hidden' name='id' value='{{ entry.audio[0].id }}'/>
                       <button type='submit' class='action'><i class='fa fa-download'></i></button>

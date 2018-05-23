@@ -1,6 +1,6 @@
 {% paginate craft.entries.section('media').order('mediaDate DESC').limit(10) as entries %}
-{% cache globally for 1 day %}
   <div class="content-summary-list">
+{% cache globally for 3 days %}
     {% for post in entries %}
       <div class="content-summary-block">
         {% if post.speaker|length %}
@@ -26,8 +26,8 @@
         </div>
       </div> <!-- .content-summary-block -->
     {% endfor %}
+{% endcache %}
 
   </div> <!-- .search-results-list -->
-{% endcache %}
 
   {% include "partials/_pagination" %}
