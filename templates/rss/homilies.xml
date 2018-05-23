@@ -19,7 +19,7 @@
         <title>{{ siteName }}</title>
         <link>{{ siteUrl }}</link>
       </image>
-      <itunes:image href="{{ feeds.podcastImage[0].url }}" />
+      <itunes:image href="http://stanneaz.org/img/general/video-placeholder-homily.jpg" />
     {% endif %}
     <itunes:summary><![CDATA[{{ siteWideContent.siteDescription }}]]></itunes:summary>
     <itunes:keywords>St. Anne,podcast,homilies,catholic</itunes:keywords>

@@ -8,13 +8,12 @@
         <language>en-us</language>
         <pubDate>{{ now.rss }}</pubDate>
         <lastBuildDate>{{ now.rss }}</lastBuildDate>
-        {% if feeds.podcastImage|length %}
-          <image>
-            <url>{{ feeds.podcastImage[0].getUrl('tf240') }}</url>
+
+        <image>
+            <url>http://stanneaz.org/img/general/_tf240/video-placeholder-homily.jpg</url>
             <title>{{ siteName }}</title>
             <link>{{ siteUrl }}</link>
-          </image>
-        {% endif %}
+        </image>
         {% for entry in craft.entries.section('newsUpdates').limit('80').find() %}
             <item>
                 <title>{{ entry.title }}</title>
