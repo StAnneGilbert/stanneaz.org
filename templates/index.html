@@ -105,9 +105,9 @@
       </div>
     </div>
     {% endif %}
-    {% cache globally for 1 year %}
     <div class="giant-block-links clearfix">
       {% if entry.quicklinks|length %}
+        {% cache globally for 1 year %}
         {% set qlinks = entry.quicklinks  %}
         {% for item in qlinks %}
           {% set link = item.qlink %}
@@ -119,9 +119,9 @@
             <a href="{{ link.url }}" class="bg-dark-blue"><i class="fa fa-envelope"></i> {{ link.text }}</a>
           {% endif %}
         {% endfor %}
+        {% endcache %}
       {% endif %}
     </div>
-    {% endcache %}
 
     <div class="page-content-container">
       <div class="container news-grid">
