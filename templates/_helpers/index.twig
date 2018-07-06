@@ -29,6 +29,7 @@
     {% set last_month = 12 %}
 
     <option value=''>{{ "Month"|t }}</option>
+    {% cache %}
     {% for yr in range(now|date('Y'),year) %}
       <optgroup label="--------------------">
       
@@ -47,6 +48,7 @@
         {% endfor %}
       </optgroup>
     {% endfor %}
+    {% endcache %}
 {%- endmacro -%}
 
 
