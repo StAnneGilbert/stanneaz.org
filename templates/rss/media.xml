@@ -5,7 +5,7 @@
     xmlns:atom="http://www.w3.org/2005/Atom" 
     version="2.0">
 <channel>
-    <atom:link href="http://stanneaz.org/rss/messages.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://stanneaz.org/rss/messages.xml" rel="self" type="application/rss+xml" />
     <title>St. Anne's Catholic Media Podcast</title>
     <link><![CDATA[{{ siteUrl }}]]></link>
     <copyright><![CDATA[© 2014]]></copyright>
@@ -19,7 +19,7 @@
         <title>{{ siteName }}</title>
         <link>{{ siteUrl }}</link>
       </image>
-      <itunes:image href="http://stanneaz.org/img/general/video-placeholder-homily.jpg" />
+      <itunes:image href="https://stanneaz.org/img/general/video-placeholder-homily.jpg" />
     {% endif %}
     <itunes:summary><![CDATA[{{ siteWideContent.siteDescription }}]]></itunes:summary>
     <itunes:keywords>St. Anne,podcast,media,catholic</itunes:keywords>
