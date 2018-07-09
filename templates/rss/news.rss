@@ -8,9 +8,7 @@
         <language>en-us</language>
         <pubDate>{{ now.rss }}</pubDate>
         <lastBuildDate>{{ now.rss }}</lastBuildDate>
-
-        <image>
-            <url>http://stanneaz.org/img/general/_tf240/video-placeholder-homily.jpg</url>
+        <image>            <url>https://stanneaz.org/img/general/_tf240/video-placeholder-homily.jpg</url>
             <title>{{ siteName }}</title>
             <link>{{ siteUrl }}</link>
         </image>
