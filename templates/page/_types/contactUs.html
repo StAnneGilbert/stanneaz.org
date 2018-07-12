@@ -1,6 +1,9 @@
   {%-set parent = craft.entries.section('pages').slug(craft.request.getSegment(2)).first()-%}
 {%- set children = parent.getDescendants(2)-%}
   <!-- .sf-content for flex sticky footer -->
+  <style>
+    #parishioneraddress{display:none}
+  </style>
   <div class="sf-content nav-slide-element" data-swiftype-name="body" data-swiftype-type="text">
     <div class="page-photo-title" {% if entry.pageImage|length %}style=" background-image:url({{ entry.pageImage[0].url }})" {% endif %}>
       <div class="overlay">
@@ -54,10 +57,10 @@
                     {% endmacro %}
 
                   {% from _self import errorList %}
-                  <form method="post" action="" accept-charset="UTF-8" class='general'>
+                  <form method="post" action="" accept-charset="UTF-8">
                     {{ getCsrfInput() }}
                     <input type="hidden" name="action" value="contactForm/sendMessage">
-                    <input type='text' name='shivermetimbers' id='shivermetimbers' style='display:none;'/>
+                    <input type="hidden" name="redirect" value="contact-thankyou">
                     <input type='hidden' name='message[Subject]' value="General Contact" />
                     <div class="form-group">
                       <h5>{{ "How can we help you"|t }}?</h5>
@@ -87,6 +90,8 @@
                         </div>
                         <span class="field-error">{% if message is defined %}{{ errorList(message.getErrors('fromName')) }}{% endif %}</span>
                       </div> <!-- .form-row -->
+                      
+                      <input type="text" name="parishioneraddress" id="parishioneraddress"/>
 
                       <div class="form-row {% if message is defined %} form-error {% endif %}">
                         <input type="email" name="fromEmail" id="" class="input-full-width" value="{% if message is defined %}{{ message.fromEmail }}{% endif %}" placeholder="{{ "Email"|t }} *" required>
@@ -94,6 +99,10 @@
                       </div>
                       <div class="form-row">
                         <input type="text" name="message[Phone]" id="message[Phone]" class="input-full-width" placeholder="{{ "Phone Number"|t }}">
+                      </div>
+                      
+                      <div class="form-row">
+                          {{craft.recaptcha.render()}}
                       </div>
 
                     </div> <!-- .form-group -->

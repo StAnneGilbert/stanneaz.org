@@ -44,7 +44,7 @@ module.exports = function(grunt) {
     // open the project's URL in the browser when grunt see is run
     // open: {
     //   all: {
-    //     path: 'http://stanneaz.org.216-70-70-10.tipmedev.com/'
+    //     path: 'https://stanneaz.org/'
     //     //path: 'http://<%= express.all.options.ip %>:<%= express.all.options.port %>'
     //   }
     // },
