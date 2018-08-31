@@ -1,0 +1,70 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Send would-be 404 requests to Craft
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} !^/(favicon\.ico|apple-touch-icon.*\.png)$ [NC]
+    RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+    RewriteCond %{REQUEST_URI} !^/\.well-known/acme-challenge/[0-9a-zA-Z_-]+$
+    RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
+    RewriteRule (.+) index.php?p=$1 [QSA,L]
+  
+    RewriteCond %{HTTPS} off
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/acme-challenge/[0-9a-zA-Z_-]+$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
+    RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+php_value memory_limit 256M
+php_value upload_max_filesize 40M
+php_value post_max_size 41M
+
+## EXPIRES CACHING ##
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresByType image/jpg "access 1 year"
+ExpiresByType image/jpeg "access 1 year"
+ExpiresByType image/gif "access 1 year"
+ExpiresByType image/png "access 1 year"
+ExpiresByType text/css "access 1 month"
+ExpiresByType text/html "access 1 month"
+ExpiresByType application/pdf "access 1 month"
+ExpiresByType text/javascript "access 1 month"
+ExpiresByType text/x-javascript "access 1 month"
+ExpiresByType application/x-shockwave-flash "access 1 month"
+ExpiresByType image/x-icon "access 1 year"
+ExpiresDefault "access 1 month"
+</IfModule>
+## EXPIRES CACHING ##
+
+AddType image/svg+xml svg svgz
+
+<IfModule mod_deflate.c>
+   AddOutputFilterByType DEFLATE application/atom+xml \
+                                application/javascript \
+                                application/json \
+                                application/ld+json \
+                                application/rss+xml \
+                                application/rdf+xml \
+                                application/vnd.ms-fontobject \
+                                application/x-font-ttf \
+                            	application/x-web-app-manifest+json \
+                                application/xhtml+xml \
+                                application/atom+xml .atom \
+                                application/xml \
+                                font/opentype \
+                                image/svg+xml \
+                                image/x-icon \
+                                text/css \
+                                text/html \
+                                text/plain \
+                                text/x-component \
+                                text/xml
+</IfModule>
+
+Redirect /en/ https://stanneaz.org
+Redirect /videoLoader http://98.174.242.120/axis-cgi/mjpg/video.cgi?camera=1&timestamp=1445451619661
+Redirect /stewardship/online-giving/how-to https://stanneaz.org/stewardship/online-giving/how-to-donate
+Redirect /stewardship/online-giving/non-pa https://www.eservicepayments.com/cgi-bin/Vanco_ver3.vps?appver3=FSNuCL_81waXlc5jGfW5IaG7emqJ1r1upKBufNP5BJn5jiCOq4HnROUp9FbE4D0cqZO3bV88VWLOs7M-lDfhABUIu6-lZTFXM0-L-8OI5dbXELyj1dS1gyFR0Af9FD-12kmtVd-6TPMMj5YRE36XBBo4d58V73ALdcwV_JEx-KBWxdIMMUV12ao2JR1xJ1ISiwIJp4msj6HASByC3ORt3A==&ver=3
