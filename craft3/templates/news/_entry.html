@@ -33,7 +33,7 @@
 
                   <p class="published">{{ "Published"|t }} {{ entry.postDate|date('F d, Y') }}
                   {% set topics = entry.newsTopics %}
-                  {% for topic in topics %}
+                  {% for topic in topics.all() %}
                       {% if loop.first %},{% endif %}
                       <a href='#topic:{{ topic.id }}'>{{ topic.title }}</a>{% if not loop.last %},{% endif %}
                   {% endfor %}</p>
@@ -72,7 +72,7 @@
                 {% if siteWideSocialLinks.socialLinks|length %}
                   <h6>{{ "Connect with us"|t }}</h6>
                   <ul class="social-circles">
-                    {% for service in siteWideSocialLinks.socialLinks %}
+                    {% for service in siteWideSocialLinks.socialLinks.all() %}
                       {% set link = service.serviceUrl %}
                         <li>
                           <a href="{{ link.url }}" class="bg-{{ service.service }}">
@@ -85,7 +85,7 @@
 
                 <h6>{{ "Subscribe"|t }}</h6>
                 <p>{{ "Get the latest news and updates from St. Anne’s in your RSS feed or email inbox"|t }}!</p>
-                {% if craft.locale == 'es_us' %}
+                {% if craft.app.language == 'es-US' %}
                 
                     <a href="http://feeds.feedburner.com/AnunciosParaStaAna" class="btn btn-light-brown-border" target="_blank"><i class="fa fa-rss"></i> {{"Announcements RSS"|t }}</a><br/>
                     <a href="http://feeds.feedburner.com/EventosStaAna" class="btn btn-light-brown-border" target="_blank"><i class="fa fa-rss"></i> {{"Events RSS"|t }}</a><br/>

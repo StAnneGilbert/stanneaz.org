@@ -11,8 +11,8 @@
     <copyright><![CDATA[© 2014]]></copyright>
     <description><![CDATA[{{ siteWideContent.siteDescription }}]]></description>
     <language>en-us</language>
-    <pubDate>{{ now.rss }}</pubDate>
-    <lastBuildDate>{{ now.rss }}</lastBuildDate>
+    <pubDate>{{ now|rss }}</pubDate>
+    <lastBuildDate>{{ now|rss }}</lastBuildDate>
     {% if fallbacks.fallbackSermonImage|length %}
       <image>
         <url>{{ fallbacks.fallbackSermonImage[0].url }}</url>
@@ -34,13 +34,13 @@
     <itunes:category text="Religion &amp; Spirituality">
         <itunes:category text="Christianity"/>
     </itunes:category>
-    {% for entry in craft.entries.section('homilies').limit('50').find() %}
+    {% for entry in craft.entries.section('homilies').limit('50').all() %}
         {% if entry.audio|length %}
         {% set audio = entry.audio[0].url %}
         <item>
             <title>{{ entry.title }}</title>
             <link>{{ entry.url }}</link>
-            <pubDate>{{ entry.postDate.rss }}</pubDate>
+            <pubDate>{{ entry.postDate|rss }}</pubDate>
         {% if entry.speaker|length %}
             <itunes:author>{{ entry.speaker[0].title }}</itunes:author>
         {% endif %}
