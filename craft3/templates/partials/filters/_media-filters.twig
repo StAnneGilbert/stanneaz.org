@@ -1,33 +1,35 @@
 {% set q = {} %}
-  {% set filterFor = "" %}
-  {% set filterId = "" %}
-  {% set month = "" %}
-  {% set value = "" %}
-  {% if craft.request.getParam('q') %}
-    {% set q = craft.request.getParam('q')|split(":") %}
+{% set filterFor = "" %}
+{% set filterId = "" %}
+{% set month = "" %}
+{% set value = "" %}
+{% if craft.app.request.getParam('q') %}
+    {% set q = craft.app.request.getParam('q')|split(":") %}
     {% set filterFor = q[0] %}
     {% set filterId = q[1] %}
-  {% endif %}
+{% endif %}
 
-  {% if filterFor == 'month' %}
+{% if filterFor == 'month' %}
     {% set monthValue = filterId|split("|") %}
     {% set month = monthValue[0] %}
     {% set value = monthValue[1] %}
-  {% endif %}
+{% endif %}
+
+{% import '_helpers/index' as helpers %}
 
 <form action="" class="content-filters">
   <label class="select" data-action='byspeaker'>
     {% set entryIds = craft.entries.section('media').ids() %}
-    {% set authors = craft.entries.section('people').relatedTo({ sourceElement: entryIds }).order('title') %}
+    {% set authors = craft.entries.section('people').relatedTo({ sourceElement: entryIds }).orderBy('title') %}
     <select name="" id="">
        <option value=''>{{ "Speaker"|t }}</option>
-      {% for category in authors %}
+      {% for category in authors.all() %}
         <option value='{{ category.id }}' {% if filterId == category.id %} selected {% endif %}>{{ category.title|t }}</option>
       {% endfor %}﻿
     </select>
   </label>
   <label class="select" data-action='bytopic'>
-    {% set categories = craft.categories.relatedTo({ sourceElement: entryIds }).group('mediaTopic').order('title').find() %}
+    {% set categories = craft.categories.relatedTo({ sourceElement: entryIds }).group('mediaTopic').orderBy('title').all() %}
     <select name="" id="">
        <option value=''>{{ "Topic"|t }}</option>
       {% for category in categories %}
@@ -38,7 +40,7 @@
   <label class="select" data-action='byseason'>
     <select name="" id="">
        <option value=''>{{ "Season"|t }}</option>
-      {% set seasons = craft.categories.relatedTo({ sourceElement: entryIds }).group('mediaSeason').order('title').find() %}
+      {% set seasons = craft.categories.relatedTo({ sourceElement: entryIds }).group('mediaSeason').orderBy('title').all() %}
       {% for category in seasons %}
         <option value='{{ category.id }}' {% if filterId == category.id %} selected {% endif %}>{{ category.title|t }}</option>
       {% endfor %}﻿
@@ -47,14 +49,14 @@
   <label class="select" data-action='bymedia'>
     <select name="" id="">
        <option value=''>{{ "Media Type"|t }}</option>
-      {% set verses = craft.categories.relatedTo({ sourceElement: entryIds }).group('mediaType').find() %}
+      {% set verses = craft.categories.relatedTo({ sourceElement: entryIds }).group('mediaType').all() %}
       {% for category in verses %}
         <option value='{{ category.id|t }}' {% if filterId == category.id %} selected {% endif %}>{{ category.title }}</option>
       {% endfor %}﻿
     </select>
   </label>
   <label class="select" data-action='bymonth'>
-  {% set lastPost = craft.entries.section('media').mediaDate('<=' ~ (now.date)).order('mediaDate ASC').first() %}
+  {% set lastPost = craft.entries.section('media').mediaDate('<=' ~ (now.date)).orderBy('mediaDate ASC').one() %}
   {% if lastPost|length %}
   {% set lastYear = lastPost.mediaDate|date('Y') %}
     <select name="" id="">

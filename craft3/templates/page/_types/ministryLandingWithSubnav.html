@@ -1,12 +1,12 @@
 
-{%- set parent = craft.entries.section('pages').slug(craft.request.getSegment(1)).first() -%}
+{%- set parent = craft.entries.section('pages').slug(craft.app.request.getSegment(1)).one() -%}
 {%- set children = entry.getDescendants(1) -%}
 
 {% macro recursiveChildren(page) %}
-  {% if page.hasDescendants and page.slug == craft.request.getSegment(page.level) %}
+  {% if page.hasDescendants and page.slug == craft.app.request.getSegment(page.level) %}
     <ul>
       {% for subpage in page.children %}
-          <li{% if subpage.slug == craft.request.getSegment(subpage.level) %} class="selected"{% endif %}>
+          <li{% if subpage.slug == craft.app.request.getSegment(subpage.level) %} class="selected"{% endif %}>
             {{ subpage.link }}
             {{ _self.recursiveChildren(subpage) }}
           </li>
@@ -74,7 +74,7 @@
           {% set feedurl = "http://stanneaz.onthecity.org/plaza?group_id=#{citygroupid}&format=rss" %}
           {% set limit = 6 %}
           {% set cache = "P0M" %}
-          {% set items = craft.feeds.getFeedItems(feedurl, limit, 0, cache) %}
+          {% set items = craft.app.feeds.getFeedItems(feedurl, limit, 0, cache) %}
           
           {% if entry.ministryFeedHeader is not empty %}
               {% set ministryRssHeader = entry.ministryFeedHeader|raw %}

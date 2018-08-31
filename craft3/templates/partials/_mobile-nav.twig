@@ -3,7 +3,7 @@
     <a href="/start-here" class="btn btn-full-width btn-light-blue">{{ "New? Start Here"|t }} &rsaquo;</a>
   </div>
   
-  <form {% if craft.locale == 'es_us' %}action="https://stanneaz.org/es/buscar"{% else %}action="https://stanneaz.org/search"{% endif %} id="nav-search-mini">
+  <form {% if craft.app.language == 'es-US' %}action="https://stanneaz.org/es/buscar"{% else %}action="https://stanneaz.org/search"{% endif %} id="nav-search-mini">
       <div class="search-input-wrap" style="margin-left:15px">
           <input type="text" name="q" id='nav-search-query2' style="width:60%" />
           <input type="submit" value="{{ "Search"|t }}" class="btn btn-light-blue" style="width:30%;padding:12px 5px"/>
@@ -13,7 +13,7 @@
   {% cache globally for 2 weeks %}
   <ul class="main-menu">
     {% set pages = craft.entries.section('pages').level(1) %}
-    {% nav page in pages %}
+    {% nav page in pages.all() %}
       <li>
         {{ page.getLink() }}
         {% if page.level == 1 %}
@@ -22,7 +22,7 @@
 
           {% if page.hasDescendants() %}
             {% set children = page.getDescendants(1) %}
-            {% for child in children %}
+            {% for child in children.all() %}
               {% if child.level == 2 %}
                 <li>{{ child.getLink() }}</li>
               {% endif %}
@@ -44,7 +44,7 @@
 
     <p class="links">
       {% cache globally for 1 month %}
-        {% for item in siteWideContent.footerLinks %}
+        {% for item in siteWideContent.footerLinks.all() %}
           {% set link = item.footerLink %}
           <span class="dot">&middot;</span>
           <a href='{{ link.url }}' {{ link.target ? ' target="_blank"' }}>{{ link.text }}</a>

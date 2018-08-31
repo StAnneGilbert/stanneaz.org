@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html{% if craft.locale == 'es_us' %} lang="es"{% else %} lang="en"{% endif %}>
+<html{% if craft.app.language == 'es-US' %} lang="es"{% else %} lang="en"{% endif %}>
 <head>
   <title>{{ siteName }} Audio Player</title>
   <style>
@@ -30,7 +30,7 @@
 <body>
   
 
-  {% set item = craft.entries.id(number).first() %}
+  {% set item = craft.entries.id(number).one() %}
   {{ item.title }}
   {% set audio = "" %}
   {% if item.audio|length %}

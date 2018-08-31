@@ -3,20 +3,20 @@
     <channel>
         <title>{{ siteName }}</title>
         <link>{{ siteUrl }}</link>
-        <atom:link href="{{ craft.request.url }}" rel="self" type="application/rss+xml" />
+        <atom:link href="{{ craft.app.request.absoluteUrl }}" rel="self" type="application/rss+xml" />
         <description>{{ siteWideContent.siteDescription }}</description>
         <language>en-us</language>
-        <pubDate>{{ now.rss }}</pubDate>
-        <lastBuildDate>{{ now.rss }}</lastBuildDate>
-        <image>            <url>https://stanneaz.org/img/general/_tf240/video-placeholder-homily.jpg</url>
+        <pubDate>{{ now|rss }}</pubDate>
+        <lastBuildDate>{{ now|rss }}</lastBuildDate>
+        <image>           <url>https://stanneaz.org/img/general/_tf240/video-placeholder-homily.jpg</url>
             <title>{{ siteName }}</title>
             <link>{{ siteUrl }}</link>
         </image>
-        {% for entry in craft.entries.section('newsUpdates').limit('80').find() %}
+        {% for entry in craft.entries.section('newsUpdates').limit('80').all() %}
             <item>
                 <title>{{ entry.title }}</title>
                 <link>{{ entry.url }}</link>
-                <pubDate>{{ entry.postDate.rss }}</pubDate>
+                <pubDate>{{ entry.postDate|rss }}</pubDate>
                 {% if entry.postAuthor|length %}
                     <author>{{ entry.postAuthor[0].title }}</author>   
                 {% endif %}
