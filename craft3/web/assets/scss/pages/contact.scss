@@ -1,0 +1,21 @@
+.contact-form {
+  @include shadow-box();
+  padding:28px 20px;
+}
+
+.contact-options {
+  font-size:16px;
+  line-height:28px;
+  padding-top:12px;
+
+  p {
+    margin-bottom:18px;
+  }
+
+  h6 {
+    margin-bottom:12px;
+  }
+  .red {
+    color:$red;
+  }
+}
