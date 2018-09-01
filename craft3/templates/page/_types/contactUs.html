@@ -1,10 +1,9 @@
-  {%-set parent = craft.entries.section('pages').slug(craft.app.request.getSegment(2)).one()-%}
+  {%-set parent = craft.entries.section('pages').slug(craft.request.getSegment(2)).first()-%}
 {%- set children = parent.getDescendants(2)-%}
-{% import '_helpers/index' as helpers %}
-<style>
-    #parishioneraddress{display:none}
-</style>
   <!-- .sf-content for flex sticky footer -->
+  <style>
+    #parishioneraddress{display:none}
+  </style>
   <div class="sf-content nav-slide-element" data-swiftype-name="body" data-swiftype-type="text">
     <div class="page-photo-title" {% if entry.pageImage|length %}style=" background-image:url({{ entry.pageImage[0].url }})" {% endif %}>
       <div class="overlay">
@@ -55,14 +54,13 @@
                                 {% endfor %}
                             </ul>
                         {% endif %}
-                  {% endmacro %}
-                  {% import _self as macros %}
+                    {% endmacro %}
 
-                  
+                  {% from _self import errorList %}
                   <form method="post" action="" accept-charset="UTF-8">
-                    {{ csrfInput() }}
-                    <input type="hidden" name="action" value="contact-form/send">
-                    {{ redirectInput('contact-thankyou') }}
+                    {{ getCsrfInput() }}
+                    <input type="hidden" name="action" value="contactForm/sendMessage">
+                    <input type="hidden" name="redirect" value="contact-thankyou">
                     <input type='hidden' name='message[Subject]' value="General Contact" />
                     <div class="form-group">
                       <h5>{{ "How can we help you"|t }}?</h5>
@@ -80,7 +78,7 @@
                       {% endif %}
                       <div class="form-row">
                         <textarea name="message[body]" id="" rows="8" class="input-full-width" placeholder="{{ "Type your specific comment, question, or issue here"|t }} ...">{% if message is defined %}{{ message.message }}{% endif %}</textarea>
-                        <span class="field-error">{% if message is defined %}{{ macros.errorList(message.getErrors('message')) }}{% endif %}</span>
+                        <span class="field-error">{% if message is defined %}{{ errorList(message.getErrors('message')) }}{% endif %}</span>
                       </div>
                     </div> <!-- .form-group -->
 
@@ -90,22 +88,21 @@
                         <div class="input-wrap">
                           <input type="text" name="fromName" id="fromName" class="input-full-width" placeholder="{{ "First & Last Name"|t }} *" value="{% if message is defined %}{{ message.fromName }}{% endif %}" required>
                         </div>
-                        <span class="field-error">{% if message is defined %}{{ macros.errorList(message.getErrors('fromName')) }}{% endif %}</span>
+                        <span class="field-error">{% if message is defined %}{{ errorList(message.getErrors('fromName')) }}{% endif %}</span>
                       </div> <!-- .form-row -->
                       
                       <input type="text" name="parishioneraddress" id="parishioneraddress"/>
 
                       <div class="form-row {% if message is defined %} form-error {% endif %}">
                         <input type="email" name="fromEmail" id="" class="input-full-width" value="{% if message is defined %}{{ message.fromEmail }}{% endif %}" placeholder="{{ "Email"|t }} *" required>
-                        <span class="field-error">{% if message is defined %}{{ macros.errorList(message.getErrors('fromEmail')) }}{% endif %}</span>
+                        <span class="field-error">{% if message is defined %}{{ errorList(message.getErrors('fromEmail')) }}{% endif %}</span>
                       </div>
                       <div class="form-row">
                         <input type="text" name="message[Phone]" id="message[Phone]" class="input-full-width" placeholder="{{ "Phone Number"|t }}">
                       </div>
                       
-                      
                       <div class="form-row">
-                          {{ craft.recaptcha.render() }}
+                          {{craft.recaptcha.render()}}
                       </div>
 
                     </div> <!-- .form-group -->
@@ -126,7 +123,7 @@
                 {% cache globally for 1 year %}
                 {% if siteWideSocialLinks.socialLinks|length %}
                   <ul class="social-circles">
-                    {% for service in siteWideSocialLinks.socialLinks.all() %}
+                    {% for service in siteWideSocialLinks.socialLinks %}
                       {% set link = service.serviceUrl %}
                         <li>
                           <a href="{{ link.url }}" class="bg-{{ service.service }}">
@@ -140,7 +137,7 @@
 
                 <hr>
                 
-                {% if craft.app.language == "es-US" %}
+                {% if craft.locale == "es_us" %}
                 
                     <b>La Aplicación móvil de <br/>Sta. Ana</b> para <a href="https://itunes.apple.com/us/app/parroquia-catolica-sta.-ana/id978905589" target="_blank">iPhone</a>, <a href="https://play.google.com/store/apps/details?id=com.subsplash.thechurchapp.s_4G33NG" target="_blank">Android</a>, y <a href="http://www.windowsphone.com/en-us/store/app/parroquia-católica-de-sta-ana/d4bbdfb9-510e-498c-b81a-8eb7fe523127" target="_blank">Windows</a>.
                     
@@ -194,7 +191,7 @@ function pageMover(obj){
 			break;
 	}
 	if (contactUrl=='https://bulletin.stanneaz.org'){
-	    window.location.href='http://bulletin.stanneaz.org';
+	    window.location.href='https://bulletin.stanneaz.org';
 	}
 }
 </script>

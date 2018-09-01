@@ -17,9 +17,9 @@
     {% set staff = craft.categories.group('staffGroup') %}
     {% for pos in staff %}
       <h3 class="bottom-border">{{ pos.title }}</h3>
-      {% set people = craft.entries.section('people').relatedTo(pos).orderBy('personLastName').all() %}
+      {% set people = craft.entries.section('people').relatedTo(pos).order('personLastName').find() %}
       <div class="staff-group">
-      {% for person in people.all() %}
+      {% for person in people %}
       
           <a name="{{ person.slug }}"></a>
           <div class="staff-member">

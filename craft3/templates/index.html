@@ -3,8 +3,8 @@
 
 {% block content %}
   <!-- .sf-content for flex sticky footer -->
-  <div class="sf-content nav-slide-element"> 
-  {% if craft.cookies.get('visited') %}   
+  <div class="sf-content nav-slide-element">    
+    {% if craft.lj_cookies.get('visited') %}
       <div class="featured-content-hero nopad" {% if entry.pageImage|length %}style=" background-image:url({{ entry.pageImage[0].url }})" {% endif %}>
         {# <div class="container">
           <h2 class="caps-header">{{ "Featured at"|t }} <br>St. Anne</h2>
@@ -22,7 +22,7 @@
             } %}
                 {% cache globally for 1 day %}
                 <ul class='bxslider' id="slider1">
-                {% for item in entry.featuredAtStAnne.all() %}
+                {% for item in entry.featuredAtStAnne %}
                   {% set link = item.contentLink %}
                     <li>
                       {% if item.vimeoVideoId != 0 %}
@@ -33,7 +33,7 @@
                       {% endif %}
                       {# <div class="caption">
                         <h3>{% if item.contentLink is not empty %}<a href="{{ link.url }}" {{ link.target ? ' target="_blank"' }}>{{ item.title }}</a>{% else %}{{ item.title }}{% endif %}</h3>
-                        <p>{{ item.description|chop(limit=170, unit='c') }}</p>
+                        <p>{{ item.description|trimit('170') }}</p>
                       </div> #}
                     </li>
                 {% endfor %}
@@ -50,7 +50,7 @@
                     quality: 75,
                     position: 'top-center'
                 } %}
-                {% for item in entry.featuredAtStAnne.all() %}
+                {% for item in entry.featuredAtStAnne %}
                 <a data-slide-index="{{ loop.index - 1 }}" href=""><img src="{{ item.eventImage[0].getUrl(thumb2) }}" /></a>
                 {% endfor %}
               {% endcache %}
@@ -73,11 +73,19 @@
 
                 <div class="video-placeholder">
                   <div class="video-actions">
+                    {% if entry.vimeoVideoId != 0 %}
+                      {% set min = 0 %}
+                      {% set sec = 0 %}
+                       {% if entry.vimeoTimecode|length %}
+                            {% set min = entry.vimeoTimecode[0].minutes %}
+                            {% set sec = entry.vimeoTimecode[0].seconds %}
+                       {% endif %}
+                      {% set video = helpers.vimeo_video(entry.vimeoVideoId,entry.autoplay,min,sec) %}
                       <div data-video='embed' class="action-icon">
                         <i class="fa fa-play"></i>
                       </div>
-                       <script type="text/template" id="video-embed">
-  <div class="fitvids"><iframe src="//player.vimeo.com/video/108439863?api=1&amp;autoplay=1" width="780" height="438" data-time="0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div></script>
+                       <script type='text/template' id='video-embed'>{{ video }}</script>
+                    {% endif %}
                   </div>
 
                   <!-- invisible (0 opacity) image to keep the aspect ratio -->
@@ -101,7 +109,7 @@
       {% if entry.quicklinks|length %}
         {% cache globally for 1 year %}
         {% set qlinks = entry.quicklinks  %}
-        {% for item in qlinks.all() %}
+        {% for item in qlinks %}
           {% set link = item.qlink %}
           {% if loop.index == 1 %}
             <a href="{{ link.url }}" class="bg-dark-brown"><i class="fa fa-clock-o"></i> {{ link.text }}</a>
@@ -125,7 +133,7 @@
       <div class="row news-blocks">
       
         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-        {% if craft.app.language == 'es-US' %}
+        {% if craft.locale == 'es_us' %}
           <h5><a href="https://subsplash.com/staana/app" target="_blank">&#161;Descarga nuestras aplicaciones de tel&#233;fono!</a></h5>
         {% else %}
           <h5><a href="http://subsplash.com/stanne/app" target="_blank">Download Our Parish Mobile Phone Apps!</a></h5>
@@ -142,20 +150,20 @@
        {% set anOffset = 0 %}
        {% set anCache = "P1D" %}
 
-       {% set anItems = craft.app.feeds.getFeedItems(anFeedurl, anLimit, anOffset, anCache) %}
+       {% set anItems = craft.feeds.getFeedItems(anFeedurl, anLimit, anOffset, anCache) %}
        {% for anItem in anItems %}
        
        {% if loop.index == loopNumber %}
         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
             <h6><i class="fa fa-rss"></i> {{ "Subscribe to Announcements"|t }}</h6>
-          <p class="excerpt"><a href="http://stanneaz.onthecity.org/groups/{% if craft.app.language == 'es-US' %}170927{% else %}159435{% endif %}" target="_blank">{{ "Join the Announcements group on The City"|t }}</a> {{"(account required)"|t }}. {{ "Or, receive them via email:"|t }}</p>
-          <form class='email-subscribe-form' action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open('https://feedburner.google.com/fb/a/mailverify?uri={% if craft.app.language == 'es-US' %}AnunciosParaStaAna{% else %}StAnneAnnouncements{% endif %}', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true"><div class='input-container clearfix'><input type="text" style="width:140px" name="email" placeholder="{{ "Enter your email address"|t }}..." title="{{ "Enter your email address"|t }}"/><input type="hidden" value="{% if craft.app.language == 'es-US' %}AnunciosParaStaAna{% else %}StAnneAnnouncements{% endif %}" name="uri"/><input type="hidden" name="loc" value="en_US"/><button type="submit" class="btn btn-sm btn-light-blue"><i class="fa fa-check"></i> {{ "Subscribe"|t }}</button></div></form>
+          <p class="excerpt"><a href="http://stanneaz.onthecity.org/groups/{% if craft.locale == 'es_us' %}170927{% else %}159435{% endif %}" target="_blank">{{ "Join the Announcements group on The City"|t }}</a> {{"(account required)"|t }}. {{ "Or, receive them via email:"|t }}</p>
+          <form class='email-subscribe-form' action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open('https://feedburner.google.com/fb/a/mailverify?uri={% if craft.locale == 'es_us' %}AnunciosParaStaAna{% else %}StAnneAnnouncements{% endif %}', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true"><div class='input-container clearfix'><input type="text" style="width:140px" name="email" placeholder="{{ "Enter your email address"|t }}..." title="{{ "Enter your email address"|t }}"/><input type="hidden" value="{% if craft.locale == 'es_us' %}AnunciosParaStaAna{% else %}StAnneAnnouncements{% endif %}" name="uri"/><input type="hidden" name="loc" value="en_US"/><button type="submit" class="btn btn-sm btn-light-blue"><i class="fa fa-check"></i> {{ "Subscribe"|t }}</button></div></form>
         </div>             
        {% endif %}
 
         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
           <h5><a href="{{ anItem.permalink }}">{{ anItem.title|raw }}</a></h5>
-          {% set anSummary = anItem.summary|chop(limit=120, unit='c') %}
+          {% set anSummary = anItem.summary| trimit(120) %}
           <p class="excerpt">{{ anSummary|raw }} <a href="{{ anItem.permalink }}">{{ "Read More"|t }}</a></p>
         </div>
         {% endfor %}
@@ -167,7 +175,7 @@
       
       
       <h4 class="caps-header text-center">
-          <a href="{% if craft.app.language == 'es-US' %}/es/connect/eventos{% else %}/connect/events{% endif %}">{{ "Events & Activities"|t }}</a>
+          <a href="{% if craft.locale == 'es_us' %}/es/connect/eventos{% else %}/connect/events{% endif %}">{{ "Events & Activities"|t }}</a>
       </h4>
 
       <hr class="short-divider centered">
@@ -181,23 +189,23 @@
        {% set cache = "P1D" %}
        
        {% cache globally for 1 hour %}
-       {% set items = craft.app.feeds.getFeedItems(feedurl, limit, offset, cache) %}
-       {% for item in items %}
+       {% set items = craft.feeds.getFeedItems(feedurl, limit, offset, cache) %}
+       {% for item in items|reverse %}
        
        {% if loop.index == 4 %}
         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
             <h6><i class="fa fa-rss"></i> {{ "Subscribe to Events"|t }}</h6>
-          <p class="excerpt"><a href="http://stanneaz.onthecity.org/groups/{% if craft.app.language == 'es-US' %}155455{% else %}145022{% endif %}" target="_blank">{{ "Join the Events group on The City"|t }}</a> {{"(account required)"|t }}. {{ "Or, receive them via email:"|t }}</p>
-          <form class='email-subscribe-form' action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open('https://feedburner.google.com/fb/a/mailverify?uri={% if craft.app.language == 'es-US' %}EventosStaAna{% else %}StAnneEvents{% endif %}', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true"><div class='input-container clearfix'><input type="text" style="width:140px" name="email" placeholder="{{ "Enter your email address"|t }}..." title="{{ "Enter your email address"|t }}"/><input type="hidden" value="{% if craft.app.language == 'es-US' %}EventosStaAna{% else %}StAnneEvents{% endif %}" name="uri"/><input type="hidden" name="loc" value="en_US"/><button type="submit" class="btn btn-sm btn-light-blue"><i class="fa fa-check"></i> {{ "Subscribe"|t }}</button></div></form>
+          <p class="excerpt"><a href="http://stanneaz.onthecity.org/groups/{% if craft.locale == 'es_us' %}155455{% else %}145022{% endif %}" target="_blank">{{ "Join the Events group on The City"|t }}</a> {{"(account required)"|t }}. {{ "Or, receive them via email:"|t }}</p>
+          <form class='email-subscribe-form' action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open('https://feedburner.google.com/fb/a/mailverify?uri={% if craft.locale == 'es_us' %}EventosStaAna{% else %}StAnneEvents{% endif %}', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true"><div class='input-container clearfix'><input type="text" style="width:140px" name="email" placeholder="{{ "Enter your email address"|t }}..." title="{{ "Enter your email address"|t }}"/><input type="hidden" value="{% if craft.locale == 'es_us' %}EventosStaAna{% else %}StAnneEvents{% endif %}" name="uri"/><input type="hidden" name="loc" value="en_US"/><button type="submit" class="btn btn-sm btn-light-blue"><i class="fa fa-check"></i> {{ "Subscribe"|t }}</button></div></form>
         </div>             
        {% endif %}
 
         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
           <h5><a href="{{ item.permalink }}">{{ item.title }}</a></h5>
-          {% set evSummary = item.summary|chop(limit=120, unit='c') %}
+          {% set evSummary = item.summary| trimit(120) %}
           <p class="excerpt">{{ evSummary|raw }} <a href="{{ item.permalink }}">{{ "Read More"|t }}</a></p>
           <p class="posted-on">
-              {% if craft.app.language == 'es-US' %}
+              {% if craft.locale == 'es_us' %}
                     {{ item.date|date('d F, Y') }}
               {% else %}
                     {{ item.date|date('F d, Y') }}
@@ -208,7 +216,7 @@
         {% endcache %}
 
         <h3 style="clear:both;text-align:center">
-          <a href="{% if craft.app.language == 'es-US' %}/es/connect/eventos{% else %}/connect/events{% endif %}">{{ "See All Events"|t }} &rsaquo;</a>
+          <a href="{% if craft.locale == 'es_us' %}/es/connect/eventos{% else %}/connect/events{% endif %}">{{ "See All Events"|t }} &rsaquo;</a>
         </h3>
       </div> <!-- .row -->
 
@@ -216,7 +224,7 @@
       <div class="text-center news-action-links">
         {% if entry.subLinks|length %}
         {% set sublinks = entry.subLinks %}
-          {% for item in sublinks.all() %}
+          {% for item in sublinks %}
             {% set link = item.subLinks %}
             <a href="{{ link.url }}" class="btn btn-light-brown-border"><i class="fa fa-rss"></i> {{ link.text }}</a>
           {% endfor %}
@@ -228,10 +236,10 @@
     </div> <!-- .page-content-container -->
   </div> <!-- .sf-content -->
 
- {# Set visited cookie #}
-  {% if not craft.cookies.get('visited') %}
-    {{ craft.cookies.set('visited', 'true', now | date_modify("+30 days").timestamp, '/' ) }}
+
+  {# Set visited cookie #}
+  {% if not craft.lj_cookies.get('visited') %}
+    {{ craft.lj_cookies.set('visited', 'true', now | date_modify("+30 days").timestamp, '/' ) }}
   {% endif %}
-  
-  
+
 {% endblock %}

@@ -67,14 +67,14 @@
     <br/>
     
     {% set vocations = craft.categories.group('vocationsGroup') %}
-    {% for pos in vocations.all() %}
+    {% for pos in vocations %}
       <h3 class="bottom-border">{{ pos.title }}</h3>
       {% if pos.title == 'Priesthood' %}
           <p style="padding-bottom:20px">
               <a href="http://dphx.org/vocations/seminarians/" target="_blank">Click here to meet seminarians from the Diocese of Phoenix!</a>
           </p>
       {% endif %}
-      {% set people = craft.entries.section('people').relatedTo(pos).orderBy('personLastName').all() %}
+      {% set people = craft.entries.section('people').relatedTo(pos).order('personLastName').find() %}
       <div class="staff-group">
       {% for person in people %}
       

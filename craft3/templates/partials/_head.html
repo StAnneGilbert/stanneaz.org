@@ -3,9 +3,9 @@
 <title>
 {% spaceless %}{% if entry.title is defined %}
     {% if entry.title == "Homepage"%}
-        St. Anne Roman Catholic Parish
+        {{ siteName }}
     {% else %}
-        {{ entry.title }} | St. Anne
+        {{ entry.title }} - {{ siteName }}
     {% endif %}
   {% endif %}
 {% endspaceless %}</title>
@@ -13,7 +13,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <meta name="base_url" content="{{ siteUrl }}">
 
-{% set currentURL = craft.app.request.absoluteUrl() %}
+{% set currentURL = craft.request.getUrl() %}
 <meta property='og:title' content='{{ siteName }}'/>
 {% if entry.pageImage|length %}
   {% set pageImage = entry.pageImage[0].getUrl('tf280') %}

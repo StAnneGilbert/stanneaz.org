@@ -1,10 +1,10 @@
 {% set q = "" %}
 {% set t = "" %}
-{% if craft.app.request.getParam('q') %}
-    {% set q = "?q=" ~ craft.app.request.getParam('q') %}
+{% if craft.request.getParam('q') %}
+    {% set q = "?q=" ~ craft.request.getParam('q') %}
 {% endif %}
-{% if craft.app.request.getParam('t') %}
-    {% set t = "&t=" ~ craft.app.request.getParam('t') %}
+{% if craft.request.getParam('t') %}
+    {% set t = "&t=" ~ craft.request.getParam('t') %}
 {% endif %}
 {% if paginate.totalPages > 1 %}
   <div class='pagination'>

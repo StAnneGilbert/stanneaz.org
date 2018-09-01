@@ -29,6 +29,5 @@
 {% endblock %} #}
 
 {% block content %}
-  {% set pgtype = entry.type %}
-  {% include "page/_types/" ~ pgtype %}
+  {%- include "page/_types/" ~ entry.type -%}
 {% endblock %}

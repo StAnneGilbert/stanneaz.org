@@ -1,4 +1,4 @@
-{% set q = craft.app.request.getParam('q')|split(":") %}
+{% set q = craft.request.getParam('q')|split(":") %}
 {% set filterFor = q[0] %}
 {% set filterId = q[1] %}
 {% set postList = "" %}
@@ -37,7 +37,7 @@
               <a href='?q=topic:{{ topic.id }}'>{{ topic.title }}</a>{% if not loop.last %},{% endif %}
           {% endfor %}
           <div class="excerpt">
-            <p>{{ post.body | chop(limit=120, unit='c') }} <a href="{{ post.url }}">{{"Read more"|t}}</a></p>
+            <p>{{ post.body | trimit(120) }} <a href="{{ post.url }}">{{"Read more"|t}}</a></p>
             <p class="muted">{{ post.postDate|date('F d, Y') }} {% if post.postAuthor|length %} &nbsp;&middot;&nbsp;{{ post.postAuthor[0].title }} {% endif %}</p>
           </div>
         </div>

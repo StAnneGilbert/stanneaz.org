@@ -2,8 +2,8 @@
 {% extends "layouts/_layout" %}
 
 {% block content %}
-  {% set query = craft.app.request.getParam('q') %}
-  {% set entries = craft.entries.search(query).orderBy('score').section('and, not pagesNoSearch, not phoneAppPages, not featuredEvents, not bulletins, not search') %}
+  {% set query = craft.request.getParam('q') %}
+  {% set entries = craft.entries.search(query).order('score').section('and, not pagesNoSearch, not phoneAppPages, not featuredEvents, not bulletins, not search') %}
    <!-- .sf-content for flex sticky footer -->
   <div class="sf-content nav-slide-element">
     <div class="page-content-container">
@@ -18,7 +18,7 @@
 
         
         
-        <form {% if craft.app.language == 'es-US' %}action="/es/buscar"{% else %}action="/search"{% endif %} id='main-search-form'>
+        <form {% if craft.locale == 'es_us' %}action="/es/buscar"{% else %}action="/search"{% endif %} id='main-search-form'>
           <div class="search-input-wrap jumbo">
             <input type="text" name="q" id='st-search-input' placeholder="Search for something else..." title="Search for something else..." class="input-full-width" value="{{ query }}" />
             <i class="fa fa-search"></i>
@@ -66,9 +66,9 @@
                   <a href="{{ item.url }}" class="item-url">{{ item.url }}</a>
                   <div class="excerpt">
                     {% if item.bodysr|length %}
-                        <p>{{ item.bodysr|chop(limit=200, unit='c') }}</p>
+                        <p>{{ item.bodysr|trimit(200) }}</p>
                     {% else %}
-                        <p>{{ item.body|chop(limit=200, unit='c') }}</p>
+                        <p>{{ item.body|trimit(200) }}</p>
                     {% endif %}
                   </div>
                 </div>

@@ -1,10 +1,10 @@
 {% set latest = "/media/media-library" %}
 {% set topicTitle = "Homilies" %}
 {% set break = 0 %}
-{% for item in craft.entries.section('media').orderBy('mediaDate DESC').all() if break == 0 %}
+{% for item in craft.entries.section('media').order('mediaDate DESC') if break == 0 %}
     {% set time = item.mediaDate|date('g:ia') %}
     {% set mediaTopics = item.mediaTopic %}
-    {% for topic in mediaTopics.all() %}
+    {% for topic in mediaTopics %}
         {% set topicTitle = topic.title %}
     {% endfor %}
     {% if time == entry.mediaTimeFilter and topicTitle == entry.mediaTopicFilter %}

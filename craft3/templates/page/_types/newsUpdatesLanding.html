@@ -18,7 +18,7 @@
 
         {% include "partials/filters/_news-updates-filters" %}
         
-        {% if craft.app.request.getParam('q') %}
+        {% if craft.request.getParam('q') %}
           {% include "news/_filtered" %}
         {% else %}
           {% include "news/_landing" %}

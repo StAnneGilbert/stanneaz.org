@@ -66,9 +66,9 @@
     </style>
   
 {% cache globally for 3 months %}
-    {% set people = craft.entries.section('people').relatedTo(pos).orderBy('title').all() %}
+    {% set people = craft.entries.section('people').relatedTo(pos).order('title').find() %}
       <div class="staff-group">
-      {% for person in people.all() %}
+      {% for person in people %}
       
           <a name="{{ person.slug }}"></a>
           <div class="staff-member">

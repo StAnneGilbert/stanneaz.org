@@ -1,11 +1,10 @@
-{% import '_helpers/index' as helpers %}
 {% set q = {} %}
 {% set filterFor = "" %}
 {% set filterId = "" %}
 {% set month = "" %}
 {% set value = "" %}
-{% if craft.app.request.getParam('q') %}
-  {% set q = craft.app.request.getParam('q')|split(":") %}
+{% if craft.request.getParam('q') %}
+  {% set q = craft.request.getParam('q')|split(":") %}
   {% set filterFor = q[0] %}
   {% set filterId = q[1] %}
 {% endif %}
@@ -22,13 +21,13 @@
     {% set authors = craft.entries.section('people').relatedTo({ sourceElement: entryIds }) %}
     <select name="" id="">
        <option value=''>Author</option>
-      {% for category in authors.all() %}
+      {% for category in authors %}
         <option value='{{ category.id }}' {% if filterId == category.id %} selected {% endif %}>{{ category.title }}</option>
       {% endfor %}﻿
     </select>
   </label>
   <label class="select" data-action='bytopic'>
-    {% set categories = craft.categories.relatedTo({ sourceElement: entryIds }).group('newsTopics').all() %}
+    {% set categories = craft.categories.relatedTo({ sourceElement: entryIds }).group('newsTopics').find() %}
     <select name="" id="">
        <option value=''>Topic</option>
       {% for category in categories %}
@@ -37,7 +36,7 @@
     </select>
   </label>
   <label class="select" data-action='bymonth'>
-  {% set lastPost = craft.entries.section('newsUpdates').postDate('<=' ~ (now.date)).orderBy('postDate ASC').one() %}
+  {% set lastPost = craft.entries.section('newsUpdates').postDate('<=' ~ (now.date)).order('postDate ASC').first() %}
   {% if lastPost|length %}
   {% set lastYear = lastPost.postDate|date('Y') %}
     <select name="" id="">

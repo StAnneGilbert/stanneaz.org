@@ -1,4 +1,8 @@
+{% if craft.config.devMode %}
+<script src='/assets/js/site.js' async></script>
+{% else %}
 <script src='/assets/js/site.min.js' async></script>
+{% endif %}
 <script>
 var WebFontConfig = {
     google: {

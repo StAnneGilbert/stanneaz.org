@@ -1,12 +1,12 @@
 
-{%- set parent = craft.entries.section('pages').slug(craft.app.request.getSegment(1)).one() -%}
+{%- set parent = craft.entries.section('pages').slug(craft.request.getSegment(1)).first() -%}
 {%- set children = entry.getDescendants(1) -%}
 
 {% macro recursiveChildren(page) %}
-  {% if page.hasDescendants and page.slug == craft.app.request.getSegment(page.level) %}
+  {% if page.hasDescendants and page.slug == craft.request.getSegment(page.level) %}
     <ul>
       {% for subpage in page.children %}
-          <li{% if subpage.slug == craft.app.request.getSegment(subpage.level) %} class="selected"{% endif %}>
+          <li{% if subpage.slug == craft.request.getSegment(subpage.level) %} class="selected"{% endif %}>
             {{ subpage.link }}
             {{ _self.recursiveChildren(subpage) }}
           </li>
