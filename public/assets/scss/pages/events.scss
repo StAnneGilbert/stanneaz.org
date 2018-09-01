@@ -1,0 +1,139 @@
+.events-list {
+  margin:30px 0;
+  border-top:1px solid $border;
+
+  .list-header {
+    border-bottom:1px solid $border;
+    padding:30px 0 24px;
+  }
+  .caps-header {
+    margin:0;
+  }
+
+  @media screen and (min-width:($screen-xs+1)) {
+    .caps-header {
+      float:left;
+    }
+    .control {
+      float:right;
+      margin-top:6px;
+    }
+  }
+}
+
+.event {
+  @include clearfix();
+  padding-top:10px;
+  padding-bottom:10px;
+  border-bottom:1px solid $border;
+  position:relative;
+
+  .event-details {
+    font-size:14px;
+    line-height:18px;
+  }
+
+  .event-media {
+    width:60px;
+    height:60px;
+    position:absolute;
+    top:12px;
+
+    img {
+      display:block;
+      width:60px;
+      height:60px;
+    }
+  }
+
+  @media screen and (min-width:($screen-xs+1)) {
+    .event-date {
+      width:80px;
+      text-align:center;
+      border-right:2px solid $border;
+      font-weight:600;
+      padding:4px 0;
+      float:left;
+
+      span {
+        display:block;
+      }
+      .number {
+        font-size:28px;
+        line-height:34px;
+      }
+      .month {
+        text-transform:uppercase;
+        font-size:18px;
+        line-height:22px;
+      }
+    }
+    .event-details {
+      margin-left:98px;
+    }
+    h5 {
+      margin:8px 0 6px;
+    }
+    .event-media {
+      right:0;
+    }
+
+    &.has-media .event-details {
+      margin-right:76px;
+    }
+  }
+  @media screen and (max-width:$screen-xs) {
+    padding-bottom:12px;
+
+    .event-date {
+      font-size:18px;
+      line-height:24px;
+      text-transform:uppercase;
+      margin-bottom:2px;
+
+      .number {
+        font-weight:600;
+      }
+      .month {
+        font-weight:400;
+        color:lighten($dark-body, 10%);
+      }
+    }
+    .event-media {
+      left:0;
+    }
+    h5 {
+      margin:0 0 2px;
+    }
+    &.has-media .event-date,
+    &.has-media .event-details {
+      margin-left:74px;
+    }
+  }
+}
+
+.event-details {
+  li {
+    margin-bottom:8px;
+    padding-left:34px;
+    position:relative;
+  }
+  .fa {
+    width:24px;
+    height:24px;
+    line-height:24px;
+    font-size:14px;
+    color:#fff;
+    background:$dark-gray;
+    border-radius:50%;
+    text-align:center;
+    display:block;
+    position:absolute;
+    top:0;
+    left:0;
+  }
+  strong {
+    text-transform:uppercase;
+    margin-right:4px;
+  }
+}
