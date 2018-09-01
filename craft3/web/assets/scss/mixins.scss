@@ -1,0 +1,23 @@
+/*========================
+ Set placeholder text color
+ =======================*/
+@mixin placeholder($color:#ccc) {
+  &:-moz-placeholder {
+    color: $color;
+  }
+  &:-ms-input-placeholder {
+    color: $color;
+  }
+  &::-webkit-input-placeholder {
+    color: $color;
+  }
+}
+
+/*========================
+ Add a white background and box shadow to any element
+ =======================*/
+@mixin shadow-box() {
+  background:#fff;
+  box-shadow:0 1px 3px rgba(0,0,0,.25);
+  border-radius:2px;
+}
