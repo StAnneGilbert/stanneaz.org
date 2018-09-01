@@ -1,0 +1,51 @@
+.round-avatar {
+  border-radius:50%;
+}
+
+.image-caption-box {
+  background:#fff;
+  border:1px solid #EBEBEB;
+  box-shadow:0 2px 4px rgba(0,0,0,.05);
+  margin-bottom:60px;
+  padding:15px;
+  display:inline-block;
+  max-width:100%;
+
+  img {
+    display:block;
+    max-width:100%;
+    height:auto;
+  }
+
+  .caption {
+    text-align:center;
+    color:#7D7D7D;
+    font-size:14px;
+    line-height:19px;
+    padding-top:15px;
+  }
+
+  @media screen and (max-width:$screen-xs) {
+    margin-bottom:30px;
+    padding:8px;
+
+    .caption {
+      padding:8px 5px 3px;
+    }
+  }
+}
+
+.featured-image-container {
+  margin-bottom:30px;
+
+  img {
+    display:block;
+    max-width:100%;
+    height:auto;
+  }
+}
+
+img.full-width {
+  display:block;
+  width:100%;
+}

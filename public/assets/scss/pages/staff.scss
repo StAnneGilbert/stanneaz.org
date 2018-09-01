@@ -1,0 +1,136 @@
+.staff-group {
+  @media screen and (max-width:$screen-xs-max) {
+    margin-bottom:30px;
+  }
+  @media screen and (min-width:$screen-sm) {
+    margin-bottom:50px;
+  }
+}
+
+.staff-member {
+  margin-bottom:20px;
+  font-size:16px;
+  line-height:24px;
+
+  .avatar {
+    display:block;
+    width:100px;
+    height:100px;
+  }
+  h6 {
+    margin-bottom:4px;
+  }
+  .job-title {
+    font-size:14px;
+    font-weight:600;
+    color:$light-body;
+    display:block;
+  }
+  .fa-phone {
+    margin-right:4px;
+    color:$light-body;
+  }
+
+  @media screen and (min-width:$screen-sm-min) {
+    display:flex;
+    flex-wrap:nowrap;
+    flex-direction:row;
+    align-items:center;
+    justify-content:space-between;
+
+    .col {
+      vertical-align:middle;
+    }
+    .col-avatar {
+      width:100px;
+    }
+    .col-name,
+    .col-phone {
+      padding-left:20px;
+      padding-right:20px;
+      flex:1;
+    }
+    .col-email {
+      width:120px;
+      text-align:right;
+    }
+  }
+  @media screen and (min-width:670px) and (max-width:$screen-xs-max) {
+    width:46%;
+    float:left;
+
+    &:nth-child(2n+1) {
+      margin-right:8%;
+    }
+  }
+  @media screen and (max-width:$screen-xs-max) {
+    margin-bottom:30px;
+
+    .col-avatar {
+      width:80px;
+      float:left;
+    }
+    .avatar {
+      width:80px;
+      height:80px;
+    }
+    .col-name,
+    .col-phone,
+    .col-email {
+      margin-left:100px;
+    }
+    h6 {
+      margin-bottom:0;
+      margin-top:4px;
+    }
+    .job-title {
+      margin-bottom:2px;
+    }
+    .col-phone {
+      margin-bottom:6px;
+    }
+  }
+}
+
+// For browsers that don't support flexbox (IE9), just use a table layout
+.no-flexbox .staff-group {
+  display:table;
+  width:100%;
+}
+.no-flexbox .staff-member {
+  display:table-row;
+
+  .col {
+    display:table-cell;
+    vertical-align:middle;
+    padding-bottom:20px;
+  }
+  .col-avatar {
+    width:100px;
+  }
+  .col-name,
+  .col-phone {
+    padding-left:20px;
+    padding-right:20px;
+  }
+  .col-email {
+    text-align:right;
+  }
+  .col-group-title {
+    display:block;
+    width:100%;
+  }
+  h6 {
+    margin-bottom:4px;
+  }
+  .job-title {
+    font-size:14px;
+    font-weight:600;
+    color:$light-body;
+    display:block;
+  }
+  .fa-phone {
+    margin-right:4px;
+    color:$light-body;
+  }
+}

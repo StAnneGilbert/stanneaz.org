@@ -1,0 +1,152 @@
+/*========================
+ 3-wide (on desktop) grid of featured items with an image, title, description, and action links
+ =======================*/
+
+// List container padding & box sizing
+.featured-media-grid {
+  padding:20px 0;
+
+  .featured-media-box.full{
+    margin: 0px 0px 3% 0px !important;
+    float: none;
+    width: 100%;
+    img{
+      width: auto;
+    }
+    h4 ~ div{
+      position: relative;
+      height: auto;
+      margin-bottom: 14px;
+      overflow: hidden;
+    }
+    h4.seth{
+      height: auto;
+    }
+  }
+  
+  .featured-media-box.short{
+    h4 ~ div{
+      height:210px;
+    }
+  }
+
+  @media screen and (min-width:$screen-md-min) {
+    .featured-media-box {
+      float:left;
+      width:31%;
+      margin:0 0 3% 3.5%;
+
+      &:nth-child(3n+1) {
+        clear:both;
+        margin-left:0;
+      }
+    }
+  }
+  @media screen and (min-width:650px) and (max-width:$screen-sm-max) {
+    .featured-media-box {
+      float:left;
+      width:48%;
+      margin:0 0 4% 4%;
+
+      &:nth-child(2n+1) {
+        clear:both;
+        margin-left:0;
+      }
+    }
+  }
+  @media screen and (max-width:649px) {
+    .featured-media-box {
+      max-width:350px;
+      margin:0 0 30px;
+
+      &:last-child {
+        margin-bottom:0;
+      }
+    }
+    .featured-media-box h4 {
+      font-size:16px;
+      line-height:18px;
+    }
+  }
+}
+
+// Individual media bxoes
+.featured-media-box {
+  @include shadow-box();
+  overflow:hidden;
+
+  img {
+    display:block;
+    width:100%;
+    height:auto;
+  }
+
+  .image-wrap {
+    width:100%;
+    background:#D8D8D8;
+
+    img {
+      display:block;
+      width:100%;
+      height:auto;
+      transition:opacity .2s ease;
+    }
+  }
+  .image-wrap a:hover img {
+    opacity:.8;
+  }
+  .details {
+    padding:12px 16px;
+    font-size:14px;
+    line-height:22px;
+  }
+  h4 {
+    font-size:18px;
+    line-height:24px;
+    font-weight:600;
+    margin:0 0 8px;
+  }
+  h4.seth{
+    height: 75px;
+  }
+  h4 ~ div{
+    position: relative;
+    height: 400px;
+    margin-bottom: 14px;
+    overflow: hidden;
+  }
+  // h4 ~ div:after{
+  //   position: absolute;
+  //   content: "…";
+  //   font-size: 16px;
+  //   color: #111111;
+  //   bottom: 0px;
+  //   right: 0px; 
+  //   background-color: #ffffff;
+  // }
+
+  h4 a {
+    color:$dark-gray;
+    text-decoration:none;
+    &:hover { text-decoration:underline; }
+  }
+  p {
+    margin:0 0 12px;
+  }
+  .more {
+    margin:0;
+  }
+  .more a {
+    color:$medium-blue;
+    text-decoration:none;
+    &:hover { text-decoration:underline; }
+  }
+  .dot {
+    color:$light-body;
+    margin:0 3px;
+  }
+}
+.standard-container .featured-media-box h4.seth {
+  font-size:16px;
+  line-height:18px;
+}

@@ -1,0 +1,120 @@
+.site-footer {
+  background:$dark-blue;
+  color:#fff;
+  font-size:12px;
+  line-height:14px;
+  color:rgba(255,255,255,.6);
+  font-weight:200;
+  padding:23px 0;
+
+  p {
+    margin:0;
+  }
+
+  a {
+    color:rgba(255,255,255,.6);
+    text-decoration:none;
+    &:hover {
+      text-decoration:underline;
+      color:#fff;
+    }
+  }
+  a.credit {
+    color:#fff;
+  }
+  .heart {
+    color:#FF5540;
+  }
+
+  .dot {
+    margin:0 4px;
+  }
+
+  a:hover .heart i:before {
+    text-decoration:underline;
+  }
+
+  @media screen and (min-width:$screen-sm-min) {
+    .copyright {
+      float:left;
+    }
+    .site-by {
+      float:right;
+    }
+    .links {
+      display:inline;
+    }
+  }
+  @media screen and (max-width:$screen-xs-max) {
+    text-align:center;
+
+    .copyright {
+      margin-bottom:18px;
+      line-height:16px;
+    }
+    .links .dot:first-child {
+      display:none;
+    }
+  }
+}
+
+.pontifex-tweets {
+  background:#FEE028;
+  color:$dark-gray;
+
+  .avatar {
+    display:block;
+    float:left;
+  }
+  .recent-tweet {
+    font-weight:200;
+  }
+  .tweet-contents {
+    margin-bottom:8px;
+  }
+  .tweet-meta {
+    font-size:14px;
+    line-height:18px;
+  }
+  a {
+    color:$dark-gray;
+    text-decoration:none;
+    &:hover { text-decoration:underline; }
+  }
+  .dot {
+    margin:0 4px;
+  }
+
+  @media screen and (max-width:$screen-xs-max) {
+    padding:30px 0;
+
+    .avatar {
+      margin:0 0 12px;
+      width:48px;
+      height:48px;
+    }
+    .recent-tweet {
+      margin-left:66px;
+    }
+    .tweet-contents {
+      font-size:18px;
+      line-height:22px;
+    }
+  }
+  @media screen and (min-width:$screen-sm-min) {
+    padding:48px 0;
+
+    .avatar {
+      margin:0 0 8px;
+      width:84px;
+      height:84px;
+    }
+    .recent-tweet {
+      margin-left:110px;
+    }
+    .tweet-contents {
+      font-size:24px;
+      line-height:36px;
+    }
+  }
+}
