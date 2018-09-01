@@ -15,23 +15,13 @@
         <div class="featured-video-container">
           <div class="video-placeholder">
             <div class="video-actions">
-              {% if entry.vimeoVideoId != 0 %}
-                {% set min = 0 %}
-                {% set sec = 0 %}
-                 {% if entry.vimeoTimecode|length %}
-                      {% set min = entry.vimeoTimecode[0].minutes %}
-                      {% set sec = entry.vimeoTimecode[0].seconds %}
-                 {% endif %}
-                {% set video = helpers.vimeo_video(entry.vimeoVideoId,entry.autoplay,min,sec) %}
-                <div data-video='embed' class="action-icon">
+                <div data-video="embed" class="action-icon">
                   <i class="fa fa-play"></i>
                 </div>
-                 <script type='text/template' id='video-embed'>{{ video }}</script>
-              {% endif %}
+                <script type="text/template" id="video-embed">
+                <div class="fitvids"><iframe src="//player.vimeo.com/video/108439863?api=1&amp;autoplay=1" width="780" height="438" data-time="0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div></script>
             </div>
-            {% if entry.placeholderImage|length %}
-              <img src="{{ entry.placeholderImage[0].url }}" alt="{{ entry.title }}" />
-            {% endif %}
+            <img src="https://stanneaz.org/img/general/video-placeholder-homily.jpg" alt="Start Here">
           </div>
         </div>
       </div>

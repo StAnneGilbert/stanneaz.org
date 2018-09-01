@@ -13,7 +13,7 @@
           {% set feedurl = entry.feedUrl|raw %}
           {% set limit = 30 %}
           {% set cache = "P0M" %}
-          {% set items = craft.feeds.getFeedItems(feedurl, limit, 0, cache) %}
+          {% set items = craft.app.feeds.getFeedItems(feedurl, limit, 0, cache) %}
           {% for item in items %}
             <div class="featured-media-box">
                 {# <div class="image-wrap">

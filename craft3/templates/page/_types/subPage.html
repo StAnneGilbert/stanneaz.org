@@ -1,12 +1,12 @@
 
-{%- set parent = craft.entries.section('pages').slug(craft.request.getSegment(1)).first() -%}
+{%- set parent = craft.entries.section('pages').slug(craft.app.request.getSegment(1)).one() -%}
 {%- set children = entry.getDescendants(1) -%}
 
 {% macro recursiveChildren(page) %}
-  {% if page.hasDescendants and page.slug == craft.request.getSegment(page.level) %}
+  {% if page.hasDescendants and page.slug == craft.app.request.getSegment(page.level) %}
     <ul>
       {% for subpage in page.children %}
-          <li{% if subpage.slug == craft.request.getSegment(subpage.level) %} class="selected"{% endif %}>
+          <li{% if subpage.slug == craft.app.request.getSegment(subpage.level) %} class="selected"{% endif %}>
             {{ subpage.link }}
             {{ _self.recursiveChildren(subpage) }}
           </li>
@@ -30,7 +30,7 @@
             {% if entry.parent %}
               <li style='font-weight:600;'> {{ entry.parent.link }} </li>
             {% endif %}
-              {% nav page in children %}
+              {% nav page in children.all() %}
                 <li {% if page.id == entry.id or entry.isDescendantOf(page) %}class="selected"{% endif %}>
                     {% if page.id == entry.id %}
                       <span>{{page.title}}</span>
@@ -50,7 +50,7 @@
           {% if entry.parent %}
             <li style='font-weight:600;'> {{ entry.parent.link }} </li>
           {% endif %}
-              {% nav page in children %}
+              {% nav page in children.all() %}
                 <li {% if page.id == entry.id or entry.isDescendantOf(page) %}class="selected"{% endif %}>
                     {% if page.id == entry.id %}
                       <span>{{page.title}}</span>

@@ -1,5 +1,6 @@
 {# Homepage Template #}
 {% extends "layouts/_layout" %}
+{% import "_helpers" as helpers %}
 
 {% block pagetype %}
 {% endblock %}
@@ -50,12 +51,7 @@
                   <i class="fa fa-volume-up"></i>
                 </div>
                 <div class='action-icon'>
-                  <form method="post" action="" accept-charset="UTF-8">
-                      <input type="hidden" name="{{ craft.config.csrfTokenName }}" value="{{ craft.request.csrfToken }}">
-                      <input type="hidden" name="action" value="downloadassets/generate/downloadAsset">
-                      <input type='hidden' name='id' value='{{ entry.audio[0].id }}'/>
-                      <button type='submit' class='action'><i class='fa fa-download'></i></button>
-                  </form>
+                     <a href="{{ entry.audio[0].url }}" target="_blank" download><i class='fa fa-download fa-inverse'></i></a>
                 </div>
               {% endif %}
             </div>
@@ -72,7 +68,7 @@
               <h3 class="small">{{ entry.mediaDate|date('F d, Y g:i a') }} {% if entry.speaker|length %} &nbsp;&middot;&nbsp;{{ entry.speaker[0].title }} {% endif %}</h3>
               <p class="links">
                 {% set topics = entry.mediaTopic %}
-                  {% for topic in topics %}
+                  {% for topic in topics.all() %}
                       <a href='/media/media-library?q=topic:{{ topic.id }}'>{{ topic.title }}</a>{% if not loop.last %},{% endif %}
                   {% endfor %}
                   {% if entry.mediaSeason|length %}
