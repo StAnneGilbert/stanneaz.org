@@ -1,7 +1,7 @@
-<?xml version="1.0"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
     <channel>
-        <title>{{ siteWideContent.parishName }}</title>
+        <title>Events at:  {{ siteWideContent.parishName }}</title>
         <link>{{ siteUrl }}</link>
         <atom:link href="{{ craft.app.request.absoluteUrl }}" rel="self" type="application/rss+xml" />
         <description>{{ siteWideContent.siteDescription }}</description>
@@ -12,16 +12,16 @@
             <title>{{ siteWideContent.parishName }}</title>
             <link>{{ siteUrl }}</link>
         </image>
-        {% for entry in craft.entries.section('newsUpdates').limit('80').all() %}
+        {% for entry in craft.entries.section('events').limit('80').all() %}
             <item>
                 <title>{{ entry.title }}</title>
                 <link>{{ entry.url }}</link>
-                <pubDate>{{ entry.postDate|rss }}</pubDate>
-                {% if entry.postAuthor|length %}
-                    <author>{{ entry.postAuthor[0].title }}</author>   
-                {% endif %}
+                <pubDate>{{ entry.eventStartDate|rss }}</pubDate>
                 <guid>{{ entry.url }}</guid>
-                <description><![CDATA[ 
+                <description><![CDATA[
+                  {% if entry.eventListingImage|length %}
+                    <img src="{{ entry.eventListingImage[0].url }}" width="321" height="200" alt="{{ entry.title }}">   
+                  {% endif %}
                     {{ entry.body }}
                 ]]></description>
             </item>

@@ -1,0 +1,90 @@
+<div class="page-content-container">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+      
+      {{ entry.body }}
+      
+      <a name="eva"></a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-5 col-md-5 col-sm-5">
+        <h3>{{ "Events"|t }}</h3>
+      </div>
+      <div class="col-lg-7 col-md-7 col-sm-7 action-links" style="text-align:right">
+        {% if craft.app.language == "en-US" %}
+            <a style="display:inline-block" href="http://feeds.feedburner.com/StAnneEvents" target="_blank"><i class="fa fa-rss"></i> {{ "Events RSS"|t }}</a>
+        {% elseif craft.app.language == "es-US" %}
+            <a style="display:inline-block" href="http://feeds.feedburner.com/EventosStaAna" target="_blank"><i class="fa fa-rss"></i> {{ "Eventos RSS"|t }}</a>
+        {% endif %}
+              
+        <form style="display:inline-block" action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open('https://feedburner.google.com/fb/a/mailverify?uri={% if craft.app.language == 'es-US' %}EventosStaAna{% else %}StAnneEvents{% endif %}', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true"> <input type="text" style="margin:0 10px 0 5px;vertical-align:middle;width:160px" name="email" placeholder="{{ "Enter your email"|t }}...." title="{{ "Enter your email address"|t }}"/><input type="hidden" value="{% if craft.app.language == 'es-US' %}EventosStaAna{% else %}StAnneEvents{% endif %}" name="uri"/><input type="hidden" name="loc" value="en_US"/><button type="submit" class="btn btn-sm btn-light-blue" style="vertical-align:middle;"><i class="fa fa-check"></i> {{ "Subscribe"|t }}</button></form>
+              
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+
+        {% paginate craft.entries.section('events').orderBy('eventDateTime ASC').limit(24) as entries %}
+        
+        {% include "events/_event-items" %}
+        
+        {% include "partials/_pagination" %}
+        
+        </div>
+    </div> <!-- .row -->
+        
+        {% if craft.app.language == 'es-US' %}
+            <h3>Eventos en la Diócesis de Phoenix (<a href="http://dphx.org/events/?lang=es" target="_blank">dphx.org/events/?lang=es</a>)</h3>
+        {% else %}
+            <h3>Events from the Diocese of Phoenix (<a href="http://dphx.org/events/" target="_blank">dphx.org/events</a>)</h3>
+        {% endif %}
+        <div class="row">
+        <div class="col-lg-12">
+
+        <div class="featured-media-grid clearfix">
+          {% if craft.app.language == 'es-US' %}
+              {% set dphxFeed = "https://dphx.org/events/feed/?lang=es" %}
+          {% else %}
+              {% set dphxFeed = "https://dphx.org/events/feed/" %}
+          {% endif %}
+          {% set limit = 100 %}
+          {% set cache = "P0M" %}
+          {% cache globally for 1 hour %}
+          {% set phxitems = craft.app.feeds.getFeedItems(dphxFeed, limit,0, cache) %}
+          {% for phxitem in phxitems|reverse %}
+            <div class="featured-media-box">
+              <div class="details">
+                <h4 class='seth'><a href="{{ phxitem.permalink }}" target='_blank'>{{ phxitem.title }}</a></h4>
+                <div>
+                  <a href="{{ phxitem.permalink }}" target='_blank'><img src="https://stanneaz.org/img/city/logos/dphxLogo.jpg" alt="Diocese of Phoenix Event" width="321" height="200" style="margin-bottom:20px" /></a>
+                  {{ phxitem.summary|raw }}
+                </div>
+                <p class="more muted">
+                  
+                  {% if craft.app.language == 'es-US' %}
+                    {{ phxitem.date|date('d F, Y') }}
+                  {% else %}
+                    {{ phxitem.date|date('F d, Y') }}
+                  {% endif %}
+                  <span class="dot">&middot;</span>
+                  {{ phxitem.date|date('g:ia') }}
+                  <span class="dot">&middot;</span>
+                  <a href="{{ phxitem.permalink }}" target='_blank'>{{ "Read More"|t }}</a>
+                </p>
+              </div>
+            </div>
+          {% endfor %}
+          {% endcache %}
+          
+        </div> <!-- .row -->
+
+
+          </div>
+        </div> <!-- .row -->
+        
+        
+      </div> <!-- .container -->
+    </div> <!-- .page-content-container -->
+  </div> <!-- .sf-content -->

@@ -1,0 +1,79 @@
+
+<div class="featured-media-grid clearfix">
+  
+  {% for post in entries|reverse %}
+  
+      {% if craft.app.language == 'es-US' %}
+                    
+		  {% if post.tbdTba | length %}
+			  {% set displayDT = "Horario: por determinar" %}   
+		  {% elseif post.eventStartDate|date('F d') == post.eventEndDate|date('F d') %}
+			  {% if post.eventStartDate|date('a') == post.eventEndDate|date('a') %}
+				  {% set displayDT = post.eventStartDate|date('d F, Y g:i') ~ " a " ~ post.eventEndDate|date('g:i a') %}
+			  {% else %}
+				  {% set displayDT = post.eventStartDate|date('d F, Y g:i a') ~ " a " ~ post.eventEndDate|date('g:i a') %}
+			  {% endif %}  
+		  {% elseif (post.eventEndDate is not empty) and (post.eventEndDate|date('g:i') != '12:00') %}  
+			  {% if post.showDatesOnly | length %}
+				  {% set displayDT = post.eventStartDate|date('d F') ~ " a " ~  post.eventEndDate|date('d F, Y') %}
+			  {% else %}
+				  {% set displayDT = post.eventStartDate|date('d F, Y g:i a') ~ " a " ~  post.eventEndDate|date('d F, Y g:i a') %}
+			  {% endif %}             
+		  {% else %}
+			  {% if post.showDatesOnly | length %}
+				  {% set displayDT = post.eventStartDate|date('d F, Y') %}
+			  {% else %}
+				  {% set displayDT = post.eventStartDate|date('d F, Y  g:i a') %}
+			  {% endif %}             
+		  {% endif %}
+	        
+                    
+      {% else %}
+  
+		  {% if post.tbdTba | length %}
+			  {% set displayDT = "Date/Time: TBD/TBA" %}   
+		  {% elseif post.eventStartDate|date('F d') == post.eventEndDate|date('F d') %}
+			  {% if post.eventStartDate|date('a') == post.eventEndDate|date('a') %}
+				  {% set displayDT = post.eventStartDate|date('F d, Y g:i') ~ "-" ~ post.eventEndDate|date('g:i a') %}
+			  {% else %}
+				  {% set displayDT = post.eventStartDate|date('F d, Y g:i a') ~ " - " ~ post.eventEndDate|date('g:i a') %}
+			  {% endif %}  
+		  {% elseif (post.eventEndDate is not empty) and (post.eventEndDate|date('g:i') != '12:00') %}  
+			  {% if post.showDatesOnly | length %}
+				  {% set displayDT = post.eventStartDate|date('F d') ~ " to " ~  post.eventEndDate|date('F d, Y') %}
+			  {% else %}
+				  {% set displayDT = post.eventStartDate|date('F d, Y g:i a') ~ " to " ~  post.eventEndDate|date('F d, Y g:i a') %}
+			  {% endif %}             
+		  {% else %}
+			  {% if post.showDatesOnly | length %}
+				  {% set displayDT = post.eventStartDate|date('F d, Y') %}
+			  {% else %}
+				  {% set displayDT = post.eventStartDate|date('F d, Y \\a\\t g:i a') %}
+			  {% endif %}             
+		  {% endif %}
+	  
+	  {% endif %}
+	
+	  {% if post.customEventUrl is not empty %}
+		  {% set eventLink = post.customEventUrl.url %}  
+	  {% else %}
+		  {% set eventLink = post.url %}  
+	  {% endif %}
+
+{% if post.eventStartDate|date('Ymd') >= now|date('Ymd') %}
+<div class="featured-media-box">   
+    <div class="details">
+        <h4 class='seth' style="height:50px"><a href="{{ eventLink }}">{{ post.title }}</a></h4>
+        <div style="height:20px">{{ displayDT }}</div>
+		<a href="{{ eventLink }}" style="cursor:pointer;cursor:hand"><img src="{{ post.eventListingImage[0].url }}" alt="" width="321" height="200" style="margin-bottom:20px" /></a>
+		<div class="postBody" style="height:85px">{{ post.body|chop(limit=140, unit='c')}}</div>
+		<p class="more muted">
+		  <a href="{{ eventLink }}" target='_blank'>{{ "Read More"|t }}</a>
+		</p>
+    </div>
+</div>
+{% endif %}
+	
+  {% endfor %}
+  
+</div> <!-- .media-area -->
