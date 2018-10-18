@@ -8,7 +8,7 @@
     <atom:link href="https://stanneaz.org/rss/messages.xml" rel="self" type="application/rss+xml" />
     <title>St. Anne's Catholic Media Podcast</title>
     <link><![CDATA[{{ siteUrl }}]]></link>
-    <copyright><![CDATA[© 2014]]></copyright>
+    <copyright><![CDATA[© 2014-2018]]></copyright>
     <description><![CDATA[{{ siteWideContent.siteDescription }}]]></description>
     <language>en-us</language>
     <pubDate>{{ now|rss }}</pubDate>
@@ -23,11 +23,11 @@
     {% endif %}
     <itunes:summary><![CDATA[{{ siteWideContent.siteDescription }}]]></itunes:summary>
     <itunes:keywords>St. Anne,podcast,media,catholic</itunes:keywords>
-    <itunes:author>St. Anne's Roman Catholic Parish</itunes:author>
+    <itunes:author>St. Anne Roman Catholic Parish</itunes:author>
     <itunes:explicit>clean</itunes:explicit>
     <itunes:owner>
         <itunes:email>info@stanneaz.org</itunes:email>
-        <itunes:name>St. Anne's Roman Catholic Parish</itunes:name>
+        <itunes:name>St. Anne Roman Catholic Parish</itunes:name>
     </itunes:owner>
 
     <itunes:block>no</itunes:block>
@@ -44,7 +44,7 @@
         {% if entry.speaker|length %}
             <itunes:author>{{ entry.speaker[0].title }}</itunes:author>
         {% endif %}
-            <author>info@stanneaz.org (St. Anne's Roman Catholic Parish)</author>
+            <author>info@stanneaz.org (St. Anne Roman Catholic Parish)</author>
             <guid>{{ audio }}</guid>
             <description><![CDATA[]]></description>
             <enclosure

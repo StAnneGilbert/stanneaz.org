@@ -42,6 +42,12 @@
                           <img src="{{ item.pageImage[0].getUrl('tf160') }}" alt="{{ item.title }}" />
                         </div>
                       {% endif %}
+                  {% case "Events" %}
+                      {% if item.eventListingImage|length %}
+                        <div class="media">
+                          <img src="{{ item.eventListingImage[0].getUrl('tf160') }}" alt="{{ item.title }}" />
+                        </div>
+                      {% endif %}
                   {% case "Homilies" %}
                       {% if item.postImage|length %}
                         <div class="media">

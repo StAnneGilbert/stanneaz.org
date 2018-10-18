@@ -1,0 +1,130 @@
+{# Homepage Template #}
+{% extends "layouts/_layout" %}
+
+{% block pagetype %}{% endblock %}
+
+{% block content %} 
+ <!-- .sf-content for flex sticky footer -->
+  <div class="sf-content nav-slide-element">
+    <div class="page-content-container">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-10 col-lg-offset-1">
+            
+
+            <div class="row">
+              <div class="col-md-8 col-sm-7">
+                <h3>{{ entry.title }}</h3>
+                <p class="published">
+              
+{% set displayEDate = '' %}
+{% set displayETime = '' %}
+{% set displayDT = '' %}
+{% if craft.app.language == 'es-US' %}
+    {% set timeSeparator = ' a ' %}
+{% else %}
+    {% set timeSeparator = ' - ' %}
+{% endif %}
+                
+{% if entry.hideDateTime | length %}  
+                  
+{% else %}
+    {% if craft.app.language == 'es-US' %}
+        {% set displayEDate = entry.eventStartDate|date('l, d \\d\\e F \\d\\e Y') %}
+    {% else %}
+        {% set displayEDate = entry.eventStartDate|date('l, F d, Y') %}          
+    {% endif %}
+    
+    {% if entry.eventStartDate|date('F d, Y') == entry.eventEndDate|date('F d, Y') %}
+        {% if entry.eventStartDate|date('a') == entry.eventEndDate|date('a') %}
+		    {% set displayETime = entry.eventStartDate|date('g:i') ~ timeSeparator ~ entry.eventEndDate|date('g:i a') %} 
+        {% else %}
+		    {% set displayETime = entry.eventStartDate|date('g:i a') ~ timeSeparator ~ entry.eventEndDate|date('g:i a') %}
+        {% endif %}  
+    {% elseif (entry.eventEndDate is not empty) and (eventEndDate|date('g:i') != '12:00') %}
+        {% if entry.showDatesOnly | length %}
+            {% if craft.app.language == 'es-US' %}
+                {% set displayEDate = entry.eventStartDate|date('\\D\\e \\l\\a\\s d \\d\\e F') ~ " del " ~  entry.eventEndDate|date('d \\d\\e F, Y') %}
+            {% else %}
+                {% set displayEDate = entry.eventStartDate|date('l, F d') ~ " to " ~  entry.eventEndDate|date('l, F d, Y') %}         
+            {% endif %}
+		    	  
+		{% else %}
+		    {% if craft.app.language == 'es-US' %}
+                {% set displayEDate = entry.eventStartDate|date('\\D\\e \\l\\a\\s d \\d\\e F, Y, g:i a') ~ " del " ~  entry.eventEndDate|date('d \\d\\e F, Y, g:i a') %}
+            {% else %}
+                {% set displayEDate = entry.eventStartDate|date('F d, Y g:i a') ~ " to " ~  entry.eventEndDate|date('F d, Y, g:i a') %}       
+            {% endif %}
+			 
+		{% endif %}             
+    {% else %}
+        {% if craft.app.language == 'es-US' %}
+            {% set displayETime = entry.eventStartDate|date('\\a \\l\\a\\s g:i a') %} 
+        {% else %}
+            {% set displayETime = entry.eventStartDate|date('\\a\\t g:i a') %}           
+        {% endif %}          
+    {% endif %}
+    
+			     
+    <div style="font-size:28px">
+        {{ displayEDate }}
+        {% if entry.showDatesOnly | length %}
+        {% else %}
+            <br>{{ displayETime }}
+        {% endif %}
+    </div>
+    
+{% endif %} 
+
+
+
+
+
+
+                </p>
+
+                <div class="blog-post">
+                  {{ entry.body }}  
+                </div>
+              </div>
+
+              <div class="col-md-4 col-sm-5 blog-sidebar">
+              
+              {% if entry.eventListingImage|length %}
+                <div class="featured-image-container">
+                  <img src="{{ entry.eventListingImage[0].url }}" alt="" />
+                </div>
+              {% endif %}
+                
+                
+                <div style="margin:20px 0 40px"><a href="{{ siteUrl }}connect/{% if craft.app.language == 'es-US' %}eventos{% else %}events{% endif %}">{{ "View more events"|t }} &rsaquo;</a>
+                </div>
+                
+                <hr>
+                
+                {% if siteWideSocialLinks.socialLinks|length %}
+                  <h6>{{ "Connect with us"|t }}</h6>
+                  <ul class="social-circles">
+                    {% for service in siteWideSocialLinks.socialLinks.all() %}
+                      {% set link = service.serviceUrl %}
+                        <li>
+                          <a href="{{ link.url }}" class="bg-{{ service.service }}">
+                            <i class='fa fa-{{ service.service }}'></i>
+                          </a>
+                        </li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+
+                
+                
+                
+
+              </div> <!-- .col -->
+            </div> <!-- .row -->
+          </div> <!-- .col -->
+        </div> <!-- .row -->
+      </div> <!-- .container -->
+    </div> <!-- .page-content-container -->
+  </div> <!-- .sf-content -->
+{% endblock %}

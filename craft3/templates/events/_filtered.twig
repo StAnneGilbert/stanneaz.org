@@ -1,4 +1,24 @@
-{% paginate craft.entries.section('newsUpdates').limit(10) as entries %}
+{% set q = craft.app.request.getParam('q')|split(":") %}
+{% set filterFor = q[0] %}
+{% set filterId = q[1] %}
+{% set postList = "" %}
+{% if filterFor == "month" %}
+    {% set monthValue = filterId|split("|") %}
+    {% set yrmo = monthValue[1]|split("-") %}
+    {% set year = yrmo[0] %}
+    {% set month = yrmo[1] %}
+
+    {% set firstDayOfMonth = year ~ "-" ~ month ~ "-01" %}
+    {% set daysInThisMonth = firstDayOfMonth|date('t') %}
+    {% set lastDayOfMonth  = year ~ "-" ~ month ~ "-" ~ daysInThisMonth %}
+
+    {% set thisMonthsEntries = craft.entries.section('newsUpdates').postDate('and', '>= ' ~ firstDayOfMonth, '<= ' ~ lastDayOfMonth) %}
+    {% set postList = thisMonthsEntries %}
+{% else %}
+  {% set postList = craft.entries.section('newsUpdates').relatedTo({ targetElement: filterId }) %}
+{% endif %}
+
+{% paginate postList.limit(10) as entries %}
   <div class="content-summary-list">
 
     {% for post in entries %}
@@ -13,7 +33,7 @@
         <div class="description">
           <h5><a href="{{ post.url }}">{{ post.title }}</a></h5>
           {% set topics = post.newsTopics %}
-          {% for topic in topics.all() %}
+          {% for topic in topics %}
               <a href='?q=topic:{{ topic.id }}'>{{ topic.title }}</a>{% if not loop.last %},{% endif %}
           {% endfor %}
           <div class="excerpt">
