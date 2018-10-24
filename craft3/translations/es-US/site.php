@@ -93,6 +93,8 @@ return array(
     "Topic" => "Tema",
     "Tuesday" => "Martes",
     "Type your specific comment, question, or issue here" => "Escribe tu comentario, pregunta, o asunto brevemente aquí",
+    "View more events" => "Ver más eventos",
+    "View more announcements" => "Ver más anuncios",
     "View more homilies" => "Ver más homilías",
     "View more media" => "Ver más medios",
     "View more news & updates" => "Ver más noticias y actualizaciones",

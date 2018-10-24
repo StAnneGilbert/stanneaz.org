@@ -1,7 +1,9 @@
 
 <div class="featured-media-grid clearfix">
+
+{% set eventItems = craft.entries.section('events').relatedTo(pos).orderBy('eventStartDate').all() %}
   
-  {% for post in entries|reverse %}
+  {% for post in eventItems %}
   
       {% if craft.app.language == 'es-US' %}
                     
@@ -63,12 +65,12 @@
 {% if post.eventStartDate|date('Ymd') >= now|date('Ymd') %}
 <div class="featured-media-box">   
     <div class="details">
-        <h4 class='seth' style="height:50px"><a href="{{ eventLink }}">{{ post.title }}</a></h4>
-        <div style="height:20px">{{ displayDT }}</div>
+        <h4 class='seth'><a href="{{ eventLink }}">{{ post.title }}</a></h4>
 		<a href="{{ eventLink }}" style="cursor:pointer;cursor:hand"><img src="{{ post.eventListingImage[0].url }}" alt="" width="321" height="200" style="margin-bottom:20px" /></a>
 		<div class="postBody" style="height:85px">{{ post.body|chop(limit=140, unit='c')}}</div>
 		<p class="more muted">
-		  <a href="{{ eventLink }}" target='_blank'>{{ "Read More"|t }}</a>
+            {{ displayDT }}<br>
+		    <a href="{{ eventLink }}" target='_blank'>{{ "Read More"|t }}</a>
 		</p>
     </div>
 </div>

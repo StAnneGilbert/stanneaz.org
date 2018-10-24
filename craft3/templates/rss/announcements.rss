@@ -2,7 +2,8 @@
 <rss version="2.0">
     <channel>
         <title>Events at:  {{ siteWideContent.parishName }}</title>
-        <link>{{ siteUrl }}connect/events</link>
+        <link>{{ siteUrl }}</link>
+        <atom:link href="{{ craft.app.request.absoluteUrl }}" rel="self" type="application/rss+xml" />
         <description>{{ siteWideContent.siteDescription }}</description>
         <language>en-us</language>
         <pubDate>{{ now|rss }}</pubDate>
