@@ -1,0 +1,37 @@
+BEGIN:VCALENDAR
+PRODID:iCalendar-Ruby
+VERSION:2.0
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Events at St. Anne Roman Catholic Parish
+X-WR-TIMEZONE:America/Phoenix
+BEGIN:VTIMEZONE
+TZID:America/Phoenix
+X-LIC-LOCATION:America/Phoenix
+BEGIN:STANDARD
+TZOFFSETFROM:-0700
+TZOFFSETTO:-0700
+TZNAME:MST
+DTSTART:19700101T000000
+END:STANDARD
+END:VTIMEZONE
+{% spaceless %}
+{% for entry in craft.entries.section('events').limit('80').all() %}{% set icalStartDate = entry.eventStartDate|date("Ymd", "UTC") %}{% set icalEndDate = entry.eventEndDate|date("Ymd", "UTC") %}{% set icalStartTime = entry.eventStartDate|date("Gi", "UTC") %}{% set icalEndTime = entry.eventEndDate|date("Gi", "UTC") %}{% if (entry.eventEndDate is not empty) and (eventEndDate|date('g:i') != '12:00') %}{% set icalEndTime = entry.eventEndDate|date("Gi", "UTC") %}{% else %}{% set icalEndDate = entry.eventStartDate|date("Ymd", "UTC") %}{% set icalEndTime = entry.eventStartDate|date("Gi", "UTC") %}{% endif %}
+BEGIN:VEVENT
+DTSTART:{{icalStartDate}}T{{icalStartTime}}00Z
+DTEND:{{icalEndDate}}T{{icalEndTime}}00Z
+UID:Events-{{icalStartDate}}T{{icalStartTime}}00Z
+DESCRIPTION:{{ entry.title }}
+{% if entry.eventStreetAddress|length %}
+LOCATION:{{entry.eventLocation}}\n{{entry.streetAddress}}\, {{entry.city}}\, {{entry.state}}\, {{entry.zip}}
+{% else %}
+LOCATION:St Anne Roman Catholic Parish\n440 E Elliot Rd\, Gilbert\, AZ\, 85234
+{% endif %}
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:{{entry.title}}
+URL:{{entry.url}}
+END:VEVENT
+{% endfor %}
+END:VCALENDAR
+{% endspaceless %}

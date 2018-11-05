@@ -95,9 +95,22 @@
                   <img src="{{ entry.eventListingImage[0].url }}" alt="" />
                 </div>
               {% endif %}
-                
-                
-                <div style="margin:20px 0 40px"><a href="{{ siteUrl }}connect/{% if craft.app.language == 'es-US' %}eventos{% else %}events{% endif %}">{{ "View more events"|t }} &rsaquo;</a>
+              
+              <div style="margin:20px 0 40px;font-size:18px">
+              
+              <h6>{{ "Event Location:"|t }}</h6>  
+              
+              {% if entry.eventStreetAddress|length %}
+                  <a href="https://www.google.com/maps/place/{{ entry.eventStreetAddress|url_encode|replace({'%20': '+'}) }}+{{ entry.city|url_encode|replace({'%20': '+'}) }}+{{ entry.state|url_encode|replace({'%20': '+'}) }}+{{ entry.zipCode }}" target="_blank">{{ entry.locationName }}<br/>
+                  {{ entry.eventStreetAddress }}<br/>
+                  {{ entry.city }}, {{ entry.state }}  {{ entry.zipCode }}</a>
+              {% else %}
+                  <a href="https://www.google.com/maps/place/440+E+Elliot+Rd,+Gilbert,+AZ+85234/@33.351169,-111.7822207,17z/data=!3m1!4b1!4m5!3m4!1s0x872ba93f28ba0e83:0x98949b9d24239822!8m2!3d33.351169!4d-111.780032" target="_blank">{{ "St. Anne Roman Catholic Parish"|t }}<br/>
+                  440 E. Elliot Rd<br/>
+                  Gilbert, AZ  85234</a>
+                  
+              {% endif %}
+              
                 </div>
                 
                 <hr>
@@ -116,7 +129,10 @@
                   </ul>
                 {% endif %}
 
+                <hr>
                 
+                <div style="margin:20px 0 40px"><a href="{{ siteUrl }}connect/{% if craft.app.language == 'es-US' %}eventos{% else %}events{% endif %}">{{ "View more events"|t }} &rsaquo;</a>
+                </div>
                 
                 
 
