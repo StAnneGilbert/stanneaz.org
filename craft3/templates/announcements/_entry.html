@@ -1,0 +1,64 @@
+{# Homepage Template #}
+{% extends "layouts/_layout" %}
+
+{% block pagetype %}{% endblock %}
+
+{% block content %} 
+ <!-- .sf-content for flex sticky footer -->
+  <div class="sf-content nav-slide-element">
+    <div class="page-content-container">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-10 col-lg-offset-1">
+            
+
+            <div class="row">
+              <div class="col-md-8 col-sm-7">
+                <h3>{{ entry.title }}</h3>
+
+
+                <div class="blog-post">
+                  {{ entry.body }}  
+                </div>
+              </div>
+
+              <div class="col-md-4 col-sm-5 blog-sidebar">
+              
+              {% if entry.eventListingImage|length %}
+                <div class="featured-image-container">
+                  <img src="{{ entry.eventListingImage[0].url }}" alt="" />
+                </div>
+              {% endif %}
+              
+                 
+                <hr>
+                
+                {% if siteWideSocialLinks.socialLinks|length %}
+                  <h6>{{ "Connect with us"|t }}</h6>
+                  <ul class="social-circles">
+                    {% for service in siteWideSocialLinks.socialLinks.all() %}
+                      {% set link = service.serviceUrl %}
+                        <li>
+                          <a href="{{ link.url }}" class="bg-{{ service.service }}">
+                            <i class='fa fa-{{ service.service }}'></i>
+                          </a>
+                        </li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+
+                <hr>
+                
+                <div style="margin:20px 0 40px"><a href="{{ siteUrl }}connect/{% if craft.app.language == 'es-US' %}anuncios{% else %}announcements{% endif %}">{{ "View more announcements"|t }} &rsaquo;</a>
+                </div>
+                
+                
+
+              </div> <!-- .col -->
+            </div> <!-- .row -->
+          </div> <!-- .col -->
+        </div> <!-- .row -->
+      </div> <!-- .container -->
+    </div> <!-- .page-content-container -->
+  </div> <!-- .sf-content -->
+{% endblock %}
