@@ -94,7 +94,7 @@
                 </div> #}
                 <div class="details">
                   <h4 class='seth'><a href="{{ item.permalink }}" target="_blank">{{ item.title }}</a></h4>
-                  <div>{{ item.summary }}</div>
+                  <div>{{ item.summary|raw }}</div>
                   <p class="more muted">
                     <a href="{{ item.permalink }}" target='_blank'>{{ "Read More"|t }}</a>
                   </p>
