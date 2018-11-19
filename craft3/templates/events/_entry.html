@@ -83,8 +83,43 @@
 
                 </p>
 
-                <div class="blog-post">
-                  {{ entry.body }}  
+                <div class="blog-post standard-container">
+                  
+                  {{ entry.body }}
+                  
+                  
+                  <style>
+                  .map-container{margin:40px 0;display:table;font-size:18px;text-align:center}
+                  .map-row{display:table-row}
+                  .map-col{display:table-cell; padding:0 20px 0 0; text-align:left; vertical-align:top;}
+                  @media screen and (max-width: 510px) { 
+                      .map-container, .map-row ,.map-col{display:block}
+                      .map-col{padding:0 0 20px}
+                  }
+                  </style>
+                  <div class="map-container">
+                    <div class="map-row">
+                      <div class="map-col">
+                        <h6>{{ "Event Location:"|t }}</h6>  
+                {% if entry.eventStreetAddress|length %}
+                        <a href="https://www.google.com/maps/place/{{ entry.eventStreetAddress|url_encode|replace({'%20': '+'}) }}+{{ entry.city|url_encode|replace({'%20': '+'}) }}+{{ entry.state|url_encode|replace({'%20': '+'}) }}+{{ entry.zipCode }}" target="_blank">{{ entry.locationName }}<br/>
+                  {{ entry.eventStreetAddress }}<br/>
+                  {{ entry.city }}, {{ entry.state }}  {{ entry.zipCode }}</a>
+                {% else %}
+                        <a href="https://www.google.com/maps/place/440+E+Elliot+Rd,+Gilbert,+AZ+85234/@33.351169,-111.7822207,17z/data=!3m1!4b1!4m5!3m4!1s0x872ba93f28ba0e83:0x98949b9d24239822!8m2!3d33.351169!4d-111.780032" target="_blank">{{ "St. Anne Roman Catholic Parish"|t }}<br/>
+                  440 E. Elliot Rd<br/>
+                  Gilbert, AZ  85234</a>
+                {% endif %}
+                      </div>
+                      <div class="map-col">
+                        <a href="https://www.google.com/maps/place/{% if entry.eventStreetAddress|length %}{{ entry.eventStreetAddress|url_encode|replace({'%20': '+'}) }}+{{ entry.city|url_encode|replace({'%20': '+'}) }}+{{ entry.state|url_encode|replace({'%20': '+'}) }}+{{ entry.zipCode }}{% else %}440+E+Elliot+Rd,+Gilbert,+AZ+85234/@33.351169,-111.7822207,17z/data=!3m1!4b1!4m5!3m4!1s0x872ba93f28ba0e83:0x98949b9d24239822!8m2!3d33.351169!4d-111.780032{% endif %}" target="_blank"> <img src="https://stanneaz.org/img/general/events/Maps-Gps.png" alt="Map It!" /></a>
+                
+                      </div><!--end .map-col-->
+                    </div><!--end .map-row-->
+                  </div><!--end .map-container-->
+                  
+                  
+                  
                 </div>
               </div>
 
@@ -96,21 +131,7 @@
                 </div>
               {% endif %}
               
-              <div style="margin:20px 0 40px;font-size:18px">
-              
-              <h6>{{ "Event Location:"|t }}</h6>  
-              
-              {% if entry.eventStreetAddress|length %}
-                  <a href="https://www.google.com/maps/place/{{ entry.eventStreetAddress|url_encode|replace({'%20': '+'}) }}+{{ entry.city|url_encode|replace({'%20': '+'}) }}+{{ entry.state|url_encode|replace({'%20': '+'}) }}+{{ entry.zipCode }}" target="_blank">{{ entry.locationName }}<br/>
-                  {{ entry.eventStreetAddress }}<br/>
-                  {{ entry.city }}, {{ entry.state }}  {{ entry.zipCode }}</a>
-              {% else %}
-                  <a href="https://www.google.com/maps/place/440+E+Elliot+Rd,+Gilbert,+AZ+85234/@33.351169,-111.7822207,17z/data=!3m1!4b1!4m5!3m4!1s0x872ba93f28ba0e83:0x98949b9d24239822!8m2!3d33.351169!4d-111.780032" target="_blank">{{ "St. Anne Roman Catholic Parish"|t }}<br/>
-                  440 E. Elliot Rd<br/>
-                  Gilbert, AZ  85234</a>
-                  
-              {% endif %}
-              
+                <div style="margin:20px 0 40px"><a href="{{ siteUrl }}connect/{% if craft.app.language == 'es-US' %}eventos{% else %}events{% endif %}">{{ "View more events"|t }} &rsaquo;</a>
                 </div>
                 
                 <hr>
@@ -131,8 +152,23 @@
 
                 <hr>
                 
-                <div style="margin:20px 0 40px"><a href="{{ siteUrl }}connect/{% if craft.app.language == 'es-US' %}eventos{% else %}events{% endif %}">{{ "View more events"|t }} &rsaquo;</a>
-                </div>
+                <h6>{{ "Subscribe"|t }}</h6>
+                <p>{{ "Get the latest news and updates from St. Anne in your RSS feed or email inbox"|t }}!</p>
+                {% if craft.app.language == 'es-US' %}
+                
+                    <a href="http://feeds.feedburner.com/AnunciosParaStaAna" class="btn btn-light-brown-border" target="_blank"><i class="fa fa-rss"></i> {{"Announcements RSS"|t }}</a><br/>
+                    <a href="http://feeds.feedburner.com/EventosStaAna" class="btn btn-light-brown-border" target="_blank"><i class="fa fa-rss"></i> {{"Events RSS"|t }}</a><br/>
+                    <a href="http://feeds.feedburner.com/CalendarioDeStaAna" class="btn btn-light-brown-border" target="_blank"><i class="fa fa-rss"></i> {{"Parish Calendar RSS"|t }}</a><br/>
+                    <a href="http://feeds.feedburner.com/AudiosdeParroquiaStaAna" class="btn btn-light-brown-border" target="_blank"><i class="fa fa-rss"></i> {{ "Podcasts RSS"|t }}</a>
+                    
+                {% else %}
+                
+                    <a href="http://feeds.feedburner.com/StAnneAnnouncements" class="btn btn-light-brown-border" target="_blank"><i class="fa fa-rss"></i> {{"Announcements RSS"|t }}</a><br/>
+                    <a href="http://feeds.feedburner.com/StAnneEvents" class="btn btn-light-brown-border"><i class="fa fa-rss" target="_blank"></i> {{"Events RSS"|t }}</a><br/>
+                    <a href="http://feeds.feedburner.com/StAnneRomanCatholicParishCalendar" class="btn btn-light-brown-border" target="_blank"><i class="fa fa-rss"></i> {{"Parish Calendar RSS"|t }}</a><br/>
+                    <a href="http://feeds.feedburner.com/stannecatholicpodcast" class="btn btn-light-brown-border" target="_blank"><i class="fa fa-rss"></i> {{ "Podcasts RSS"|t }}</a>
+                
+                {% endif %}
                 
                 
 
