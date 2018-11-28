@@ -1,5 +1,11 @@
-{% set latest = "/media/media-library" %}
-{% set topicTitle = "Homilies" %}
+{% if craft.app.language == 'es-US' %}
+    {% set latest = "/es/media/media-library" %}
+    {% set topicTitle = "Homilias" %}
+{% else %}
+    {% set latest = "/media/media-library" %}
+    {% set topicTitle = "Homilies" %}
+{% endif %}
+
 {% set break = 0 %}
 {% for item in craft.entries.section('media').orderBy('mediaDate DESC').all() if break == 0 %}
     {% set time = item.mediaDate|date('g:ia') %}

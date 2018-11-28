@@ -53,7 +53,7 @@
           {% set cache = "P0M" %}
           {% cache globally for 1 hour %}
           {% set phxitems = craft.app.feeds.getFeedItems(dphxFeed, limit,0, cache) %}
-          {% for phxitem in phxitems|reverse %}
+          {% for phxitem in phxitems %}
             <div class="featured-media-box">
               <div class="details">
                 <h4 class='seth'><a href="{{ phxitem.permalink }}" target='_blank'>{{ phxitem.title }}</a></h4>
