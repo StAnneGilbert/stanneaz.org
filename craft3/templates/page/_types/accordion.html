@@ -72,11 +72,13 @@
     </style>
         
         {{ entry.body }}
+        
+        {{ entry.scriptarea|raw }}
+        
       </div> <!-- .container -->
     </div> <!-- .page-content-container -->
   </div> <!-- .sf-content -->
   
-  {{ entry.scriptarea|raw }}
   
 <script>
 $("#accordion").accordion({ header: "h1", collapsible: true, active: false, heightStyle: "content" });
