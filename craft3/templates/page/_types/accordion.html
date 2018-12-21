@@ -76,6 +76,8 @@
     </div> <!-- .page-content-container -->
   </div> <!-- .sf-content -->
   
+  {{ entry.scriptarea|raw }}
+  
 <script>
 $("#accordion").accordion({ header: "h1", collapsible: true, active: false, heightStyle: "content" });
 $("#accordionOpen").accordion({ header: "h1", collapsible: false, active: false, heightStyle: "content" });
