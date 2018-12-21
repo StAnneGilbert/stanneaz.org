@@ -3,18 +3,14 @@
     <div class="row">
       <div class="col-lg-12">
 
-        <div class="section-title">
-          <div class="row">
-            <div class="col-lg-4 col-md-5 col-sm-5">
-              <h3>{{ entry.title }}</h3>
-            </div>
-          </div>
-        </div>
+
+        {{ entry.body }}
+
 
         <div class="featured-media-grid clearfix">
         {% if entry.feedUrl is not empty %}
           {% set feedurl = entry.feedUrl|raw %}
-          {% set limit = 30 %}
+          {% set limit = 60 %}
           {% set cache = "P0M" %}
           {% set items = craft.app.feeds.getFeedItems(feedurl, limit, 0, cache) %}
           {% for item in items %}
@@ -38,20 +34,6 @@
           {% endif %}
         </div> <!-- .row -->
 
-{#         <hr>
-
-        <div class="pagination">
-          <a href="#" class="btn btn-sm btn-light-blue btn-prev">&lsaquo; August 2014</a>
-          <ul class="pages">
-            <li class="current-page"><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">6</a></li>
-          </ul>
-          <a href="#" class="btn btn-sm btn-light-blue btn-next">October 2014 &rsaquo;</a>
-        </div> #}
 
           </div> <!-- .col -->
         </div> <!-- .row -->

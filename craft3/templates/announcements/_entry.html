@@ -18,7 +18,10 @@
 
 
                 <div class="blog-post standard-container">
-                  {{ entry.body }}  
+                  {{ entry.body }}
+                  
+                  {{ entry.scriptarea|raw }}
+                    
                 </div>
               </div>
 
@@ -81,6 +84,5 @@
     </div> <!-- .page-content-container -->
   </div> <!-- .sf-content -->
   
-  {{ entry.scriptarea|raw }}
   
 {% endblock %}
