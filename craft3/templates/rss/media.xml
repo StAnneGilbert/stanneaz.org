@@ -19,14 +19,14 @@
         <title>{{ siteName }}</title>
         <link>{{ siteUrl }}</link>
       </image>
-      <itunes:image href="https://stanneaz.org/img/general/video-placeholder-homily.jpg" />
+      <itunes:image href="https://stanneaz.org/img/general/podcasts/logo-1440x1440.jpg" />
     {% endif %}
     <itunes:summary><![CDATA[{{ siteWideContent.siteDescription }}]]></itunes:summary>
     <itunes:keywords>St. Anne,podcast,media,catholic</itunes:keywords>
     <itunes:author>St. Anne Roman Catholic Parish</itunes:author>
     <itunes:explicit>clean</itunes:explicit>
     <itunes:owner>
-        <itunes:email>info@stanneaz.org</itunes:email>
+        <itunes:email>media@stanneaz.org</itunes:email>
         <itunes:name>St. Anne Roman Catholic Parish</itunes:name>
     </itunes:owner>
 
@@ -44,7 +44,7 @@
         {% if entry.speaker|length %}
             <itunes:author>{{ entry.speaker[0].title }}</itunes:author>
         {% endif %}
-            <author>info@stanneaz.org (St. Anne Roman Catholic Parish)</author>
+            <author>media@stanneaz.org (St. Anne Roman Catholic Parish)</author>
             <guid>{{ audio }}</guid>
             <description><![CDATA[]]></description>
             <enclosure
