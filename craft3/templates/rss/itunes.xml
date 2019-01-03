@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
 <channel>
-<title>St. Anne's Catholic Media Podcast</title>
+<title>{{ "St. Anne's Catholic Media Podcast"|t }}</title>
 <link><![CDATA[{{ siteUrl }}]]></link>
 <language>en-us</language>
-<description>Catholic homilies and Mass readings from St. Anne Roman Catholic Parish in Gilbert, Arizona</description>
+<description>{{ "Catholic homilies and Mass readings from St. Anne Roman Catholic Parish in Gilbert, Arizona"|t }}</description>
 <pubDate>{{ now|rss }}</pubDate>
 <lastBuildDate>{{ now|rss }}</lastBuildDate>
-<itunes:subtitle>Homilies and Mass Readings</itunes:subtitle>
-<itunes:author>St. Anne Roman Catholic Parish</itunes:author>
-<itunes:summary>Catholic homilies and Mass readings from St. Anne Roman Catholic Parish in Gilbert, Arizona</itunes:summary>
-<itunes:keywords>St. Anne,podcast,media,catholic</itunes:keywords>
+<itunes:subtitle>{{ "Homilies and Mass Readings"|t }}</itunes:subtitle>
+<itunes:author>{{ "St. Anne Roman Catholic Parish"|t }}</itunes:author>
+<itunes:summary>{{ "Catholic homilies and Mass readings from St. Anne Roman Catholic Parish in Gilbert, Arizona"|t }}</itunes:summary>
+<itunes:keywords>{{ "St. Anne, podcast, media, catholic"|t }}</itunes:keywords>
 <itunes:owner>
-    <itunes:name>St. Anne Roman Catholic Parish</itunes:name>
+    <itunes:name>{{ "St. Anne Roman Catholic Parish"|t }}</itunes:name>
     <itunes:email>media@stanneaz.org</itunes:email>
 </itunes:owner>
 <itunes:explicit>no</itunes:explicit>
@@ -20,13 +20,13 @@
 <itunes:category text="Religion &amp; Spirituality">
     <itunes:category text="Christianity"/>
 </itunes:category>
-{% for entry in craft.entries.section('media').limit('50').all() %}
+{% for entry in craft.entries.section('media').limit('55').all() %}
     {% if entry.audio|length %}
     {% set audio = entry.audio[0].url %}
 <item>
     <title>{{ entry.title }}</title>
-    <itunes:summary>{% if entry.lead|length %}<![CDATA[{{ entry.lead }}]]>{% else %}Catholic homilies and Mass readings from St. Anne Roman Catholic Parish in Gilbert, Arizona{% endif %}</itunes:summary>
-    <description>{% if entry.body|length %}<![CDATA[{{ entry.body }}]]>{% else %}Catholic homilies and Mass readings from St. Anne Roman Catholic Parish in Gilbert, Arizona{% endif %}</description>
+    <itunes:summary>{% if entry.lead|length %}<![CDATA[{{ entry.lead }}]]>{% else %}{{ "Catholic homilies and Mass readings from St. Anne Roman Catholic Parish in Gilbert, Arizona"|t }}{% endif %}</itunes:summary>
+    <description>{% if entry.body|length %}<![CDATA[{{ entry.body }}]]>{% else %}{{ "Catholic homilies and Mass readings from St. Anne Roman Catholic Parish in Gilbert, Arizona"|t }}{% endif %}</description>
     <link>{{ entry.url }}</link>
     <enclosure url="{{ audio }}" type="audio/mpeg" length="1024"></enclosure>
     <pubDate>{{ entry.postDate|rss }}</pubDate>
