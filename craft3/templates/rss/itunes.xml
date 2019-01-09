@@ -3,7 +3,7 @@
 <channel>
 <title>{{ "St. Anne's Catholic Media Podcast"|t }}</title>
 <link><![CDATA[{{ siteUrl }}]]></link>
-<language>en-us</language>
+<language>{% if craft.app.language == 'es-US' %}es-us{% else %}en-us{% endif %}</language>
 <description>{{ "Catholic homilies and Mass readings from St. Anne Roman Catholic Parish in Gilbert, Arizona"|t }}</description>
 <pubDate>{{ now|rss }}</pubDate>
 <lastBuildDate>{{ now|rss }}</lastBuildDate>
