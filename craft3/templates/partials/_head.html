@@ -32,3 +32,8 @@
 <link rel='shortcut icon' href='https://stanneaz.org/assets/img/favicon.ico'/>
 <link rel="prerender" href="/start-here" />
 <link href='/assets/css/global.css' rel='stylesheet'/>
+
+{% if entry.headTagContent|length %}
+  {{ entry.headTagContent|raw }} 
+{% endif %}
+
