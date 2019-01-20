@@ -1,7 +1,6 @@
 <div class="page-content-container">
   <div class="container standard-container">
-  
-{% cache globally for 3 months %}
+
     {% set staff = craft.categories.group('staffGroup') %}
     {% for pos in staff.all() %}
       <h3 class="bottom-border">{{ pos.title }}</h3>
@@ -23,12 +22,79 @@
               <span class="job-title">{{ person.professionalTitle }}</span>
             </div>
             {% if person.phoneNumber is not empty %}
-              <div class="col col-email">
+              <div class="col col-phone">
                 <a href="{{ person.phoneNumber.url }}" class="btn btn-sm btn-light-blue"><i class="fa fa-phone"></i> {{ person.phoneNumber.text }}</a>
+              </div>
+            {% endif %}
+            {% if person.emailAddress is not empty %}
+              <div class="col col-email">
+                <a href="#" onclick="displayForm('contactArea-{{ person.slug }}');return false;" class="btn btn-sm btn-light-blue"><i class="fa fa-envelope"></i> Email</a>
               </div>
             {% endif %}
             
           </div> <!-- .staff-member -->
+          {% if person.emailAddress is not empty %}
+              <div id="contactArea-{{ person.slug }}" style="display:none">
+              
+<div class="contact-form">
+    {% macro errorList(errors) %}
+		{% if errors %}
+			<ul class="errors">
+				{% for error in errors %}
+					<li>{{ error }}</li>
+				{% endfor %}
+			</ul>
+		{% endif %}
+    {% endmacro %}
+    {% import _self as macros %}
+
+<form method="post" action="" accept-charset="UTF-8">
+  {{ csrfInput() }}
+  <input type="hidden" name="action" value="contact-form/send">
+  {{ redirectInput('contact-thankyou') }}
+  <input type='hidden' name='message[Subject]' value="Contact from Leadership Page" />
+  <input type="hidden" name="toEmail" id="toEmail" value="{{ person.emailAddress.text|hash }}" />
+  <div class="form-group">
+	  <div class="form-row">
+		  <textarea name="message[body]" id="" rows="8" class="input-full-width" placeholder="{{ "Type your message here"|t }} ...">{% if message is defined %}{{ message.message }}{% endif %}</textarea>
+		  <span class="field-error">{% if message is defined %}{{ macros.errorList(message.getErrors('message')) }}{% endif %}</span>
+	  </div>
+  </div> <!-- .form-group -->
+
+  <div class="form-group">
+	  <h5>{{ "Please share your contact info below"|t }}:</h5>
+	  <div class="form-row {% if message is defined %} form-error {% endif %}">
+		<div class="input-wrap">
+		  <input type="text" name="fromName" id="fromName" class="input-full-width" placeholder="{{ "First & Last Name"|t }} *" value="{% if message is defined %}{{ message.fromName }}{% endif %}" required>
+		</div>
+		<span class="field-error">{% if message is defined %}{{ macros.errorList(message.getErrors('fromName')) }}{% endif %}</span>
+	  </div> <!-- .form-row -->
+
+	  <div class="form-row {% if message is defined %} form-error {% endif %}">
+		<input type="email" name="fromEmail" id="" class="input-full-width" value="{% if message is defined %}{{ message.fromEmail }}{% endif %}" placeholder="{{ "Email"|t }} *" required>
+		<span class="field-error">{% if message is defined %}{{ macros.errorList(message.getErrors('fromEmail')) }}{% endif %}</span>
+	  </div>
+	  <div class="form-row">
+		<input type="text" name="message[Phone]" id="message[Phone]" class="input-full-width" placeholder="{{ "Phone Number"|t }}">
+	  </div>
+	  
+	  
+	  <div class="form-row">
+		  {{ craft.recaptcha.render() }}
+	  </div>
+
+</div> <!-- .form-group -->
+<button type="submit" class="btn btn-lg btn-light-blue btn-full-width"><span class='button__text'>{{ "Send Now"|t }}</span></button>
+<p class="text-center muted">{{ "We are usually able to respond within 1-3 days."|t }}</p>
+  
+</form>
+<br>
+<a href="#" onclick="hideForm('contactArea-{{ person.slug }}');return false;" class="btn btn-light-blue">Hide This Form</a>
+</div>
+<br><br>
+
+              </div>
+          {% endif %}
           {% if person.bio is not empty %}
             <div class='staff-member'>
               <div class='col col-name'>
@@ -39,8 +105,18 @@
       {% endfor %}
       </div> <!-- .staff-group -->
     {% endfor %}
-{% endcache %}
+
 
     </div> <!-- .container -->
   </div> <!-- .page-content-container -->
 </div> <!-- .sf-content -->
+
+
+<script>
+function displayForm(idName) {
+    document.getElementById(idName).style.display = 'block';
+}
+function hideForm(idName) {
+    document.getElementById(idName).style.display = 'none';
+}
+</script>
