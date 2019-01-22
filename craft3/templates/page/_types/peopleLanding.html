@@ -66,32 +66,26 @@
     </style>
   
 {% cache globally for 3 months %}
-    {% set people = craft.entries.section('people').relatedTo(pos).orderBy('title').all() %}
+        {% set people = craft.entries.section('people').relatedTo(pos).orderBy('title').all() %}
       <div class="staff-group">
-      {% for person in people.all() %}
+      {% for person in people %}
       
           <a name="{{ person.slug }}"></a>
           <div class="staff-member">
+            
+              {% if person.profileImage is not empty %}
               <div class="col col-avatar">
-                {% if person.profileImage is not empty %}
-                  <img src="{{ person.profileImage[0].getUrl('tf160') }}" alt="" class="avatar round-avatar" />
-                {% else %}
-                  <img src="/img/people/_tf160/1524/logoBlueNoWords.jpg" width="160" height="160" alt="" class="avatar round-avatar" />
-                {% endif %}
-              </div>
+                <img src="{{ person.profileImage[0].getUrl('tf160') }}" alt="" class="avatar round-avatar" />
+                </div>
+              {% endif %}
             
             <div class="col col-name">
               <h6>{{ person.title }}</h6>
               <span class="job-title">{{ person.professionalTitle }}</span>
             </div>
             {% if person.phoneNumber is not empty %}
-              <div class="col col-phone">
-                <a href="{{ person.phoneNumber.url }}" class="btn btn-sm btn-light-blue"><i class="fa fa-phone"></i> {{ person.phoneNumber.text }}</a>
-              </div>
-            {% endif %}
-            {% if person.emailAddress is not empty %}
               <div class="col col-email">
-                <a href="{{ person.emailAddress.url }}" class="btn btn-sm btn-light-blue"><i class="fa fa-envelope"></i> Email</a>
+                <a href="{{ person.phoneNumber.url }}" class="btn btn-sm btn-light-blue"><i class="fa fa-phone"></i> {{ person.phoneNumber.text }}</a>
               </div>
             {% endif %}
             
