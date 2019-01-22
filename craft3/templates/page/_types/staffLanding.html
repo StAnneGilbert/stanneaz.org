@@ -1,6 +1,8 @@
 <div class="page-content-container">
   <div class="container standard-container">
-
+    <style>
+      #parishioneraddress{display:none}
+    </style>
     {% set staff = craft.categories.group('staffGroup') %}
     {% for pos in staff.all() %}
       <h3 class="bottom-border">{{ pos.title }}</h3>
@@ -69,7 +71,7 @@
 		</div>
 		<span class="field-error">{% if message is defined %}{{ macros.errorList(message.getErrors('fromName')) }}{% endif %}</span>
 	  </div> <!-- .form-row -->
-
+      <input type="text" name="parishioneraddress" id="parishioneraddress"/>
 	  <div class="form-row {% if message is defined %} form-error {% endif %}">
 		<input type="email" name="fromEmail" id="" class="input-full-width" value="{% if message is defined %}{{ message.fromEmail }}{% endif %}" placeholder="{{ "Email"|t }} *" required>
 		<span class="field-error">{% if message is defined %}{{ macros.errorList(message.getErrors('fromEmail')) }}{% endif %}</span>
