@@ -69,48 +69,11 @@
       <div class="container standard-container">
         {{ entry.body }}
         
-        {% if entry.cityGroupId is not empty %}
-          {% set citygroupid = entry.cityGroupId|raw %}
-          {% set feedurl = "http://stanneaz.onthecity.org/plaza?group_id=#{citygroupid}&format=rss" %}
-          {% set limit = 6 %}
-          {% set cache = "P0M" %}
-          {% set items = craft.app.feeds.getFeedItems(feedurl, limit, 0, cache) %}
-          
-          {% if entry.ministryFeedHeader is not empty %}
-              {% set ministryRssHeader = entry.ministryFeedHeader|raw %}
-          {% else %}
-              {% set ministryRssHeader = "Activities, Events, News, and Information"|t %}
-          {% endif %}
-
-          {% if items|length %}
-          
-            <h3>{{ ministryRssHeader }}</h3>
-          
-        <div class="featured-media-grid clearfix">
-          {% for item in items %}
-            <div class="featured-media-box short">
-                {# <div class="image-wrap">
-                  <img src="assets/feature-st-james.jpg" alt="" />
-                </div> #}
-                <div class="details">
-                  <h4 class='seth'><a href="{{ item.permalink }}" target="_blank">{{ item.title }}</a></h4>
-                  <div>{{ item.summary|raw }}</div>
-                  <p class="more muted">
-                    <a href="{{ item.permalink }}" target='_blank'>{{ "Read More"|t }}</a>
-                  </p>
-                </div>
-              </div>
-            {% endfor %}
-        </div> <!-- .row -->
-
-        <strong><a href="http://stanneaz.onthecity.org/plaza?group_id={{ citygroupid }}" target="_blank">{{ "View more posts"|t }}</a> | 
         
+        {% if entry.bodyBelowEvents is not empty %}
+        <br/><br/>
+            {{ entry.bodyBelowEvents }}
         {% endif %}
-        
-        <a href="http://stanneaz.onthecity.org/groups/{{ citygroupid }}/info" target="_blank">{{ "Group Information Page on The City"|t }}</a></strong>
-        
-        {% endif %}
-        
         	
       </div> <!-- .container -->
     </div> <!-- .page-content-container -->
