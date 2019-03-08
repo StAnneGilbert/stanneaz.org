@@ -43,7 +43,7 @@
             {% if person.emailAddress is not empty %}
               {% set link = person.emailAddress %}
               <div class="col col-email">
-                <a href="mailto:{{ link.email }}" class="btn btn-sm btn-light-blue"><i class="fa fa-envelope"></i> Email</a>
+                <a href="mailto:{{ link.email }}" class="btn btn-sm btn-light-blue"><i class="fa fa-envelope"></i> {{ "Email"|t }}</a>
               </div>
             {% endif %}
             

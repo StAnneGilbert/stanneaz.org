@@ -11,6 +11,7 @@ return array(
     "Catholic homilies and Mass readings from St. Anne Roman Catholic Parish in Gilbert, Arizona" => "Homilías católicas y lecturas del domingo en La Parroquia de Santa Ana en Gilbert, Arizona",
     "Clergy" => "Clero",
     "Click here to submit content for the bulletin" => "Enviar contenido para el boletín y los medios",
+    "Close Email Form" => "Cierra esto",
     "Connect with us" => "Conéctate con nosotros",
     "Choose an option" => "Escoga una opción",
     "Days" => "Días",
