@@ -34,10 +34,10 @@
             {% endif %}
             {% if person.emailAddress is not empty %}
               <div class="col col-email" id="close-{{ person.slug }}" style="display:none">
-                <a href="#" onclick="hideForm();return false;" class="btn btn-sm btn-light-blue">Close Email Form</a>
+                <a href="#" onclick="hideForm();return false;" class="btn btn-sm btn-light-blue">{{ "Close Email Form"|t }}</a>
               </div>
               <div class="col col-email" id="e-{{ person.slug }}">
-                <a href="#" onclick="displayForm('{{ person.slug }}','{{ person.title }}');return false;" class="btn btn-sm btn-light-blue"><i class="fa fa-envelope"></i> Email</a>
+                <a href="#" onclick="displayForm('{{ person.slug }}','{{ person.title }}');return false;" class="btn btn-sm btn-light-blue"><i class="fa fa-envelope"></i> {{ "Email"|t }}</a>
               </div>
             {% endif %}
             
