@@ -12,11 +12,16 @@
             <link>{{ siteUrl }}</link>
         </image>
         {% for entry in craft.entries.section('events').limit('80').all() %}
+            {% if entry.customEventUrl is not empty %}
+		        {% set eventLink = entry.customEventUrl.url %}  
+	        {% else %}
+		        {% set eventLink = entry.url %}  
+	        {% endif %}
             <item>
                 <title>{{ entry.title }}</title>
-                <link>{{ entry.url }}</link>
+                <link>{{ eventLink }}</link>
                 <pubDate>{{ entry.eventStartDate|rss }}</pubDate>
-                <guid>{{ entry.url }}</guid>
+                <guid>{{ eventLink }}</guid>
                 <description><![CDATA[
                   {% if entry.eventListingImage|length %}
                     <img src="{{ entry.eventListingImage[0].url }}" width="321" height="200" alt="{{ entry.title }}">   

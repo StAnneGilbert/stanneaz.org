@@ -13,11 +13,18 @@
             <link>{{ siteUrl }}</link>
         </image>
         {% for entry in craft.entries.section('announcements').limit('80').all() %}
+        
+            {% if entry.redirectUrl is not empty %}
+				{% set announceLink = entry.redirectUrl.url %}  
+			{% else %}
+				{% set announceLink = entry.url %}  
+			{% endif %}
+			
             <item>
                 <title>{{ entry.title }}</title>
-                <link>{{ entry.url }}</link>
+                <link>{{ announceLink }}</link>
                 <pubDate>{{ entry.postDate|rss }}</pubDate>
-                <guid>{{ entry.url }}</guid>
+                <guid>{{ announceLink }}</guid>
                 <description><![CDATA[
                   {% if entry.eventListingImage|length %}
                     <img src="{{ entry.eventListingImage[0].url }}" width="321" height="200" alt="{{ entry.title }}">   
