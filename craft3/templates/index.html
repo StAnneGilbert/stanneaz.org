@@ -4,7 +4,6 @@
 {% block content %}
   <!-- .sf-content for flex sticky footer -->
   <div class="sf-content nav-slide-element"> 
-  {% if craft.cookies.get('visited') %}   
       <div class="featured-content-hero nopad" {% if entry.pageImage|length %}style=" background-image:url({{ entry.pageImage[0].url }})" {% endif %}>
         {# <div class="container">
           <h2 class="caps-header">{{ "Featured at"|t }} <br>St. Anne</h2>
@@ -61,42 +60,7 @@
           </div>
         </div> <!-- .featured-items -->
       </div> <!-- .block-featured-content -->
-    {% else %}
-      <div class="welcome-hero" {% if entry.pageImage|length %}style=" background-image:url({{ entry.pageImage[0].url }})" {% endif %}>
-      <div class="container">
-        <div class="text-pad">
-
-          <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
-              <div class="featured-video-container">
-                <div class="video-holder"></div>
-
-                <div class="video-placeholder">
-                  <div class="video-actions">
-                      <div data-video='embed' class="action-icon">
-                        <i class="fa fa-play"></i>
-                      </div>
-                       <script type="text/template" id="video-embed">
-  <div class="fitvids"><iframe src="//player.vimeo.com/video/108439863?api=1&amp;autoplay=1" width="780" height="438" data-time="0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div></script>
-                  </div>
-
-                  <!-- invisible (0 opacity) image to keep the aspect ratio -->
-                  {% if entry.placeholderImage|length %}
-                    <img src="{{ entry.placeholderImage[0].getUrl() }}" alt="St. Anne Video Area" width='780' height='438' />
-                  {% endif %}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="welcome-text">
-            <h1>{{ entry.heading }}</h1>
-            <h2>{{ entry.subHeading }}</h2>
-          </div>
-        </div>
-      </div>
-    </div>
-    {% endif %}
+   
     <div class="giant-block-links clearfix">
       {% if entry.quicklinks|length %}
         {% cache globally for 1 year %}
@@ -132,9 +96,9 @@
         {% else %}
           <h5><a href="http://subsplash.com/stanne/app" target="_blank">Download Our Parish Mobile Phone Apps!</a></h5>
         {% endif %}
-        <p class="excerpt downAppArea"><a href="http://www.acstechnologies.com/products/the-city/features/the-city-app" target="_blank"><img src="/img/general/assets/appIconTheCity2.jpg" alt="The City App" width="60" height="60" /><span>The City App</span></a> 
+        <p class="excerpt downAppArea"><a href="http://subsplash.com/stanne/app" target="_blank"><img src="/img/general/assets/appIconStAnne2.jpg" alt="St. Anne App" width="60" height="60" /><span>St. Anne App</span></a>
         &nbsp;&nbsp;&nbsp; 
-        <a href="http://subsplash.com/stanne/app" target="_blank"><img src="/img/general/assets/appIconStAnne2.jpg" alt="St. Anne App" width="60" height="60" /><span>St. Anne App</span></a></p>
+        <a href="http://subsplash.com/staana/app" target="_blank"><img src="/img/general/assets/appIconStAnne2.jpg" alt="St. Anne App" width="60" height="60" /><span>St. Anne App (Espa&ntilde;ol)</span></a></p>
         </div>
         
        {% set anFeedurl = entry.homeAnnouncementsFeedUrl %}
