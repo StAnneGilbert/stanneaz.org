@@ -14,8 +14,8 @@
         </image>
         {% for entry in craft.entries.section('announcements').limit('80').all() %}
         
-            {% if entry.redirectUrl is not empty %}
-				{% set announceLink = entry.redirectUrl.url %}  
+            {% if entry.customEventUrl is not empty %}
+				{% set announceLink = entry.customEventUrl.url %}  
 			{% else %}
 				{% set announceLink = entry.url %}  
 			{% endif %}
