@@ -16,11 +16,11 @@ DTSTART:19700101T000000
 END:STANDARD
 END:VTIMEZONE
 {% spaceless %}
-{% for entry in craft.entries.section('events').limit('80').all() %}{% set icalStartDate = entry.eventStartDate|date("Ymd", "UTC") %}{% set icalEndDate = entry.eventEndDate|date("Ymd", "UTC") %}{% set icalStartTime = entry.eventStartDate|date("Gi", "UTC") %}{% set icalEndTime = entry.eventEndDate|date("Gi", "UTC") %}{% if (entry.eventEndDate is not empty) and (eventEndDate|date('g:i') != '12:00') %}{% set icalEndTime = entry.eventEndDate|date("Gi", "UTC") %}{% else %}{% set icalEndDate = entry.eventStartDate|date("Ymd", "UTC") %}{% set icalEndTime = entry.eventStartDate|date("Gi", "UTC") %}{% endif %}
+{% for entry in craft.entries.section('events').limit('80').all() %}{% set icalStartDate = entry.eventStartDate|date("Ymd", "UTC") %}{% set icalEndDate = entry.eventEndDate|date("Ymd", "UTC") %}{% set icalStartTime = entry.eventStartDate|date("Gis", "UTC") %}{% set icalEndTime = entry.eventEndDate|date("Gis", "UTC") %}{% if (entry.eventEndDate is not empty) and (eventEndDate|date('g:i') != '12:00') %}{% set icalEndTime = entry.eventEndDate|date("Gi", "UTC") %}{% else %}{% set icalEndDate = entry.eventStartDate|date("Ymd", "UTC") %}{% set icalEndTime = entry.eventStartDate|date("Gis", "UTC") %}{% endif %}
 BEGIN:VEVENT
-DTSTART:{{icalStartDate}}T{{icalStartTime}}00Z
-DTEND:{{icalEndDate}}T{{icalEndTime}}00Z
-UID:Events-{{icalStartDate}}T{{icalStartTime}}00Z
+DTSTART:{{icalStartDate}}T{{icalStartTime}}Z
+DTEND:{{icalEndDate}}T{{icalEndTime}}Z
+UID:Events-{{icalStartDate}}T{{icalStartTime}}Z
 DESCRIPTION:{{ entry.title }}
 {% if entry.eventStreetAddress|length %}
 LOCATION:{{entry.eventLocation}}\n{{entry.streetAddress}}\, {{entry.city}}\, {{entry.state}}\, {{entry.zip}}
