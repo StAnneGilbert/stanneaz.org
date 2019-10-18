@@ -1,3 +1,4 @@
+{% import 'events/_event-time-variables' as macros %}
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
     <channel>
@@ -12,13 +13,15 @@
             <link>{{ siteUrl }}</link>
         </image>
         {% for entry in craft.entries.section('events').orderBy('eventStartDate ASC').limit('80').all() %}
+        
             {% if entry.customEventUrl is not empty %}
 		        {% set eventLink = entry.customEventUrl.url %}  
 	        {% else %}
 		        {% set eventLink = entry.url %}  
 	        {% endif %}
+	  
             <item>
-                <title>{{ entry.title }}</title>
+                <title><![CDATA[{{ macros.date_time_options(craft.app.language, entry.eventStartDate, entry.eventEndDate, entry.tbdTba, entry.showDatesOnly) }}                             {{ entry.title }}]]></title>
                 <link>{{ eventLink }}</link>
                 <pubDate>{{ entry.eventStartDate|rss }}</pubDate>
                 <guid>{{ eventLink }}</guid>
@@ -26,7 +29,12 @@
                   {% if entry.eventListingImage|length %}
                     <img src="{{ entry.eventListingImage[0].url }}" width="321" height="200" alt="{{ entry.title }}">   
                   {% endif %}
-                    {{ entry.body }}
+                  {% if entry.body|length < 600 %}
+                      {{ entry.body }}
+                  {% else %}
+		              {{ entry.body|slice(0, 600) }}.... 
+		              <p>... More information available at stanneaz.org/events....</p>
+	              {% endif %}
                 ]]></description>
             </item>
         {% endfor %}
