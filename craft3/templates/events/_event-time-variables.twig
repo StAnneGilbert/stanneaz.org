@@ -1,0 +1,50 @@
+{%- macro date_time_options(language, startDate, endDate, tbdTba, showDatesOnly) -%}
+{% spaceless %}
+{% if language == 'es-US' %}			
+	{% if tbdTba | length %}
+	    {% set displayDT = "Horario: por determinar" %}   
+	{% elseif startDate|date('F d') == endDate|date('F d') %}
+	    {% if startDate|date('a') == endDate|date('a') %}
+		    {% set displayDT = startDate|date('d F, Y g:i') ~ " a " ~ endDate|date('g:i a') %}
+	    {% else %}
+		    {% set displayDT = startDate|date('d F, Y g:i a') ~ " a " ~ endDate|date('g:i a') %}
+	    {% endif %}  
+	{% elseif (endDate is not empty) and (endDate|date('g:i') != '12:00') %}  
+	    {% if showDatesOnly | length %}
+		    {% set displayDT = startDate|date('d F') ~ " a " ~ endDate|date('d F, Y') %}
+	    {% else %}
+		    {% set displayDT = startDate|date('d F, Y g:i a') ~ " a " ~  endDate|date('d F, Y g:i a') %}
+	    {% endif %}             
+	{% else %}
+	    {% if showDatesOnly | length %}
+		    {% set displayDT = startDate|date('d F, Y') %}
+	    {% else %}
+		    {% set displayDT = startDate|date('d F, Y  g:i a') %}
+	    {% endif %}             
+	{% endif %}			
+{% else %}
+	{% if tbdTba | length %}
+	  {% set displayDT = "Date/Time: TBD/TBA" %}   
+	{% elseif startDate|date('F d') == endDate|date('F d') %}
+		{% if startDate|date('a') == endDate|date('a') %}
+		    {% set displayDT = startDate|date('F d, Y g:i') ~ "-" ~ endDate|date('g:i a') %}
+		{% else %}
+		    {% set displayDT = startDate|date('F d, Y g:i a') ~ " - " ~ endDate|date('g:i a') %}
+		{% endif %}  
+	{% elseif (endDate is not empty) and (endDate|date('g:i') != '12:00') %}  
+		{% if showDatesOnly | length %}
+		    {% set displayDT = startDate|date('F d') ~ " to " ~ endDate|date('F d, Y') %}
+		{% else %}
+		    {% set displayDT = startDate|date('F d, Y g:i a') ~ " to " ~  endDate|date('F d, Y g:i a') %}
+		{% endif %}             
+	{% else %}
+		{% if showDatesOnly | length %}
+		    {% set displayDT = startDate|date('F d, Y') %}
+		{% else %}
+		    {% set displayDT = startDate|date('F d, Y \\a\\t g:i a') %}
+		{% endif %}             
+	{% endif %}
+{% endif %}
+{{ displayDT }}
+{% endspaceless %}
+{%- endmacro -%}
