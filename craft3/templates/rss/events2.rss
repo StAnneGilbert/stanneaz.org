@@ -21,18 +21,20 @@
 	        {% endif %}
 	  
             <item>
-                <title><![CDATA[{{ macros.date_time_options(craft.app.language, entry.eventStartDate, entry.eventEndDate, entry.tbdTba, entry.showDatesOnly) }}                             {{ entry.title }}]]></title>
+                <title><![CDATA[{{ macros.date_time_options(craft.app.language, entry.eventStartDate, entry.eventEndDate, entry.tbdTba, entry.showDatesOnly) }}                                {{ entry.title }}]]></title>
                 <link>{{ eventLink }}</link>
                 <pubDate>{{ entry.eventStartDate|rss }}</pubDate>
                 <guid>{{ eventLink }}</guid>
                 <description><![CDATA[
                   {% if entry.eventListingImage|length %}
-                    <img src="{{ entry.eventListingImage[0].url }}" width="321" height="200" alt="{{ entry.title }}">   
+                    <img src="{{ entry.eventListingImage[0].url }}" width="321" height="200" alt="{{ entry.title }}"> 
                   {% endif %}
                   {% if entry.body|length < 600 %}
-                      {{ entry.body }}
+                      {{ entry.body|raw }}
                   {% else %}
-		              {{ entry.body|slice(0, 600) }}.... 
+		              <div>
+                        {{ entry.body|slice(0, 600)|raw }}...
+                      </div>
 		              <p>... More information available at stanneaz.org/events....</p>
 	              {% endif %}
                 ]]></description>
