@@ -86,20 +86,67 @@
       </h4>
 
       <hr class="short-divider centered">
-      
 
       <div class="row news-blocks">
       
         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-        {% if craft.app.language == 'es-US' %}
-          <h5><a href="https://subsplash.com/staana/app" target="_blank">&#161;Descarga nuestras aplicaciones de tel&#233;fono!</a></h5>
-        {% else %}
-          <h5><a href="http://subsplash.com/stanne/app" target="_blank">Download Our Parish Mobile Phone Apps!</a></h5>
-        {% endif %}
-        <p class="excerpt downAppArea"><a href="http://subsplash.com/stanne/app" target="_blank"><img src="/img/general/assets/appIconStAnne2.jpg" alt="St. Anne App" width="60" height="60" /><span>St. Anne App</span></a>
-        &nbsp;&nbsp;&nbsp; 
-        <a href="http://subsplash.com/staana/app" target="_blank"><img src="/img/general/assets/appIconStAnne2.jpg" alt="St. Anne App" width="60" height="60" /><span>St. Anne App (Espa&ntilde;ol)</span></a></p>
-        </div>
+          {% set offertoryUp = craft.entries.section('offertoryUpdates').one() %}
+          <style>
+          .oContainer{white-space:nowrap}
+          .offertoryNumTxt{font-size:18px;color:#005f72;font-weight:bold;}
+          .offertoryLabel{font-size:90%;font-weight:bold}
+          .weeklynum,.ytdnum{color:#005f72;}
+            {% if offertoryUp %}
+              {% if offertoryUp.pewWeeklyBudget > offertoryUp.pewWeeklyGiving %}
+                .weeklynum{color:#cc0000;}
+              {% endif %}
+              {% if offertoryUp.ytdBudget > offertoryUp.ytdGiving %}
+                .ytdnum{color:#cc0000;}
+              {% endif %}
+            {% endif %}
+          </style>
+              
+          <table>
+            <tr>
+              <td align="left" style="padding-right:15px">  
+		        <a href="https://giving.parishsoft.com/app/giving/stanneaz" target="_blank"><img src="/img/general/assets/Give-Icon-60x60{% if craft.app.language == 'es-US' %}_es{% endif %}.png" alt="Give to St. Anne" width="60" height="60" /></a>
+		      </td>
+              <td valign="top">
+                <h5>{{ "Offertory Update"|t }}</h5>
+		        {% if offertoryUp %}
+		          <div class="excerpt">
+		            {% if craft.app.language == 'es-US' %}
+		               Donaciones para la semana<br>del {{offertoryUp.givingDateEnding|date('d')}} de {{offertoryUp.givingDateEnding|date('F, Y')}}
+		            {% else %}
+		              Family giving for the week<br>ending {{offertoryUp.givingDateEnding|date('F d, Y')}}
+		            {% endif %}
+		          </div>
+		        {% endif %}
+		      </td>
+		    </tr>
+		  </table>
+		  {% if offertoryUp %}
+		    {% set wGiving = offertoryUp.pewWeeklyGiving + offertoryUp.eWeeklyGiving  %}
+		    {% set wBugdet = offertoryUp.pewWeeklyBudget + offertoryUp.eWeeklyBudget  %}
+		    {% if craft.app.language == 'es-US' %}
+		      <div class="oContainer">
+				<span class="offertoryLabel">Esta semana:</span> <span class="offertoryNumTxt weeklynum">{{wGiving|number_format(0, '.', '.')}} $</span>&nbsp; <span class="offertoryLabel">Planeado:</span> <span class="offertoryNumTxt">{{wBugdet|number_format(0, '.', '.')}} $</span> 
+			  </div>
+			  <div class="oContainer">
+				<span class="offertoryLabel">Año a la fecha:</span> <span class="offertoryNumTxt ytdnum">{{offertoryUp.ytdGiving|number_format(0, '.', '.')}} $</span><br><span class="offertoryLabel">Presupuesto de año a día:</span> <span class="offertoryNumTxt">{{offertoryUp.ytdBudget|number_format(0, '.', '.')}} $</span>
+		      </div>
+		    {% else %}
+			  <div class="oContainer">
+				<span class="offertoryLabel">This Week:</span> <span class="offertoryNumTxt weeklynum">${{wGiving|number_format(0, '.', ',')}}</span> &nbsp; <span class="offertoryLabel">Weekly Budget:</span> <span class="offertoryNumTxt">${{wBugdet|number_format(0, '.', ',')}}</span> 
+			  </div>
+			  <div class="oContainer">
+				<span class="offertoryLabel">YTD Giving:</span> <span class="offertoryNumTxt ytdnum">${{offertoryUp.ytdGiving|number_format(0, '.', ',')}}</span> &nbsp; <span class="offertoryLabel">YTD Budget:</span> <span class="offertoryNumTxt">${{offertoryUp.ytdBudget|number_format(0, '.', ',')}}</span>
+		      </div>
+		    {% endif %}
+		  {% else %}
+			<div>No offertory data is available at this time.</div>
+		  {% endif %}
+		</div>
         
        {% set anFeedurl = entry.homeAnnouncementsFeedUrl %}
        {% set anLimit = 4 %}
@@ -144,7 +191,7 @@
       
         
        {% set feedurl = entry.eventFeedUrl %}
-       {% set limit = 5 %}
+       {% set limit = 4 %}
        {% set offset = 0 %}
        {% set cache = "P1D" %}
        
@@ -152,7 +199,20 @@
        {% set items = craft.app.feeds.getFeedItems(feedurl, limit, offset, cache) %}
        {% for item in items %}
        
-       {% if loop.index == 4 %}
+       {% if loop.index == 1 %}
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+        {% if craft.app.language == 'es-US' %}
+          <h5><a href="https://subsplash.com/staana/app" target="_blank">&#161;Descarga nuestras aplicaciones de tel&#233;fono!</a></h5>
+        {% else %}
+          <h5><a href="http://subsplash.com/stanne/app" target="_blank">Download Our Parish Mobile Phone Apps!</a></h5>
+        {% endif %}
+        <p class="excerpt downAppArea"><a href="http://subsplash.com/stanne/app" target="_blank"><img src="/img/general/assets/appIconStAnne2.jpg" alt="St. Anne App" width="60" height="60" /><span>St. Anne App</span></a>
+        &nbsp;&nbsp;&nbsp; 
+        <a href="http://subsplash.com/staana/app" target="_blank"><img src="/img/general/assets/appIconStAnne2.jpg" alt="St. Anne App" width="60" height="60" /><span>St. Anne App (Espa&ntilde;ol)</span></a></p>
+        </div>
+       {% endif %}
+       
+       {% if loop.index == 3 %}
         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
             <h6><i class="fa fa-rss"></i> {{ "Subscribe to Events"|t }}</h6>
           <p class="excerpt">{{ "Receive St. Anne events in your email inbox:"|t }}</p>

@@ -62,6 +62,7 @@ return array(
     "New? Start Here" => "¿Eres nuevo? Comienza aquí",
     "News" => "Noticias",
     "News & Updates" => "Noticias y Actualizaciones",
+    "Offertory Update" => "Actualización de oferta",
     "OFFICE" => "Teléfono:",
     "Or, receive them via email:" => "O, recibirlos por correo electrónico:",
     "Parish office hours" => "Horas de oficina",
