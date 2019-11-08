@@ -1,0 +1,89 @@
+<style>
+.slideOuterContainer{
+    background-color:#{{entry.backgroundColor}};
+    color: #{{entry.color}};
+}
+.slideContainer{
+    margin: 0 60px;
+}
+#slides {
+    position: relative;
+    height: 1400px;
+    padding: 0px;
+    margin: 0px;
+    list-style-type: none;
+    text-align:center;
+}
+
+.slide {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 1;
+    text-align:center;
+
+    -webkit-transition: opacity 1s;
+    -moz-transition: opacity 1s;
+    -o-transition: opacity 1s;
+    transition: opacity 1s;
+}
+.slide h4{font-size:24px}
+.slide img{margin-bottom:20px}
+.showing {
+    opacity: 1;
+    z-index: 2;
+}
+</style>
+
+{{ entry.body }}
+
+{% set eMarker = 0 %} 
+
+<div class="slideOuterContainer">
+  <div class="slideContainer">
+
+    <div id="slides">
+ 
+{% for entry in craft.entries.section('announcements').limit('80').all() %}
+	
+	{% set eMarker = eMarker + 1 %} 
+	
+	<div class="slide{% if eMarker == 1 %} showing{% endif %}">
+		<h4>{{ entry.title }}</h4>
+		{% if entry.eventListingImage|length %}
+            <img src="{{ entry.eventListingImage[0].url }}" width="321" height="200" alt="{{ entry.title }}">   
+        {% endif %}
+		
+		{% if entry.body|length < 600 %}
+			{{ entry.body|raw }}
+		{% else %}
+			<div>
+				{{ entry.body|slice(0, 600)|striptags|raw }}...
+			</div>
+			<p>... More information available on stanneaz.org....</p>
+		{% endif %}
+	</div>
+	
+{% endfor %}
+</div>
+        
+
+<script>
+
+var slides = document.querySelectorAll('#slides .slide');
+var currentSlide = 0;
+var slideInterval = setInterval(nextSlide,10000);
+
+function nextSlide() {
+    slides[currentSlide].className = 'slide';
+    currentSlide = (currentSlide+1)%slides.length;
+    slides[currentSlide].className = 'slide showing';
+}
+
+</script>
+
+  </div>
+</div>
