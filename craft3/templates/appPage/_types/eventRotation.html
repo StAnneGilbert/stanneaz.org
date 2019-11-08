@@ -38,16 +38,9 @@
 }
 </style>
 
-      
-      {{ entry.body }}
-      
- 
-
-{% paginate craft.entries.section('events').orderBy('eventDateTime ASC').limit(24) as entries %}
+{{ entry.body }}
         
 {% import 'events/_event-time-variables' as macros %}
-
-{% set eventItems = craft.entries.section('events').relatedTo(pos).orderBy('eventStartDate').all() %}
 
 {% set eMarker = 0 %} 
 
@@ -56,13 +49,7 @@
 
     <div id="slides">
  
-{% for entry in eventItems %}
-	
-	{% if entry.customEventUrl is not empty %}
-		{% set eventLink = entry.customEventUrl.url %}  
-	{% else %}
-		{% set eventLink = entry.url %}  
-	{% endif %}
+{% for entry in craft.entries.section('events').orderBy('eventStartDate ASC').limit('80').all() %}
 	
 	{% set eMarker = eMarker + 1 %} 
 
@@ -86,9 +73,6 @@
 	
 {% endfor %}
 </div>
-        
-{% include "partials/_pagination" %}
-        
 
 
 <script>

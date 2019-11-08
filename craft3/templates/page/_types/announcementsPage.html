@@ -36,7 +36,7 @@
     
   {% for post in announcements %}
 
-      {% if post.redirectUrl is not empty %}
+      {% if post.customEventUrl.url is not empty %}
 		  {% set announceLink = post.customEventUrl.url %}  
 	  {% else %}
 		  {% set announceLink = post.url %}  
