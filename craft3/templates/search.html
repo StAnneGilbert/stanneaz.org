@@ -74,7 +74,13 @@
                     {% if item.bodysr|length %}
                         <p>{{ item.bodysr|chop(limit=200, unit='c') }}</p>
                     {% else %}
-                        <p>{{ item.body|chop(limit=200, unit='c') }}</p>
+                        {% if item.body|length %}
+                            <p>{{ item.body|chop(limit=200, unit='c') }}</p>
+                        {% else %}
+                            {% if item.shortDescription|length %}
+                                <p>{{ item.shortDescription|chop(limit=200, unit='c') }}</p>
+                            {% endif %}
+                        {% endif %}
                     {% endif %}
                   </div>
                 </div>

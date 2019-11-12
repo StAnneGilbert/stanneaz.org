@@ -84,8 +84,14 @@
                 </p>
 
                 <div class="blog-post standard-container">
-                  
-                  {{ entry.body }}
+                
+                  {% if entry.body|length %}
+                      {{ entry.body|raw }}
+                  {% else %}
+                      {% if entry.shortDescription|length %}
+                          {{ entry.shortDescription|raw }}
+                      {% endif %}
+                  {% endif %}
                   
                   {{ entry.scriptarea|raw }}
                   

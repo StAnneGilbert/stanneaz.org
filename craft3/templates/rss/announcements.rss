@@ -29,7 +29,13 @@
                   {% if entry.eventListingImage|length %}
                     <img src="{{ entry.eventListingImage[0].url }}" width="321" height="200" alt="{{ entry.title }}">   
                   {% endif %}
-                    {{ entry.body }}
+                  {% if entry.body|length %}
+                      {{ entry.body|raw }}
+                  {% else %}
+                      {% if entry.shortDescription|length %}
+                          {{ entry.shortDescription|raw }}
+                      {% endif %}
+                  {% endif %}
                 ]]></description>
             </item>
         {% endfor %}
