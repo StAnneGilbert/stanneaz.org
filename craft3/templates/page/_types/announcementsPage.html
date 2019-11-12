@@ -47,7 +47,7 @@
     <div class="details">
         <h4 class='seth'><a href="{{ announceLink }}">{{ post.title }}</a></h4>
 		<a href="{{ announceLink }}" style="cursor:pointer;cursor:hand"><img src="{{ post.eventListingImage[0].url }}" alt="" width="321" height="200" style="margin-bottom:20px" /></a>
-		<div class="postBody" style="height:85px">{{ post.body|chop(limit=140, unit='c')}}</div>
+		<div class="postBody" style="height:85px">{% if post.shortDescription|length %}{{ post.shortDescription|chop(limit=140, unit='c')}}{% else %}{{ post.body|chop(limit=140, unit='c')}}{% endif %}</div>
 		<p class="more muted">
 		    <a href="{{ announceLink }}" target='_blank'>{{ "Read More"|t }}</a>
 		</p>

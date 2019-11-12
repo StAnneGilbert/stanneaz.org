@@ -4,7 +4,7 @@
     color: #{{entry.color}};
 }
 .slideContainer{
-    margin: 0 60px;
+    margin: 0 20px;
 }
 #slides {
     position: relative;
@@ -30,8 +30,9 @@
     -o-transition: opacity 1s;
     transition: opacity 1s;
 }
-.slide h4{font-size:24px}
-.slide img{margin-bottom:20px}
+.slide h4{font-size:38px; margin:0 0 20px 0; padding:0}
+.slide img{margin:0 0 20px 0}
+.slide p, .slide div{font-size:24px;margin:0;padding:0 0 20px 0}
 .showing {
     opacity: 1;
     z-index: 2;
@@ -42,7 +43,7 @@
         
 {% import 'events/_event-time-variables' as macros %}
 
-{% set eMarker = 0 %} 
+{% set eMarker = 1 %} 
 
 <div class="slideOuterContainer">
   <div class="slideContainer">
@@ -50,25 +51,28 @@
     <div id="slides">
  
 {% for entry in craft.entries.section('events').orderBy('eventStartDate ASC').limit('80').all() %}
-	
-	{% set eMarker = eMarker + 1 %} 
 
 	{% if entry.eventStartDate|date('Ymd') >= now|date('Ymd') %}
 	
 		<div class="slide{% if eMarker == 1 %} showing{% endif %}">
 	        <h4>{{ macros.date_time_options(craft.app.language, entry.eventStartDate, entry.eventEndDate, entry.tbdTba, entry.showDatesOnly) }}<br>{{ entry.title }}</h4>
 	        <img src="{{ entry.eventListingImage[0].url }}" alt="" width="321" height="200" />
-	        {% if entry.body|length < 600 %}
-                {{ entry.body|raw }}
-            {% else %}
-		        <div>
-                    {{ entry.body|slice(0, 600)|striptags|raw }}...
-                </div>
-		        <p>... More information available at stanneaz.org/events....</p>
+	        {% if entry.shortDescription|length %}
+	            <div>{{ entry.shortDescription|raw }}</div>
+	        {% else %}
+	            {% if entry.body|length < 450 %}
+                    <div>{{ entry.body|raw }}</div>
+                {% else %}
+		            <div>
+                        {{ entry.body|slice(0, 450)|striptags|raw }}...
+                    </div>
+		            <p>... More information available at stanneaz.org/events....</p>
+	            {% endif %}
 	        {% endif %}
 		</div>
 	
-	
+        {% set eMarker = eMarker + 1 %} 
+    
 	{% endif %}
 	
 {% endfor %}
