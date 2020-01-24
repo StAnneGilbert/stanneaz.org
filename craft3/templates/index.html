@@ -96,14 +96,16 @@
           .offertoryNumTxt{font-size:18px;color:#005f72;font-weight:bold;}
           .offertoryLabel{font-size:90%;font-weight:bold}
           .weeklynum,.ytdnum{color:#005f72;}
-            {% if offertoryUp %}
-              {% if offertoryUp.pewWeeklyBudget > offertoryUp.pewWeeklyGiving %}
+          {% if offertoryUp %}
+              {% set wGiving = offertoryUp.pewWeeklyGiving + offertoryUp.eWeeklyGiving  %}
+              {% set wBugdet = offertoryUp.pewWeeklyBudget + offertoryUp.eWeeklyBudget  %}
+              {% if wBugdet > wGiving %}
                 .weeklynum{color:#cc0000;}
               {% endif %}
               {% if offertoryUp.ytdBudget > offertoryUp.ytdGiving %}
                 .ytdnum{color:#cc0000;}
               {% endif %}
-            {% endif %}
+          {% endif %}
           </style>
               
           <table>
@@ -126,8 +128,6 @@
 		    </tr>
 		  </table>
 		  {% if offertoryUp %}
-		    {% set wGiving = offertoryUp.pewWeeklyGiving + offertoryUp.eWeeklyGiving  %}
-		    {% set wBugdet = offertoryUp.pewWeeklyBudget + offertoryUp.eWeeklyBudget  %}
 		    {% if craft.app.language == 'es-US' %}
 		      <div class="oContainer">
 				<span class="offertoryLabel">Esta semana:</span> <span class="offertoryNumTxt weeklynum">{{wGiving|number_format(0, '.', '.')}} $</span>&nbsp; <span class="offertoryLabel">Planeado:</span> <span class="offertoryNumTxt">{{wBugdet|number_format(0, '.', '.')}} $</span> 
