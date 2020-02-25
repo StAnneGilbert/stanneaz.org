@@ -1,25 +1,21 @@
-{% set q = "" %}
 {% set t = "" %}
-{% if craft.app.request.getParam('q') %}
-    {% set q = "?q=" ~ craft.app.request.getParam('q') %}
-{% endif %}
 {% if craft.app.request.getParam('t') %}
     {% set t = "&t=" ~ craft.app.request.getParam('t') %}
 {% endif %}
 {% if paginate.totalPages > 1 %}
   <div class='pagination'>
-  {% if paginate.prevUrl %}<a href="{{ paginate.prevUrl }}{{ q }}{{ t }}" class='btn btn-sm btn-light-blue btn-prev' title='Go to previous page'>&lsaquo; Prev</a>{% endif %}
+  {% if paginate.prevUrl %}<a href="{{ paginate.prevUrl }}{{ t }}" class='btn btn-sm btn-light-blue btn-prev' title='Go to previous page'>&lsaquo; Prev</a>{% endif %}
   <ul class='pages'>
     {% for page, url in paginate.getPrevUrls(5) %}
-        <li><a href="{{ url }}{{ q }}{{ t }}" title='Go to page {{ page }}'>{{ page }}</a></li>
+        <li><a href="{{ url }}{{ t }}" title='Go to page {{ page }}'>{{ page }}</a></li>
     {% endfor %}
 
     <li class="current-page"><a href='#'>{{ paginate.currentPage }}</a></li>
 
     {% for page, url in paginate.getNextUrls(5) %}
-        <li><a href="{{ url }}{{ q }}{{ t }}" title='Go to page {{ page }}'>{{ page }}</a></li>
+        <li><a href="{{ url }}{{ t }}" title='Go to page {{ page }}'>{{ page }}</a></li>
     {% endfor %}
   </ul>
-  {% if paginate.nextUrl %}<a href="{{ paginate.nextUrl }}{{ q }}{{ t }}" class="btn btn-sm btn-light-blue btn-next" title='Go to next page'>Next &rsaquo;</a>{% endif %}
+  {% if paginate.nextUrl %}<a href="{{ paginate.nextUrl }}{{ t }}" class="btn btn-sm btn-light-blue btn-next" title='Go to next page'>Next &rsaquo;</a>{% endif %}
   </div>{#  end pagination #}
 {% endif %}
