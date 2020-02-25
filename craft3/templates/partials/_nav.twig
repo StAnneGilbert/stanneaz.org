@@ -48,38 +48,91 @@
       
       <div class="site-menu hidden-xs">
       
+<ul {% if craft.app.language == 'es-US' %} class="es_us"{% endif %}>
 
 {% cache globally for 2 days %}
-    <ul {% if craft.app.language == 'es-US' %} class="es_us"{% endif %}>
-        {% set pages = craft.entries.section('pages').level('<= 3') %}
-        {% nav page in pages.all() %}
-        
-            <li {% if page.level == 1 or page.level == 2 %}{% if page.hasDescendants() %}class='has-menu{% if page.level == 2 %}2{%endif%}{% if page.title == "Ministries" or page.title == "Movements" or page.title == "Ministerios" or page.title == "Movimientos"  %} menuIndent{%endif%}'{% endif %}{%endif%}>
-                {{ page.getLink() }}
+{# Get top-level entries in pages structure (exclude home page)  #}
+{% set pages = craft.entries.section('pages').id('not 1').level(1).all() %}
 
-                {% ifchildren %}
-                    <ul class="{% if page.level == 1 %}sub-menu{%endif%}{% if page.level == 2 %}sub-menu2{%endif%}">
-                        {% children %}
-                    </ul>
-                {% endifchildren %}
-            </li>
-        {% endnav %}
-      
-        
-          <li class="search" id="menusearch">
-            <a href="#" class='search-open' title="Search"><i class="fa fa-search"></i></a>
-            <form {% if craft.app.language == 'es-US' %}action="/es/buscar"{% else %}action="/search"{% endif %} id="nav-search" class="search-form">
-              <div class="search-input-wrap">
-                <i class="fa fa-search" title="Search"></i>
-                <input type="text" name="q" id='nav-search-query' placeholder="{{ "I'm searching for"|t }}..." title="{{ "I'm searching for"|t }}..." />
-              </div>
-            </form>
-          </li>
-          <li>
-            <a {% if craft.app.language == 'es-US' %}href="/es/comience-aqui"{% else %}href="/start-here"{% endif %} class="btn btn-light-blue">{{ "Start Here"|t }}</a>
-          </li>
-        </ul>
+{# Loop through top-level entries #}
+{% for page in pages %}
+
+	{# Check if entry has descendants #}
+	{% if not page.hasDescendants %}
+
+		{# List navigation item if entry has NO child entries #}
+		<li>
+			<a href="{{ page.getUrl }}">{{ page.title }}</a>
+		</li>
+
+	{% else %}
+
+		{# List navigation item if entry does have child entries #}
+		<li class="has-menu">
+			<a href="{{ page.getUrl }}">{{ page.title }}</a>
+			<ul class="sub-menu">
+
+				{# Get child entries of current iteration's top-level entry #}
+				{% set subPages = page.getChildren().all() %}
+				
+				{# Loop through those 2nd-level entries #}
+				{% for subPage in subPages %}
+
+					{# List sub-menu navigation item #}
+					<li {% if subPage.hasDescendants and subPage.title != 'Community of Ministries' and subPage.title != 'Comunidad de Ministerios' %}class="has-menu2"{% endif %}>
+						<a href="{{ subPage.getUrl }}">{{ subPage.title }}</a>
+						{% if subPage.hasDescendants %}
+							{% set thirdLevels = subPage.getChildren().all() %}
+							<ul class="sub-menu2">
+							{% for level3 in thirdLevels %}
+								{% if not level3.menuIndent|length %}
+									<li>
+									<a href="{{ level3.getUrl }}">{{ level3.title }}</a>
+									</li>
+								{% endif %}
+							{% endfor %}
+							</ul>
+						{% endif %}
+					</li>
+					{% for level3a in thirdLevels %}
+						{% if level3a.menuIndent|length %}
+						<li class="menuIndent{% if level3a.hasDescendants %} has-menu2{% endif %}">
+							<a href="{{ level3a.getUrl }}">{{ level3a.title }}</a>
+							{% if level3a.hasDescendants %}
+								{% set fourthLevels = level3a.getChildren().all() %}
+								<ul class="sub-menu2">
+									{% for level4 in fourthLevels %}
+										<li>
+										<a href="{{ level4.getUrl }}">{{ level4.title }}</a>
+										</li>
+									{% endfor %}
+								</ul>
+							{% endif %}
+						</li>
+						{% endif %}
+					{% endfor %}				
+						
+				{% endfor %} {# end 'subPage in subPages loop' #}
+			</ul>
+		</li>
+	{% endif %}
+{% endfor %} {# end 'for page in pages loop' #}
 {% endcache %}
+    
+    <li class="search" id="menusearch">
+	    <a href="#" class='search-open' title="Search"><i class="fa fa-search"></i></a>
+	    <form {% if craft.app.language == 'es-US' %}action="/es/buscar"{% else %}action="/search"{% endif %} id="nav-search" class="search-form">
+	        <div class="search-input-wrap">
+	            <i class="fa fa-search" title="Search"></i>
+	            <input type="text" name="q" id='nav-search-query' placeholder="{{ "I'm searching for"|t }}..." title="{{ "I'm searching for"|t }}..." />
+	        </div>
+	    </form>
+	</li>
+	<li>
+	    <a {% if craft.app.language == 'es-US' %}href="/es/comience-aqui"{% else %}href="/start-here"{% endif %} class="btn btn-light-blue">{{ "Start Here"|t }}</a>
+	</li>
+</ul>
+
       </div>
     </div>
   </header>
