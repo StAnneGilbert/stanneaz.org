@@ -2,6 +2,27 @@
 {% extends "layouts/_layout" %}
 
 {% block content %}
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/cupertino/jquery-ui.css">
+        <script src="//code.jquery.com/jquery-2.2.3.min.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<style>
+.ycontainer {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+}
+.yvideo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+#donationArea,#playlistArea,#homilyArea,#facebookArea{display:none}
+#homilyArea{display:none;text-align:left;padding:20px 40px;font-size:120%}
+</style>
   <!-- .sf-content for flex sticky footer -->
   <div class="sf-content nav-slide-element"> 
       <div class="featured-content-hero nopad" {% if entry.pageImage|length %}style=" background-image:url({{ entry.pageImage[0].url }})" {% endif %}>
@@ -68,7 +89,7 @@
         {% for item in qlinks.all() %}
           {% set link = item.qlink %}
           {% if loop.index == 1 %}
-            <a href="{{ link.url }}" class="bg-dark-brown"><i class="fa fa-clock-o"></i> {{ link.text }}</a>
+            <a href="{{ link.url }}" class="bg-dark-brown"><i class="fa fa-bullhorn"></i> {{ link.text }}</a>
           {% elseif loop.index == 2 %}
             <a href="{{ link.url }}" class="bg-light-blue"><i class="fa fa-bullseye"></i> {{ link.text }}</a>
           {% else %}
@@ -81,15 +102,10 @@
 
     <div class="page-content-container">
       <div class="container news-grid">
-      <h4 class="caps-header text-center">
-          <a href="{% if craft.app.language == 'es-US' %}/es/connect/anuncios{% else %}/connect/announcements{% endif %}">{{ "Announcements"|t }}</a>
-      </h4>
-
-      <hr class="short-divider centered">
-
-      <div class="row news-blocks">
       
-        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+        <div class="row news-blocks">
+        
+          <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
           {% set offertoryUp = craft.entries.section('offertoryUpdates').one() %}
           <style>
           .oContainer{white-space:nowrap}
@@ -111,10 +127,10 @@
           <table>
             <tr>
               <td align="left" style="padding-right:15px">  
-		        <a href="https://giving.parishsoft.com/app/giving/stanneaz" target="_blank"><img src="/img/general/assets/Give-Icon-60x60{% if craft.app.language == 'es-US' %}_es{% endif %}.png" alt="Give to St. Anne" width="60" height="60" /></a>
+		        <a href="#donationArea" onclick="displayDonation();"><img src="/img/general/assets/Give-Icon-60x60{% if craft.app.language == 'es-US' %}_es{% endif %}.png" alt="Give to St. Anne" width="60" height="60" /></a>
 		      </td>
               <td valign="top">
-                <h5><a href="https://giving.parishsoft.com/app/giving/stanneaz" target="_blank">{{ "Offertory Update"|t }}</a></h5>
+                <h5><a href="#donationArea" onclick="displayDonation();">{{ "Offertory Update"|t }}</a></h5>
 		        {% if offertoryUp %}
 		          <div class="excerpt">
 		            {% if craft.app.language == 'es-US' %}
@@ -146,101 +162,122 @@
 		  {% else %}
 			<div>No offertory data is available at this time.</div>
 		  {% endif %}
+		  <div style="text-align:center;margin-top:10px"><a href="#donationArea" onclick="displayDonation();" class="btn btn-light-blue" style="margin:0 auto">Donate Today</a></div>
 		</div>
-        
-       {% set anFeedurl = entry.homeAnnouncementsFeedUrl %}
-       {% set anLimit = 4 %}
-       {% set loopNumber = 3 %}
-       
-       {% set anOffset = 0 %}
-       {% set anCache = "P1D" %}
-
-       {% set anItems = craft.app.feeds.getFeedItems(anFeedurl, anLimit, anOffset, anCache) %}
-       {% for anItem in anItems %}
-       
-       {% if loop.index == loopNumber %}
+		
         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-            <h6><i class="fa fa-rss"></i> {{ "Subscribe to Announcements"|t }}</h6>
-          <p class="excerpt">{{ "Receive St. Anne announcements in your email inbox:"|t }}</p>
-          <form class='email-subscribe-form' action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open('https://feedburner.google.com/fb/a/mailverify?uri={% if craft.app.language == 'es-US' %}AnunciosParaStaAna{% else %}StAnneAnnouncements{% endif %}', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true"><div class='input-container clearfix'><input type="text" style="width:140px" name="email" placeholder="{{ "Enter your email address"|t }}..." title="{{ "Enter your email address"|t }}"/><input type="hidden" value="{% if craft.app.language == 'es-US' %}AnunciosParaStaAna{% else %}StAnneAnnouncements{% endif %}" name="uri"/><input type="hidden" name="loc" value="en_US"/><button type="submit" class="btn btn-sm btn-light-blue"><i class="fa fa-check"></i> {{ "Subscribe"|t }}</button></div></form>
-        </div>             
-       {% endif %}
-
-        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-          <h5><a href="{{ anItem.permalink }}">{{ anItem.title|raw }}</a></h5>
-          {% set anSummary = anItem.summary|chop(limit=120, unit='c') %}
-          <p class="excerpt">{{ anSummary|raw }} <a href="{{ anItem.permalink }}">{{ "Read More"|t }}</a></p>
-        </div>
-        {% endfor %}
-        
-        </div>
-        
-        <h6 style="clear:both;text-align:right">
-          <a href="{% if craft.app.language == 'es-US' %}/es/connect/anuncios{% else %}/connect/announcements{% endif %}">{{ "See All Announcements"|t }} &rsaquo;</a>
-        </h6>
-    
-      
-      
-      <h4 class="caps-header text-center">
-          <a href="{% if craft.app.language == 'es-US' %}/es/connect/eventos{% else %}/connect/events{% endif %}">{{ "Events & Activities"|t }}</a>
-      </h4>
-
-      <hr class="short-divider centered">
-
-      <div class="row news-blocks">
-      
-        
-       {% set feedurl = entry.eventFeedUrl %}
-       {% set limit = 4 %}
-       {% set offset = 0 %}
-       {% set cache = "P1D" %}
-       
-       {% cache globally for 1 hour %}
-       {% set items = craft.app.feeds.getFeedItems(feedurl, limit, offset, cache) %}
-       {% for item in items %}
-       
-       {% if loop.index == 1 %}
-        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-        {% if craft.app.language == 'es-US' %}
-          <h5><a href="https://subsplash.com/staana/app" target="_blank">&#161;Descarga nuestras aplicaciones de tel&#233;fono!</a></h5>
-        {% else %}
-          <h5><a href="http://subsplash.com/stanne/app" target="_blank">Download Our Parish Mobile Phone Apps!</a></h5>
-        {% endif %}
-        <p class="excerpt downAppArea"><a href="http://subsplash.com/stanne/app" target="_blank"><img src="/img/general/assets/appIconStAnne2.jpg" alt="St. Anne App" width="60" height="60" /><span>St. Anne App</span></a>
-        &nbsp;&nbsp;&nbsp; 
-        <a href="http://subsplash.com/staana/app" target="_blank"><img src="/img/general/assets/appIconStAnne2.jpg" alt="St. Anne App" width="60" height="60" /><span>St. Anne App (Espa&ntilde;ol)</span></a></p>
-        </div>
-       {% endif %}
-       
-       {% if loop.index == 3 %}
-        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-            <h6><i class="fa fa-rss"></i> {{ "Subscribe to Events"|t }}</h6>
-          <p class="excerpt">{{ "Receive St. Anne events in your email inbox:"|t }}</p>
-          <form class='email-subscribe-form' action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open('https://feedburner.google.com/fb/a/mailverify?uri={% if craft.app.language == 'es-US' %}EventosStaAna{% else %}StAnneEvents{% endif %}', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true"><div class='input-container clearfix'><input type="text" style="width:140px" name="email" placeholder="{{ "Enter your email address"|t }}..." title="{{ "Enter your email address"|t }}"/><input type="hidden" value="{% if craft.app.language == 'es-US' %}EventosStaAna{% else %}StAnneEvents{% endif %}" name="uri"/><input type="hidden" name="loc" value="en_US"/><button type="submit" class="btn btn-sm btn-light-blue"><i class="fa fa-check"></i> {{ "Subscribe"|t }}</button></div></form>
-        </div>             
-       {% endif %}
-
-        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-          <h5><a href="{{ item.permalink }}">{{ item.title }}</a></h5>
-          {% set evSummary = item.summary|chop(limit=220, unit='c') %}
-          <p class="excerpt">{{ evSummary|raw }} <a href="{{ item.permalink }}">{{ "Read More"|t }}</a></p>
-          <p class="posted-on">
-              {% if craft.app.language == 'es-US' %}
-                    {{ item.date|date('d F, Y') }}
-              {% else %}
-                    {{ item.date|date('F d, Y') }}
-              {% endif %}
-          </p>
-        </div>
-        {% endfor %}
-        {% endcache %}
-
-        <h6 style="clear:both;text-align:right">
-          <a href="{% if craft.app.language == 'es-US' %}/es/connect/eventos{% else %}/connect/events{% endif %}">{{ "See All Events and Activities"|t }} &rsaquo;</a>
-        </h6>
-      </div> <!-- .row -->
-
+            {{ entry.homeBlock1|raw }}
+        </div>  
  
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+            {{ entry.homeBlock2|raw }}
+        </div>
+
+        </div>  <!-- end row news-blocks -->        
+     
+    
+        
+        <br>
+        <hr class="short-divider centered">
+        
+        
+        <div style="text-align:center">
+      
+       <h4 class="caps-header text-center">
+         <a href="#" onclick="displayLive();return false;" >{{ "Live Video Stream"|t }}</a>&nbsp; / &nbsp;<a href="#" onclick="displayPrevStream();return false;" >{{ "Previously Recorded"|t }}</a>
+       </h4>
+  
+      
+    <div id="liveArea">
+        <div id="youTubeArea">
+            <h3 style="display:inline">{{ "St. Anne YouTube Live Stream"|t }}</h3> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            <a href="https://www.facebook.com/Stannegilbert/" class="btn btn-light-blue" target="_blank">{{ "St. Anne Facebook Live Stream"|t }}</a><br>
+            <div class="ycontainer">
+               <iframe src="https://www.youtube.com/embed/live_stream?channel=UCbosi2FmDot80gSSas3rMDg" 
+frameborder="0" allowfullscreen class="yvideo"></iframe>
+            </div>
+        </div>
+    </div>
+    <div id="playlistArea">
+        <h3>Weekend Mass</h3>
+        <div class="ycontainer">
+            <iframe src="https://www.youtube.com/embed/videoseries?list=PLa9PKK2m9n8ljLJFCtDcSL9cGtToJJ3Wr" 
+frameborder="0" allowfullscreen class="yvideo"></iframe><br>
+
+        </div>
+        <br><h3>Daily Mass</h3>
+        <div class="ycontainer">
+            <iframe src="https://www.youtube.com/embed/videoseries?list=PLa9PKK2m9n8ng2ZFKHos97cW-UXyW57vP" 
+frameborder="0" allowfullscreen class="yvideo"></iframe>
+        </div>
+    </div>
+
+    <div class="giant-block-links clearfix" style="margin:0 auto;padding:0">
+        {% if craft.app.language == 'es-US' %}
+            <a href="#" onclick="displayDonationArea();return false;" class="bg-dark-brown"><i class="fa fa-heart"></i> ¿puede ayudar? Done hoy</a>
+            <a href="#" onclick="displaySpiritualCommunion();return false;" class="bg-light-blue"><i class="fa fa-plus"></i> Hacer una Comunión Espiritual</a>
+            <a href="#" onclick="displayHomily();return false;" class="bg-dark-blue"><i class="fa fa-book"></i> Última homilía</a>
+        {% else %}
+            <a href="#" onclick="displayDonationArea();return false;" class="bg-dark-brown"><i class="fa fa-heart"></i> Can you help? Donate Today</a>
+            <a href="#" onclick="displaySpiritualCommunion();return false;" class="bg-light-blue"><i class="fa fa-plus"></i> Make A Spiritual Communion</a>
+            <a href="#" onclick="displayHomily();return false;" class="bg-dark-blue"><i class="fa fa-book"></i> Latest Homily</a> 
+        {% endif %}     
+    </div>
+ 
+    <div id="donationArea" style="display:none;">
+        {% if craft.app.language == 'es-US' %}
+            <script src="https://forms.ministryforms.net/embed.aspx?formId=daa6ef40-de28-4594-98da-4f3a8039614c&custom-templates="></script>
+        {% else %}
+            <script src="https://forms.ministryforms.net/embed.aspx?formId=00efe358-ad9e-41ea-86a0-1695fa41eed0&custom-templates="></script>
+        {% endif %} 
+         
+    </div>
+      
+    <div id="spiritualCommunionArea" style="display:none;">
+        {% if craft.app.language == 'es-US' %}
+            <img src="http://stanneaz.org/img/general/resources/spiritualCommunion_es.jpg" width="100%" alt="COMUNION ESPIRITUAL (para los que NO pueden comulgar) - Jesus mío, creo que estás en el santísimo sacramento del altar, te amo sobre todas las cosas y deseo tenerte en mi alma. Ya que ahora no puedo recibirte sacramentalmente,  ven espiritualmente a mi corazón. Como si ya hubieses venido, me uno todo  a tí, no te apartes jamás de mí. Así sea. Amen." />
+        {% else %}
+            <img src="http://stanneaz.org/img/general/resources/spiritualCommunion.jpg" width="100%" alt="Spiritual Communion - My Jesus, I believe that You are present in the Most Holy Sacrament.  I love You above all things, and desire to receive You into my soul.  Since I cannot at this moment receive You sacramentally, come at least spiritually into my heart. I embrace You as if You were already there and unite myself wholly to You.  Never permit me to be separated from you. Amen." />
+        {% endif %} 
+      
+      <br><br>
+    </div>
+      
+    <div id="homilyArea" style="display:none;">
+    
+ 
+    {{ entry.body }}
+      
+
+      <br><br>
+    </div>
+      
+</div> <!-- .row -->
+    
+    
+    
+
+
+<br><br>
+
+
+    <div class="row news-blocks">
+   
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+            {{ entry.homeBlock3|raw }}
+        </div>
+        
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+            {{ entry.homeBlock4|raw }}
+        </div>
+        
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+            {{ entry.homeBlock5|raw }}
+        </div>          
+       
+    </div>
+
+
       <div class="text-center news-action-links">
         {% if entry.subLinks|length %}
         {% set sublinks = entry.subLinks %}
@@ -248,13 +285,61 @@
             {% set link = item.subLinks %}
             <a href="{{ link.url }}" class="btn btn-light-brown-border"><i class="fa fa-rss"></i> {{ link.text }}</a>
           {% endfor %}
-          <!-- <a href="/news-updates" class="btn btn-light-brown-border"><i class="fa fa-rss"></i> More News</a>
-          <a href="/events" class="btn btn-light-brown-border"><i class="fa fa-calendar"></i> Event Calendar</a> -->
+    
         {% endif %}
       </div>
     </div> <!-- .container -->
     </div> <!-- .page-content-container -->
   </div> <!-- .sf-content -->
+  <script>
+function displayDonation(){
+  document.getElementById('donationArea').style.display = 'block';
+  document.getElementById('donationArea').focus();
+}
+function displayDonationArea(){
+  document.getElementById('spiritualCommunionArea').style.display = 'none';
+  document.getElementById('homilyArea').style.display = 'none';
+   if(document.getElementById('donationArea').style.display == 'none'){
+       document.getElementById('donationArea').style.display = 'block';
+   } else {
+       document.getElementById('donationArea').style.display = 'none';
+   }
+}
+function displaySpiritualCommunion(){
+   document.getElementById('donationArea').style.display = 'none';
+   document.getElementById('homilyArea').style.display = 'none';
+   if(document.getElementById('spiritualCommunionArea').style.display == 'none'){
+       document.getElementById('spiritualCommunionArea').style.display = 'block';
+   } else {
+       document.getElementById('spiritualCommunionArea').style.display = 'none';
+   }
+}
+function displayHomily(){
+   document.getElementById('donationArea').style.display = 'none';
+   document.getElementById('spiritualCommunionArea').style.display = 'none';
+   if(document.getElementById('homilyArea').style.display == 'none'){
+       document.getElementById('homilyArea').style.display = 'block';
+   } else {
+       document.getElementById('homilyArea').style.display = 'none';
+   }
+}
+function displayLive(){
+   document.getElementById('playlistArea').style.display = 'none';
+   document.getElementById('liveArea').style.display = 'block';
+   document.getElementById('liveArea').focus();
+}
+function displayPrevStream(){
+   document.getElementById('liveArea').style.display = 'none';
+   document.getElementById('playlistArea').style.display = 'block';
+   document.getElementById('playlistArea').focus();
+}
+function displayFacebook() {
+    document.getElementById('youTubeArea').style.display = 'none';
+    document.getElementById('facebookArea').style.display = 'block';
+    document.getElementById('facebookArea').focus();
+}
+
+</script>
 
  {# Set visited cookie #}
   {% if not craft.cookies.get('visited') %}
@@ -263,3 +348,5 @@
   
   
 {% endblock %}
+
+

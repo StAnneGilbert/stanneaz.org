@@ -1,0 +1,112 @@
+{% import '_helpers/index' as helpers %}
+<style>
+    #parishioneraddress{display:none}
+</style>
+  <!-- .sf-content for flex sticky footer -->
+  <div class="sf-content nav-slide-element" data-swiftype-name="body" data-swiftype-type="text">
+    <div class="page-photo-title" {% if entry.pageImage|length %}style=" background-image:url({{ entry.pageImage[0].url }})" {% endif %}>
+      <div class="overlay" style="background:none !important">
+        <div class="container">
+          <h1 class="caps-header">{{ entry.heading }}</h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-content-container">
+      <div class="container standard-container">
+        
+        {{ entry.body }}
+        
+        {{ entry.scriptarea|raw }}
+        
+        {{ entry.bodyBelowEvents }}
+        
+        <div class="contact-form">
+                  {% macro errorList(errors) %}
+                        {% if errors %}
+                            <ul class="errors">
+                                {% for error in errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                  {% endmacro %}
+                  {% import _self as macros %}
+
+                  
+                  <form method="post" action="" accept-charset="UTF-8">
+                    {{ csrfInput() }}
+                    <input type="hidden" name="action" value="contact-form/send">
+                    {{ redirectInput('contact-thankyou') }}
+                    <input type='hidden' name='message[Subject]' value="Contact from FAQ Page" />
+                    <input type="hidden" name="toEmail" id="toEmail" value="{{'contact@stanneaz.org'|hash}}">
+                    
+                    <div class="form-group">
+                      <div class="form-row">
+                        <textarea name="message[body]" id="" rows="8" class="input-full-width" placeholder="{{ "Type your specific comment, question, or issue here"|t }} ...">{% if message is defined %}{{ message.message }}{% endif %}</textarea>
+                        <span class="field-error">{% if message is defined %}{{ macros.errorList(message.getErrors('message')) }}{% endif %}</span>
+                      </div>
+                    </div> <!-- .form-group -->
+
+                    <div class="form-group">
+                      <h5>{{ "Please share your contact info below"|t }}:</h5>
+                      <div class="form-row {% if message is defined %} form-error {% endif %}">
+                        <div class="input-wrap">
+                          <input type="text" name="fromName" id="fromName" class="input-full-width" placeholder="{{ "First & Last Name"|t }} *" value="{% if message is defined %}{{ message.fromName }}{% endif %}" required>
+                        </div>
+                        <span class="field-error">{% if message is defined %}{{ macros.errorList(message.getErrors('fromName')) }}{% endif %}</span>
+                      </div> <!-- .form-row -->
+                      
+                      <input type="text" name="parishioneraddress" id="parishioneraddress"/>
+
+                      <div class="form-row {% if message is defined %} form-error {% endif %}">
+                        <input type="email" name="fromEmail" id="" class="input-full-width" value="{% if message is defined %}{{ message.fromEmail }}{% endif %}" placeholder="{{ "Email"|t }} *" required>
+                        <span class="field-error">{% if message is defined %}{{ macros.errorList(message.getErrors('fromEmail')) }}{% endif %}</span>
+                      </div>
+                      <div class="form-row">
+                        <input type="text" name="message[Phone]" id="message[Phone]" class="input-full-width" placeholder="{{ "Phone Number"|t }}">
+                      </div>
+                      
+                      
+                      <div class="form-row">
+                          {{ craft.recaptcha.render() }}
+                      </div>
+
+                    </div> <!-- .form-group -->
+
+                    <button type="submit" class="btn btn-lg btn-light-blue btn-full-width"><span class='button__text'>{{ "Send Now"|t }}</span></button>
+                    <p class="text-center muted">{{ "We are usually able to respond within 1-3 days."|t }}</p>
+                  </form>
+                </div> <!-- .contact-form -->
+                <p></p>
+                
+        {{ entry.bodyBelowEverything }}
+
+        
+      </div> <!-- .container -->
+    </div> <!-- .page-content-container -->
+  </div> <!-- .sf-content -->
+  
+  <script>
+function pageMover(obj){
+	var option_user_selection = obj.options[ obj.selectedIndex ].text;
+	var contactUrl = '';
+	switch(option_user_selection)
+	{
+		case "Choose an option...":
+			break;
+		case "Escoga una opción...":
+		    break;
+		case "Bulletin & Media Content Submission":
+		    contactUrl="https://communications.stanneaz.org";
+			break;
+		case "Contenido de boletines y medios":
+		    contactUrl="https://communications.stanneaz.org";
+			break;
+	}
+	if (contactUrl=='https://communications.stanneaz.org'){
+	    window.location.href='http://communications.stanneaz.org';
+	}
+}
+</script>
+  
