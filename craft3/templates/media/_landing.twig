@@ -13,10 +13,10 @@
           <h5><a href="{{ post.url }}">{{ post.title }}</a></h5>
           {% set topics = post.mediaTopic %}
           {% for topic in topics.all() %}
-              <a href='?q=topic:{{ topic.id }}'>{{ topic.title }}</a>{% if not loop.last %},{% endif %}
+              <a href='?q=topic:{{ topic.id }}'>{{ topic.title }}</a>, 
           {% endfor %}
           {% if post.mediaSeason|length %}
-            <a href="?q=season:{{ post.mediaSeason[0].id }}" class="item-url">{{ post.mediaSeason[0].title }}</a>,
+            <a href="?q=season:{{ post.mediaSeason[0].id }}" class="item-url">{{ post.mediaSeason[0].title }}</a>
           {% endif %}
           <div class="excerpt">
             <p>{{ post.body | chop(limit=120, unit='c') }} <a href="{{ post.url }}">{{ "Read more"|t }}</a></p>
