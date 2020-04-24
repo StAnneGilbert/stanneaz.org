@@ -458,18 +458,19 @@ var TMF = (function ($, tm, window, document, undefined) {
     
     tm.Slider.init = function(){
       $(document).ready(function(){
-        $('#slider1').bxSlider({
+        $('#slider1').show().bxSlider({
           video: true,
           useCSS: false,
           auto: true,
           pause: 8000
         });
-        $('#slider2').bxSlider({
+        $('#slider2').show().bxSlider({
           minSlides: 2,
           maxSlides: 7,
           slideWidth: 125,
           slideMargin: 10
         });
+        $('#placeHolder1').hide();
       });
     };
 

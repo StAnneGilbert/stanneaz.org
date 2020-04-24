@@ -71,17 +71,13 @@
                   <h5><a href="{{ item.url }}">{{ item.title }}</a></h5>
                   <a href="{{ item.url }}" class="item-url">{{ item.url }}</a>
                   <div class="excerpt">
-                    {% if item.bodysr|length %}
-                        <p>{{ item.bodysr|chop(limit=200, unit='c') }}</p>
-                    {% else %}
-                        {% if item.body|length %}
-                            <p>{{ item.body|chop(limit=200, unit='c') }}</p>
-                        {% else %}
-                            {% if item.shortDescription|length %}
-                                <p>{{ item.shortDescription|chop(limit=200, unit='c') }}</p>
-                            {% endif %}
-                        {% endif %}
-                    {% endif %}
+                      {% if item.body|length %}
+                          <p>{{ item.body|chop(limit=200, unit='c') }}</p>
+                      {% else %}
+                          {% if item.shortDescription|length %}
+                              <p>{{ item.shortDescription|chop(limit=200, unit='c') }}</p>
+                          {% endif %}
+                      {% endif %}
                   </div>
                 </div>
               </div> <!-- .content-summary-block -->
