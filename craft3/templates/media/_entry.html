@@ -20,15 +20,7 @@
 
     <div class="page-content-container">
       <div class="container standard-container">
-      
-        <div class="col-xs-6"></div>
-
-        <div class="row bottom-padding">
-          <div class="col-xs-6 text-right font-size-14">
-            <a href="/media/media-library">{{ "View more media"|t }} &rsaquo;</a>
-          </div>
-        </div>
-
+        
         <div class="featured-video-container">
           <div class="video-placeholder">
             <div class="video-actions">
@@ -59,7 +51,7 @@
             {% endif %}
           </div>
           {% if entry.youTubeVideoId|length %}
-              {% if entry.postImage|length or entry.vimeoVideoId != 0 %}<br>{% endif %}
+              {% if entry.postImage|length or entry.vimeoVideoId != 0 %}<br clear="all">{% endif %}
                 <style>
 				.ycontainer {
 					position: relative;

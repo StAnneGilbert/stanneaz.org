@@ -35,7 +35,11 @@
 <div class="massConfessionPage">
     <div id="topMessageArea">
 {% if post.topOfPageMessage | length %}
-        <p class="cancelledItem">{{ "There are changes to the Mass and Confession schedule.  Scroll down to see the changes."|t }}</p>
+        {% if craft.app.language == 'es-US' %}
+            <p class="cancelledItem">Hay cambios en el horario. Desplácese hacia abajo para ver los cambios.</p>
+        {% else %}
+            <p class="cancelledItem">There are changes to the schedule.  Scroll down to see the changes.</p>
+        {% endif %}
 {% endif %}
     </div>     
         
@@ -65,8 +69,8 @@
 {{ post.bodyBetweenSundayAndWeekdayMass }}
 
 {%cache globally%}
-{% if post.weekdayMassTimes|length %}
-    {% if post.weekdayMassTimes|length >= 6 %}
+{% if post.weekdayMassTimes|length %} 
+    {% if post.weekdayMassTimes|length >= 7 %}
         <p><strong>{{ "Monday"|t }}:</strong></p>
         <ul>
             {% for block in post.weekdayMassTimes.all() %}

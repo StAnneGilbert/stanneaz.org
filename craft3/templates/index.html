@@ -7,61 +7,106 @@
         <script src="//code.jquery.com/jquery-2.2.3.min.js"></script>
         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <style>
-.ycontainer {
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding-bottom: 56.25%;
-}
-.yvideo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
+.ycontainer {position: relative;width: 100%;height: 0;padding-bottom: 56.25%}
+.yvideo {position: absolute;top: 0;left: 0;width: 100%; height: 100%}
+#topDonate{display:block; text-align:center; width:70%; margin:15px auto 15px auto; padding:2px 3px 3px; border: 1px #000 solid; background-color:#fdea60; color:#000}
+#topDonate b {display:block; padding:0 0 1px 0; font-size:130%; color:#c00}
+#topDonate i {display:inline-block;color:#000}
+#topDonate u {text-decoration:none; color:#c00;font-weight:bold}
+.page-content-container{margin-top:0;padding-top:35px;}
 #donationArea,#playlistArea,#homilyArea,#facebookArea{display:none}
 #homilyArea{display:none;text-align:left;padding:20px 40px;font-size:120%}
+.caps-header a{color:#99bfbc}
+.caps-header a:hover{text-decoration:underline}
+@media screen and (min-width: 1147px)
+{
+    .worship-links a {font-size: 20px;line-height: 24px;padding: 15px 0;float: left; width: 20%;
+    }
+}
+@media screen and (max-width: 1146px){
+.worship-links a {padding: 15px 12px;}
+#topDonate{width:92%}
+}
+.worship-links a {display: block;color: #000;background-color:#fff;text-decoration: none;text-align: center;border: 1px #000 solid}
+.worship-links a:hover, .worship-links a.active {background-color:#eee}
+#accordionOrder div, #accordionSongs div, #accordion div.inner,.saTxt{font-size:130%}
+#accordionOrder h1, #accordionSongs h1, #accordion h1{font-size:110%;text-align:left}
+#songs p, #readings p, #homilyArea p,#orderOfMass p{margin-top:20px}
+#songs, #readings, #orderOfMass{text-align:left}
+#accordionOrder h4 {color:#c00;text-align:right}
+.allPpl,.orTxt,orTxt2,.instTxt{color:#c00}
+.allPpl{font-weight:bold}
+.orTxt{font-size:120%; font-weight:bold; font-style: italic; padding:20px 0}
+.orTxt2{font-weight:bold; font-style: italic;}
+.instTxt{display:block;text-align:right}
+.rubrica { color: #CC0000; font-style: italic; text-align:right }
+.pueblo { font-weight: bold; }
+
+
+.ui-widget{font-family: "Open Sans", "Helvetica", "Arial", sans-serif;font-size: 100%;}
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
+        color: #4A4A4A;
+		font-family: "Open Sans", "Helvetica", "Arial", sans-serif;
+		font-size: 16px;
+		line-height: 22px;
+		margin-top:5px;
+		padding: 8px 8px;
+		outline: none;
+		font-weight: 200;
+		resize: none;
+    }
+.ui-widget-content{background:#ffffff !important;-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);border-radius: 2px;padding: 28px 20px}
+.ui-widget-content a{color:#6aa29d;}
+.ui-widget-content a:hover{text-decoration:underline;}
+.ui-widget-content a.btn:hover{text-decoration:none;}
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited{color:#005F72}
+.ui-state-hover a:hover, .ui-state-hover a:link, .ui-state-hover a:visited, .ui-state-focus a, .ui-state-focus a:hover, .ui-state-focus a:link, .ui-state-focus a:visited{color:#895022}
+.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited{color:#ffffff}
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active{border: 1px solid #99BFBC;background: #99BFBC;-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);}
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus{border: 1px solid #99BFBC;-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25)}
+}
+@media only screen and (max-width: 768px) {
+  .ui-accordion .ui-accordion-content {padding:1em 25px}
+}
+@media screen and (max-width: 600px) { 
+    .ui-accordion .ui-accordion-content {padding:1em 20px}
+    .ui-accordion .ui-accordion-header{padding-right:0} 
+}
+
 </style>
-  <!-- .sf-content for flex sticky footer -->
-  <div class="sf-content nav-slide-element"> 
-      <div class="featured-content-hero nopad" {% if entry.pageImage|length %}style=" background-image:url({{ entry.pageImage[0].url }})" {% endif %}>
-        {# <div class="container">
-          <h2 class="caps-header">{{ "Featured at"|t }} <br>St. Anne</h2>
-        </div> #}
-        <div class=''>
-         <div class="featured-items">
-            <div id="featured-content-slider" class=''>
-              {% if entry.featuredAtStAnne | length %}
-              {% set thumb = {
-                mode: 'crop',
-                width: 2000,
-                height: 690,
-                quality: 75,
-                position: 'top-center'
-            } %}
+
+<!-- .sf-content for flex sticky footer -->
+<div class="sf-content nav-slide-element"> 
+    <div class="featured-content-hero nopad" {% if entry.pageImage|length %}style=" background-image:url({{ entry.pageImage[0].url }})" {% endif %}>
+        <div class="featured-items">
+            <div id="featured-content-slider">
+                {% if entry.featuredAtStAnne | length %}
+                {% set thumb = {
+                  mode: 'crop',
+                  width: 2000,
+                  height: 480,
+                  quality: 75,
+                  position: 'top-center'
+                  } %}
                 {% cache globally for 1 day %}
-                <ul class='bxslider' id="slider1">
+                <div id="placeHolder1"><img src="{{ entry.pageImage[0].url }}" width="100%" /></div>
+                <ul class='bxslider' id="slider1" style="display:none;">
                 {% for item in entry.featuredAtStAnne.all() %}
                   {% set link = item.contentLink %}
                     <li>
                       {% if item.vimeoVideoId != 0 %}
                         <iframe src="//player.vimeo.com/video/{{ item.vimeoVideoId }}?api=1&amp;autoplay=false" width=""  frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
                       {% else %}
-                        {% if item.contentLink is not empty %}<a href="{{ link.url }}" {{ link.target ? ' target="_blank"' }}>{% endif %}<img src="{{ item.eventImage[0].getUrl(thumb) }}" />
+                        {% if item.contentLink is not empty %}<a href="{{ link.url }}" {{ link.target ? ' target="_blank"' }}>{% endif %}<img src="{{ item.eventImage[0].getUrl(thumb) }}" width="100%" />
                          {% if item.contentLink is not empty %} </a>{% endif %}
                       {% endif %}
-                      {# <div class="caption">
-                        <h3>{% if item.contentLink is not empty %}<a href="{{ link.url }}" {{ link.target ? ' target="_blank"' }}>{{ item.title }}</a>{% else %}{{ item.title }}{% endif %}</h3>
-                        <p>{{ item.description|chop(limit=170, unit='c') }}</p>
-                      </div> #}
                     </li>
                 {% endfor %}
                 </ul>
                 {% endcache %}
               
 
-              <div id="bx-pager">
+                <div id="bx-pager">
               {% cache globally for 1 day %}
                 {% set thumb2 = {
                     mode: 'crop',
@@ -74,13 +119,12 @@
                 <a data-slide-index="{{ loop.index - 1 }}" href=""><img src="{{ item.eventImage[0].getUrl(thumb2) }}" /></a>
                 {% endfor %}
               {% endcache %}
-              </div>
+                </div>
             {% endif %}
             </div> <!-- #featured-content-slider -->
             <span id="responsiveFlag"></span>
-          </div>
-        </div> <!-- .featured-items -->
-      </div> <!-- .block-featured-content -->
+        </div> <!-- .featured-content-hero nopad -->
+    </div> <!-- .sf-content nav-slide-element -->
    
     <div class="giant-block-links clearfix">
       {% if entry.quicklinks|length %}
@@ -101,6 +145,17 @@
     </div>
 
     <div class="page-content-container">
+    
+        {% if craft.app.language == 'es-US' %}
+            <a href="#donationArea" onclick="displayDonation();" id="topDonate">
+            <b><i class="fa fa-exclamation-circle"></i> Donar a su parroquia</b> 
+            Durante la pandemia COVID-19, su parroquia necesita su apoyo más que nunca. Su regalo parroquial proporciona un salvavidas de apoyo a nuestra familia de la iglesia en estos tiempos de crisis. <u>Por favor, dona hoy</u></a>.
+        {% else %}
+            <a href="#donationArea" onclick="displayDonation();" id="topDonate">
+        <b><i class="fa fa-exclamation-circle"></i> Donate to Your Parish</b>
+        During the COVID-19 pandemic, your parish needs your support more than ever. Your parish gift provides a lifeline of support to our church family in this time of crisis. <u>Please donate today</u></a>.
+        {% endif %}     
+    
       <div class="container news-grid">
       
         <div class="row news-blocks">
@@ -112,6 +167,8 @@
           .offertoryNumTxt{font-size:18px;color:#005f72;font-weight:bold;}
           .offertoryLabel{font-size:90%;font-weight:bold}
           .weeklynum,.ytdnum{color:#005f72;}
+          .home-donate-button {text-align:center;margin-top:10px}
+          .home-donate-button .btn-light-blue {margin:0 auto;background-color:#cc0000;font-weight:bold;}
           {% if offertoryUp %}
               {% set wGiving = offertoryUp.pewWeeklyGiving + offertoryUp.eWeeklyGiving  %}
               {% set wBugdet = offertoryUp.pewWeeklyBudget + offertoryUp.eWeeklyBudget  %}
@@ -162,7 +219,7 @@
 		  {% else %}
 			<div>No offertory data is available at this time.</div>
 		  {% endif %}
-		  <div style="text-align:center;margin-top:10px"><a href="#donationArea" onclick="displayDonation();" class="btn btn-light-blue" style="margin:0 auto">Donate Today</a></div>
+		  <div class="home-donate-button"><a href="#donationArea" onclick="displayDonation();" class="btn btn-light-blue">{{ "Donate Today"|t }}</a></div>
 		</div>
 		
         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
@@ -174,24 +231,21 @@
         </div>
 
         </div>  <!-- end row news-blocks -->        
-     
-    
-        
+
         <br>
-        <hr class="short-divider centered">
         
         
-        <div style="text-align:center">
+<div style="text-align:center">
       
-       <h4 class="caps-header text-center">
-         <a href="#" onclick="displayLive();return false;" >{{ "Live Video Stream"|t }}</a>&nbsp; / &nbsp;<a href="#" onclick="displayPrevStream();return false;" >{{ "Previously Recorded"|t }}</a>
-       </h4>
+    <h4 class="caps-header text-center">
+         <span id="liveTitle">{{ "Live Video Stream"|t }}&nbsp; / &nbsp;<a href="#" onclick="displayPrevStream();return false;">{{ "Previously Recorded"|t }}</a></span><span id="prevRecHTitle" style="display:none"><a href="#" onclick="displayLive();return false;">{{ "Live Video Stream"|t }}</a>&nbsp; / &nbsp;{{ "Previously Recorded"|t }}</span>
+    </h4>
   
       
     <div id="liveArea">
         <div id="youTubeArea">
             <h3 style="display:inline">{{ "St. Anne YouTube Live Stream"|t }}</h3> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-            <a href="https://www.facebook.com/Stannegilbert/" class="btn btn-light-blue" target="_blank">{{ "St. Anne Facebook Live Stream"|t }}</a><br>
+            <a href="https://www.facebook.com/Stannegilbert/videos/" class="btn btn-light-blue" target="_blank">{{ "St. Anne Facebook Live Stream"|t }}</a><br>
             <div class="ycontainer">
                <iframe src="https://www.youtube.com/embed/live_stream?channel=UCbosi2FmDot80gSSas3rMDg" 
 frameborder="0" allowfullscreen class="yvideo"></iframe>
@@ -199,13 +253,13 @@ frameborder="0" allowfullscreen class="yvideo"></iframe>
         </div>
     </div>
     <div id="playlistArea">
-        <h3>Weekend Mass</h3>
+        <h3>{{ "Weekend Mass"|t }}</h3>
         <div class="ycontainer">
             <iframe src="https://www.youtube.com/embed/videoseries?list=PLa9PKK2m9n8ljLJFCtDcSL9cGtToJJ3Wr" 
 frameborder="0" allowfullscreen class="yvideo"></iframe><br>
 
         </div>
-        <br><h3>Daily Mass</h3>
+        <br><h3>{{ "Daily Mass"|t }}</h3>
         <div class="ycontainer">
             <iframe src="https://www.youtube.com/embed/videoseries?list=PLa9PKK2m9n8ng2ZFKHos97cW-UXyW57vP" 
 frameborder="0" allowfullscreen class="yvideo"></iframe>
@@ -213,15 +267,9 @@ frameborder="0" allowfullscreen class="yvideo"></iframe>
     </div>
 
     <div class="giant-block-links clearfix" style="margin:0 auto;padding:0">
-        {% if craft.app.language == 'es-US' %}
-            <a href="#" onclick="displayDonationArea();return false;" class="bg-dark-brown"><i class="fa fa-heart"></i> ¿puede ayudar? Done hoy</a>
-            <a href="#" onclick="displaySpiritualCommunion();return false;" class="bg-light-blue"><i class="fa fa-plus"></i> Hacer una Comunión Espiritual</a>
-            <a href="#" onclick="displayHomily();return false;" class="bg-dark-blue"><i class="fa fa-book"></i> Última homilía</a>
-        {% else %}
-            <a href="#" onclick="displayDonationArea();return false;" class="bg-dark-brown"><i class="fa fa-heart"></i> Can you help? Donate Today</a>
-            <a href="#" onclick="displaySpiritualCommunion();return false;" class="bg-light-blue"><i class="fa fa-plus"></i> Make A Spiritual Communion</a>
-            <a href="#" onclick="displayHomily();return false;" class="bg-dark-blue"><i class="fa fa-book"></i> Latest Homily</a> 
-        {% endif %}     
+        <a href="#" onclick="displayDonationArea();return false;" class="bg-dark-brown"><i class="fa fa-heart"></i> {{ "Can you help? Donate Today"|t }}</a>
+        <a href="#" onclick="displayWorshipAids();displaySongs();return false;" class="bg-light-blue"><i class="fa fa-plus"></i> {{ "Worship Aids"|t }}</a>
+        <a href="#" onclick="displayHomily();return false;" class="bg-dark-blue"><i class="fa fa-book"></i> {{ "Latest Homily"|t }}</a>     
     </div>
  
     <div id="donationArea" style="display:none;">
@@ -232,25 +280,157 @@ frameborder="0" allowfullscreen class="yvideo"></iframe>
         {% endif %} 
          
     </div>
-      
-    <div id="spiritualCommunionArea" style="display:none;">
-        {% if craft.app.language == 'es-US' %}
-            <img src="http://stanneaz.org/img/general/resources/spiritualCommunion_es.jpg" width="100%" alt="COMUNION ESPIRITUAL (para los que NO pueden comulgar) - Jesus mío, creo que estás en el santísimo sacramento del altar, te amo sobre todas las cosas y deseo tenerte en mi alma. Ya que ahora no puedo recibirte sacramentalmente,  ven espiritualmente a mi corazón. Como si ya hubieses venido, me uno todo  a tí, no te apartes jamás de mí. Así sea. Amen." />
-        {% else %}
-            <img src="http://stanneaz.org/img/general/resources/spiritualCommunion.jpg" width="100%" alt="Spiritual Communion - My Jesus, I believe that You are present in the Most Holy Sacrament.  I love You above all things, and desire to receive You into my soul.  Since I cannot at this moment receive You sacramentally, come at least spiritually into my heart. I embrace You as if You were already there and unite myself wholly to You.  Never permit me to be separated from you. Amen." />
-        {% endif %} 
-      
-      <br><br>
-    </div>
-      
-    <div id="homilyArea" style="display:none;">
     
- 
-    {{ entry.body }}
+    <div id="worshipAidsArea" style="display:none">
+        <div class="worship-links clearfix" style="margin:0 auto;padding:0">
+            <a href="#" id="hOrderOfMass" onclick="displayOrderOfMass();return false;"><i class="fa fa-life-ring"></i> {{ "Order of Mass"|t }}</a>
+            <a href="#" id="hSongs" onclick="displaySongs();return false;"><i class="fa fa-music"></i> {{ "Songs"|t }}</a>
+            <a href="#" id="hReadings" onclick="displayReadings();return false;"><i class="fa fa-book"></i> {{ "Readings"|t }}</a>
+            <a href="#" id="hCommunion" onclick="displaySpiritualCommunion();return false;"><i class="fa fa-plus"></i> {{ "Spiritual Communion"|t }}</a>
+            <a href="#" id="hResources" onclick="displayResources();return false;"><i class="fa fa-wrench"></i> {{ "Resources"|t }}</a>
+        </div>
+    
+        <div id="orderOfMass" style="display:none">
+            <br>
+            <h3>{{ "The Order of Mass"|t }}</h3>
+
+			{{ entry.bodyb }}
+
+        </div><!--end orderOfMass-->
+    
+    
+    
+        <div id="songs" style="display:none">
+            <br>
+            {{ entry.songsLead|raw }}
+            
+            {{ entry.songSection }}
+
+        </div><!--end songs-->
+        
+        
+        
+        <div id="readings" style="display:none">
+            <br>
+            <h3>{{ "Readings"|t }}</h3>
+            <div class="saTxt"> 
+{% if craft.app.language == 'es-US' %}
+     {% set feedurl = "http://www.usccb.org/bible/lecturas/rss/index.cfm" %}
+{% else %}
+     {% set feedurl = "http://www.usccb.org/bible/readings/rss/daily.xml" %} 
+{% endif %}
+{% set limit = 1 %}
+{% set offset = 0 %}
+{% set cache = "PT1H" %}
+{% cache globally for 1 hour %}
+    {% set items = craft.app.feeds.getFeedItems(feedurl, limit, offset, cache) %}
+    {% for item in items %}
+	    <h4>{{ item.title }}</h4>
+	    <div{% if loop.index == 1 %} id="firstReading"{% endif %}>
+		  {% if loop.index == 1 %}
+			  {% if craft.app.language == 'es-US' %}
+				  <p>(<a href="https://stanneaz.org/?pg=readings">Click here for English / Haga clic aquí para inglés</a>)</p>
+			  {% else %}
+				  <p>(<a href="https://stanneaz.org/es/?pg=readings">Haga clic aquí para español / Click here for Spanish</a>)</p>
+			  {% endif %}
+		  {% endif %}
+		    {{ item.summary|raw }}
+		    <br><p><a href="{{ item.permalink }}" target="_blank" class="btn btn-light-blue">{{ "View Readings on USCCB.org"|t }}</a></p>
+	    </div>
+    {% endfor %}
+{% endcache %}
+
+            </div><!--end .saTxt-->   
+        </div><!--end readings-->
+        
+        
+        
+        
+        <div id="spiritualCommunionArea" style="display:none;">
+       
+            {% if craft.app.language == 'es-US' %}
+                <img src="https://stanneaz.org/img/general/resources/spiritualCommunion_es.jpg" width="100%" alt="COMUNION ESPIRITUAL (para los que NO pueden comulgar) - Jesus mío, creo que estás en el santísimo sacramento del altar, te amo sobre todas las cosas y deseo tenerte en mi alma. Ya que ahora no puedo recibirte sacramentalmente,  ven espiritualmente a mi corazón. Como si ya hubieses venido, me uno todo  a tí, no te apartes jamás de mí. Así sea. Amen." />
+            {% else %}
+                <img src="https://stanneaz.org/img/general/resources/spiritualCommunion.jpg" width="100%" alt="Spiritual Communion - My Jesus, I believe that You are present in the Most Holy Sacrament.  I love You above all things, and desire to receive You into my soul.  Since I cannot at this moment receive You sacramentally, come at least spiritually into my heart. I embrace You as if You were already there and unite myself wholly to You.  Never permit me to be separated from you. Amen." />
+            {% endif %} 
+      
+          <br><br>
+        </div>
+        
+        
+        
+        
+        <div id="resources" style="display:none;">
+            <br>
+            <h3>{{ "Resources"|t}}</h3>      
+        
+            {{ entry.worshipAidResources|raw }}
+
+        </div>
+    
+    
+    
+    
+
+    
+    </div>
       
 
-      <br><br>
-    </div>
+      
+    <div id="homilyArea" style="display:none;">
+	{% set topicTitle = "none" %}
+	{% set latest = "none" %}
+	{% set mTitle = "none" %}
+	{% set mLead = "none" %}
+	{% set mBody = "none" %}
+	{% set mDate = "none" %}
+
+	{% set break = 0 %}
+	{% for item in craft.entries.section('media').orderBy('mediaDate DESC').all() if break == 0 %}
+		{% set time = item.mediaDate|date('g:ia') %}
+		{% set mediaTopics = item.mediaTopic %}
+		{% for topic in mediaTopics.all() %}
+			{% set topicTitle = topic.title %}
+		{% endfor %}
+		{% if entry.mediaTimeFilter %}
+		    {% if entry.mediaTimeFilter in time and topicTitle == entry.mediaTopicFilter %}
+		    	{% set break = 1 %}
+			    {% set mTitle = item.title %}
+			    {% set mLead = item.lead %}
+			    {% set mBody = item.body %}
+			    {% set mDate = item.mediaDate|date %}
+		    {% endif %}
+		{% else %}
+            {% if topicTitle == entry.mediaTopicFilter %}
+                {% set break = 1 %}
+                {% set mTitle = item.title %}
+			    {% set mLead = item.lead %}
+			    {% set mBody = item.body %}
+			    {% set mDate = item.mediaDate|date %}
+            {% endif %}
+        {% endif %}
+	{% endfor %}
+        <br>
+        {% if entry.body %}
+            {{ entry.body }}
+        {% elseif mDate != 'none' %}
+            <h3>{{mDate}} - {{mTitle}}</h3>
+            <p>{{ mLead }}</p>
+            <p>{{ mBody }}</p>
+        {% else %}
+            {% set media = craft.entries.section('media').one() %}
+		    <h3>{{media.date|date}} - {{media.title}}</h3>
+            <p>{{ media.lead }}</p>
+            <p>{{ media.body }}</p>
+	    {% endif %}
+        <p>
+        {% if craft.app.language == 'es-US' %}
+            <a href="/es/media/media-library" class="btn btn-light-blue">Ver Audios de Santa Ana</a>   
+        {% else %}
+            <a href="/media/media-library" class="btn btn-light-blue">View Media Library</a>        
+        {% endif %}
+        </p>
+    </div> <!-- #homilyArea -->
       
 </div> <!-- .row -->
     
@@ -296,8 +476,9 @@ function displayDonation(){
   document.getElementById('donationArea').style.display = 'block';
   document.getElementById('donationArea').focus();
 }
+
 function displayDonationArea(){
-  document.getElementById('spiritualCommunionArea').style.display = 'none';
+  document.getElementById('worshipAidsArea').style.display = 'none';
   document.getElementById('homilyArea').style.display = 'none';
    if(document.getElementById('donationArea').style.display == 'none'){
        document.getElementById('donationArea').style.display = 'block';
@@ -305,18 +486,102 @@ function displayDonationArea(){
        document.getElementById('donationArea').style.display = 'none';
    }
 }
-function displaySpiritualCommunion(){
+
+
+function displayWorshipAids(){
    document.getElementById('donationArea').style.display = 'none';
    document.getElementById('homilyArea').style.display = 'none';
-   if(document.getElementById('spiritualCommunionArea').style.display == 'none'){
-       document.getElementById('spiritualCommunionArea').style.display = 'block';
+   if(document.getElementById('worshipAidsArea').style.display == 'none'){
+       document.getElementById('worshipAidsArea').style.display = 'block';
    } else {
-       document.getElementById('spiritualCommunionArea').style.display = 'none';
+       document.getElementById('worshipAidsArea').style.display = 'none';
    }
 }
+
+function clearWorshipPanels(idName){
+    if (idName != 'orderOfMass'){
+        document.getElementById('orderOfMass').style.display = 'none';
+        document.getElementById('hOrderOfMass').classList.remove('active');
+    }
+    if (idName != 'songs'){
+        document.getElementById('songs').style.display = 'none';
+        document.getElementById('hSongs').classList.remove('active');
+    }
+    if (idName != 'readings'){
+        document.getElementById('readings').style.display = 'none';
+        document.getElementById('hReadings').classList.remove('active');
+    }
+    if (idName != 'spiritualCommunionArea'){
+        document.getElementById('spiritualCommunionArea').style.display = 'none';
+        document.getElementById('hCommunion').classList.remove('active');
+    }
+    if (idName != 'resources'){
+        document.getElementById('resources').style.display = 'none';
+        document.getElementById('hResources').classList.remove('active');
+    }
+}
+
+function displayOrderOfMass(){
+    clearWorshipPanels('orderOfMass');
+    if(document.getElementById('orderOfMass').style.display == 'none'){
+        document.getElementById('orderOfMass').style.display = 'block';
+        document.getElementById('hOrderOfMass').classList.add("active");
+    } else {
+        document.getElementById('orderOfMass').style.display = 'none';
+        document.getElementById('hOrderOfMass').classList.remove('active');
+    }
+}
+
+function displaySongs(){
+   clearWorshipPanels('songs');
+   if(document.getElementById('songs').style.display == 'none'){
+       document.getElementById('songs').style.display = 'block';
+       document.getElementById('hSongs').classList.add("active");
+   } else {
+       document.getElementById('songs').style.display = 'none';
+        document.getElementById('hSongs').classList.remove('active');
+   }
+}
+
+function displayReadings(){
+   clearWorshipPanels('readings');
+   if(document.getElementById('readings').style.display == 'none'){
+       document.getElementById('readings').style.display = 'block';
+       document.getElementById('hReadings').classList.add('active');
+   } else {
+       document.getElementById('readings').style.display = 'none';
+        document.getElementById('hReadings').classList.remove('active');
+   }
+}
+
+
+function displaySpiritualCommunion(){
+   clearWorshipPanels('spiritualCommunionArea');
+   if(document.getElementById('spiritualCommunionArea').style.display == 'none'){
+       document.getElementById('spiritualCommunionArea').style.display = 'block';
+       document.getElementById('hCommunion').classList.add("active");
+   } else {
+       document.getElementById('spiritualCommunionArea').style.display = 'none';
+       document.getElementById('hCommunion').classList.remove('active');
+   }
+}
+
+function displayResources(){
+   clearWorshipPanels('resources');
+   if(document.getElementById('resources').style.display == 'none'){
+       document.getElementById('resources').style.display = 'block';
+       document.getElementById('hResources').classList.add('active');
+   } else {
+       document.getElementById('resources').style.display = 'none';
+       document.getElementById('hResources').classList.remove('active');
+   }
+}
+
+
+
 function displayHomily(){
    document.getElementById('donationArea').style.display = 'none';
-   document.getElementById('spiritualCommunionArea').style.display = 'none';
+   document.getElementById('worshipAidsArea').style.display = 'none';
    if(document.getElementById('homilyArea').style.display == 'none'){
        document.getElementById('homilyArea').style.display = 'block';
    } else {
@@ -324,11 +589,15 @@ function displayHomily(){
    }
 }
 function displayLive(){
+   document.getElementById('prevRecHTitle').style.display = 'none';
+   document.getElementById('liveTitle').style.display = 'block';
    document.getElementById('playlistArea').style.display = 'none';
    document.getElementById('liveArea').style.display = 'block';
    document.getElementById('liveArea').focus();
 }
 function displayPrevStream(){
+   document.getElementById('liveTitle').style.display = 'none';
+   document.getElementById('prevRecHTitle').style.display = 'block';
    document.getElementById('liveArea').style.display = 'none';
    document.getElementById('playlistArea').style.display = 'block';
    document.getElementById('playlistArea').focus();
@@ -338,6 +607,62 @@ function displayFacebook() {
     document.getElementById('facebookArea').style.display = 'block';
     document.getElementById('facebookArea').focus();
 }
+
+
+$("#accordion").accordion({ header: "h1", collapsible: true, active: false, heightStyle: "content", animate: 300 });
+$("#accordion").accordion("option", "active", $("#firstReading").index("#accordion div"));
+$('#accordion h1').bind('click',function(){
+    var self = this;
+    setTimeout(function() {
+         theOffset = $(self).offset();
+         $('body,html').animate({ scrollTop: theOffset.top - 25 });
+    }, 310); // ensure the collapse animation is done
+});
+$("#accordionOrder").accordion({ header: "h1", collapsible: true, active: false, heightStyle: "content", animate: 300 });
+$('#accordionOrder h1').bind('click',function(){
+    var self = this;
+    setTimeout(function() {
+         theOffset = $(self).offset();
+         $('body,html').animate({ scrollTop: theOffset.top - 25 });
+    }, 310); // ensure the collapse animation is done
+});
+$("#accordionSongs").accordion({ header: "h1", collapsible: true, active: false, heightStyle: "content", animate: 300 });
+$("#accordionSongs").accordion("option", "active", $("#firstSong").index("#accordionSongs div"));
+$('#accordionSongs h1').bind('click',function(){
+    var self = this;
+    setTimeout(function() {
+         theOffset = $(self).offset();
+         $('body,html').animate({ scrollTop: theOffset.top - 25 });
+    }, 310); // ensure the collapse animation is done
+});
+$("#accordionOpen").accordion({ header: "h1", collapsible: false, active: false, heightStyle: "content", animate: 300 });
+
+
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+var pageArea = getParameterByName('pg');
+if (pageArea == 'readings'){
+    displayWorshipAids();
+    displayReadings();
+    document.getElementById('readings').focus();
+    $('body,html').animate({ scrollTop: 1900 }); 
+} else if (pageArea == 'songs'){
+    displayWorshipAids();
+    displaySongs();
+    document.getElementById('songs').focus();
+    $('body,html').animate({ scrollTop: 1900 });
+} else if (pageArea == 'resources'){
+    displayWorshipAids();
+    displayResources();
+    document.getElementById('resources').focus();
+    $('body,html').animate({ scrollTop: 1900 });
+} else {
+}
+
 
 </script>
 
