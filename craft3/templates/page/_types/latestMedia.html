@@ -1,10 +1,11 @@
 {% if craft.app.language == 'es-US' %}
     {% set latest = "/es/media/media-library" %}
-    {% set topicTitle = "Homilias" %}
+    {% set theMass = "La Santa Misa" %}
 {% else %}
     {% set latest = "/media/media-library" %}
-    {% set topicTitle = "Homilies" %}
+    {% set theMass = "The Holy Mass" %}
 {% endif %}
+{% set topicTitle = "none" %}
 
 {% set break = 0 %}
 {% for item in craft.entries.section('media').orderBy('mediaDate DESC').all() if break == 0 %}
@@ -13,7 +14,7 @@
     {% for topic in mediaTopics.all() %}
         {% set topicTitle = topic.title %}
     {% endfor %}
-    {% if time == entry.mediaTimeFilter and topicTitle == entry.mediaTopicFilter %}
+    {% if entry.mediaTimeFilter in time and (topicTitle == entry.mediaTopicFilter or topicTitle == theMass) %}
         {% set break = 1 %}
         {% set latest = item.url %}
     {% endif %}

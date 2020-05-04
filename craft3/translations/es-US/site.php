@@ -132,6 +132,7 @@ return array(
     "View more media" => "Ver más medios",
     "View more news & updates" => "Ver más noticias y actualizaciones",
     "View more posts" => "Ver más mensajes",
+    "View Readings on USCCB.org" => "Ver lecturas en USCCB.org",
     "Watch live" => "Mirar en vivo",
     "Watch Live" => "Ver en directo",
     "We are usually able to respond within 1-3 days."=> "Estaremos disponibles para responderte de 1-3 dias",

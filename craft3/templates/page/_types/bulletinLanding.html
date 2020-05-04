@@ -37,7 +37,7 @@
     {% for bulletin in bulletins %}
       <p class="bulletinItem">
         {% if bulletin.bulletinDate is not empty %}
-          <a href="{% if bulletin.bulletinPdf is not empty %}{{ bulletin.bulletinPdf[0].getUrl() }}{% elseif bulletin.bulletinInsertUrl is not empty %}{{ bulletin.bulletinInsertUrl.url }}{% endif %}" target="_blank"><img alt="" src="{% if bulletin.bulletinImage is not empty %}{{ bulletin.bulletinImage[0].getUrl() }}{% elseif bulletin.bulletinInsertUrl is not empty %}/bulletins/bulletinInsert.jpg{% else %}/bulletins/20160327B.jpg{% endif %}" border="0" /> {% if bulletin.bulletinInsertUrl is not empty %}{% if craft.app.language == 'es-US' %}{{ bulletin.bulletinDate|date('d F') }} Inserto{% else %}{{ bulletin.bulletinDate|date('F d') }} Insert{% endif %}{% else %}{% if craft.app.language == 'es-US' %}{{ bulletin.bulletinDate|date('d F, Y') }}{% else %}{{ bulletin.bulletinDate|date('F d, Y') }}{% endif %}{% endif %}</a>
+          <a href="{% if bulletin.bulletinPdf is not empty %}{{ bulletin.bulletinPdf[0].getUrl() }}{% elseif bulletin.bulletinInsertUrl is not empty %}{{ bulletin.bulletinInsertUrl.url }}{% endif %}" target="_blank"><img alt="" src="{% if bulletin.bulletinImage is not empty %}{{ bulletin.bulletinImage[0].getUrl() }}{% elseif bulletin.bulletinInsertUrl is not empty %}/bulletins/bulletinInsert.jpg{% else %}/bulletins/20160327B.jpg{% endif %}" border="0" /> {% if craft.app.language == 'es-US' %}{{ bulletin.bulletinDate|date('d F, Y') }}{% else %}{{ bulletin.bulletinDate|date('F d, Y') }}{% endif %}</a>
           
         {% endif %}
       </p> <!-- .bulletinItem -->
