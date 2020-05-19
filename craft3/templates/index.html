@@ -9,7 +9,8 @@
 <style>
 .ycontainer {position: relative;width: 100%;height: 0;padding-bottom: 56.25%}
 .yvideo {position: absolute;top: 0;left: 0;width: 100%; height: 100%}
-#topDonate{display:block; text-align:center; width:70%; margin:15px auto 15px auto; padding:2px 3px 3px; border: 1px #000 solid; background-color:#fdea60; color:#000}
+.seatsLeft{border: 1px #005f72 solid; width: 70%; margin:0 auto 30px auto; padding: 10px 20px;}
+#topDonate{display:block; text-align:center; width:70%; margin:10px auto 35px auto; padding:2px 3px 3px; border: 1px #000 solid; background-color:#fdea60; color:#000}
 #topDonate b {display:block; padding:0 0 1px 0; font-size:130%; color:#c00}
 #topDonate i {display:inline-block;color:#000}
 #topDonate u {text-decoration:none; color:#c00;font-weight:bold}
@@ -25,10 +26,14 @@
 }
 @media screen and (max-width: 1146px){
 .worship-links a {padding: 15px 12px;}
-#topDonate{width:92%}
+#topDonate,.seatsLeft{width:92%}
 }
 .worship-links a {display: block;color: #000;background-color:#fff;text-decoration: none;text-align: center;border: 1px #000 solid}
 .worship-links a:hover, .worship-links a.active {background-color:#eee}
+.besideBtns{display:inline !important;padding-right:10px}
+@media screen and (max-width: 768px){
+  .besideBtns{display:block !important;padding-right:0}
+}
 #accordionOrder div, #accordionSongs div, #accordion div.inner,.saTxt{font-size:130%}
 #accordionOrder h1, #accordionSongs h1, #accordion h1{font-size:110%;text-align:left}
 #songs p, #readings p, #homilyArea p,#orderOfMass p{margin-top:20px}
@@ -146,15 +151,7 @@
 
     <div class="page-content-container">
     
-        {% if craft.app.language == 'es-US' %}
-            <a href="#donationArea" onclick="displayDonation();" id="topDonate">
-            <b><i class="fa fa-exclamation-circle"></i> Donar a su parroquia</b> 
-            Durante la pandemia COVID-19, su parroquia necesita su apoyo más que nunca. Su regalo parroquial proporciona un salvavidas de apoyo a nuestra familia de la iglesia en estos tiempos de crisis. <u>Por favor, dona hoy</u></a>.
-        {% else %}
-            <a href="#donationArea" onclick="displayDonation();" id="topDonate">
-        <b><i class="fa fa-exclamation-circle"></i> Donate to Your Parish</b>
-        During the COVID-19 pandemic, your parish needs your support more than ever. Your parish gift provides a lifeline of support to our church family in this time of crisis. <u>Please donate today</u></a>.
-        {% endif %}     
+        {{ entry.topBlock|raw }}  
     
       <div class="container news-grid">
       
@@ -244,7 +241,7 @@
       
     <div id="liveArea">
         <div id="youTubeArea">
-            <h3 style="display:inline">{{ "St. Anne YouTube Live Stream"|t }}</h3> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            <h3 class="besideBtns">{{ "St. Anne YouTube Live Stream"|t }}</h3> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
             <a href="https://www.facebook.com/Stannegilbert/videos/" class="btn btn-light-blue" target="_blank">{{ "St. Anne Facebook Live Stream"|t }}</a><br>
             <div class="ycontainer">
                <iframe src="https://www.youtube.com/embed/live_stream?channel=UCbosi2FmDot80gSSas3rMDg" 
@@ -253,13 +250,15 @@ frameborder="0" allowfullscreen class="yvideo"></iframe>
         </div>
     </div>
     <div id="playlistArea">
-        <h3>{{ "Weekend Mass"|t }}</h3>
+        <h3 class="besideBtns">{{ "Weekend Mass"|t }}</h3>
+        <a href="https://www.youtube.com/playlist?list=PLa9PKK2m9n8ljLJFCtDcSL9cGtToJJ3Wr" class="btn btn-light-blue" target="_blank">{{ "View Full Playlist"|t }}</a><br>
         <div class="ycontainer">
             <iframe src="https://www.youtube.com/embed/videoseries?list=PLa9PKK2m9n8ljLJFCtDcSL9cGtToJJ3Wr" 
 frameborder="0" allowfullscreen class="yvideo"></iframe><br>
 
         </div>
-        <br><h3>{{ "Daily Mass"|t }}</h3>
+        <br><h3 class="besideBtns">{{ "Daily Mass"|t }}</h3>
+        <a href="https://www.youtube.com/playlist?list=PLa9PKK2m9n8ng2ZFKHos97cW-UXyW57vP" class="btn btn-light-blue" target="_blank">{{ "Full Playlist"|t }}</a> &nbsp;&nbsp; <a href="https://www.youtube.com/channel/UCbosi2FmDot80gSSas3rMDg/videos" class="btn btn-light-blue" target="_blank">{{ "All Videos"|t }}</a><br>
         <div class="ycontainer">
             <iframe src="https://www.youtube.com/embed/videoseries?list=PLa9PKK2m9n8ng2ZFKHos97cW-UXyW57vP" 
 frameborder="0" allowfullscreen class="yvideo"></iframe>
@@ -393,7 +392,7 @@ frameborder="0" allowfullscreen class="yvideo"></iframe>
 			{% set topicTitle = topic.title %}
 		{% endfor %}
 		{% if entry.mediaTimeFilter %}
-		    {% if entry.mediaTimeFilter in time and topicTitle == entry.mediaTopicFilter %}
+		    {% if entry.mediaTimeFilter in time and topicTitle == entry.mediaTopicFilter and item.body != '' %}
 		    	{% set break = 1 %}
 			    {% set mTitle = item.title %}
 			    {% set mLead = item.lead %}
@@ -401,7 +400,7 @@ frameborder="0" allowfullscreen class="yvideo"></iframe>
 			    {% set mDate = item.mediaDate|date %}
 		    {% endif %}
 		{% else %}
-            {% if topicTitle == entry.mediaTopicFilter %}
+            {% if topicTitle == entry.mediaTopicFilter and item.body != '' %}
                 {% set break = 1 %}
                 {% set mTitle = item.title %}
 			    {% set mLead = item.lead %}

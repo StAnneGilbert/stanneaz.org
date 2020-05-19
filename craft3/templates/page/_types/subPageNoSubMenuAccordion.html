@@ -75,8 +75,36 @@
   
   
 <script>
-$("#accordion").accordion({ header: "h1", collapsible: true, active: false, heightStyle: "content" });
-$("#accordionOpen").accordion({ header: "h1", collapsible: false, active: false, heightStyle: "content" });
-$("#accordion2").accordion({ header: "h3", collapsible: true, active: false, heightStyle: "content" });
-$("#accordion2Open").accordion({ header: "h3", collapsible: true, active: false, heightStyle: "content" });
+$("#accordion").accordion({ header: "h1", collapsible: true, active: false, heightStyle: "content", animate: 300 });
+$('#accordion h1').bind('click',function(){
+    var self = this;
+    setTimeout(function() {
+         theOffset = $(self).offset();
+         $('body,html').animate({ scrollTop: theOffset.top - 25 });
+    }, 310); // ensure the collapse animation is done
+});
+$("#accordionOpen").accordion({ header: "h1", collapsible: false, active: false, heightStyle: "content", animate: 300 });
+$('#accordionOpen h1').bind('click',function(){
+    var self = this;
+    setTimeout(function() {
+         theOffset = $(self).offset();
+         $('body,html').animate({ scrollTop: theOffset.top - 25 });
+    }, 310); // ensure the collapse animation is done
+});
+$("#accordion2").accordion({ header: "h3", collapsible: true, active: false, heightStyle: "content", animate: 300 });
+$('#accordion2 h3').bind('click',function(){
+    var self = this;
+    setTimeout(function() {
+         theOffset = $(self).offset();
+         $('body,html').animate({ scrollTop: theOffset.top - 25 });
+    }, 310); // ensure the collapse animation is done
+});
+$("#accordion2Open").accordion({ header: "h3", collapsible: true, active: false, heightStyle: "content", animate: 300 });
+$('#accordion2Open h3').bind('click',function(){
+    var self = this;
+    setTimeout(function() {
+         theOffset = $(self).offset();
+         $('body,html').animate({ scrollTop: theOffset.top - 25 });
+    }, 310); // ensure the collapse animation is done
+});
 </script>

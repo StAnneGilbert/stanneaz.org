@@ -169,6 +169,7 @@
                     {% endfor %}
                     {% endcache %}
                   </p>
+                  
                   {% if siteWideContent.parishOfficeHours[0].exceptionReference is not empty %}
                     <p class="muted">*{{ siteWideContent.parishOfficeHours[0].exceptionReference }}</p>
                   {% endif %}
@@ -197,9 +198,27 @@ function pageMover(obj){
 		case "Contenido de boletines y medios":
 		    contactUrl="https://communications.stanneaz.org";
 			break;
+		case "Counseling Services Regarding COVID-19":
+		    contactUrl="https://giving.parishsoft.com/App/Form/1ade726c-d2bd-4ebb-b0f7-8d229bdcc896";
+			break;
+		case "Servicios de asesoramiento":
+		    contactUrl="https://giving.parishsoft.com/App/Form/1ade726c-d2bd-4ebb-b0f7-8d229bdcc896";
+			break;
+		case "Grief and Bereavement Service":
+		    contactUrl="https://giving.parishsoft.com/App/Form/33fc80a5-cd4d-4f2f-8e7d-a40e83d13f53";
+			break;
+		case "Servicio de duelo y duelo":
+		    contactUrl="https://giving.parishsoft.com/App/Form/33fc80a5-cd4d-4f2f-8e7d-a40e83d13f53";
+			break;
+		case "Spiritual Direction":
+		    contactUrl="https://giving.parishsoft.com/App/Form/78187e6c-fcd2-49ab-b4e4-bc8e450e4577";
+			break;
+		case "Director espiritual certificado":
+		    contactUrl="https://giving.parishsoft.com/App/Form/78187e6c-fcd2-49ab-b4e4-bc8e450e4577";
+			break;
 	}
-	if (contactUrl=='https://communications.stanneaz.org'){
-	    window.location.href='http://communications.stanneaz.org';
+	if (contactUrl != ''){
+	    window.location.href=contactUrl;
 	}
 }
 </script>
