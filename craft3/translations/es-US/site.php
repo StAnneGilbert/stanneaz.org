@@ -3,6 +3,7 @@
 return array(
     "(account required)" => "(cuenta requerida)",
     "Activities, Events, News, and Information" => "Actividades, Eventos, Noticias e información",
+    "All Videos" => "Todos los videos",
     "Announcements" => "Anuncios",
     "Announcement Notifications" => "Notificaciones de anuncios",
     "Announcements RSS" => "Anuncios RSS",
@@ -73,6 +74,7 @@ return array(
     "Or, receive them via email:" => "O, recibirlos por correo electrónico:",
     "Order of Mass" => "Ordinario de la Misa",
     "Parish office hours" => "Horas de oficina",
+    "Full Playlist" => "Lista de reproducción",
     "Please share your contact info below" => "Por favor comparte su información de contacto abajo",
     "Please share your contact info below:" => "Por favor comparte su información de contacto abajo",
     "Pledged:" => "Actual:",
@@ -126,6 +128,7 @@ return array(
     "Topic" => "Tema",
     "Tuesday" => "Martes",
     "Type your specific comment, question, or issue here" => "Escribe tu comentario, pregunta, o asunto brevemente aquí",
+    "View Full Playlist" => "Ver lista de reproducción completa",
     "View more events" => "Ver más eventos",
     "View more announcements" => "Ver más anuncios",
     "View more homilies" => "Ver más homilías",

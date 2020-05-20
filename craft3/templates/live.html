@@ -30,6 +30,10 @@
 }
 .worship-links a {display: block;color: #000;background-color:#fff;text-decoration: none;text-align: center;border: 1px #000 solid}
 .worship-links a:hover, .worship-links a.active {background-color:#eee}
+.besideBtns{display:inline !important;padding-right:10px}
+@media screen and (max-width: 768px){
+  .besideBtns{display:block !important;padding-right:0}
+}
 #accordionOrder div, #accordionSongs div, #accordion div.inner,.saTxt{font-size:130%}
 #accordionOrder h1, #accordionSongs h1, #accordion h1{font-size:110%;text-align:left}
 #songs p, #readings p, #homilyArea p,#orderOfMass p{margin-top:20px}
@@ -98,7 +102,7 @@
       
     <div id="liveArea">
         <div id="youTubeArea">
-            <h3 style="display:inline">{{ "St. Anne YouTube Live Stream"|t }}</h3> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            <h3 class="besideBtns">{{ "St. Anne YouTube Live Stream"|t }}</h3> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
             <a href="https://www.facebook.com/pg/Stannegilbert/videos/" class="btn btn-light-blue" target="_blank">{{ "St. Anne Facebook Live Stream"|t }}</a><br>
             <div class="ycontainer">
                <iframe src="https://www.youtube.com/embed/live_stream?channel=UCbosi2FmDot80gSSas3rMDg" 
@@ -107,13 +111,15 @@ frameborder="0" allowfullscreen class="yvideo"></iframe>
         </div>
     </div>
     <div id="playlistArea">
-        <h3>{{ "Weekend Mass"|t }}</h3>
+        <h3 class="besideBtns">{{ "Weekend Mass"|t }}</h3>
+        <a href="https://www.youtube.com/playlist?list=PLa9PKK2m9n8ljLJFCtDcSL9cGtToJJ3Wr" class="btn btn-light-blue" target="_blank">{{ "View Full Playlist"|t }}</a><br>
         <div class="ycontainer">
             <iframe src="https://www.youtube.com/embed/videoseries?list=PLa9PKK2m9n8ljLJFCtDcSL9cGtToJJ3Wr" 
 frameborder="0" allowfullscreen class="yvideo"></iframe><br>
 
         </div>
-        <br><h3>{{ "Daily Mass"|t }}</h3>
+        <br><h3 class="besideBtns">{{ "Daily Mass"|t }}</h3>
+        <a href="https://www.youtube.com/playlist?list=PLa9PKK2m9n8ng2ZFKHos97cW-UXyW57vP" class="btn btn-light-blue" target="_blank">{{ "Full Playlist"|t }}</a> &nbsp;&nbsp; <a href="https://www.youtube.com/channel/UCbosi2FmDot80gSSas3rMDg/videos" class="btn btn-light-blue" target="_blank">{{ "All Videos"|t }}</a><br>
         <div class="ycontainer">
             <iframe src="https://www.youtube.com/embed/videoseries?list=PLa9PKK2m9n8ng2ZFKHos97cW-UXyW57vP" 
 frameborder="0" allowfullscreen class="yvideo"></iframe>
@@ -249,7 +255,7 @@ frameborder="0" allowfullscreen class="yvideo"></iframe>
 			{% set topicTitle = topic.title %}
 		{% endfor %}
 		{% if entry.mediaTimeFilter %}
-		    {% if home.mediaTimeFilter in time and topicTitle == entry.mediaTopicFilter %}
+		    {% if home.mediaTimeFilter in time and topicTitle == entry.mediaTopicFilter and item.body != '' %}
 		    	{% set break = 1 %}
 			    {% set mTitle = item.title %}
 			    {% set mLead = item.lead %}
@@ -257,7 +263,7 @@ frameborder="0" allowfullscreen class="yvideo"></iframe>
 			    {% set mDate = item.mediaDate|date %}
 		    {% endif %}
 		{% else %}
-            {% if topicTitle == home.mediaTopicFilter %}
+            {% if topicTitle == home.mediaTopicFilter and item.body != '' %}
                 {% set break = 1 %}
                 {% set mTitle = item.title %}
 			    {% set mLead = item.lead %}
