@@ -50,6 +50,27 @@
               <img src="{{ entry.postImage[0].getUrl() }}" alt="{{ entry.title }}" />
             {% endif %}
           </div>
+          {% if entry.video|length %}
+              {% if entry.postImage|length or entry.vimeoVideoId != 0 %}<br clear="all">{% endif %}
+              <style>
+				.ycontainer {
+					position: relative;
+					width: 100%;
+					height: 0;
+					padding-bottom: 56.25%;
+				}
+				.yvideo {
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 100%;
+					height: 100%;
+				}
+				</style>
+                <div class="ycontainer">
+                    {{ entry.video|raw }}
+                </div>
+          {% endif %}
           {% if entry.youTubeVideoId|length %}
               {% if entry.postImage|length or entry.vimeoVideoId != 0 %}<br clear="all">{% endif %}
                 <style>
