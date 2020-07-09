@@ -1,14 +1,14 @@
 {% if craft.app.language == 'es-US' %}
-    {% set response = craft.twitter.get('statuses/user_timeline', {'screen_name':'pontifex_es',count:1}) %}
+    {% set response = craft.twitter.get('statuses/user_timeline', {'screen_name':'pontifex_es',count:1,tweet_mode:'extended'}) %}
 {% else %}
-    {% set response = craft.twitter.get('statuses/user_timeline', {'screen_name':'pontifex',count:1}) %}
+    {% set response = craft.twitter.get('statuses/user_timeline', {'screen_name':'pontifex',count:1,tweet_mode:'extended'}) %}
 {% endif %}
 
 <div class="sf-footer nav-slide-element">
 {# % if response.success %}
     {% set tweets = response.data %}
     {% for item in tweets %}
-        {{ item.text }}
+        {{ item.full_text }}
     {% endfor %}
     <pre>{{ tweets|json_encode(constant('JSON_PRETTY_PRINT')) }}</pre>
 {% else %}
@@ -26,7 +26,7 @@
                   {% for tweet in tweets %}
                      {% set url = 'https://twitter.com/' ~ tweet.user.screen_name ~ '/status/' ~ tweet.id %}
                     <div class="tweet-contents">
-                      {{ tweet.text|raw }}
+                      {{ tweet.full_text|raw }}
                     </div>
                     <div class="tweet-meta">
                       <a href="{{ url }}" target="_blank"><i class="fa fa-twitter"></i> {{ tweet.created_at|date('F jS \\a\\t g:ia') }}</a>
