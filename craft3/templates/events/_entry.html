@@ -67,8 +67,11 @@
     
 			     
     <div style="font-size:28px">
-        {{ displayEDate }}
-        {% if entry.showDatesOnly | length %}
+        {% if entry.tbdTba | length %}
+        {% else %}
+            {{ displayEDate }}
+        {% endif %}
+        {% if entry.showDatesOnly | length or entry.tbdTba | length %}
         {% else %}
             <br>{{ displayETime }}
         {% endif %}

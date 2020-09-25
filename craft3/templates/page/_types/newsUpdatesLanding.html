@@ -4,17 +4,11 @@
     <div class="page-content-container">
       <div class="container standard-container">
 
-        <div class="section-title">
-          <div class="row">
-            <div class="col-lg-5 col-md-5 col-sm-5">
-              <h3>{{ entry.title }}</h3>
-              <h3 class="small">{{ "Find and filter posts below"|t }}</h3>
-            </div>
-            <div class="col-lg-7 col-md-7 col-sm-7 action-links">
-             
-            </div>
-          </div>
-        </div>
+        
+        <h3>{{ entry.title }}</h3>
+        {{ entry.body }}
+        <h3 class="small">{{ "Find and filter posts below"|t }}</h3>
+            
 
         {% include "partials/filters/_news-updates-filters" %}
         
