@@ -173,34 +173,17 @@ frameborder="0" allowfullscreen class="yvideo"></iframe>
         <div id="readings" style="display:none">
             <br>
             <h3>{{ "Readings"|t }}</h3>
-            <div class="saTxt"> 
-{% if craft.app.language == 'es-US' %}
-     {% set feedurl = "http://www.usccb.org/bible/lecturas/rss/index.cfm" %}
-{% else %}
-     {% set feedurl = "http://www.usccb.org/bible/readings/rss/daily.xml" %} 
-{% endif %}
-{% set limit = 1 %}
-{% set offset = 0 %}
-{% set cache = "PT1H" %}
-{% cache globally for 1 hour %}
-    {% set items = craft.app.feeds.getFeedItems(feedurl, limit, offset, cache) %}
-    {% for item in items %}
-	    <h4>{{ item.title }}</h4>
-	    <div{% if loop.index == 1 %} id="firstReading"{% endif %}>
-		  {% if loop.index == 1 %}
-			  {% if craft.app.language == 'es-US' %}
-				  <p>(<a href="https://stanneaz.org/?pg=readings">Click here for English / Haga clic aquí para inglés</a>)</p>
-			  {% else %}
-				  <p>(<a href="https://stanneaz.org/es/?pg=readings">Haga clic aquí para español / Click here for Spanish</a>)</p>
-			  {% endif %}
-		  {% endif %}
-		    {{ item.summary|raw }}
-		    <br><p><a href="{{ item.permalink }}" target="_blank" class="btn btn-light-blue">{{ "View Readings on USCCB.org"|t }}</a></p>
-	    </div>
-    {% endfor %}
-{% endcache %}
-
-            </div><!--end .saTxt-->   
+            <div class="saTxt">
+			    {% if craft.app.language == 'es-US' %}
+				    <p>(<a href="https://stanneaz.org/?pg=readings">Click here for English / Haga clic aquí para inglés</a>)</p>
+				    {% set readingFeedUrl = "/es/usccb-readings" %}
+			    {% else %}
+				    <p>(<a href="https://stanneaz.org/es/?pg=readings">Haga clic aquí para español / Click here for Spanish</a>)</p>
+				    {% set readingFeedUrl = "/usccb-readings" %}
+			    {% endif %}
+			</div>
+            <iframe src="{{ readingFeedUrl }}" 
+frameborder="0" allowfullscreen style="width:100%;height:5500px"></iframe>  
         </div><!--end readings-->
         
         

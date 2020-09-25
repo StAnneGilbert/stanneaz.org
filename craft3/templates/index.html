@@ -94,7 +94,7 @@
                   position: 'top-center'
                   } %}
                 {% cache globally for 1 day %}
-                <div id="placeHolder1"><img src="{{ entry.pageImage[0].url }}" width="100%" /></div>
+                <div id="placeHolder1"><img src="https://stanneaz.org/img/carousels/carousel-spacer.png" width="100%" /></div>
                 <ul class='bxslider' id="slider1" style="display:none;">
                 {% for item in entry.featuredAtStAnne.all() %}
                   {% set link = item.contentLink %}
@@ -158,6 +158,9 @@
         <div class="row news-blocks">
         
           <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+          
+               {{ entry.topLeftBlock|raw }}  
+          
           {% set offertoryUp = craft.entries.section('offertoryUpdates').one() %}
           <style>
           .oContainer{white-space:nowrap}
@@ -242,7 +245,7 @@
     <div id="liveArea">
         <div id="youTubeArea">
             <h3 class="besideBtns">{{ "St. Anne YouTube Live Stream"|t }}</h3> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-            <a href="https://www.facebook.com/Stannegilbert/videos/" class="btn btn-light-blue" target="_blank">{{ "St. Anne Facebook Live Stream"|t }}</a><br>
+            <a href="https://www.facebook.com/Stannegilbert/live_videos/" class="btn btn-light-blue" target="_blank">{{ "St. Anne Facebook Live Stream"|t }}</a><br>
             <div class="ycontainer">
                <iframe src="https://www.youtube.com/embed/live_stream?channel=UCbosi2FmDot80gSSas3rMDg" 
 frameborder="0" allowfullscreen class="yvideo"></iframe>
@@ -312,34 +315,17 @@ frameborder="0" allowfullscreen class="yvideo"></iframe>
         <div id="readings" style="display:none">
             <br>
             <h3>{{ "Readings"|t }}</h3>
-            <div class="saTxt"> 
-{% if craft.app.language == 'es-US' %}
-     {% set feedurl = "http://www.usccb.org/bible/lecturas/rss/index.cfm" %}
-{% else %}
-     {% set feedurl = "http://www.usccb.org/bible/readings/rss/daily.xml" %} 
-{% endif %}
-{% set limit = 1 %}
-{% set offset = 0 %}
-{% set cache = "PT1H" %}
-{% cache globally for 1 hour %}
-    {% set items = craft.app.feeds.getFeedItems(feedurl, limit, offset, cache) %}
-    {% for item in items %}
-	    <h4>{{ item.title }}</h4>
-	    <div{% if loop.index == 1 %} id="firstReading"{% endif %}>
-		  {% if loop.index == 1 %}
-			  {% if craft.app.language == 'es-US' %}
-				  <p>(<a href="https://stanneaz.org/?pg=readings">Click here for English / Haga clic aquí para inglés</a>)</p>
-			  {% else %}
-				  <p>(<a href="https://stanneaz.org/es/?pg=readings">Haga clic aquí para español / Click here for Spanish</a>)</p>
-			  {% endif %}
-		  {% endif %}
-		    {{ item.summary|raw }}
-		    <br><p><a href="{{ item.permalink }}" target="_blank" class="btn btn-light-blue">{{ "View Readings on USCCB.org"|t }}</a></p>
-	    </div>
-    {% endfor %}
-{% endcache %}
-
-            </div><!--end .saTxt-->   
+            <div class="saTxt">
+			    {% if craft.app.language == 'es-US' %}
+				    <p>(<a href="https://stanneaz.org/?pg=readings">Click here for English / Haga clic aquí para inglés</a>)</p>
+				    {% set readingFeedUrl = "/es/usccb-readings" %}
+			    {% else %}
+				    <p>(<a href="https://stanneaz.org/es/?pg=readings">Haga clic aquí para español / Click here for Spanish</a>)</p>
+				    {% set readingFeedUrl = "/usccb-readings" %}
+			    {% endif %}
+			</div>
+            <iframe src="{{ readingFeedUrl }}" 
+frameborder="0" allowfullscreen style="width:100%;height:5500px"></iframe>
         </div><!--end readings-->
         
         
@@ -455,7 +441,24 @@ frameborder="0" allowfullscreen class="yvideo"></iframe>
         </div>          
        
     </div>
-
+    
+    {% if entry.homeBlock6 %}
+        <div class="row news-blocks">
+   
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                {{ entry.homeBlock6|raw }}
+            </div>
+        
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                {{ entry.homeBlock7|raw }}
+            </div>
+        
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                {{ entry.homeBlock8|raw }}
+            </div>          
+       
+        </div>
+    {% endif %}
 
       <div class="text-center news-action-links">
         {% if entry.subLinks|length %}

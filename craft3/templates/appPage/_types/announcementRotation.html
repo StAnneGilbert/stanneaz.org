@@ -1,14 +1,15 @@
 <style>
-.slideOuterContainer{
-    background-color:#{{entry.backgroundColor}};
-    color: #{{entry.color}};
+.slideOuterContainer{ background: #005f72 url('https://stanneaz.org/img/general/assets/logo-stanne-bg.png'); 
+    color: #ffffff;
+    overflow:hidden;
 }
 .slideContainer{
     margin: 0 20px;
+    overflow:hidden;
 }
 #slides {
     position: relative;
-    height: 1400px;
+    height: 1100px;
     padding: 0px;
     margin: 0px;
     list-style-type: none;
@@ -24,6 +25,7 @@
     opacity: 0;
     z-index: 1;
     text-align:center;
+    overflow:hidden;
 
     -webkit-transition: opacity 1s;
     -moz-transition: opacity 1s;
@@ -49,12 +51,18 @@
     <div id="slides">
  
 {% for entry in craft.entries.section('announcements').limit('80').all() %}
+
+    {% if not entry.hideFromDigitalMediaBoards | length %}             
 	
 	<div class="slide{% if eMarker == 1 %} showing{% endif %}">
 		<h4>{{ entry.title }}</h4>
-		{% if entry.eventListingImage|length %}
-            <img src="{{ entry.eventListingImage[0].url }}" width="321" height="200" alt="{{ entry.title }}">   
-        {% endif %}
+        {% if entry.rotationImage|length %}
+	        <img src="{{ entry.rotationImage[0].url }}" alt="" height="200" />
+	    {% else %}
+	        {% if entry.eventListingImage|length %}
+	            <img src="{{ entry.eventListingImage[0].url }}" alt="" width="321" height="200" />
+	        {% endif %}
+	    {% endif %}
 		{% if entry.shortDescription|length %}
 	        <div>{{ entry.shortDescription|raw }}</div>
 	    {% else %}
@@ -68,6 +76,8 @@
 	</div>
 	
 	{% set eMarker = eMarker + 1 %} 
+	
+	{% endif %}
 	
 {% endfor %}
 </div>
