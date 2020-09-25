@@ -157,4 +157,15 @@ function hideForm() {
     document.getElementById('formArea').style.display = 'none';
     location.href = "#"+personSlugVal;
 }
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+var stSlug = getParameterByName('sl');
+var staffMember = getParameterByName('st');
+if(stSlug && staffMember){
+    displayForm(stSlug,staffMember);
+}
 </script>
