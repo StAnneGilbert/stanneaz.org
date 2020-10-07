@@ -3,6 +3,9 @@
 
 {% block content %}
 
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0&appId=229828303704088&autoLogAppEvents=1" nonce="lm0yP7kR"></script>
+
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/cupertino/jquery-ui.css">
         <script src="//code.jquery.com/jquery-2.2.3.min.js"></script>
         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
@@ -240,31 +243,23 @@
     <h4 class="caps-header text-center">
          <span id="liveTitle">{{ "Live Video Stream"|t }}&nbsp; / &nbsp;<a href="#" onclick="displayPrevStream();return false;">{{ "Previously Recorded"|t }}</a></span><span id="prevRecHTitle" style="display:none"><a href="#" onclick="displayLive();return false;">{{ "Live Video Stream"|t }}</a>&nbsp; / &nbsp;{{ "Previously Recorded"|t }}</span>
     </h4>
-  
       
     <div id="liveArea">
         <div id="youTubeArea">
-            <h3 class="besideBtns">{{ "St. Anne YouTube Live Stream"|t }}</h3> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-            <a href="https://www.facebook.com/Stannegilbert/live_videos/" class="btn btn-light-blue" target="_blank">{{ "St. Anne Facebook Live Stream"|t }}</a><br>
+            <p>Note: If you see a message requiring a login, <a href="https://www.facebook.com/Stannegilbert/live/" target="_blank">you may be able to watch the video here without logging in</a>.</p><br>
             <div class="ycontainer">
-               <iframe src="https://www.youtube.com/embed/live_stream?channel=UCbosi2FmDot80gSSas3rMDg" 
-frameborder="0" allowfullscreen class="yvideo"></iframe>
+                <div class="fb-video" data-href="https://www.facebook.com/Stannegilbert/live/" data-show-text="true" data-width=""></div><br clear="all">
+                <!--iframe src="https://www.youtube.com/embed/live_stream?channel=UCbosi2FmDot80gSSas3rMDg" 
+frameborder="0" allowfullscreen class="yvideo"></iframe-->
             </div>
         </div>
     </div>
     <div id="playlistArea">
-        <h3 class="besideBtns">{{ "Weekend Mass"|t }}</h3>
-        <a href="https://www.youtube.com/playlist?list=PLa9PKK2m9n8ljLJFCtDcSL9cGtToJJ3Wr" class="btn btn-light-blue" target="_blank">{{ "View Full Playlist"|t }}</a><br>
+        <a href="https://www.facebook.com/watch/142021569155124/2563675830580536" class="btn btn-light-blue" target="_blank">{{ "View Weekend Mass Playlist"|t }}</a> &nbsp; <a href="https://www.facebook.com/watch/142021569155124/258056238552112" class="btn btn-light-blue" target="_blank">{{ "Daily Mass"|t }}</a> &nbsp; <a href="https://www.facebook.com/Stannegilbert/live/" class="btn btn-light-blue" target="_blank">{{ "All Videos"|t }}</a><br><br>
         <div class="ycontainer">
             <iframe src="https://www.youtube.com/embed/videoseries?list=PLa9PKK2m9n8ljLJFCtDcSL9cGtToJJ3Wr" 
 frameborder="0" allowfullscreen class="yvideo"></iframe><br>
 
-        </div>
-        <br><h3 class="besideBtns">{{ "Daily Mass"|t }}</h3>
-        <a href="https://www.youtube.com/playlist?list=PLa9PKK2m9n8ng2ZFKHos97cW-UXyW57vP" class="btn btn-light-blue" target="_blank">{{ "Full Playlist"|t }}</a> &nbsp;&nbsp; <a href="https://www.youtube.com/channel/UCbosi2FmDot80gSSas3rMDg/videos" class="btn btn-light-blue" target="_blank">{{ "All Videos"|t }}</a><br>
-        <div class="ycontainer">
-            <iframe src="https://www.youtube.com/embed/videoseries?list=PLa9PKK2m9n8ng2ZFKHos97cW-UXyW57vP" 
-frameborder="0" allowfullscreen class="yvideo"></iframe>
         </div>
     </div>
 
