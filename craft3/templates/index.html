@@ -3,14 +3,37 @@
 
 {% block content %}
 
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0&appId=229828303704088&autoLogAppEvents=1" nonce="lm0yP7kR"></script>
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ websiteTitle }}">
+<meta property="og:description" content="St. Anne Roman Catholic Parish is located in Gilbert, Arizona. Fiat Voluntas Tua (May God's will be done).">
+<meta property="og:image" content="https://stanneaz.org/img/general/Mosaic-1920x1080.jpg">
+<meta property='og:url' content='{{ currentURL }}'/>
+
+<meta name="twitter:card" content="summary" /> 
+<meta name="twitter:site" content="{{ currentURL }}" /> 
+<meta name="twitter:title" content="{{ websiteTitle }}" /> 
+<meta name="twitter:description" content="St. Anne Roman Catholic Parish is located in Gilbert, Arizona. Fiat Voluntas Tua (May God's will be done)." /> 
+<meta name=twitter:image content="https://stanneaz.org/img/general/Mosaic-1920x1080.jpg" />
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/cupertino/jquery-ui.css">
         <script src="//code.jquery.com/jquery-2.2.3.min.js"></script>
         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <style>
 .ycontainer {position: relative;width: 100%;height: 0;padding-bottom: 56.25%}
+/* The current embedded video is not playing well with .ycontainer and .yvideo */
+@media screen and (max-width: 991px){
+  .ycontainer{padding-bottom: 30%}
+}
+@media screen and (max-width: 628px){
+  .ycontainer{padding-bottom: 36%}
+}
+@media screen and (max-width: 498px){
+  .ycontainer{padding-bottom: 46%}
+}
+@media screen and (max-width: 413px){
+  .ycontainer{padding-bottom: 56.25%}
+}
+/* end weird padding corrections. */
 .yvideo {position: absolute;top: 0;left: 0;width: 100%; height: 100%}
 .seatsLeft{border: 1px #005f72 solid; width: 70%; margin:0 auto 30px auto; padding: 10px 20px;}
 #topDonate{display:block; text-align:center; width:70%; margin:10px auto 35px auto; padding:2px 3px 3px; border: 1px #000 solid; background-color:#fdea60; color:#000}
@@ -18,13 +41,13 @@
 #topDonate i {display:inline-block;color:#000}
 #topDonate u {text-decoration:none; color:#c00;font-weight:bold}
 .page-content-container{margin-top:0;padding-top:35px;}
-#donationArea,#playlistArea,#homilyArea,#facebookArea{display:none}
+#donationArea,#vidArea2,#homilyArea,#facebookArea{display:none}
 #homilyArea{display:none;text-align:left;padding:20px 40px;font-size:120%}
 .caps-header a{color:#99bfbc}
 .caps-header a:hover{text-decoration:underline}
 @media screen and (min-width: 1147px)
 {
-    .worship-links a {font-size: 20px;line-height: 24px;padding: 15px 0;float: left; width: 20%;
+    .worship-links a {font-size: 20px;line-height: 24px;padding: 15px 0;float: left; width: 25%;
     }
 }
 @media screen and (max-width: 1146px){
@@ -83,7 +106,6 @@
 
 </style>
 
-<!-- .sf-content for flex sticky footer -->
 <div class="sf-content nav-slide-element"> 
     <div class="featured-content-hero nopad" {% if entry.pageImage|length %}style=" background-image:url({{ entry.pageImage[0].url }})" {% endif %}>
         <div class="featured-items">
@@ -241,31 +263,24 @@
 <div style="text-align:center">
       
     <h4 class="caps-header text-center">
-         <span id="liveTitle">{{ "Live Video Stream"|t }}&nbsp; / &nbsp;<a href="#" onclick="displayPrevStream();return false;">{{ "Previously Recorded"|t }}</a></span><span id="prevRecHTitle" style="display:none"><a href="#" onclick="displayLive();return false;">{{ "Live Video Stream"|t }}</a>&nbsp; / &nbsp;{{ "Previously Recorded"|t }}</span>
+          <span id="vidTitle1">{{ "Live"|t }}</span>&nbsp;/&nbsp;<a href="https://www.youtube.com/c/StAnneRomanCatholicParish/videos" target="_blank">YouTube</a>&nbsp;/&nbsp;<a href="https://www.facebook.com/Stannegilbert/videos/" target="_blank">{{ "Facebook"|t }}</a>
     </h4>
       
-    <div id="liveArea">
-        <div id="youTubeArea">
-            <p>Note: If you see a message requiring a login, <a href="https://www.facebook.com/Stannegilbert/live/" target="_blank">you may be able to watch the video here without logging in</a>.</p><br>
-            <div class="ycontainer">
-                <div class="fb-video" data-href="https://www.facebook.com/Stannegilbert/live/" data-show-text="true" data-width=""></div><br clear="all">
-                <!--iframe src="https://www.youtube.com/embed/live_stream?channel=UCbosi2FmDot80gSSas3rMDg" 
-frameborder="0" allowfullscreen class="yvideo"></iframe-->
-            </div>
-        </div>
-    </div>
-    <div id="playlistArea">
-        <a href="https://www.facebook.com/watch/142021569155124/2563675830580536" class="btn btn-light-blue" target="_blank">{{ "View Weekend Mass Playlist"|t }}</a> &nbsp; <a href="https://www.facebook.com/watch/142021569155124/258056238552112" class="btn btn-light-blue" target="_blank">{{ "Daily Mass"|t }}</a> &nbsp; <a href="https://www.facebook.com/Stannegilbert/live/" class="btn btn-light-blue" target="_blank">{{ "All Videos"|t }}</a><br><br>
+    <div id="vidArea1">
         <div class="ycontainer">
-            <iframe src="https://www.youtube.com/embed/videoseries?list=PLa9PKK2m9n8ljLJFCtDcSL9cGtToJJ3Wr" 
-frameborder="0" allowfullscreen class="yvideo"></iframe><br>
-
+            <iframe frameborder="0"  src="https://yourstreamlive.com/embed/iframe/live/11817?&responsive=yes&aspect_ratio=16:9" marginheight="0" marginwidth="0" scrolling="auto" allowfullscreen="yes" allowtransparency="yes" allow="autoplay" name="live" id="live" class="yvideo"></iframe><br>
+            <!--iframe src="https://www.youtube.com/embed/live_stream?channel=UCbosi2FmDot80gSSas3rMDg" 
+frameborder="0" allowfullscreen class="yvideo"><br></iframe-->
         </div>
     </div>
+    <div id="vidArea2">
+           
+    </div>
+    
 
     <div class="giant-block-links clearfix" style="margin:0 auto;padding:0">
         <a href="#" onclick="displayDonationArea();return false;" class="bg-dark-brown"><i class="fa fa-heart"></i> {{ "Can you help? Donate Today"|t }}</a>
-        <a href="#" onclick="displayWorshipAids();displaySongs();return false;" class="bg-light-blue"><i class="fa fa-plus"></i> {{ "Worship Aids"|t }}</a>
+        <a href="#" onclick="displayWorshipAids();displayReadings();return false;" class="bg-light-blue"><i class="fa fa-plus"></i> {{ "Worship Aids"|t }}</a>
         <a href="#" onclick="displayHomily();return false;" class="bg-dark-blue"><i class="fa fa-book"></i> {{ "Latest Homily"|t }}</a>     
     </div>
  
@@ -281,7 +296,7 @@ frameborder="0" allowfullscreen class="yvideo"></iframe><br>
     <div id="worshipAidsArea" style="display:none">
         <div class="worship-links clearfix" style="margin:0 auto;padding:0">
             <a href="#" id="hOrderOfMass" onclick="displayOrderOfMass();return false;"><i class="fa fa-life-ring"></i> {{ "Order of Mass"|t }}</a>
-            <a href="#" id="hSongs" onclick="displaySongs();return false;"><i class="fa fa-music"></i> {{ "Songs"|t }}</a>
+            <!--a href="#" id="hSongs" onclick="displaySongs();return false;"><i class="fa fa-music"></i> {{ "Songs"|t }}</a-->
             <a href="#" id="hReadings" onclick="displayReadings();return false;"><i class="fa fa-book"></i> {{ "Readings"|t }}</a>
             <a href="#" id="hCommunion" onclick="displaySpiritualCommunion();return false;"><i class="fa fa-plus"></i> {{ "Spiritual Communion"|t }}</a>
             <a href="#" id="hResources" onclick="displayResources();return false;"><i class="fa fa-wrench"></i> {{ "Resources"|t }}</a>
@@ -500,10 +515,10 @@ function clearWorshipPanels(idName){
         document.getElementById('orderOfMass').style.display = 'none';
         document.getElementById('hOrderOfMass').classList.remove('active');
     }
-    if (idName != 'songs'){
+    /*if (idName != 'songs'){
         document.getElementById('songs').style.display = 'none';
         document.getElementById('hSongs').classList.remove('active');
-    }
+    }*/
     if (idName != 'readings'){
         document.getElementById('readings').style.display = 'none';
         document.getElementById('hReadings').classList.remove('active');
@@ -586,18 +601,18 @@ function displayHomily(){
    }
 }
 function displayLive(){
-   document.getElementById('prevRecHTitle').style.display = 'none';
-   document.getElementById('liveTitle').style.display = 'block';
-   document.getElementById('playlistArea').style.display = 'none';
-   document.getElementById('liveArea').style.display = 'block';
-   document.getElementById('liveArea').focus();
+   document.getElementById('vidTitle2').style.display = 'none';
+   document.getElementById('vidTitle1').style.display = 'inline-block';
+   document.getElementById('vidArea2').style.display = 'none';
+   document.getElementById('vidArea1').style.display = 'block';
+   document.getElementById('vidArea1').focus();
 }
 function displayPrevStream(){
-   document.getElementById('liveTitle').style.display = 'none';
-   document.getElementById('prevRecHTitle').style.display = 'block';
-   document.getElementById('liveArea').style.display = 'none';
-   document.getElementById('playlistArea').style.display = 'block';
-   document.getElementById('playlistArea').focus();
+   document.getElementById('vidTitle1').style.display = 'none';
+   document.getElementById('vidTitle2').style.display = 'inline-block';
+   document.getElementById('vidArea1').style.display = 'none';
+   document.getElementById('vidArea2').style.display = 'block';
+   document.getElementById('vidArea2').focus();
 }
 function displayFacebook() {
     document.getElementById('youTubeArea').style.display = 'none';
@@ -649,8 +664,8 @@ if (pageArea == 'readings'){
     $('body,html').animate({ scrollTop: 1900 }); 
 } else if (pageArea == 'songs'){
     displayWorshipAids();
-    displaySongs();
-    document.getElementById('songs').focus();
+    displayReadings();
+    document.getElementById('readings').focus();
     $('body,html').animate({ scrollTop: 1900 });
 } else if (pageArea == 'resources'){
     displayWorshipAids();
