@@ -105,7 +105,7 @@
                       
                       
                       <div class="form-row">
-                          {{ craft.recaptcha.render() }}
+                          {% include ['_recaptcha/frontend'] %}
                       </div>
 
                     </div> <!-- .form-group -->
@@ -160,9 +160,9 @@
                       {% spaceless %}
                         <strong>{{ item.dayOfTheWeek }}</strong>
                         {% if item.redLabel == 1 %}
-                          <span class="red"> {{ item.times }} </span>
+                          <span class="red"> {{ item.times|raw  }} </span>
                         {% else %}
-                            {{ item.times }}
+                            {{ item.times|raw }}
                         {% endif %}
                         {% if item.exception == 1 %}<span class="muted">*</span> {% endif %} {% if not loop.last %}<br>{% endif %}
                       {% endspaceless %}
