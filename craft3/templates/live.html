@@ -126,19 +126,8 @@
           <span id="vidTitle1">{{ "Live"|t }}</span>&nbsp;/&nbsp;<a href="https://www.youtube.com/c/StAnneRomanCatholicParish/videos" target="_blank">YouTube</a>&nbsp;/&nbsp;<a href="https://www.facebook.com/Stannegilbert/videos/" target="_blank">{{ "Facebook"|t }}</a>
     </h4>
   
-      
-    <div id="vidArea1">
-        <div id="youTubeArea">             
-            <div class="ycontainer">        
-               <!--iframe src="https://www.youtube.com/embed/live_stream?channel=UCbosi2FmDot80gSSas3rMDg" 
-frameborder="0" allowfullscreen class="yvideo"></iframe-->
-
-
-<iframe frameborder="0"  src="https://yourstreamlive.com/embed/iframe/live/11817?&responsive=yes&aspect_ratio=16:9" marginheight="0" marginwidth="0" scrolling="auto" allowfullscreen="yes" allowtransparency="yes" allow="autoplay" name="live" id="live" class="yvideo"></iframe>
-
-            </div>
-        </div>
-    </div>
+    {{ liveBroadcastSettings.liveBroadcastVideoEmbed | raw }}
+    
     <div id="vidArea2">
        
     </div>

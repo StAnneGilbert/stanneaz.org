@@ -171,7 +171,7 @@
                   </p>
                   
                   {% if siteWideContent.parishOfficeHours[0].exceptionReference is not empty %}
-                    <p class="muted">*{{ siteWideContent.parishOfficeHours[0].exceptionReference }}</p>
+                    <p><span class="muted">*</span> {{ siteWideContent.parishOfficeHours[0].exceptionReference|raw }}</p>
                   {% endif %}
                 {% endif %}
               </div>
