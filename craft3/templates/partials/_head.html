@@ -10,7 +10,7 @@
   {% endif %}
 {% endspaceless %}
 
-<title>{{ websiteTitle }} </title>
+<title>{{ websiteTitle }}</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <meta name="base_url" content="{{ siteUrl }}">
@@ -20,18 +20,20 @@
 {% if entry.pageImage|length %}
   {% set pageImage = entry.pageImage[0].getUrl('tf280') %}
 {% endif %}
-
-
-
-<meta property='og:type'  content='website'/>
+<meta property="og:type" content="website">
+<meta property="og:description" content="St. Anne Roman Catholic Parish is located in Gilbert, Arizona. Fiat Voluntas Tua (May God's will be done).">
+<meta property="og:image" content="https://stanneaz.org/img/general/Mosaic-1920x1080.jpg">
 <meta property='og:url' content='{{ currentURL }}'/>
-<meta property='og:site_name' content=''/>
-<meta name="twitter:card" content="summary">
-<meta name="twitter:url" content="https://stanneaz.org">
-<meta name="twitter:site" content="@stanneaz">
+
+<meta name="twitter:card" content="summary" /> 
+<meta name="twitter:site" content="{{ currentURL }}" /> 
+<meta name="twitter:title" content="{{ websiteTitle }}" /> 
+<meta name="twitter:description" content="St. Anne Roman Catholic Parish is located in Gilbert, Arizona. Fiat Voluntas Tua (May God's will be done)." /> 
+<meta name=twitter:image content="https://stanneaz.org/img/general/Mosaic-1920x1080.jpg" />
 
 
-<link rel='shortcut icon' href='https://stanneaz.org/assets/img/favicon.ico'/>
+<link rel="shortcut icon" type="image" href="https://stanneaz.org/assets/img/favicon.ico" />
+<link rel="icon" href="https://stanneaz.org/assets/img/favicon.ico" type="image/png">
 <link rel="prerender" href="/start-here" />
 <link href='/assets/css/global.css' rel='stylesheet'/>
 
