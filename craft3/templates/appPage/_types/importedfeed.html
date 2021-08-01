@@ -1,0 +1,27 @@
+<html>
+<head>
+<title>{{ entry.title }}</title>
+<style>
+.saTxt{font-size:130%}
+</style>
+</head>
+<body>
+<div class="saTxt">
+{% set limit = 1 %}
+{% set offset = 0 %}
+{% set cache = "PT1H" %}
+{% if entry.feedUrl %}
+    {% cache globally for 1 hour %}
+        {% set items = craft.app.feeds.getFeedItems(entry.feedUrl, limit, offset, cache) %}
+		{% for item in items %}
+			<h4>{{ item.title }}</h4>
+			<div{% if loop.index == 1 %} id="firstReading"{% endif %}>
+				{{ item.summary|raw }}
+				<br><p><a href="{{ item.permalink }}" target="_blank" class="btn btn-light-blue">{{ "View Readings on USCCB.org"|t }}</a></p>
+			</div>
+		{% endfor %}
+    {% endcache %}
+{% endif %}
+</div>
+</body>
+</html>

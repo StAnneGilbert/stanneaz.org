@@ -27,12 +27,12 @@
             {% if person.emailAddress is not empty %}
               <span id="i-{{ person.slug }}" style="display:none">{{ person.emailAddress.text|hash }}</span>
             {% endif %}
-            {% if person.phoneNumber is not empty %}
+            {% if (person.phoneNumber is not empty) and (not person.hidePhone | length) %}
               <div class="col col-phone">
                 <a href="{{ person.phoneNumber.url }}" class="btn btn-sm btn-light-blue"><i class="fa fa-phone"></i> {{ person.phoneNumber.text }}</a>
               </div>
             {% endif %}
-            {% if person.emailAddress is not empty %}
+            {% if (person.emailAddress is not empty) and (not person.hideEmail | length) %}
               <div class="col col-email" id="close-{{ person.slug }}" style="display:none">
                 <a href="#" onclick="hideForm();return false;" class="btn btn-sm btn-light-blue">{{ "Close Email Form"|t }}</a>
               </div>
