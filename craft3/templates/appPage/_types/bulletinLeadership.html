@@ -20,7 +20,7 @@
     list-style-type: none;
     text-align:center;
 }
-.staffTile{float:left;display:block;width:182px;height:128px;font-size:70%;text-align:left;}
+.staffTile{float:left;display:block;width:182px;height:100px;font-size:70%;text-align:left;}
 .staffinfo{line-height:16px}
 </style>
 
@@ -30,21 +30,22 @@
 
             <div class="topBBar">&nbsp;</div>
             <div class="underTopBBar">
-                <span>Deacons and Staff</span>
-	            <span>Clero y personal de la parroquia</span>
+                <span>Parish Leadership</span>
+	            <span>Liderazgo parroquial</span>
             </div>
-            <div style="padding:0 0 0 20px">
+            <div style="padding:0 0 0 20px;text-align:left">
 
 
-    {% set staff = craft.categories.group('staffGroup') %}
+    {% set staff = craft.categories.group('leadershipGroup') %}
     {% for pos in staff.all() %}
+    
+    <h6 style="margin:0;padding:10px 0 2px 0">{{ pos.title }}</h6>
 
       {% set people = craft.entries.section('people').relatedTo(pos).orderBy('personLastName').all() %}
 
-
       {% for person in people %}
       
-          {% if (not person.hideFromBulletin | length) and (pos.title != 'Divine Master') and (pos.title != 'Successor of St. Peter the Apostle') and (pos.title != 'Successor of Apostles, in Phoenix, Arizona') and (pos.title != 'Clergy - Priests')  %}
+          {% if (not person.hideFromBulletin | length)  %}
       
           <div class="staffTile">
             
@@ -55,12 +56,6 @@
               {% endif %}
               <div class="staffinfo">{{ person.professionalTitle|replace('Catechesis of the Good Shepherd', 'CGS')|replace('Catequesis del Buen Pastor','CBP')|replace('Administration Coordinator', 'Administration') }}:</div>
               <div class="staffinfo">{{ person.title|replace('Deacon', 'Dcn.') }}</div>
-              {% if person.phoneNumber is not empty %}
-              <div class="staffinfo">Ph. {{ person.phoneNumber.text }}</div>
-              {% endif %}
-              {% if person.emailAddress is not empty %}
-                  <div class="staffinfo">{{ person.emailAddress.text }}</div>
-              {% endif %}
             
           </div> <!-- .staff-member -->
       
@@ -69,6 +64,8 @@
           {% endif %}
           
       {% endfor %}
+      
+      <div style="clear:both;font-size:1px;line-height:1px;height:1px;"></div>
       
 
     {% endfor %} 

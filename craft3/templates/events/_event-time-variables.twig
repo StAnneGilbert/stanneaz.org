@@ -1,4 +1,4 @@
-{%- macro date_time_options(language, startDate, endDate, tbdTba, showDatesOnly) -%}
+{%- macro date_time_options(afterMass, language, startDate, endDate, tbdTba, showDatesOnly) -%}
 {% spaceless %}
 {% if language == 'es-US' %}			
 	{% if tbdTba | length %}
@@ -24,27 +24,34 @@
 	{% endif %}			
 {% else %}
 	{% if tbdTba | length %}
-	  {% set displayDT = "Date/Time: TBD/TBA" %}   
+	    {% set displayDT = "Date/Time: TBD/TBA" %}
+	{% elseif (afterMass | length) and (endDate is not empty) %}
+	    {% if startDate|date('F d') == endDate|date('F d') %}
+	        {% set displayDT = startDate|date('l, F d') ~ ", after Mass" %} 
+	    {% else %}
+		    {% set displayDT = "Saturday & Sunday, " ~ startDate|date('F d') ~ "-" ~ endDate|date('d') ~ ", after Mass" %}
+		{% endif %}    
 	{% elseif startDate|date('F d') == endDate|date('F d') %}
 		{% if startDate|date('a') == endDate|date('a') %}
-		    {% set displayDT = startDate|date('F d, Y g:i') ~ "-" ~ endDate|date('g:i a') %}
+		    {% set displayDT = startDate|date('l, F d, Y g:i') ~ "-" ~ endDate|date('g:i a') %}
 		{% else %}
-		    {% set displayDT = startDate|date('F d, Y g:i a') ~ " - " ~ endDate|date('g:i a') %}
+		    {% set displayDT = startDate|date('l, F d, Y g:i a') ~ " - " ~ endDate|date('g:i a') %}
 		{% endif %}  
 	{% elseif (endDate is not empty) and (endDate|date('g:i') != '12:00') %}  
 		{% if showDatesOnly | length %}
-		    {% set displayDT = startDate|date('F d') ~ " to " ~ endDate|date('F d, Y') %}
+		    {% set displayDT = startDate|date('l, F d') ~ " to " ~ endDate|date('F d, Y') %}
 		{% else %}
-		    {% set displayDT = startDate|date('F d, Y g:i a') ~ " to " ~  endDate|date('F d, Y g:i a') %}
+		    {% set displayDT = startDate|date('l, F d, Y g:i a') ~ " to " ~  endDate|date('F d, Y g:i a') %}
 		{% endif %}             
 	{% else %}
 		{% if showDatesOnly | length %}
-		    {% set displayDT = startDate|date('F d, Y') %}
+		    {% set displayDT = startDate|date('l, F d, Y') %}
 		{% else %}
-		    {% set displayDT = startDate|date('F d, Y \\a\\t g:i a') %}
+		    {% set displayDT = startDate|date('l, F d, Y \\a\\t g:i a') %}
 		{% endif %}             
 	{% endif %}
 {% endif %}
+{% set displayDT = displayDT|replace(' 01', ' 1')|replace(' 02', ' 2')|replace(' 03', ' 3')|replace(' 04', ' 4')|replace(' 05', ' 5')|replace(' 06', ' 6')|replace(' 07', ' 7')|replace(' 08', ' 8')|replace(' 09', ' 9')|replace('-01', '-1')|replace('-02', '-2')|replace('-03', '-3') %}
 {{ displayDT }}
 {% endspaceless %}
 {%- endmacro -%}

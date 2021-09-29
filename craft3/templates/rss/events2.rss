@@ -21,7 +21,7 @@
 	        {% endif %}
 	  
             <item>
-                <title><![CDATA[{{ macros.date_time_options(craft.app.language, entry.eventStartDate, entry.eventEndDate, entry.tbdTba, entry.showDatesOnly) }}                                {{ entry.title }}]]></title>
+                <title><![CDATA[{{ macros.date_time_options(entry.afterMass, craft.app.language, entry.eventStartDate, entry.eventEndDate, entry.tbdTba, entry.showDatesOnly) }}                                {{ entry.title }}]]></title>
                 <link>{{ eventLink }}</link>
                 <pubDate>{{ entry.eventStartDate|rss }}</pubDate>
                 <guid>{{ eventLink }}</guid>
@@ -30,7 +30,9 @@
                     <img src="{{ entry.eventListingImage[0].url }}" width="321" height="200" alt="{{ entry.title }}"> 
                   {% endif %}
                   {% if entry.shortDescription|length %}
-                      {{ entry.shortDescription|raw}}
+                      <div>
+                          {{ entry.shortDescription|raw }}
+                      </div>
                   {% else %}
                       {% if entry.body|length < 900 %}
                           {{ entry.body|raw }}

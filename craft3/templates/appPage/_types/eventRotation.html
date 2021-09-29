@@ -33,9 +33,11 @@
     -o-transition: opacity 1s;
     transition: opacity 1s;
 }
-.slide h4{font-size:38px; margin:0 0 20px 0; padding:0}
+.slide .zDate{font-size:32px;padding:0}
+.slide .zTitle{font-size:34px;font-weight:bold;margin-bottom:20px;padding:0}
+.slide h4{font-size:34px; margin:0 0 20px 0; padding:0}
 .slide img{margin:0 0 20px 0}
-.slide p, .slide div{font-size:24px;margin:0;padding:0 0 20px 0}
+.slide p, .slide div{font-size:26px;margin:0;padding:0 0 20px 0}
 .showing {
     opacity: 1;
     z-index: 2;
@@ -58,7 +60,8 @@
 	{% if (entry.eventStartDate|date('Ymd') >= now|date('Ymd')) and (not entry.hideFromDigitalMediaBoards | length) %}
 
 		<div class="slide{% if eMarker == 1 %} showing{% endif %}">
-	        <h4>{{ macros.date_time_options(craft.app.language, entry.eventStartDate, entry.eventEndDate, entry.tbdTba, entry.showDatesOnly) }}<br>{{ entry.title }}</h4>
+	        <div class="zDate">{{ macros.date_time_options(entry.afterMass, craft.app.language, entry.eventStartDate, entry.eventEndDate, entry.tbdTba, entry.showDatesOnly)|replace(' &amp; ',' & ') }}</div>
+	        <div class="zTitle">{{ entry.title }}</div>
 	        {% if entry.rotationImage|length %}
 	            <img src="{{ entry.rotationImage[0].url }}" alt="" height="200" />
 	        {% else %}
