@@ -1,5 +1,7 @@
 <style>
-.bulletinContent{
+.btmBBar{background-color:#005F72;color:#fff;font-size:90%;font-weight:bold;height:30px;line-height:30px;text-align:center;width:720px;margin:0 auto}
+.underTopBBar span ,.btmBBar span{display:inline-block; width:48%; text-align:center;}
+.bulletinPage{
     background: #fff url('https://stanneaz.org/img/general/assets/logo-stanne-bg-light.png'); 
     color: #333;
     overflow:auto;
@@ -9,20 +11,21 @@
     overflow:auto;
 }
 #bulletinArea1 {
-    font-size:90%;
+    font-size:14px;
     min-height: 900px;
-    width:750px;
+    width:720px;
     padding: 0px;
     margin: 0 auto;
     list-style-type: none;
     text-align:center;
 }
-.priestTile{float:left;display:block;width:189px;height:95px;text-align:left;}
-.priestLast{width:179px}
-.priestTileContact{float:left;display:block;width:106px;height:95px;}
+.priestTile{display:block;float:left;font-size:12px;width:183px;height:95px;text-align:left;}
+.priestTile b{font-size:14px}
+.priestLast{width:170px}
+.priestTileContact{float:left;display:block;width:103px;height:95px;}
 .priestLast .priestTileContact{width:107px}
-.priestTilePicture{float:left;display:block;width:82px;height:95px}
-.priestLast .priestTilePicture{width:70px}
+.priestTilePicture{float:left;display:block;width:70px;height:95px}
+.priestLast .priestTilePicture{width:62px}
 </style>
 
         
@@ -35,12 +38,12 @@
 {% set adateinspanish = "Next sunday"|date("d \\d\\e F \\d\\e Y")|replace('January', 'enero')|replace('February', 'febrero')|replace('March', 'marzo')|replace('April', 'abril')|replace('May', 'mayo')|replace('June', 'junio')|replace('July', 'julio')|replace('August', 'agosto')|replace('September', 'septiembre')|replace('October', 'octubre')|replace('November', 'noviembre')|replace('December', 'diciembre') %}
 
 
-<div class="bulletinContent">
+<div class="bulletinPage">
     <div class="bulletinContainer">
         <div id="bulletinArea1">
     
     
-<table width="750" style="margin:0 auto">
+<table width="720" style="margin:0 auto">
 	<tr>
 		<td colspan="4" style="padding-bottom:10px">
 		{{ entry.body }}
@@ -49,7 +52,7 @@
 
 	<tr>
 
-		<td width="365" valign="top">
+		<td width="350" valign="top">
 		
 		    <h3 style="font-weight:bold;font-size:20px;margin-top:0;padding-top:0">Announcements / Anuncios </h3>
     
@@ -74,7 +77,7 @@
 
 	{% if (entry.eventEndDate|date('Ymd') >= now|date('Ymd')) and (not entry.hideFromBulletin | length) %}
 
-	    <div style="font-weight:bold">{{ macros.date_time_options(craft.app.language, entry.eventStartDate, entry.eventEndDate, entry.tbdTba, entry.showDatesOnly) }}</div>
+	    <div style="font-weight:bold">{{ macros.date_time_options(entry.afterMass, craft.app.language, entry.eventStartDate, entry.eventEndDate, entry.tbdTba, entry.showDatesOnly) }}</div>
 		<div style="margin: 0 0 15px 0">{{ entry.title }}</div>
 	    
 	    {% set eMarker = eMarker + 1 %} 
@@ -82,6 +85,8 @@
 	{% endif %}
 	
 {% endfor %}
+
+		    {{ entry.bodyb }}
      
      
 		</td>
@@ -91,7 +96,7 @@
 		<td width="10" valign="top">
 		   &nbsp;
 		</td>
-		<td valign="top" width="365">
+		<td valign="top" width="350">
 		     <div style="font-weight:bold;font-size:18px;color:#005F72;margin:0 0 15px 0">
 		         
 			     {{ adateinenglish }}<br>
@@ -130,26 +135,16 @@
 
 	        </div>
 	 
-	        {{ entry.bodyb }}
+	        {{ entry.bodyc }}
 	 
 	 
 	    </td>
 	</tr>
 </table>
-<table width="750" style="margin:0 auto">
+<div style="border-top: 2px #895022 solid; height:5px; font-size:1px; line-height:5px;width:680px;margin:0 auto;"></div>
+<table width="720" style="margin:0 auto;">
 	<tr>
-		<td width="40" valign="top" style="height:5px;font-size:1px;line-height:5px">
-		 &nbsp;
-		</td>
-		<td valign="top" style="border-top: 2px #895022 solid;height:5px;font-size:1px;line-height:5px">
-		 &nbsp;
-		</td>
-		<td width="40" valign="top" style="height:5px;font-size:1px;line-height:5px">>
-		 &nbsp;
-		</td>
-	</tr>
-	<tr>
-		<td colspan="3" valign="top">
+		<td valign="top">
 
 
    {% set staff = craft.categories.group('staffGroup') %}
@@ -163,13 +158,13 @@
       
           <div class="priestTile{% if 'Riccitelli' in person.title %} priestLast{% endif %}">
               <div class="priestTileContact">
-                  <div style="margin-top:15px;font-size:80%"><b>{{ person.professionalTitle }}</b></div>
-                  <div style="font-size:75%">{{ person.title|replace('Father', 'Fr.')|replace('Muñoz', 'M.') }}</div>
+                  <div style="margin-top:15px;"><b>{{ person.professionalTitle }}</b></div>
+                  <div>{{ person.title|replace('Father', 'Fr.')|replace('Muñoz', 'M.') }}</div>
                   {% if person.phoneNumber is not empty %}
-                      <div style="font-size:75%">Ph. {{ person.phoneNumber.text }}</div>
+                      <div>Ph. {{ person.phoneNumber.text }}</div>
                   {% endif %}
                   {% if person.emailAddress is not empty %}
-                      <div style="font-size:75%">{{ person.emailAddress.text }}</div>
+                      <div>{{ person.emailAddress.text }}</div>
                   {% endif %}
               </div>
               <div class="priestTilePicture">
@@ -191,20 +186,18 @@
       <div style="clear:both"></div>
       </div> <!-- .staff-group -->
     {% endfor %}
-    
-    {{ entry.bodyC }}
 
 
         </td>
 	</tr>
-	<tr>
-	    <td colspan="3" style="background-color:#005F72;color:#fff;text-align:center;height:30px;line-height:30px;font-weight:bold">
-	        <span style="padding-right:200px">www.stanneaz.org</span>
-	        <span>stanneaz.flocknote.com</span>
-	    <td>
-	</tr>
 </table>
 
         </div>
+    
+        <div class="btmBBar">
+	        <span>www.stanneaz.org</span>
+	        <span>stanneaz.flocknote.com</span>
+	    </div>
+	    
     </div>
 </div>

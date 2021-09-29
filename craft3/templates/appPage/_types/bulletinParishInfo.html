@@ -1,5 +1,9 @@
 <style>
-.bulletinContent{ 
+.topBBar{background-color:#005F72;border-bottom:2px #895022 solid; color:#fff;text-align:center;height:15px;line-height:15px;font-size:8px}
+.underTopBBar{background-color:#F6ECDF;color:#895022;text-align:center;height:23px;line-height:23px;font-size:90%}
+.btmBBar{background-color:#005F72;color:#fff;font-size:90%;font-weight:bold;height:30px;line-height:30px;text-align:center;width:720px;margin:0 auto}
+.underTopBBar span ,.btmBBar span{display:inline-block; width:48%; text-align:center;}
+.bulletinPage{ 
     color: #333;
     overflow:auto;
 }
@@ -10,34 +14,164 @@
 #bulletinArea1 {
     background: #fff url('https://stanneaz.org/img/general/assets/logo-stanne-bg-light3.png');
     min-height: 900px;
-    width:750px;
+    width:720px;
     padding: 0px;
     margin: 0 auto;
     list-style-type: none;
     text-align:center;
 }
-.staffTile{float:left;display:block;width:187px;height:147px;font-size:70%;text-align:left;}
-.staffinfo{line-height:16px}
+.bulletinContentTable{margin:0 auto;font-size:12px;}
+.bulletinContentTable td{text-align:left;vertical-align: top;}
+.bLeftCol1,.bRtCol1{width:350px}
+.bulletinContentTable td h6{font-size:16px;margin:5px 0 0 0;}
+.bulletinHeader{text-align:center}
 </style>
 
-<div class="bulletinContent">
+<div class="bulletinPage">
     <div class="bulletinContainer">
         <div id="bulletinArea1">
         
-         <div style="background-color:#005F72;border-bottom:2px #895022 solid; color:#fff;text-align:center;height:15px;line-height:15px;font-size:8px">&nbsp;</div>
-         <div style="background-color:#F6ECDF;color:#895022;text-align:center;height:23px;line-height:23px;margin-bottom:8px;font-size:90%">
-            <span style="padding-right:140px">Parish Information / Información parroquial</span>
-	        <span>Mass Intentions / Intenciones de la Misa</span>
-	    </div>
+            <div class="topBBar">&nbsp;</div>
+            <div class="underTopBBar">
+                <span>Parish Information / Información parroquial</span>
+	            <span>Mass Intentions / Intenciones de la Misa</span>
+	        </div>
 
-<table width="750" style="margin:0 auto">
+<table width="720" class="bulletinContentTable">
     <tr>
-        <td>
+        <td class="bLeftCol1">
+        <h6 class="bulletinHeader">Contact Us</h6>
+Address: {{ siteWideContent.parishAddress|replace('Arizona', 'AZ') }}<br>
+Phone: {{ siteWideContent.parishPhoneNumber }} Fax {{ siteWideContent.parishFaxNumber }}<br>
+Web Page: www.stanneaz.org<br>
+Email: admin@stanneaz.org
+
+<h6 class="bulletinHeader">Office Hours/Horas de oficina</h6>
+			{% if siteWideContent.parishOfficeHours|length %}
+			  <table style="width:350px">
+				{% cache globally for 1 month %}
+				{% for item in siteWideContent.parishOfficeHours[0].hoursTable %}
+				  {% spaceless %}
+				    <tr>
+				      <td>
+					    {{ item.dayOfTheWeek|replace('Sun.', 'Sunday / Domingo')|replace('Mon.', 'Monday / Lunes')|replace('Tue.', 'Tuesday / Martes')|replace('Wed.', 'Wednesday / Miércoles')|replace('Thur.', 'Thursday / Jueves')|replace('Fri.', 'Friday / Viernes')|replace('Sat.', 'Saturday / Sábado') }}
+					  </td>
+					  <td style="text-align:right">
+						{{ item.times|replace('Closed', 'Closed / Cerrado')|raw }}
+					    {% if item.exception == 1 %}<span class="muted">*</span> {% endif %}
+					  </td>
+					</tr>
+				  {% endspaceless %}
+				{% endfor %}
+				{% endcache %}
+			  </table>
+			  
+			  {% if siteWideContent.parishOfficeHours[0].exceptionReference is not empty %}
+				<div style="color:#895022;font-style:italic">* {{ siteWideContent.parishOfficeHours[0].exceptionReference|raw }}</div>
+			  {% endif %}
+			{% endif %}
+			
+			{% paginate craft.entries.section('times').orderBy('title ASC').limit(2) as entries %} 
         
+{% for post in entries %}
+
+{% if post.saturdayVigilMassTimes|length %}
+    <h6>Weekend Mass Times</h6>
+    Saturday: 
+        {% for block in post.saturdayVigilMassTimes.all() %}
+            {{ block.hourName|replace('p.m.', 'pm')|replace('a.m.', 'am')|replace('in English', '(English Vigil)')|replace('in Spanish', '(Spanish)')|raw }}
+        {% endfor %}<br>
+{% endif %}
+{% if post.sundayMassTimes|length %}
+    Sunday: 
+        {% for block in post.sundayMassTimes.all() %}
+           {{ block.hourName|replace('p.m.', 'pm')|replace('a.m.', 'am')|replace('in English', '')|replace('High Mass', '(High Mass)')|replace('in Spanish', '(Spanish)')|replace('Tridentine Low Mass in Latin', '(Tridentine)')|replace('3 pm', '<br>3 pm')|raw }}{% if block.hourName != '5:30 p.m. in English' %}, {% endif %} 
+        {% endfor %}   
+{% endif %}
+<h6>Holy Days of Obligation/Dia de guardar</h6>
+Visit the St. Anne website for the most up to date information.
+
+{% if post.weekdayMassTimes|length %} 
+    <h6>Weekday Mass Times</h6>
+    {{ "Monday"|t }}: 
+            {% for block in post.weekdayMassTimes.all() %}
+                {% if (block.dayOfWeek == 'Monday') or (block.dayOfWeek == 'Lunes') %}
+                    {{ block.hourName|replace('p.m.', 'pm')|replace('a.m.', 'am') }} {% if block.languageOfMass != 'none' %}({{ block.languageOfMass }}) {% if block.languageOfMass == 'English' %}, {% endif %}{% endif %}   
+                {% endif %} 
+            {% endfor %}<br>
+    {{ "Tuesday"|t }}:
+            {% for block in post.weekdayMassTimes.all() %}
+                {% if (block.dayOfWeek == 'Tuesday') or (block.dayOfWeek == 'Martes') %}
+                   {{ block.hourName|replace('p.m.', 'pm')|replace('a.m.', 'am') }} {% if block.languageOfMass != 'none' %}({{ block.languageOfMass }}){% if block.languageOfMass == 'English' %}, {% endif %}{% endif %}
+                {% endif %}
+            {% endfor %}<br>
+     {{ "Wednesday"|t }}: 
+            {% for block in post.weekdayMassTimes.all() %}
+                {% if (block.dayOfWeek == 'Wednesday') or (block.dayOfWeek == 'Miércoles') %}
+                   {{ block.hourName|replace('p.m.', 'pm')|replace('a.m.', 'am') }} {% if block.languageOfMass != 'none' %}({{ block.languageOfMass|replace('Tridentine - Latin', 'Tridentine') }}){% if block.languageOfMass != 'English' %}, {% endif %}{% endif %} 
+                {% endif %}
+            {% endfor %}<br> 
+    {{ "Thursday"|t }}: 
+            {% for block in post.weekdayMassTimes.all() %}
+                {% if (block.dayOfWeek == 'Thursday') or (block.dayOfWeek == 'Jueves') %}
+                   {{ block.hourName|replace('p.m.', 'pm')|replace('a.m.', 'am') }} {% if block.languageOfMass != 'none' %}({{ block.languageOfMass }}){% endif %}, 
+                {% endif %}
+            {% endfor %}<br>
+   {{ "Friday"|t }}: 
+            {% for block in post.weekdayMassTimes.all() %}
+                {% if (block.dayOfWeek == 'Friday') or (block.dayOfWeek == 'Viernes') %}
+                   {{ block.hourName|replace('p.m.', 'pm')|replace('a.m.', 'am') }} {% if block.languageOfMass != 'none' %}({{ block.languageOfMass|replace('Tridentine - Latin', 'Tridentine') }}){% endif %}, 
+                {% endif %}
+            {% endfor %} <br>
+  {{ "Saturday"|t }}: 
+            {% for block in post.weekdayMassTimes.all() %}
+                {% if (block.dayOfWeek == 'Saturday') or (block.dayOfWeek == 'Sábado') %}
+                   {{ block.hourName|replace('p.m.', 'pm')|replace('a.m.', 'am') }} {% if block.languageOfMass != 'none' %}({{ block.languageOfMass }}){% endif %}
+                {% endif %}
+            {% endfor %} 
+    
+{% endif %}
+    
+{% endfor %}
+			
         </td>
         
-        <td>
+        <td style="width:20px"></td>
         
+        <td class="bRtCol1">
+        
+{% import 'events/_event-time-variables' as macros %}
+
+{% set eMarker = 1 %} 
+{% set aMarker = 1 %} 
+
+{% set adateinenglish = "Next sunday"|date("F d, Y") %}
+{% set adateinspanish = "Next sunday"|date("d \\d\\e F \\d\\e Y")|replace('January', 'enero')|replace('February', 'febrero')|replace('March', 'marzo')|replace('April', 'abril')|replace('May', 'mayo')|replace('June', 'junio')|replace('July', 'julio')|replace('August', 'agosto')|replace('September', 'septiembre')|replace('October', 'octubre')|replace('November', 'noviembre')|replace('December', 'diciembre') %}
+
+{% set startDate = now | date | atom %}
+{% set cal = parseIcs("/home/stanneaz/extras.stanneaz.org/utilities/liturgy2021.ics") %}
+{% set events = cal.eventsFromRange(startDate) %}
+
+{% for event in events %}
+    {% if event.dtstart == "Next sunday"|date("Ymd") %}
+        {{ event.summary }}
+        {% set theSundayDate = "Next sunday"|date("F d,") %}
+    {% endif %}
+{% endfor %}
+        
+        <h6></h6>
+        
+{% set startDate = now | date | atom %}
+{% set cal = parseIcs("https://massintentions.stanneaz.org/Web/export/ical-subscribe.php?uid=&sid=26a0c1d841a7fd3132d6&rid=&icskey=27e29aec67e7dbee94ed") %}
+{% set cevents = cal.eventsFromRange(startDate) %}
+{% for cevent in cevents %}
+{{ cevent.description }}<br>
+    {% if cevent.dtstart == "Next sunday"|date("Ymd") %}
+        {{ cevent.description }}
+    {% endif %}	
+{% endfor %}<br>
+
+ 
         </td>
     </tr>
 </table>
@@ -46,8 +180,8 @@
     
     <div style="clear:both"></div>
     
-    <div style="background-color:#005F72;color:#fff;font-size:90%;font-weight:bold;height:30px;line-height:30px;text-align:center;">
-	    <span style="padding-right:200px">www.stanneaz.org</span>
+    <div class="btmBBar">
+	    <span>www.stanneaz.org</span>
 	    <span>stanneaz.flocknote.com</span>
 	</div>
 

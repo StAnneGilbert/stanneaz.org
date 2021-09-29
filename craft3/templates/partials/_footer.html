@@ -1,46 +1,14 @@
-{% if craft.app.language == 'es-US' %}
-    {% set response = craft.twitter.get('statuses/user_timeline', {'screen_name':'pontifex_es',count:1,tweet_mode:'extended'}) %}
-{% else %}
-    {% set response = craft.twitter.get('statuses/user_timeline', {'screen_name':'pontifex',count:1,tweet_mode:'extended'}) %}
-{% endif %}
-
 <div class="sf-footer nav-slide-element">
-{# % if response.success %}
-    {% set tweets = response.data %}
-    {% for item in tweets %}
-        {{ item.full_text }}
-    {% endfor %}
-    <pre>{{ tweets|json_encode(constant('JSON_PRETTY_PRINT')) }}</pre>
-{% else %}
-    <p>An error occured:</p>
-    <pre>{{ response.data|json_encode(constant('JSON_PRETTY_PRINT')) }}</pre>
-{% endif % #}
     <div class="pontifex-tweets">
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
             <img src="/img/general/assets/avatar-pope-francis.png" alt="Pope Francis" class="avatar round-avatar" />
             <div class="recent-tweet">
-                {% if response.success %}
-                  {% set tweets = response.data %}
-                  {% for tweet in tweets %}
-                     {% set url = 'https://twitter.com/' ~ tweet.user.screen_name ~ '/status/' ~ tweet.id %}
-                    <div class="tweet-contents">
-                      {{ tweet.full_text|raw }}
-                    </div>
-                    <div class="tweet-meta">
-                      <a href="{{ url }}" target="_blank"><i class="fa fa-twitter"></i> {{ tweet.created_at|date('F jS \\a\\t g:ia') }}</a>
-                      <span class="dot">&middot;</span>
-                      <a href="{{ url }}" target="_blank">@{{ tweet.user.screen_name }}</a>
-                    </div>
-                  {% endfor %}
+                {% if craft.app.language == 'es-US' %}
+                    <a class="twitter-timeline" data-lang="es" data-height="220" href="https://twitter.com/Pontifex_es?ref_src=twsrc%5Etfw">Tweets by Pontifex</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                 {% else %}
-                    <div class="tweet-contents">
-                      <a href="https://twitter.com/pontifex" target="_blank">Click here to visit the Holy Father's Twitter feed.</a> (St. Anne's Twitter plugin is experiencing technical difficulties.)
-                    </div>
-                    <div class="tweet-meta">
-                      <a href="https://twitter.com/pontifex" target="_blank">@pontifex</a>
-                    </div>
+                    <a class="twitter-timeline" data-height="220" href="https://twitter.com/Pontifex?ref_src=twsrc%5Etfw">Tweets by Pontifex</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                 {% endif %}
               </div>
             </div>
