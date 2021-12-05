@@ -167,7 +167,7 @@ Visit the St. Anne website for the most up to date information.
 {% for cevent in cevents %}
 {{ cevent.description }}<br>
     {% if cevent.dtstart == "Next sunday"|date("Ymd") %}
-        {{ cevent.description }}
+        {{ cevent.description|raw }}
     {% endif %}	
 {% endfor %}<br>
 
