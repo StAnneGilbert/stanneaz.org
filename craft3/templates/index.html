@@ -444,11 +444,8 @@ frameborder="0" allowfullscreen style="width:100%;height:5500px"></iframe>
         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
             {{ entry.homeBlock5|raw }}
         </div>          
-       
-    </div>
     
-    {% if entry.homeBlock6 %}
-        <div class="row news-blocks">
+        {% if entry.homeBlock6 %}
    
             <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                 {{ entry.homeBlock6|raw }}
@@ -460,10 +457,11 @@ frameborder="0" allowfullscreen style="width:100%;height:5500px"></iframe>
         
             <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                 {{ entry.homeBlock8|raw }}
-            </div>          
+            </div>
+            
+        {% endif %}
        
-        </div>
-    {% endif %}
+    </div>
 
       <div class="text-center news-action-links">
         {% if entry.subLinks|length %}

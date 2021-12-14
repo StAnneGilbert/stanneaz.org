@@ -107,4 +107,10 @@ $('#accordion2Open h3').bind('click',function(){
          $('body,html').animate({ scrollTop: theOffset.top - 25 });
     }, 310); // ensure the collapse animation is done
 });
+
+var hash = window.location.hash.substr(1);
+if(hash){
+    $('#' + hash).click();
+}
+
 </script>
