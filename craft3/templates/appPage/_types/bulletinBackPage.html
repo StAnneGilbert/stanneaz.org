@@ -56,10 +56,10 @@
               <div class="staffinfo">{{ person.professionalTitle|replace('Catechesis of the Good Shepherd', 'CGS')|replace('Catequesis del Buen Pastor','CBP')|replace('Administration Coordinator', 'Administration') }}:</div>
               <div class="staffinfo">{{ person.title|replace('Deacon', 'Dcn.') }}</div>
               {% if person.phoneNumber is not empty %}
-              <div class="staffinfo">Ph. {{ person.phoneNumber.text }}</div>
+              <div class="staffinfo">Ph. {{ person.phoneNumber }}</div>
               {% endif %}
               {% if person.emailAddress is not empty %}
-                  <div class="staffinfo">{{ person.emailAddress.text }}</div>
+                  <div class="staffinfo">{{ person.emailAddress }}</div>
               {% endif %}
             
           </div> <!-- .staff-member -->

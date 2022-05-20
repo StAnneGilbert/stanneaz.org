@@ -161,10 +161,10 @@
                   <div style="margin-top:15px;"><b>{{ person.professionalTitle }}</b></div>
                   <div>{{ person.title|replace('Father', 'Fr.')|replace('Muñoz', 'M.') }}</div>
                   {% if person.phoneNumber is not empty %}
-                      <div>Ph. {{ person.phoneNumber.text }}</div>
+                      <div>Ph. {{ person.phoneNumber }}</div>
                   {% endif %}
                   {% if person.emailAddress is not empty %}
-                      <div>{{ person.emailAddress.text }}</div>
+                      <div>{{ person.emailAddress }}</div>
                   {% endif %}
               </div>
               <div class="priestTilePicture">
