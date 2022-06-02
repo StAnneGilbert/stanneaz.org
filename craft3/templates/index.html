@@ -60,10 +60,10 @@
 @media screen and (max-width: 768px){
   .besideBtns{display:block !important;padding-right:0}
 }
-#accordionOrder div, #accordionSongs div, #accordion div.inner,.saTxt{font-size:130%}
-#accordionOrder h1, #accordionSongs h1, #accordion h1{font-size:110%;text-align:left}
-#songs p, #readings p, #homilyArea p,#orderOfMass p{margin-top:20px}
-#songs, #readings, #orderOfMass{text-align:left}
+#accordionOrder div, #accordion div.inner,.saTxt{font-size:130%}
+#accordionOrder h1, #accordion h1{font-size:110%;text-align:left}
+#readings p, #homilyArea p,#orderOfMass p{margin-top:20px}
+#readings, #orderOfMass{text-align:left}
 #accordionOrder h4 {color:#c00;text-align:right}
 .allPpl,.orTxt,orTxt2,.instTxt{color:#c00}
 .allPpl{font-weight:bold}
@@ -124,12 +124,8 @@
                 {% for item in entry.featuredAtStAnne.all() %}
                   {% set link = item.contentLink %}
                     <li>
-                      {% if item.vimeoVideoId != 0 %}
-                        <iframe src="//player.vimeo.com/video/{{ item.vimeoVideoId }}?api=1&amp;autoplay=false" width=""  frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-                      {% else %}
                         {% if item.contentLink is not empty %}<a href="{{ link.url }}" {{ link.target ? ' target="_blank"' }}>{% endif %}<img src="{{ item.eventImage[0].getUrl(thumb) }}" width="100%" />
-                         {% if item.contentLink is not empty %} </a>{% endif %}
-                      {% endif %}
+                        {% if item.contentLink is not empty %} </a>{% endif %}
                     </li>
                 {% endfor %}
                 </ul>
@@ -183,8 +179,6 @@
         <div class="row news-blocks">
         
           <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-          
-               {{ entry.topLeftBlock|raw }}  
           
           {% set offertoryUp = craft.entries.section('offertoryUpdates').one() %}
           <style>
@@ -291,7 +285,6 @@
     <div id="worshipAidsArea" style="display:none">
         <div class="worship-links clearfix" style="margin:0 auto;padding:0">
             <a href="#" id="hOrderOfMass" onclick="displayOrderOfMass();return false;"><i class="fa fa-life-ring"></i> {{ "Order of Mass"|t }}</a>
-            <!--a href="#" id="hSongs" onclick="displaySongs();return false;"><i class="fa fa-music"></i> {{ "Songs"|t }}</a-->
             <a href="#" id="hReadings" onclick="displayReadings();return false;"><i class="fa fa-book"></i> {{ "Readings"|t }}</a>
             <a href="#" id="hCommunion" onclick="displaySpiritualCommunion();return false;"><i class="fa fa-plus"></i> {{ "Spiritual Communion"|t }}</a>
             <a href="#" id="hResources" onclick="displayResources();return false;"><i class="fa fa-wrench"></i> {{ "Resources"|t }}</a>
@@ -304,16 +297,6 @@
 			{{ entry.bodyb }}
 
         </div><!--end orderOfMass-->
-    
-    
-    
-        <div id="songs" style="display:none">
-            <br>
-            {{ entry.songsLead|raw }}
-            
-            {{ entry.songSection }}
-
-        </div><!--end songs-->
         
         
         
@@ -526,10 +509,6 @@ function clearWorshipPanels(idName){
         document.getElementById('orderOfMass').style.display = 'none';
         document.getElementById('hOrderOfMass').classList.remove('active');
     }
-    /*if (idName != 'songs'){
-        document.getElementById('songs').style.display = 'none';
-        document.getElementById('hSongs').classList.remove('active');
-    }*/
     if (idName != 'readings'){
         document.getElementById('readings').style.display = 'none';
         document.getElementById('hReadings').classList.remove('active');
@@ -553,17 +532,6 @@ function displayOrderOfMass(){
         document.getElementById('orderOfMass').style.display = 'none';
         document.getElementById('hOrderOfMass').classList.remove('active');
     }
-}
-
-function displaySongs(){
-   clearWorshipPanels('songs');
-   if(document.getElementById('songs').style.display == 'none'){
-       document.getElementById('songs').style.display = 'block';
-       document.getElementById('hSongs').classList.add("active");
-   } else {
-       document.getElementById('songs').style.display = 'none';
-        document.getElementById('hSongs').classList.remove('active');
-   }
 }
 
 function displayReadings(){
@@ -649,15 +617,6 @@ $('#accordionOrder h1').bind('click',function(){
          $('body,html').animate({ scrollTop: theOffset.top - 25 });
     }, 310); // ensure the collapse animation is done
 });
-$("#accordionSongs").accordion({ header: "h1", collapsible: true, active: false, heightStyle: "content", animate: 300 });
-$("#accordionSongs").accordion("option", "active", $("#firstSong").index("#accordionSongs div"));
-$('#accordionSongs h1').bind('click',function(){
-    var self = this;
-    setTimeout(function() {
-         theOffset = $(self).offset();
-         $('body,html').animate({ scrollTop: theOffset.top - 25 });
-    }, 310); // ensure the collapse animation is done
-});
 $("#accordionOpen").accordion({ header: "h1", collapsible: false, active: false, heightStyle: "content", animate: 300 });
 
 
@@ -669,11 +628,6 @@ function getParameterByName(name) {
 }
 var pageArea = getParameterByName('pg');
 if (pageArea == 'readings'){
-    displayWorshipAids();
-    displayReadings();
-    document.getElementById('readings').focus();
-    $('body,html').animate({ scrollTop: 1900 }); 
-} else if (pageArea == 'songs'){
     displayWorshipAids();
     displayReadings();
     document.getElementById('readings').focus();
