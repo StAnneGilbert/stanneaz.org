@@ -11,7 +11,7 @@
         <div class="row">
           <div class="col-lg-10 col-lg-offset-1">
             
-            {% if entry.postImage|length %}
+            {% if entry.postImage.exists() %}
               <div class="featured-image-container">
                 <img src="{{ entry.postImage[0].url }}" alt="" />
               </div>
@@ -20,7 +20,7 @@
             <div class="row">
               <div class="col-md-8 col-sm-7">
                 <h3>{{ entry.title }}</h3>
-                {% if entry.postAuthor|length %}
+                {% if entry.postAuthor.exists() %}
                   <h3 class="small">{{ entry.postAuthor.title }}</h3>
                 {% endif %}
 
@@ -41,10 +41,10 @@
               </div>
 
               <div class="col-md-4 col-sm-5 blog-sidebar">
-                {% if entry.postAuthor|length %}
+                {% if entry.postAuthor.exists() %}
                   {% set author = entry.postAuthor[0] %}
                   <div class="author-bio clearfix">
-                    {% if author.profileImage|length %}
+                    {% if author.profileImage.exists() %}
                      <img src="{{ author.profileImage[0].getUrl('tf160') }}" alt="" class="avatar round-avatar" />
                     {% endif %}
 
@@ -53,7 +53,7 @@
                       <p>{{ author.personFirstName }} is a {{ author.professionalTitle }} at St. Anne's.</p>
 
                       <ul class="links">
-                        {% if author.socialLinks|length %}
+                        {% if author.socialLinks.exists() %}
                           {% for service in author.socialLinks %}
                           {% set link = service.serviceUrl %}
                             <li><a href='{{ link.url }}' class='{{ service.service | lower }} social__link'><i class='fa fa-{{ service.service }}'></i></a></li>
@@ -69,7 +69,7 @@
                 
                 <hr>
                 
-                {% if siteWideSocialLinks.socialLinks|length %}
+                {% if siteWideSocialLinks.socialLinks.exists() %}
                   <h6>{{ "Connect with us"|t }}</h6>
                   <ul class="social-circles">
                     {% for service in siteWideSocialLinks.socialLinks.all() %}

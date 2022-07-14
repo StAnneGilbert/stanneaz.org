@@ -38,7 +38,7 @@
   </label>
   <label class="select" data-action='bymonth'>
   {% set lastPost = craft.entries.section('newsUpdates').orderBy('postDate ASC').one() %}
-  {% if lastPost|length %}
+  {% if lastPost.exists() %}
   {% set lastYear = lastPost.postDate|date('Y') %}
     <select name="" id="">
       {{ helpers.month_options(value,lastYear) }} 

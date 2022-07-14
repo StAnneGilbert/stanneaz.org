@@ -18,10 +18,10 @@
 
 
                 <div class="blog-post standard-container">
-                  {% if entry.body|length %}
+                  {% if entry.body.exists() %}
                       {{ entry.body|raw }}
                   {% else %}
-                      {% if entry.shortDescription|length %}
+                      {% if entry.shortDescription.exists() %}
                           {{ entry.shortDescription|raw }}
                       {% endif %}
                   {% endif %}
@@ -33,7 +33,7 @@
 
               <div class="col-md-4 col-sm-5 blog-sidebar">
               
-              {% if entry.eventListingImage|length %}
+              {% if entry.eventListingImage.exists() %}
                 <div class="featured-image-container">
                   <img src="{{ entry.eventListingImage[0].url }}" alt="" />
                 </div>
@@ -45,7 +45,7 @@
                 
                 <hr>
                 
-                {% if siteWideSocialLinks.socialLinks|length %}
+                {% if siteWideSocialLinks.socialLinks.exists() %}
                   <h6>{{ "Connect with us"|t }}</h6>
                   <ul class="social-circles">
                     {% for service in siteWideSocialLinks.socialLinks.all() %}

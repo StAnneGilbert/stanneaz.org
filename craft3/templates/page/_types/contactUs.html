@@ -6,7 +6,7 @@
 </style>
   <!-- .sf-content for flex sticky footer -->
   <div class="sf-content nav-slide-element" data-swiftype-name="body" data-swiftype-type="text">
-    <div class="page-photo-title" {% if entry.pageImage|length %}style=" background-image:url({{ entry.pageImage[0].url }})" {% endif %}>
+    <div class="page-photo-title" {% if entry.pageImage.exists() %}style=" background-image:url({{ entry.pageImage[0].url }})" {% endif %}>
       <div class="overlay">
         <div class="container">
           <h1 class="caps-header">{{ entry.title }}</h1>
@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-    {% if children|length %}
+    {% if children.exists() %}
       <div class="section-navigation">
         <div class="container">
           <ul>
@@ -66,7 +66,7 @@
                     <input type='hidden' name='message[Subject]' value="General Contact" />
                     <div class="form-group">
                       <h5>{{ "How can we help you"|t }}?</h5>
-                      {% if entry.contactUsFormOptions|length %}
+                      {% if entry.contactUsFormOptions.exists() %}
                         <div class="form-row">
                           <label class="select input-full-width">
                             <select name="toEmail" id="toEmail" onchange="pageMover(this);">
@@ -124,7 +124,7 @@
                   <strong>{{ "FAX"|t }}</strong> {{ siteWideContent.parishFaxNumber }}
                 </p>
                 {% cache globally for 1 year %}
-                {% if siteWideSocialLinks.socialLinks|length %}
+                {% if siteWideSocialLinks.socialLinks.exists() %}
                   <ul class="social-circles">
                     {% for service in siteWideSocialLinks.socialLinks.all() %}
                       {% set link = service.serviceUrl %}
@@ -153,7 +153,7 @@
                 <hr>
                 
                 <h6>{{ "Parish office hours"|t }}</h6>
-                {% if siteWideContent.parishOfficeHours|length %}
+                {% if siteWideContent.parishOfficeHours.exists() %}
                   <p>
                     {% cache globally for 1 month %}
                     {% for item in siteWideContent.parishOfficeHours[0].hoursTable %}

@@ -47,7 +47,7 @@ Web Page: www.stanneaz.org<br>
 Email: admin@stanneaz.org
 
 <h6 class="bulletinHeader">Office Hours/Horas de oficina</h6>
-			{% if siteWideContent.parishOfficeHours|length %}
+			{% if siteWideContent.parishOfficeHours.exists() %}
 			  <table style="width:350px">
 				{% cache globally for 1 month %}
 				{% for item in siteWideContent.parishOfficeHours[0].hoursTable %}
@@ -75,14 +75,14 @@ Email: admin@stanneaz.org
         
 {% for post in entries %}
 
-{% if post.saturdayVigilMassTimes|length %}
+{% if post.saturdayVigilMassTimes.exists() %}
     <h6>Weekend Mass Times</h6>
     Saturday: 
         {% for block in post.saturdayVigilMassTimes.all() %}
             {{ block.hourName|replace('p.m.', 'pm')|replace('a.m.', 'am')|replace('in English', '(English Vigil)')|replace('in Spanish', '(Spanish)')|raw }}
         {% endfor %}<br>
 {% endif %}
-{% if post.sundayMassTimes|length %}
+{% if post.sundayMassTimes.exists() %}
     Sunday: 
         {% for block in post.sundayMassTimes.all() %}
            {{ block.hourName|replace('p.m.', 'pm')|replace('a.m.', 'am')|replace('in English', '')|replace('High Mass', '(High Mass)')|replace('in Spanish', '(Spanish)')|replace('Tridentine Low Mass in Latin', '(Tridentine)')|replace('3 pm', '<br>3 pm')|raw }}{% if block.hourName != '5:30 p.m. in English' %}, {% endif %} 
@@ -91,7 +91,7 @@ Email: admin@stanneaz.org
 <h6>Holy Days of Obligation/Dia de guardar</h6>
 Visit the St. Anne website for the most up to date information.
 
-{% if post.weekdayMassTimes|length %} 
+{% if post.weekdayMassTimes.exists() %} 
     <h6>Weekday Mass Times</h6>
     {{ "Monday"|t }}: 
             {% for block in post.weekdayMassTimes.all() %}
