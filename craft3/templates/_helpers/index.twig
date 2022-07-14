@@ -51,7 +51,7 @@
 
 
 {%- macro page_image(image,move="nomove") -%}
-  {% if image|length %}
+  {% if image.exists() %}
     {% if craft.lj_mobiledetect.type == "phone" %} 
       <div class='{{move}}' style='background-image:url({{ image[0].getUrl('tf360x418') }})'></div>
     {% elseif craft.lj_mobiledetect.type == "tablet" %}

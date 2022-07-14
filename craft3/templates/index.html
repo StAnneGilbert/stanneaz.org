@@ -107,7 +107,7 @@
 </style>
 
 <div class="sf-content nav-slide-element"> 
-    <div class="featured-content-hero nopad" {% if entry.pageImage|length %}style=" background-image:url({{ entry.pageImage[0].url }})" {% endif %}>
+    <div class="featured-content-hero nopad" {% if entry.pageImage.exists() %}style=" background-image:url({{ entry.pageImage[0].url }})" {% endif %}>
         <div class="featured-items">
             <div id="featured-content-slider">
                 {% if entry.featuredAtStAnne | length %}
@@ -153,7 +153,7 @@
     </div> <!-- .sf-content nav-slide-element -->
    
     <div class="giant-block-links clearfix">
-      {% if entry.quicklinks|length %}
+      {% if entry.quicklinks.exists() %}
         {% cache globally for 1 year %}
         {% set qlinks = entry.quicklinks  %}
         {% for item in qlinks.all() %}
@@ -465,7 +465,7 @@ frameborder="0" allowfullscreen style="width:100%;height:5500px"></iframe>
     </div>
 
       <div class="text-center news-action-links">
-        {% if entry.subLinks|length %}
+        {% if entry.subLinks.exists() %}
         {% set sublinks = entry.subLinks %}
           {% for item in sublinks.all() %}
             {% set link = item.subLinks %}

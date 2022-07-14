@@ -11,8 +11,8 @@
 
         <div class="section-title">
           <h3>{{ "Here's what we found"|t }}</h3>
-          {% if entries|length %}
-            <h3 class='small'>{{ entries|length }} {{ "results for"|t }} &ldquo;{{ query }}&rdquo;</h3>
+          {% if entries.exists() %}
+            <h3 class='small'>{{ entries.exists() }} {{ "results for"|t }} &ldquo;{{ query }}&rdquo;</h3>
           {% endif %}
         </div>
 
@@ -31,37 +31,37 @@
               <div class="content-summary-block">
                 {% switch item.section %}
                   {% case "Pages" %}
-                    {% if item.pageImage|length %}
+                    {% if item.pageImage.exists() %}
                       <div class="media">
                           <img src="{{ item.pageImage[0].getUrl('tf160') }}" alt="{{ item.title }}" />
                       </div>
                     {% endif %}
                   {% case "Single Pages" %}
-                      {% if item.pageImage|length %}
+                      {% if item.pageImage.exists() %}
                         <div class="media">
                           <img src="{{ item.pageImage[0].getUrl('tf160') }}" alt="{{ item.title }}" />
                         </div>
                       {% endif %}
                   {% case "Events" %}
-                      {% if item.eventListingImage|length %}
+                      {% if item.eventListingImage.exists() %}
                         <div class="media">
                           <img src="{{ item.eventListingImage[0].getUrl('tf160') }}" alt="{{ item.title }}" />
                         </div>
                       {% endif %}
                   {% case "Homilies" %}
-                      {% if item.postImage|length %}
+                      {% if item.postImage.exists() %}
                         <div class="media">
                           <img src="{{ item.postImage[0].getUrl('tf160') }}" alt="{{ item.title }}" />
                         </div>
                       {% endif %}
                   {% case "News & Updates" %}
-                      {% if item.postImage|length %}
+                      {% if item.postImage.exists() %}
                         <div class="media">
                           <img src="{{ item.postImage[0].getUrl('tf160') }}" alt="{{ item.title }}" />
                         </div>
                       {% endif %}
                   {% default %}
-                    {% if item.pageImage|length %}
+                    {% if item.pageImage.exists() %}
                         <div class="media">
                           <img src="{{ item.pageImage[0].getUrl('tf160') }}" alt="{{ item.title }}" />
                         </div>
@@ -71,10 +71,10 @@
                   <h5><a href="{{ item.url }}">{{ item.title }}</a></h5>
                   <a href="{{ item.url }}" class="item-url">{{ item.url }}</a>
                   <div class="excerpt">
-                      {% if item.body|length %}
+                      {% if item.body.exists() %}
                           <p>{{ item.body|chop(limit=200, unit='c') }}</p>
                       {% else %}
-                          {% if item.shortDescription|length %}
+                          {% if item.shortDescription.exists() %}
                               <p>{{ item.shortDescription|chop(limit=200, unit='c') }}</p>
                           {% endif %}
                       {% endif %}

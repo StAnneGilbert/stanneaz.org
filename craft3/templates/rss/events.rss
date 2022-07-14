@@ -23,13 +23,13 @@
                 <pubDate>{{ entry.eventStartDate|rss }}</pubDate>
                 <guid>{{ eventLink }}</guid>
                 <description><![CDATA[
-                  {% if entry.eventListingImage|length %}
+                  {% if entry.eventListingImage.exists() %}
                     <img src="{{ entry.eventListingImage[0].url }}" width="321" height="200" alt="{{ entry.title }}">   
                   {% endif %}
-                  {% if entry.body|length %}
+                  {% if entry.body.exists() %}
                       {{ entry.body|raw }}
                   {% else %}
-                      {% if entry.shortDescription|length %}
+                      {% if entry.shortDescription.exists() %}
                           {{ entry.shortDescription|raw }}
                       {% endif %}
                   {% endif %}

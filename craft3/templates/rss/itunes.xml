@@ -21,17 +21,17 @@
     <itunes:category text="Christianity"/>
 </itunes:category>
 {% for entry in craft.entries.section('media').limit('55').all() %}
-    {% if entry.audio|length %}
+    {% if entry.audio.exists() %}
     {% set audio = entry.audio[0].url %}
 <item>
     <title>{{ entry.title }}</title>
-    <itunes:summary>{% if entry.lead|length %}<![CDATA[{{ entry.lead }}]]>{% else %}{{ "Catholic homilies and Mass readings from St. Anne Roman Catholic Parish in Gilbert, Arizona"|t }}{% endif %}</itunes:summary>
-    <description>{% if entry.body|length %}<![CDATA[{{ entry.body }}]]>{% else %}{{ "Catholic homilies and Mass readings from St. Anne Roman Catholic Parish in Gilbert, Arizona"|t }}{% endif %}</description>
+    <itunes:summary>{% if entry.lead.exists() %}<![CDATA[{{ entry.lead }}]]>{% else %}{{ "Catholic homilies and Mass readings from St. Anne Roman Catholic Parish in Gilbert, Arizona"|t }}{% endif %}</itunes:summary>
+    <description>{% if entry.body.exists() %}<![CDATA[{{ entry.body }}]]>{% else %}{{ "Catholic homilies and Mass readings from St. Anne Roman Catholic Parish in Gilbert, Arizona"|t }}{% endif %}</description>
     <link>{{ entry.url }}</link>
     <enclosure url="{{ audio }}" type="audio/mpeg" length="1024"></enclosure>
     <pubDate>{{ entry.postDate|rss }}</pubDate>
     <itunes:author>{{ entry.speaker[0].title }}</itunes:author>
-    {% if entry.duration|length %}
+    {% if entry.duration.exists() %}
     <itunes:duration>{{ entry.duration }}</itunes:duration>
     {% endif %}
     <itunes:explicit>no</itunes:explicit>

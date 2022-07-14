@@ -17,7 +17,7 @@
                 <title>{{ entry.title }}</title>
                 <link>{{ entry.url }}</link>
                 <pubDate>{{ entry.postDate|rss }}</pubDate>
-                {% if entry.postAuthor|length %}
+                {% if entry.postAuthor.exists() %}
                     <author>{{ entry.postAuthor[0].title }}</author>   
                 {% endif %}
                 <guid>{{ entry.url }}</guid>

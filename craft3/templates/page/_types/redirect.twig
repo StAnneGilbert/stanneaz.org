@@ -1,6 +1,9 @@
-{% if entry.redirectUrl|length %}
-  {% set link = entry.redirectUrl %}
-  {% redirect link.url %}
+{% if entry.entryLocation.exists() %}
+    {% redirect entry.entryLocation.one().url %}
+{% elseif entry.webUrl.exists() %}
+    {% redirect entry.webUrl %}
+{% elseif entry.redirectUrl.exists() %}
+    {% redirect entry.redirectUrl.url %}
 {% else %}
-  {% redirect '/start-here' %}
+    {% redirect '/start-here' %}
 {% endif %}

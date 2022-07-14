@@ -57,7 +57,7 @@
   </label>
   <label class="select" data-action='bymonth'>
   {% set lastPost = craft.entries.section('media').orderBy('postDate ASC').one() %}
-  {% if lastPost|length %}
+  {% if lastPost.exists() %}
   {% set lastYear = lastPost.mediaDate|date('Y') %}
     <select name="" id="">
       {{ helpers.month_options(value,lastYear) }} 

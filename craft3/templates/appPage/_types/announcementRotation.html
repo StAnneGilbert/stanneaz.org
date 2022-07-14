@@ -56,17 +56,17 @@
 	
 	<div class="slide{% if eMarker == 1 %} showing{% endif %}">
 		<h4>{{ entry.title }}</h4>
-        {% if entry.rotationImage|length %}
+        {% if entry.rotationImage.exists() %}
 	        <img src="{{ entry.rotationImage[0].url }}" alt="" height="200" />
 	    {% else %}
-	        {% if entry.eventListingImage|length %}
+	        {% if entry.eventListingImage.exists() %}
 	            <img src="{{ entry.eventListingImage[0].url }}" alt="" width="321" height="200" />
 	        {% endif %}
 	    {% endif %}
-		{% if entry.shortDescription|length %}
+		{% if entry.shortDescription.exists() %}
 	        <div>{{ entry.shortDescription|raw }}</div>
 	    {% else %}
-		    {% if entry.body|length < 450 %}
+		    {% if entry.body.exists() < 450 %}
 			    <div>{{ entry.body|raw }}</div>
 		    {% else %}
 		        <div>{{ entry.body|slice(0, 450)|striptags|raw }}...</div>

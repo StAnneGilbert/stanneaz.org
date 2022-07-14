@@ -2,8 +2,8 @@
   <div class="content-summary-list">
     {% for post in entries %}
       <div class="content-summary-block">
-        {% if post.speaker|length %}
-          {% if post.speaker[0].profileImage|length %}
+        {% if post.speaker.exists() %}
+          {% if post.speaker[0].profileImage.exists() %}
             <div class="media">
               <img src="{{ post.speaker[0].profileImage[0].getUrl('tf160') }}" alt="" class="round-avatar" />
             </div>
@@ -15,12 +15,12 @@
           {% for topic in topics.all() %}
               <a href='?q=topic:{{ topic.id }}'>{{ topic.title }}</a>, 
           {% endfor %}
-          {% if post.mediaSeason|length %}
+          {% if post.mediaSeason.exists() %}
             <a href="?q=season:{{ post.mediaSeason[0].id }}" class="item-url">{{ post.mediaSeason[0].title }}</a>
           {% endif %}
           <div class="excerpt">
             <p>{{ post.body | chop(limit=120, unit='c') }} <a href="{{ post.url }}">{{ "Read more"|t }}</a></p>
-            <p class="muted">{{ post.mediaDate|date('F d, Y') }} {% if post.speaker|length %} &nbsp;&middot;&nbsp;{{ post.speaker[0].title }} {% endif %}</p>
+            <p class="muted">{{ post.mediaDate|date('F d, Y') }} {% if post.speaker.exists() %} &nbsp;&middot;&nbsp;{{ post.speaker[0].title }} {% endif %}</p>
           </div>
         </div>
       </div> <!-- .content-summary-block -->

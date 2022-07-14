@@ -63,7 +63,7 @@
     
 		<div style="font-weight:bold">{{ entry.title }}</div>
 		<div style="margin: 0 0 15px 0">
-		{% if entry.heading|length %}
+		{% if entry.heading.exists() %}
 	        {{ entry.heading|raw }}
 		{% endif %}
 		</div>	

@@ -27,7 +27,7 @@
               {% if entry.vimeoVideoId != 0 %}
                 {% set min = 0 %}
                 {% set sec = 0 %}
-                 {% if entry.vimeoTimecode|length %}
+                 {% if entry.vimeoTimecode.exists() %}
                       {% set min = entry.vimeoTimecode[0].minutes %}
                       {% set sec = entry.vimeoTimecode[0].seconds %}
                  {% endif %}
@@ -37,7 +37,7 @@
                 </div>
                 <script type='text/template' id='video-embed'>{{ video }}</script>
               {% endif %}
-              {% if entry.audio|length %}
+              {% if entry.audio.exists() %}
                 <div class="action-icon" data-audio data-id='{{ entry.id }}' data-title="{{ entry.title }}">
                   <i class="fa fa-volume-up"></i>
                 </div>
@@ -46,12 +46,12 @@
                 </div>
               {% endif %}
             </div>
-            {% if entry.postImage|length %}
+            {% if entry.postImage.exists() %}
               <img src="{{ entry.postImage[0].getUrl() }}" alt="{{ entry.title }}" />
             {% endif %}
           </div>
-          {% if entry.video|length %}
-              {% if entry.postImage|length or entry.vimeoVideoId != 0 %}<br clear="all">{% endif %}
+          {% if entry.video.exists() %}
+              {% if entry.postImage.exists() or entry.vimeoVideoId != 0 %}<br clear="all">{% endif %}
               <style>
 				.ycontainer {
 					position: relative;
@@ -71,8 +71,8 @@
                     {{ entry.video|raw }}
                 </div>
           {% endif %}
-          {% if entry.youTubeVideoId|length %}
-              {% if entry.postImage|length or entry.vimeoVideoId != 0 %}<br clear="all">{% endif %}
+          {% if entry.youTubeVideoId.exists() %}
+              {% if entry.postImage.exists() or entry.vimeoVideoId != 0 %}<br clear="all">{% endif %}
                 <style>
 				.ycontainer {
 					position: relative;
@@ -98,21 +98,21 @@
           <div class="row">
             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
               <h3>{{ entry.title }}</h3>
-              <h3 class="small">{{ entry.mediaDate|date('F d, Y g:i a') }} {% if entry.speaker|length %} &nbsp;&middot;&nbsp;{{ entry.speaker[0].title }} {% endif %}</h3>
+              <h3 class="small">{{ entry.mediaDate|date('F d, Y g:i a') }} {% if entry.speaker.exists() %} &nbsp;&middot;&nbsp;{{ entry.speaker[0].title }} {% endif %}</h3>
               <p class="links">
                 {% set topics = entry.mediaTopic %}
                   {% for topic in topics.all() %}
                       <a href='/media/media-library?q=topic:{{ topic.id }}'>{{ topic.title }}</a>, 
                   {% endfor %}
-                  {% if entry.mediaSeason|length %}
+                  {% if entry.mediaSeason.exists() %}
                     <a href="/media/media-library?q=season:{{ entry.mediaSeason[0].id }}" class="item-url">{{ entry.mediaSeason[0].title }}</a>
                   {% endif %}
               </p>
               
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3">
-            {% if entry.speaker|length %}
-              {% if entry.speaker[0].profileImage|length %}
+            {% if entry.speaker.exists() %}
+              {% if entry.speaker[0].profileImage.exists() %}
                   <img src="{{ entry.speaker[0].profileImage[0].getUrl('tf160') }}" alt="entry.speaker[0].title" class="round-avatar full-max-width" />
               {% endif %}
             {% endif %}

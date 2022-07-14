@@ -17,7 +17,7 @@
 
 {% set currentURL = craft.app.request.absoluteUrl() %}
 <meta property='og:title' content='{{ websiteTitle }}'/>
-{% if entry.pageImage|length %}
+{% if entry.pageImage.exists() %}
   {% set pageImage = entry.pageImage[0].getUrl('tf280') %}
 {% endif %}
 <meta property="og:type" content="website">
@@ -41,7 +41,7 @@
 <link rel="prerender" href="/start-here" />
 <link href='/assets/css/global.css' rel='stylesheet'/>
 
-{% if entry.headTagContent|length %}
+{% if entry.headTagContent.exists() %}
   {{ entry.headTagContent|raw }} 
 {% endif %}
 

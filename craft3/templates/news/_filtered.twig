@@ -23,8 +23,8 @@
 
     {% for post in entries %}
       <div class="content-summary-block">
-        {% if post.postAuthor|length %}
-          {% if post.postAuthor[0].postImage|length %}
+        {% if post.postAuthor.exists() %}
+          {% if post.postAuthor[0].postImage.exists() %}
             <div class="media">
               <img src="{{ post.postAuthor[0].postImage[0].getUrl('tf160') }}" alt="" class="round-avatar" />
             </div>
@@ -38,7 +38,7 @@
           {% endfor %}
           <div class="excerpt">
             <p>{{ post.body | chop(limit=120, unit='c') }} <a href="{{ post.url }}">{{"Read more"|t}}</a></p>
-            <p class="muted">{{ post.postDate|date('F d, Y') }} {% if post.postAuthor|length %} &nbsp;&middot;&nbsp;{{ post.postAuthor[0].title }} {% endif %}</p>
+            <p class="muted">{{ post.postDate|date('F d, Y') }} {% if post.postAuthor.exists() %} &nbsp;&middot;&nbsp;{{ post.postAuthor[0].title }} {% endif %}</p>
           </div>
         </div>
       </div> <!-- .content-summary-block -->

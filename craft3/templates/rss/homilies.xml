@@ -13,7 +13,7 @@
     <language>en-us</language>
     <pubDate>{{ now|rss }}</pubDate>
     <lastBuildDate>{{ now|rss }}</lastBuildDate>
-    {% if fallbacks.fallbackSermonImage|length %}
+    {% if fallbacks.fallbackSermonImage.exists() %}
       <image>
         <url>{{ fallbacks.fallbackSermonImage[0].url }}</url>
         <title>{{ siteName }}</title>
@@ -35,13 +35,13 @@
         <itunes:category text="Christianity"/>
     </itunes:category>
     {% for entry in craft.entries.section('homilies').limit('50').all() %}
-        {% if entry.audio|length %}
+        {% if entry.audio.exists() %}
         {% set audio = entry.audio[0].url %}
         <item>
             <title>{{ entry.title }}</title>
             <link>{{ entry.url }}</link>
             <pubDate>{{ entry.postDate|rss }}</pubDate>
-        {% if entry.speaker|length %}
+        {% if entry.speaker.exists() %}
             <itunes:author>{{ entry.speaker[0].title }}</itunes:author>
         {% endif %}
             <author>info@stanneaz.org (St. Anne Roman Catholic Parish)</author>
@@ -52,7 +52,7 @@
                 type="audio/mpeg"
                 length="3600000"
             />
-        {% if entry.sermonImage|length %}
+        {% if entry.sermonImage.exists() %}
             <itunes:image href="{{ entry.postImage[0].url }}" />
         {% endif %}
             <itunes:keywords>
