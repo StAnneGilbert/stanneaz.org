@@ -1,8 +1,8 @@
-{% if entry.entryLocation.exists() %}
-    {% redirect entry.entryLocation.one().url %}
-{% elseif entry.webUrl.exists() %}
+{% if entry.entryLocation|length %}
+    {% redirect entry.entryLocation[0].url %}
+{% elseif entry.webUrl|length %}
     {% redirect entry.webUrl %}
-{% elseif entry.redirectUrl.exists() %}
+{% elseif entry.redirectUrl|length %}
     {% redirect entry.redirectUrl.url %}
 {% else %}
     {% redirect '/start-here' %}
