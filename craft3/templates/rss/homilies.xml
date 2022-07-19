@@ -15,7 +15,7 @@
     <lastBuildDate>{{ now|rss }}</lastBuildDate>
     {% if fallbacks.fallbackSermonImage.exists() %}
       <image>
-        <url>{{ fallbacks.fallbackSermonImage[0].url }}</url>
+        <url>{{ fallbacks.fallbackSermonImage.one().url }}</url>
         <title>{{ siteName }}</title>
         <link>{{ siteUrl }}</link>
       </image>
@@ -36,13 +36,13 @@
     </itunes:category>
     {% for entry in craft.entries.section('homilies').limit('50').all() %}
         {% if entry.audio.exists() %}
-        {% set audio = entry.audio[0].url %}
+        {% set audio = entry.audio.one().url %}
         <item>
             <title>{{ entry.title }}</title>
             <link>{{ entry.url }}</link>
             <pubDate>{{ entry.postDate|rss }}</pubDate>
         {% if entry.speaker.exists() %}
-            <itunes:author>{{ entry.speaker[0].title }}</itunes:author>
+            <itunes:author>{{ entry.speaker.one().title }}</itunes:author>
         {% endif %}
             <author>info@stanneaz.org (St. Anne Roman Catholic Parish)</author>
             <guid>{{ audio }}</guid>
@@ -53,7 +53,7 @@
                 length="3600000"
             />
         {% if entry.sermonImage.exists() %}
-            <itunes:image href="{{ entry.postImage[0].url }}" />
+            <itunes:image href="{{ entry.postImage.one().url }}" />
         {% endif %}
             <itunes:keywords>
         {% spaceless %}

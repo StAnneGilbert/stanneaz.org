@@ -107,7 +107,7 @@
 </style>
 
 <div class="sf-content nav-slide-element"> 
-    <div class="featured-content-hero nopad" {% if entry.pageImage.exists() %}style=" background-image:url({{ entry.pageImage[0].url }})" {% endif %}>
+    <div class="featured-content-hero nopad" {% if entry.pageImage.exists() %}style=" background-image:url({{ entry.pageImage.one().url }})" {% endif %}>
         <div class="featured-items">
             <div id="featured-content-slider">
                 {% if entry.featuredAtStAnne | length %}
@@ -124,7 +124,7 @@
                 {% for item in entry.featuredAtStAnne.all() %}
                   {% set link = item.contentLink %}
                     <li>
-                        {% if item.contentLink is not empty %}<a href="{{ link.url }}" {{ link.target ? ' target="_blank"' }}>{% endif %}<img src="{{ item.eventImage[0].getUrl(thumb) }}" width="100%" />
+                        {% if item.contentLink is not empty %}<a href="{{ link.url }}" {{ link.target ? ' target="_blank"' }}>{% endif %}<img src="{{ item.eventImage.one().getUrl(thumb) }}" width="100%" />
                         {% if item.contentLink is not empty %} </a>{% endif %}
                     </li>
                 {% endfor %}
@@ -142,7 +142,7 @@
                     position: 'top-center'
                 } %}
                 {% for item in entry.featuredAtStAnne.all() %}
-                <a data-slide-index="{{ loop.index - 1 }}" href=""><img src="{{ item.eventImage[0].getUrl(thumb2) }}" /></a>
+                <a data-slide-index="{{ loop.index - 1 }}" href=""><img src="{{ item.eventImage.one().getUrl(thumb2) }}" /></a>
                 {% endfor %}
               {% endcache %}
                 </div>

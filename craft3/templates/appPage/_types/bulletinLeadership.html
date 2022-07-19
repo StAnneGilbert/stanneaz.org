@@ -51,7 +51,7 @@
             
               {% if person.profileImage is not empty %}
               <div class="col col-avatar" style="margin:0;padding:0;height:61px">
-                  <img src="{{ person.profileImage[0].getUrl('tf60') }}" alt="{{ person.title }}" class="avatar round-avatar" />
+                  <img src="{{ person.profileImage.one().getUrl('tf60') }}" alt="{{ person.title }}" class="avatar round-avatar" />
               </div>
               {% endif %}
               <div class="staffinfo">{{ person.professionalTitle|replace('Catechesis of the Good Shepherd', 'CGS')|replace('Catequesis del Buen Pastor','CBP')|replace('Administration Coordinator', 'Administration') }}:</div>

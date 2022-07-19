@@ -170,7 +170,7 @@
               <div class="priestTilePicture">
                   {% if person.profileImage is not empty %}
                       <div class="col col-avatar" style="margin:0;padding:0">
-                          <img src="{{ person.profileImage[0].getUrl('tf70') }}" alt="{{ person.title }}" class="avatar round-avatar" />
+                          <img src="{{ person.profileImage.one().getUrl('tf70') }}" alt="{{ person.title }}" class="avatar round-avatar" />
                       </div>
                   {% endif %}
               	</div>

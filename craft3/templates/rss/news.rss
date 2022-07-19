@@ -18,7 +18,7 @@
                 <link>{{ entry.url }}</link>
                 <pubDate>{{ entry.postDate|rss }}</pubDate>
                 {% if entry.postAuthor.exists() %}
-                    <author>{{ entry.postAuthor[0].title }}</author>   
+                    <author>{{ entry.postAuthor.one().title }}</author>   
                 {% endif %}
                 <guid>{{ entry.url }}</guid>
                 <description><![CDATA[ 

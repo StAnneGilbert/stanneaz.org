@@ -1,8 +1,8 @@
 {% if entry.pageImage.exists() %}
-  <meta class='swiftype' name='image' data-type='enum' content="{{ entry.pageImage[0].getUrl('tf280') }}">
+  <meta class='swiftype' name='image' data-type='enum' content="{{ entry.pageImage.one().getUrl('tf280') }}">
 {% else %}
     {% if entry.profileImage.exists() %}
-      <meta class='swiftype' name='image' data-type='enum' content="{{ entry.profileImage[0].getUrl('tf280') }}">
+      <meta class='swiftype' name='image' data-type='enum' content="{{ entry.profileImage.one().getUrl('tf280') }}">
     {% endif %}
 {% endif %}
 

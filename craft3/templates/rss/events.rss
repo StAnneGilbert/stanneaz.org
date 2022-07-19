@@ -24,9 +24,9 @@
                 <guid>{{ eventLink }}</guid>
                 <description><![CDATA[
                   {% if entry.eventListingImage.exists() %}
-                    <img src="{{ entry.eventListingImage[0].url }}" width="321" height="200" alt="{{ entry.title }}">   
+                    <img src="{{ entry.eventListingImage.one().url }}" width="321" height="200" alt="{{ entry.title }}">   
                   {% endif %}
-                  {% if entry.body.exists() %}
+                  {% if entry.body|length %}
                       {{ entry.body|raw }}
                   {% else %}
                       {% if entry.shortDescription.exists() %}

@@ -5,7 +5,7 @@
 {% macro recursiveChildren(page) %}
   {% if page.hasDescendants and page.slug == craft.app.request.getSegment(page.level) %}
     <ul>
-      {% for subpage in page.children %}
+      {% for subpage in page.children.all() %}
           <li{% if subpage.slug == craft.app.request.getSegment(subpage.level) %} class="selected"{% endif %}>
             {{ subpage.link }}
             {{ _self.recursiveChildren(subpage) }}
@@ -16,7 +16,7 @@
 {% endmacro %}
   <!-- .sf-content for flex sticky footer -->
   <div class="sf-content nav-slide-element" data-swiftype-name="body" data-swiftype-type="text">
-    <div class="page-photo-title" {% if entry.pageImage.exists() %}style=" background-image:url({{ entry.pageImage[0].url }})" {% endif %}>
+    <div class="page-photo-title" {% if entry.pageImage.exists() %}style=" background-image:url({{ entry.pageImage.one().url }})"{% endif %}>
       <div class="overlay">
         <div class="container">
           <h1 class="caps-header">{{ entry.heading }}</h1>

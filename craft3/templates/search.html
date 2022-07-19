@@ -33,37 +33,37 @@
                   {% case "Pages" %}
                     {% if item.pageImage.exists() %}
                       <div class="media">
-                          <img src="{{ item.pageImage[0].getUrl('tf160') }}" alt="{{ item.title }}" />
+                          <img src="{{ item.pageImage.one().getUrl('tf160') }}" alt="{{ item.title }}" />
                       </div>
                     {% endif %}
                   {% case "Single Pages" %}
                       {% if item.pageImage.exists() %}
                         <div class="media">
-                          <img src="{{ item.pageImage[0].getUrl('tf160') }}" alt="{{ item.title }}" />
+                          <img src="{{ item.pageImage.one().getUrl('tf160') }}" alt="{{ item.title }}" />
                         </div>
                       {% endif %}
                   {% case "Events" %}
                       {% if item.eventListingImage.exists() %}
                         <div class="media">
-                          <img src="{{ item.eventListingImage[0].getUrl('tf160') }}" alt="{{ item.title }}" />
+                          <img src="{{ item.eventListingImage.one().getUrl('tf160') }}" alt="{{ item.title }}" />
                         </div>
                       {% endif %}
                   {% case "Homilies" %}
                       {% if item.postImage.exists() %}
                         <div class="media">
-                          <img src="{{ item.postImage[0].getUrl('tf160') }}" alt="{{ item.title }}" />
+                          <img src="{{ item.postImage.one().getUrl('tf160') }}" alt="{{ item.title }}" />
                         </div>
                       {% endif %}
                   {% case "News & Updates" %}
                       {% if item.postImage.exists() %}
                         <div class="media">
-                          <img src="{{ item.postImage[0].getUrl('tf160') }}" alt="{{ item.title }}" />
+                          <img src="{{ item.postImage.one().getUrl('tf160') }}" alt="{{ item.title }}" />
                         </div>
                       {% endif %}
                   {% default %}
                     {% if item.pageImage.exists() %}
                         <div class="media">
-                          <img src="{{ item.pageImage[0].getUrl('tf160') }}" alt="{{ item.title }}" />
+                          <img src="{{ item.pageImage.one().getUrl('tf160') }}" alt="{{ item.title }}" />
                         </div>
                       {% endif %}
                 {% endswitch %}
@@ -71,10 +71,10 @@
                   <h5><a href="{{ item.url }}">{{ item.title }}</a></h5>
                   <a href="{{ item.url }}" class="item-url">{{ item.url }}</a>
                   <div class="excerpt">
-                      {% if item.body.exists() %}
+                      {% if item.body|length %}
                           <p>{{ item.body|chop(limit=200, unit='c') }}</p>
                       {% else %}
-                          {% if item.shortDescription.exists() %}
+                          {% if item.shortDescription|length %}
                               <p>{{ item.shortDescription|chop(limit=200, unit='c') }}</p>
                           {% endif %}
                       {% endif %}

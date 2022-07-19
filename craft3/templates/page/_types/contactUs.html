@@ -6,7 +6,7 @@
 </style>
   <!-- .sf-content for flex sticky footer -->
   <div class="sf-content nav-slide-element" data-swiftype-name="body" data-swiftype-type="text">
-    <div class="page-photo-title" {% if entry.pageImage.exists() %}style=" background-image:url({{ entry.pageImage[0].url }})" {% endif %}>
+    <div class="page-photo-title" {% if entry.pageImage.exists() %}style=" background-image:url({{ entry.pageImage.one().url }})" {% endif %}>
       <div class="overlay">
         <div class="container">
           <h1 class="caps-header">{{ entry.title }}</h1>
@@ -156,7 +156,7 @@
                 {% if siteWideContent.parishOfficeHours.exists() %}
                   <p>
                     {% cache globally for 1 month %}
-                    {% for item in siteWideContent.parishOfficeHours[0].hoursTable %}
+                    {% for item in siteWideContent.parishOfficeHours.one().hoursTable %}
                       {% spaceless %}
                         <strong>{{ item.dayOfTheWeek }}</strong>
                         {% if item.redLabel == 1 %}
@@ -170,8 +170,8 @@
                     {% endcache %}
                   </p>
                   
-                  {% if siteWideContent.parishOfficeHours[0].exceptionReference is not empty %}
-                    <p><span class="muted">*</span> {{ siteWideContent.parishOfficeHours[0].exceptionReference|raw }}</p>
+                  {% if siteWideContent.parishOfficeHours.one().exceptionReference is not empty %}
+                    <p><span class="muted">*</span> {{ siteWideContent.parishOfficeHours.one().exceptionReference|raw }}</p>
                   {% endif %}
                 {% endif %}
               </div>

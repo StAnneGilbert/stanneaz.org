@@ -50,7 +50,7 @@ Email: admin@stanneaz.org
 			{% if siteWideContent.parishOfficeHours.exists() %}
 			  <table style="width:350px">
 				{% cache globally for 1 month %}
-				{% for item in siteWideContent.parishOfficeHours[0].hoursTable %}
+				{% for item in siteWideContent.parishOfficeHours.one().hoursTable %}
 				  {% spaceless %}
 				    <tr>
 				      <td>
@@ -66,8 +66,8 @@ Email: admin@stanneaz.org
 				{% endcache %}
 			  </table>
 			  
-			  {% if siteWideContent.parishOfficeHours[0].exceptionReference is not empty %}
-				<div style="color:#895022;font-style:italic">* {{ siteWideContent.parishOfficeHours[0].exceptionReference|raw }}</div>
+			  {% if siteWideContent.parishOfficeHours.one().exceptionReference is not empty %}
+				<div style="color:#895022;font-style:italic">* {{ siteWideContent.parishOfficeHours.one().exceptionReference|raw }}</div>
 			  {% endif %}
 			{% endif %}
 			
