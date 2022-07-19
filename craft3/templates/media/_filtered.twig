@@ -37,7 +37,7 @@
               <a href='?q=topic:{{ topic.id }}'>{{ topic.title }}</a>, 
           {% endfor %}
           {% if post.mediaSeason.exists() %}
-            <a href="?q=season:{{ post.mediaSeason.one().id }}" class="item-url">{{ post.mediaSeason[0].title }}</a>
+            <a href="?q=season:{{ post.mediaSeason.one().id }}" class="item-url">{{ post.mediaSeason.one().title }}</a>
           {% endif %}
           <div class="excerpt">
             <p>{{ post.body | chop(limit=120, unit='c') }} <a href="{{ post.url }}">{{ "Read more"|t }}</a></p>
