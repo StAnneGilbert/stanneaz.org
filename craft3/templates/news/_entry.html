@@ -42,7 +42,7 @@
 
               <div class="col-md-4 col-sm-5 blog-sidebar">
                 {% if entry.postAuthor.exists() %}
-                  {% set author = entry.postAuthor[0] %}
+                  {% set author = entry.postAuthor.one() %}
                   <div class="author-bio clearfix">
                     {% if author.profileImage.exists() %}
                      <img src="{{ author.profileImage.one().getUrl('tf160') }}" alt="" class="avatar round-avatar" />
