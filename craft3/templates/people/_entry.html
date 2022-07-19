@@ -24,9 +24,9 @@
           <a name="{{ person.slug }}"></a>
           <div class="staff-member">
             
-              {% if person.profileImage is not empty %}
+              {% if person.profileImage.exists() %}
               <div class="col col-avatar">
-                <img src="{{ person.profileImage[0].getUrl('tf160') }}" alt="" class="avatar round-avatar" />
+                <img src="{{ person.profileImage.one().getUrl('tf160') }}" alt="" class="avatar round-avatar" />
                 </div>
               {% endif %}
             
