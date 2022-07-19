@@ -49,7 +49,7 @@
       
           <div class="staffTile">
             
-              {% if person.profileImage is not empty %}
+              {% if person.profileImage.exists() %}
               <div class="col col-avatar" style="margin:0;padding:0;height:61px">
                   <img src="{{ person.profileImage.one().getUrl('tf60') }}" alt="{{ person.title }}" class="avatar round-avatar" />
               </div>
