@@ -88,7 +88,7 @@
 
                 <div class="blog-post standard-container">
                 
-                  {% if entry.body.exists() %}
+                  {% if entry.body|length %}
                       {{ entry.body|raw }}
                   {% else %}
                       {% if entry.shortDescription.exists() %}
@@ -137,7 +137,7 @@
               
               {% if entry.eventListingImage.exists() %}
                 <div class="featured-image-container">
-                  <img src="{{ entry.eventListingImage[0].url }}" alt="" />
+                  <img src="{{ entry.eventListingImage.one().url }}" alt="" />
                 </div>
               {% endif %}
               

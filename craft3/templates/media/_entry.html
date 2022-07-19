@@ -28,8 +28,8 @@
                 {% set min = 0 %}
                 {% set sec = 0 %}
                  {% if entry.vimeoTimecode.exists() %}
-                      {% set min = entry.vimeoTimecode[0].minutes %}
-                      {% set sec = entry.vimeoTimecode[0].seconds %}
+                      {% set min = entry.vimeoTimecode.one().minutes %}
+                      {% set sec = entry.vimeoTimecode.one().seconds %}
                  {% endif %}
                 {% set video = helpers.vimeo_video(entry.vimeoVideoId,entry.autoplay,min,sec) %}
                 <div data-video='embed' class="action-icon">
@@ -42,12 +42,12 @@
                   <i class="fa fa-volume-up"></i>
                 </div>
                 <div class='action-icon'>
-                     <a href="{{ entry.audio[0].url }}" target="_blank" download><i class='fa fa-download fa-inverse'></i></a>
+                     <a href="{{ entry.audio.one().url }}" target="_blank" download><i class='fa fa-download fa-inverse'></i></a>
                 </div>
               {% endif %}
             </div>
             {% if entry.postImage.exists() %}
-              <img src="{{ entry.postImage[0].getUrl() }}" alt="{{ entry.title }}" />
+              <img src="{{ entry.postImage.one().getUrl() }}" alt="{{ entry.title }}" />
             {% endif %}
           </div>
           {% if entry.video.exists() %}
@@ -98,22 +98,22 @@
           <div class="row">
             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
               <h3>{{ entry.title }}</h3>
-              <h3 class="small">{{ entry.mediaDate|date('F d, Y g:i a') }} {% if entry.speaker.exists() %} &nbsp;&middot;&nbsp;{{ entry.speaker[0].title }} {% endif %}</h3>
+              <h3 class="small">{{ entry.mediaDate|date('F d, Y g:i a') }} {% if entry.speaker.exists() %} &nbsp;&middot;&nbsp;{{ entry.speaker.one().title }} {% endif %}</h3>
               <p class="links">
                 {% set topics = entry.mediaTopic %}
                   {% for topic in topics.all() %}
                       <a href='/media/media-library?q=topic:{{ topic.id }}'>{{ topic.title }}</a>, 
                   {% endfor %}
                   {% if entry.mediaSeason.exists() %}
-                    <a href="/media/media-library?q=season:{{ entry.mediaSeason[0].id }}" class="item-url">{{ entry.mediaSeason[0].title }}</a>
+                    <a href="/media/media-library?q=season:{{ entry.mediaSeason.one().id }}" class="item-url">{{ entry.mediaSeason.one().title }}</a>
                   {% endif %}
               </p>
               
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3">
             {% if entry.speaker.exists() %}
-              {% if entry.speaker[0].profileImage.exists() %}
-                  <img src="{{ entry.speaker[0].profileImage[0].getUrl('tf160') }}" alt="entry.speaker[0].title" class="round-avatar full-max-width" />
+              {% if entry.speaker.one().profileImage.exists() %}
+                  <img src="{{ entry.speaker.one().profileImage.one().getUrl('tf160') }}" alt="entry.speaker.one().title" class="round-avatar full-max-width" />
               {% endif %}
             {% endif %}
           </div>

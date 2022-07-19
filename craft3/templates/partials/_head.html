@@ -18,7 +18,7 @@
 {% set currentURL = craft.app.request.absoluteUrl() %}
 <meta property='og:title' content='{{ websiteTitle }}'/>
 {% if entry.pageImage.exists() %}
-  {% set pageImage = entry.pageImage[0].getUrl('tf280') %}
+  {% set pageImage = entry.pageImage.one().getUrl('tf280') %}
 {% endif %}
 <meta property="og:type" content="website">
 <meta property="og:description" content="St. Anne Roman Catholic Parish is located in Gilbert, Arizona. Fiat Voluntas Tua (May God's will be done).">

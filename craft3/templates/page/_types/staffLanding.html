@@ -14,9 +14,9 @@
           <a name="{{ person.slug }}" id="{{ person.slug }}"></a>
           <div class="staff-member" id="staff-{{ person.slug }}">
             
-              {% if person.profileImage is not empty %}
+              {% if person.profileImage.exists() %}
               <div class="col col-avatar">
-                <img src="{{ person.profileImage[0].getUrl('tf160') }}" alt="" class="avatar round-avatar" />
+                <img src="{{ person.profileImage.one().getUrl('tf160') }}" alt="" class="avatar round-avatar" />
                 </div>
               {% endif %}
             
@@ -93,9 +93,9 @@
           <a name="{{ person.slug }}{% if person.staffMember is not empty %}2{% endif %}" id="{{ person.slug }}{% if person.staffMember is not empty %}2{% endif %}"></a>
           <div class="staff-member" id="staff-{{ person.slug }}{% if person.staffMember is not empty %}2{% endif %}">
             
-              {% if person.profileImage is not empty %}
+              {% if person.profileImage.exists() %}
               <div class="col col-avatar">
-                <img src="{{ person.profileImage[0].getUrl('tf160') }}" alt="" class="avatar round-avatar" />
+                <img src="{{ person.profileImage.one().getUrl('tf160') }}" alt="" class="avatar round-avatar" />
                 </div>
               {% endif %}
             

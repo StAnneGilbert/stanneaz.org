@@ -18,7 +18,7 @@
 <div class="featured-media-box">   
     <div class="details">
         <h4 class='seth'><a href="{{ eventLink }}">{{ entry.title }}</a></h4>
-		<a href="{{ eventLink }}" style="cursor:pointer;cursor:hand"><img src="{{ entry.eventListingImage[0].url }}" alt="" width="321" height="200" style="margin-bottom:20px" /></a>
+		<a href="{{ eventLink }}" style="cursor:pointer;cursor:hand"><img src="{{ entry.eventListingImage.one().url }}" alt="" width="321" height="200" style="margin-bottom:20px" /></a>
 		<div class="postBody" style="height:85px">{% if entry.shortDescription.exists() %}{{ entry.shortDescription|chop(limit=140, unit='c')}}{% else %}{{ entry.body|chop(limit=140, unit='c')}}{% endif %}</div>
 		<p class="more muted">
 		    {{ macros.date_time_options(entry.afterMass, craft.app.language, entry.eventStartDate, entry.eventEndDate, entry.tbdTba, entry.showDatesOnly) }}<br>

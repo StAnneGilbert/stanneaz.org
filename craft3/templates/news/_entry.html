@@ -13,7 +13,7 @@
             
             {% if entry.postImage.exists() %}
               <div class="featured-image-container">
-                <img src="{{ entry.postImage[0].url }}" alt="" />
+                <img src="{{ entry.postImage.one().url }}" alt="" />
               </div>
             {% endif %}
 
@@ -45,7 +45,7 @@
                   {% set author = entry.postAuthor[0] %}
                   <div class="author-bio clearfix">
                     {% if author.profileImage.exists() %}
-                     <img src="{{ author.profileImage[0].getUrl('tf160') }}" alt="" class="avatar round-avatar" />
+                     <img src="{{ author.profileImage.one().getUrl('tf160') }}" alt="" class="avatar round-avatar" />
                     {% endif %}
 
                     <div class="bio">

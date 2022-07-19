@@ -34,11 +34,11 @@
   {{ item.title }}
   {% set audio = "" %}
   {% if item.audio.exists() %}
-    {% set audio = item.audio[0].url %}
+    {% set audio = item.audio.one().url %}
   {% endif %}
   {% set image = "" %}
   {% if item.postImage.exists() %}
-    {% set image = item.postImage[0].getUrl('tf780x438') %}
+    {% set image = item.postImage.one().getUrl('tf780x438') %}
   {% endif %}
   <div style='background-image:url({{ image }})'>
     <audio controls style='display:none;' autoplay><source src='{{ audio }}' type='audio/mp3'></audio>
