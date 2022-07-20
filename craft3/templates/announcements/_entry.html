@@ -21,7 +21,7 @@
                   {% if entry.body|length %}
                       {{ entry.body|raw }}
                   {% else %}
-                      {% if entry.shortDescription.exists() %}
+                      {% if entry.shortDescription|length %}
                           {{ entry.shortDescription|raw }}
                       {% endif %}
                   {% endif %}

@@ -25,7 +25,7 @@
     {% set audio = entry.audio.one().url %}
 <item>
     <title>{{ entry.title }}</title>
-    <itunes:summary>{% if entry.lead.exists() %}<![CDATA[{{ entry.lead }}]]>{% else %}Catholic homilies and Mass readings from St. Anne Roman Catholic Parish in Gilbert, Arizona{% endif %}</itunes:summary>
+    <itunes:summary>{% if entry.lead|length %}<![CDATA[{{ entry.lead }}]]>{% else %}Catholic homilies and Mass readings from St. Anne Roman Catholic Parish in Gilbert, Arizona{% endif %}</itunes:summary>
     <description>{% if entry.body|length %}<![CDATA[{{ entry.body }}]]>{% else %}Catholic homilies and Mass readings from St. Anne Roman Catholic Parish in Gilbert, Arizona{% endif %}</description>
     <link>{{ entry.url }}</link>
     <enclosure url="{{ audio }}" type="audio/mpeg" length="1024"></enclosure>

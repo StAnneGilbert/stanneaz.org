@@ -68,7 +68,7 @@
 	            <img src="{{ entry.eventListingImage.one().url }}" alt="" width="321" height="200" />
 	        {% endif %}
 	    {% endif %}
-		{% if entry.shortDescription.exists() %}
+		{% if entry.shortDescription|length %}
 	        <div>{{ entry.shortDescription|raw }}</div>
 	    {% else %}
 		    {% if entry.body|length < 450 %}
@@ -101,7 +101,7 @@
 	            {% endif %}
 	        {% endif %}
 	        
-	        {% if entry.shortDescription.exists() %}
+	        {% if entry.shortDescription|length  %}
 	            <div>{{ entry.shortDescription|raw }}</div>
 	        {% else %}
 	            {% if entry.body|length < 450 %}

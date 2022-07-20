@@ -29,7 +29,7 @@
                   {% if entry.eventListingImage.exists() %}
                     <img src="{{ entry.eventListingImage.one().url }}" width="321" height="200" alt="{{ entry.title }}"> 
                   {% endif %}
-                  {% if entry.shortDescription.exists() %}
+                  {% if entry.shortDescription|length %}
                       <div>
                           {{ entry.shortDescription|raw }}
                       </div>

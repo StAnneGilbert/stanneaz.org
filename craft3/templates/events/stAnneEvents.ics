@@ -22,7 +22,7 @@ DTSTART:{{icalStartDate}}T{{icalStartTime}}Z
 DTEND:{{icalEndDate}}T{{icalEndTime}}Z
 UID:Events-{{icalStartDate}}T{{icalStartTime}}Z
 DESCRIPTION:{{ entry.title }}
-{% if entry.eventStreetAddress.exists() %}
+{% if entry.eventStreetAddress|length %}
 LOCATION:{{entry.eventLocation}}\n{{entry.streetAddress}}\, {{entry.city}}\, {{entry.state}}\, {{entry.zip}}
 {% else %}
 LOCATION:St Anne Roman Catholic Parish\n440 E Elliot Rd\, Gilbert\, AZ\, 85234

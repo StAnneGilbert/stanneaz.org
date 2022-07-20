@@ -66,7 +66,7 @@
                     <input type='hidden' name='message[Subject]' value="General Contact" />
                     <div class="form-group">
                       <h5>{{ "How can we help you"|t }}?</h5>
-                      {% if entry.contactUsFormOptions.exists() %}
+                      {% if entry.contactUsFormOptions|length %}
                         <div class="form-row">
                           <label class="select input-full-width">
                             <select name="toEmail" id="toEmail" onchange="pageMover(this);">

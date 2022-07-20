@@ -41,7 +41,7 @@
 <link rel="prerender" href="/start-here" />
 <link href='/assets/css/global.css' rel='stylesheet'/>
 
-{% if entry.headTagContent.exists() %}
+{% if entry.headTagContent|length %}
   {{ entry.headTagContent|raw }} 
 {% endif %}
 

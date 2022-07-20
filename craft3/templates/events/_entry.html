@@ -91,7 +91,7 @@
                   {% if entry.body|length %}
                       {{ entry.body|raw }}
                   {% else %}
-                      {% if entry.shortDescription.exists() %}
+                      {% if entry.shortDescription|length %}
                           {{ entry.shortDescription|raw }}
                       {% endif %}
                   {% endif %}
@@ -111,7 +111,7 @@
                     <div class="map-row">
                       <div class="map-col">
                         <h6>{{ "Event Location:"|t }}</h6>  
-                {% if entry.eventStreetAddress.exists() %}
+                {% if entry.eventStreetAddress|length %}
                         <a href="https://www.google.com/maps/place/{{ entry.eventStreetAddress|url_encode|replace({'%20': '+'}) }}+{{ entry.city|url_encode|replace({'%20': '+'}) }}+{{ entry.state|url_encode|replace({'%20': '+'}) }}+{{ entry.zipCode }}" target="_blank">{{ entry.locationName }}<br/>
                   {{ entry.eventStreetAddress }}<br/>
                   {{ entry.city }}, {{ entry.state }}  {{ entry.zipCode }}</a>
@@ -122,7 +122,7 @@
                 {% endif %}
                       </div>
                       <div class="map-col">
-                        <a href="https://www.google.com/maps/place/{% if entry.eventStreetAddress.exists() %}{{ entry.eventStreetAddress|url_encode|replace({'%20': '+'}) }}+{{ entry.city|url_encode|replace({'%20': '+'}) }}+{{ entry.state|url_encode|replace({'%20': '+'}) }}+{{ entry.zipCode }}{% else %}440+E+Elliot+Rd,+Gilbert,+AZ+85234/@33.351169,-111.7822207,17z/data=!3m1!4b1!4m5!3m4!1s0x872ba93f28ba0e83:0x98949b9d24239822!8m2!3d33.351169!4d-111.780032{% endif %}" target="_blank"> <img src="https://stanneaz.org/img/general/events/Maps-Gps.png" alt="Map It!" /></a>
+                        <a href="https://www.google.com/maps/place/{% if entry.eventStreetAddress|length %}{{ entry.eventStreetAddress|url_encode|replace({'%20': '+'}) }}+{{ entry.city|url_encode|replace({'%20': '+'}) }}+{{ entry.state|url_encode|replace({'%20': '+'}) }}+{{ entry.zipCode }}{% else %}440+E+Elliot+Rd,+Gilbert,+AZ+85234/@33.351169,-111.7822207,17z/data=!3m1!4b1!4m5!3m4!1s0x872ba93f28ba0e83:0x98949b9d24239822!8m2!3d33.351169!4d-111.780032{% endif %}" target="_blank"> <img src="https://stanneaz.org/img/general/events/Maps-Gps.png" alt="Map It!" /></a>
                 
                       </div><!--end .map-col-->
                     </div><!--end .map-row-->

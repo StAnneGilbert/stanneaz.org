@@ -1,0 +1,22 @@
+
+
+
+  <!-- .sf-content for flex sticky footer -->
+  <div class="sf-content nav-slide-element" data-swiftype-name="body" data-swiftype-type="text">
+    
+    <div class="page-content-container">
+      <div class="container standard-container">
+
+        {% if entry.entryLocation.exists() %}
+            {{ entry.entryLocation.one().url }}<br><br>
+        {% elseif entry.webUrl.exists() %}
+            {{ entry.webUrl }}<br><br>
+        {% elseif entry.redirectUrl.exists() %}
+            {{ entry.redirectUrl.url }}<br><br>
+	    {% else %}
+            Nothing there, yet.
+        {% endif %}
+
+      </div> <!-- .container -->
+    </div> <!-- .page-content-container -->
+  </div> <!-- .sf-content -->
