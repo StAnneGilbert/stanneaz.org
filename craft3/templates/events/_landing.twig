@@ -17,7 +17,7 @@
               <a href='?q=topic:{{ topic.id }}'>{{ topic.title }}</a>{% if not loop.last %},{% endif %}
           {% endfor %}
           <div class="excerpt">
-            <p>{% if post.shortDescription.exists() %}{{ post.shortDescription|chop(limit=140, unit='c')}}{% else %}{{ post.body|chop(limit=140, unit='c')}}{% endif %} <a href="{{ post.url }}">{{"Read more"|t}}</a></p>
+            <p>{% if post.shortDescription|length %}{{ post.shortDescription|chop(limit=140, unit='c')}}{% else %}{{ post.body|chop(limit=140, unit='c')}}{% endif %} <a href="{{ post.url }}">{{"Read more"|t}}</a></p>
             <p class="muted">{{ post.postDate|date('F d, Y') }} {% if post.postAuthor.exists() %} &nbsp;&middot;&nbsp;{{ post.postAuthor.one().title }} {% endif %}</p>
           </div>
         </div>

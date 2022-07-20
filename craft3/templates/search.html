@@ -11,8 +11,8 @@
 
         <div class="section-title">
           <h3>{{ "Here's what we found"|t }}</h3>
-          {% if entries.exists() %}
-            <h3 class='small'>{{ entries.exists() }} {{ "results for"|t }} &ldquo;{{ query }}&rdquo;</h3>
+          {% if entries|length %}
+            <h3 class='small'>{{ entries|length }} {{ "results for"|t }} &ldquo;{{ query }}&rdquo;</h3>
           {% endif %}
         </div>
 

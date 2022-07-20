@@ -85,7 +85,7 @@
 							{% set thirdLevels = subPage.getChildren().all() %}
 							<ul class="sub-menu2">
 							{% for level3 in thirdLevels %}
-								{% if not level3.menuIndent.exists() %}
+								{% if not level3.menuIndent|length %}
 									<li>
 									<a href="{{ level3.getUrl }}">{{ level3.title }}</a>
 									</li>
@@ -95,7 +95,7 @@
 						{% endif %}
 					</li>
 					{% for level3a in thirdLevels %}
-						{% if level3a.menuIndent.exists() %}
+						{% if level3a.menuIndent|length %}
 						<li class="menuIndent{% if level3a.hasDescendants %} has-menu2{% endif %}">
 							<a href="{{ level3a.getUrl }}">{{ level3a.title }}</a>
 							{% if level3a.hasDescendants %}
