@@ -1,5 +1,5 @@
-{% if entry.entryLocation|length %}
-    {% redirect entry.entryLocation[0].url %}
+{% if entry.entryLocation.exists() %}
+    {% redirect entry.entryLocation.one().url %}
 {% elseif entry.webUrl|length %}
     {% redirect entry.webUrl %}
 {% elseif entry.redirectUrl|length %}
