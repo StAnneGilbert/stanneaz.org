@@ -1,6 +1,19 @@
 {# Homepage Template #}
 {% extends "layouts/_layout" %}
 
+{% spaceless %}
+    {% if entry.title is defined %}
+        {% if entry.title == "Homepage"%}
+            {% set websiteTitle = 'St. Anne Roman Catholic Parish' %}
+        {% else %}
+            {% set websiteTitle %}{{ entry.title }} | St. Anne{% endset %}
+        {% endif %}
+    {% else %}
+        {% set websiteTitle = 'St. Anne Roman Catholic Parish' %}
+    {% endif %}
+{% endspaceless %}
+{% set currentURL = craft.app.request.absoluteUrl() %}
+
 {% block content %}
 
 <meta property="og:type" content="website">
@@ -465,7 +478,7 @@ frameborder="0" allowfullscreen style="width:100%;height:5500px"></iframe>
     </div>
 
       <div class="text-center news-action-links">
-        {% if entry.subLinks.exists() %}
+        {% if entry.subLinks|length %}
         {% set sublinks = entry.subLinks %}
           {% for item in sublinks.all() %}
             {% set link = item.subLinks %}

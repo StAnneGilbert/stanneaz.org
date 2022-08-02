@@ -94,7 +94,8 @@
 							</ul>
 						{% endif %}
 					</li>
-					{% for level3a in thirdLevels %}
+					{% if subPage.hasDescendants %}
+					  {% for level3a in thirdLevels %}
 						{% if level3a.menuIndent|length %}
 						<li class="menuIndent{% if level3a.hasDescendants %} has-menu2{% endif %}">
 							<a href="{{ level3a.getUrl }}">{{ level3a.title }}</a>
@@ -110,7 +111,8 @@
 							{% endif %}
 						</li>
 						{% endif %}
-					{% endfor %}				
+					  {% endfor %}
+					{% endif %}				
 						
 				{% endfor %} {# end 'subPage in subPages loop' #}
 			</ul>

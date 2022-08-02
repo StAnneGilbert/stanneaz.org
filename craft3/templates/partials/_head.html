@@ -1,13 +1,16 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-{% spaceless %}{% if entry.title is defined %}
-    {% if entry.title == "Homepage"%}
-        {% set websiteTitle = 'St. Anne Roman Catholic Parish' %}
+{% spaceless %}
+    {% if entry.title is defined %}
+        {% if entry.title == "Homepage"%}
+            {% set websiteTitle = 'St. Anne Roman Catholic Parish' %}
+        {% else %}
+            {% set websiteTitle %}{{ entry.title }} | St. Anne{% endset %}
+        {% endif %}
     {% else %}
-        {% set websiteTitle %}{{ entry.title }} | St. Anne{% endset %}
+        {% set websiteTitle = 'St. Anne Roman Catholic Parish' %}
     {% endif %}
-  {% endif %}
 {% endspaceless %}
 
 <title>{{ websiteTitle }}</title>
@@ -17,7 +20,7 @@
 
 {% set currentURL = craft.app.request.absoluteUrl() %}
 <meta property='og:title' content='{{ websiteTitle }}'/>
-{% if entry.pageImage.exists() %}
+{% if entry.pageImage|length %}
   {% set pageImage = entry.pageImage.one().getUrl('tf280') %}
 {% endif %}
 <meta property="og:type" content="website">

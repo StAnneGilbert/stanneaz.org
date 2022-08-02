@@ -3,7 +3,7 @@
 
 <div class="featured-media-grid clearfix">
 
-{% set eventItems = craft.entries.section('events').relatedTo(pos).orderBy('eventStartDate').all() %}
+{% set eventItems = craft.entries.section('events').orderBy('eventStartDate').all() %}
   
   {% for entry in eventItems %}
       
