@@ -90,8 +90,8 @@
       <div class="staff-group">
       {% for person in people %}
       
-          <a name="{{ person.slug }}{% if person.staffMember is not empty %}2{% endif %}" id="{{ person.slug }}{% if person.staffMember is not empty %}2{% endif %}"></a>
-          <div class="staff-member" id="staff-{{ person.slug }}{% if person.staffMember is not empty %}2{% endif %}">
+          <a name="{{ person.slug }}" id="{{ person.slug }}"></a>
+          <div class="staff-member" id="staff-{{ person.slug }}">
             
               {% if person.profileImage.exists() %}
               <div class="col col-avatar">
