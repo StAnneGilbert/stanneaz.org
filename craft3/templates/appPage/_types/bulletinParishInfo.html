@@ -51,7 +51,6 @@ Email: admin@stanneaz.org
 			  <table style="width:350px">
 				{% cache globally for 1 month %}
 				{% for item in siteWideContent.parishOfficeHours.one().hoursTable %}
-				  {% spaceless %}
 				    <tr>
 				      <td>
 					    {{ item.dayOfTheWeek|replace('Sun.', 'Sunday / Domingo')|replace('Mon.', 'Monday / Lunes')|replace('Tue.', 'Tuesday / Martes')|replace('Wed.', 'Wednesday / Miércoles')|replace('Thur.', 'Thursday / Jueves')|replace('Fri.', 'Friday / Viernes')|replace('Sat.', 'Saturday / Sábado') }}
@@ -61,7 +60,6 @@ Email: admin@stanneaz.org
 					    {% if item.exception == 1 %}<span class="muted">*</span> {% endif %}
 					  </td>
 					</tr>
-				  {% endspaceless %}
 				{% endfor %}
 				{% endcache %}
 			  </table>

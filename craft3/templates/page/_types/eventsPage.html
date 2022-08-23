@@ -40,48 +40,6 @@
         {% else %}
             <h3><a href="http://dphx.org/events/" target="_blank">Click here to see more events around the Diocese of Phoenix</a></h3>
         {% endif %}
-        
-        
-        
-        <!--div class="row">
-        <div class="col-lg-12">
-
-        <div class="featured-media-grid clearfix">
-          {% if craft.app.language == 'es-US' %}
-              {% set dphxFeed = "https://dphx.org/events/feed/?lang=es" %}
-          {% else %}
-              {% set dphxFeed = "https://dphx.org/events/feed/" %}
-          {% endif %}
-          {% set limit = 100 %}
-          {% set cache = "P0M" %}
-          {% cache globally for 1 hour %}
-          {% set phxitems = craft.app.feeds.getFeedItems(dphxFeed, limit,0, cache) %}
-          {% for phxitem in phxitems %}
-            <div class="featured-media-box">
-              <div class="details">
-                <h4 class='seth'><a href="{{ phxitem.permalink }}" target='_blank'>{{ phxitem.title }}</a></h4>
-                <div>
-                  <a href="{{ phxitem.permalink }}" target='_blank'><img src="/img/general/listing/Logo-dphx.jpg" alt="Diocese of Phoenix Event" width="321" height="200" style="margin-bottom:20px" /></a>
-                  {{ phxitem.summary|raw }}
-                </div>
-                <p class="more muted">
-                  
-                  {% if craft.app.language == 'es-US' %}
-                    {{ phxitem.date|date('d F, Y') }}
-                  {% else %}
-                    {{ phxitem.date|date('F d, Y') }}
-                  {% endif %}
-                  <span class="dot">&middot;</span>
-                  {{ phxitem.date|date('g:ia') }}
-                  <span class="dot">&middot;</span>
-                  <a href="{{ phxitem.permalink }}" target='_blank'>{{ "Read More"|t }}</a>
-                </p>
-              </div>
-            </div>
-          {% endfor %}
-          {% endcache %}
-          
-        </div--> <!-- .row -->
 
 
           </div>

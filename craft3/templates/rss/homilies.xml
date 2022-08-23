@@ -56,9 +56,7 @@
             <itunes:image href="{{ entry.postImage.one().url }}" />
         {% endif %}
             <itunes:keywords>
-        {% spaceless %}
             St. Anne, Podcast, Homily, 
-        {% endspaceless %}
             </itunes:keywords>
         </item>
         {% endif %}

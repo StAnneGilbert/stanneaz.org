@@ -8,7 +8,7 @@
 {% set topicTitle = "none" %}
 
 {% set break = 0 %}
-{% for item in craft.entries.section('media').orderBy('mediaDate DESC').all() if break == 0 %}
+{% for item in craft.entries.section('media').orderBy('mediaDate DESC').all() %}
     {% set time = item.mediaDate|date('g:ia') %}
     {% set mediaTopics = item.mediaTopic %}
     {% for topic in mediaTopics.all() %}
