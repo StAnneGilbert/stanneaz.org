@@ -157,7 +157,6 @@
                   <p>
                     {% cache globally for 1 month %}
                     {% for item in siteWideContent.parishOfficeHours.one().hoursTable %}
-                      {% spaceless %}
                         <strong>{{ item.dayOfTheWeek }}</strong>
                         {% if item.redLabel == 1 %}
                           <span class="red"> {{ item.times|raw  }} </span>
@@ -165,7 +164,6 @@
                             {{ item.times|raw }}
                         {% endif %}
                         {% if item.exception == 1 %}<span class="muted">*</span> {% endif %} {% if not loop.last %}<br>{% endif %}
-                      {% endspaceless %}
                     {% endfor %}
                     {% endcache %}
                   </p>

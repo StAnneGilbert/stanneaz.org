@@ -1,17 +1,15 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-{% spaceless %}
-    {% if entry.title is defined %}
-        {% if entry.title == "Homepage"%}
-            {% set websiteTitle = 'St. Anne Roman Catholic Parish' %}
-        {% else %}
-            {% set websiteTitle %}{{ entry.title }} | St. Anne{% endset %}
-        {% endif %}
-    {% else %}
+{% if entry.title is defined %}
+    {% if entry.title == "Homepage"%}
         {% set websiteTitle = 'St. Anne Roman Catholic Parish' %}
+    {% else %}
+        {% set websiteTitle %}{{ entry.title }} | St. Anne{% endset %}
     {% endif %}
-{% endspaceless %}
+{% else %}
+    {% set websiteTitle = 'St. Anne Roman Catholic Parish' %}
+{% endif %}
 
 <title>{{ websiteTitle }}</title>
 

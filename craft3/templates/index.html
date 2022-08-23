@@ -1,17 +1,17 @@
 {# Homepage Template #}
 {% extends "layouts/_layout" %}
 
-{% spaceless %}
-    {% if entry.title is defined %}
-        {% if entry.title == "Homepage"%}
-            {% set websiteTitle = 'St. Anne Roman Catholic Parish' %}
-        {% else %}
-            {% set websiteTitle %}{{ entry.title }} | St. Anne{% endset %}
-        {% endif %}
+
+{% if entry.title is defined %}
+     {% if entry.title == "Homepage"%}
+          {% set websiteTitle = 'St. Anne Roman Catholic Parish' %}
     {% else %}
-        {% set websiteTitle = 'St. Anne Roman Catholic Parish' %}
+          {% set websiteTitle %}{{ entry.title }} | St. Anne{% endset %}
     {% endif %}
-{% endspaceless %}
+{% else %}
+    {% set websiteTitle = 'St. Anne Roman Catholic Parish' %}
+{% endif %}
+
 {% set currentURL = craft.app.request.absoluteUrl() %}
 
 {% block content %}

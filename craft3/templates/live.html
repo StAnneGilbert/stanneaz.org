@@ -3,13 +3,11 @@
 
 {% block content %}
 
-{% spaceless %}
-    {% if entry.title is defined %}
-        {% set websiteTitle %}{{ entry.title }} | St. Anne{% endset %}
-    {% else %}
-        {% set websiteTitle %}St. Anne Roman Catholic Parish{% endset %}
-    {% endif %}
-{% endspaceless %}
+{% if entry.title is defined %}
+    {% set websiteTitle %}{{ entry.title }} | St. Anne{% endset %}
+{% else %}
+    {% set websiteTitle %}St. Anne Roman Catholic Parish{% endset %}
+{% endif %}
 {% set currentURL = craft.app.request.absoluteUrl() %}
 
 <meta property="og:type" content="website">
@@ -237,7 +235,7 @@ frameborder="0" allowfullscreen style="width:100%;height:5500px"></iframe>
 	{% set mDate = "none" %}
 
 	{% set break = 0 %}
-	{% for item in craft.entries.section('media').orderBy('mediaDate DESC').all() if break == 0 %}
+	{% for item in craft.entries.section('media').orderBy('mediaDate DESC').all() %}
 		{% set time = item.mediaDate|date('g:ia') %}
 		{% set mediaTopics = item.mediaTopic %}
 		{% for topic in mediaTopics.all() %}

@@ -31,37 +31,37 @@
               <div class="content-summary-block">
                 {% switch item.section %}
                   {% case "Pages" %}
-                    {% if item.pageImage.exists() %}
+                    {% if item.pageImage|length %}
                       <div class="media">
                           <img src="{{ item.pageImage.one().getUrl('tf160') }}" alt="{{ item.title }}" />
                       </div>
                     {% endif %}
                   {% case "Single Pages" %}
-                      {% if item.pageImage.exists() %}
+                      {% if item.pageImage|length %}
                         <div class="media">
                           <img src="{{ item.pageImage.one().getUrl('tf160') }}" alt="{{ item.title }}" />
                         </div>
                       {% endif %}
                   {% case "Events" %}
-                      {% if item.eventListingImage.exists() %}
+                      {% if item.eventListingImage|length %}
                         <div class="media">
                           <img src="{{ item.eventListingImage.one().getUrl('tf160') }}" alt="{{ item.title }}" />
                         </div>
                       {% endif %}
                   {% case "Homilies" %}
-                      {% if item.postImage.exists() %}
+                      {% if item.postImage|length %}
                         <div class="media">
                           <img src="{{ item.postImage.one().getUrl('tf160') }}" alt="{{ item.title }}" />
                         </div>
                       {% endif %}
                   {% case "News & Updates" %}
-                      {% if item.postImage.exists() %}
+                      {% if item.postImage|length %}
                         <div class="media">
                           <img src="{{ item.postImage.one().getUrl('tf160') }}" alt="{{ item.title }}" />
                         </div>
                       {% endif %}
                   {% default %}
-                    {% if item.pageImage.exists() %}
+                    {% if item.pageImage|length %}
                         <div class="media">
                           <img src="{{ item.pageImage.one().getUrl('tf160') }}" alt="{{ item.title }}" />
                         </div>
