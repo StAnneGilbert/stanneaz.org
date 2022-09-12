@@ -370,28 +370,30 @@ frameborder="0" allowfullscreen style="width:100%;height:5500px"></iframe>
 	{% set mLead = "none" %}
 	{% set mBody = "none" %}
 	{% set mDate = "none" %}
-
+    {% set break = 0 %}
 	{% for item in craft.entries.section('media').orderBy('mediaDate DESC').all() %}
-		{% set time = item.mediaDate|date('g:ia') %}
-		{% set mediaTopics = item.mediaTopic %}
-		{% for topic in mediaTopics.all() %}
-			{% set topicTitle = topic.title %}
-		{% endfor %}
-		{% if entry.mediaTimeFilter %}
-		    {% if entry.mediaTimeFilter in time and topicTitle == entry.mediaTopicFilter and item.body != '' %}
-		    	{% set break = 1 %}
-			    {% set mTitle = item.title %}
-			    {% set mLead = item.lead %}
-			    {% set mBody = item.body %}
-			    {% set mDate = item.mediaDate|date %}
-		    {% endif %}
-		{% else %}
-            {% if topicTitle == entry.mediaTopicFilter and item.body != '' %}
-                {% set break = 1 %}
-                {% set mTitle = item.title %}
-			    {% set mLead = item.lead %}
-			    {% set mBody = item.body %}
-			    {% set mDate = item.mediaDate|date %}
+        {% if break == 0 %}
+		    {% set time = item.mediaDate|date('g:ia') %}
+		    {% set mediaTopics = item.mediaTopic %}
+		    {% for topic in mediaTopics.all() %}
+			    {% set topicTitle = topic.title %}
+		    {% endfor %}
+		    {% if entry.mediaTimeFilter %}
+		        {% if entry.mediaTimeFilter in time and topicTitle == entry.mediaTopicFilter and item.body != '' %}
+		    	    {% set break = 1 %}
+			        {% set mTitle = item.title %}
+			        {% set mLead = item.lead %}
+			        {% set mBody = item.body %}
+			        {% set mDate = item.mediaDate|date %}
+		        {% endif %}
+		    {% else %}
+                {% if topicTitle == entry.mediaTopicFilter and item.body != '' %}
+                    {% set break = 1 %}
+                    {% set mTitle = item.title %}
+			        {% set mLead = item.lead %}
+			        {% set mBody = item.body %}
+			        {% set mDate = item.mediaDate|date %}
+                {% endif %}
             {% endif %}
         {% endif %}
 	{% endfor %}
