@@ -54,7 +54,7 @@
   <div class="slideContainer">
 
     <div id="slides">
- 
+{% cache globally for 1 day %} 
 {% for entry in craft.entries.section('announcements').limit('80').all() %}
 
     {% if not entry.hideFromDigitalMediaBoards | length %}             
@@ -85,7 +85,9 @@
 	{% endif %}
 	
 {% endfor %}
+{% endcache %}
 
+{% cache globally for 1 day %} 
 {% for entry in craft.entries.section('events').orderBy('eventStartDate ASC').limit('80').all() %}
 
 	{% if (entry.eventStartDate|date('Ymd') >= now|date('Ymd')) and (not entry.hideFromDigitalMediaBoards | length) %}
@@ -120,6 +122,7 @@
 	{% endif %}
 	
 {% endfor %}
+{% endcache %}
 </div>
         
 
