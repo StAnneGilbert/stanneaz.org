@@ -51,8 +51,7 @@
 #topDonate i {display:inline-block;color:#000}
 #topDonate u {text-decoration:none; color:#c00;font-weight:bold}
 .page-content-container{margin-top:0;padding-top:35px;}
-#donationArea,#vidArea2,#homilyArea,#facebookArea{display:none}
-#homilyArea{display:none;text-align:left;padding:20px 40px;font-size:120%}
+#donationArea,#vidArea2,#facebookArea{display:none}
 .caps-header a{color:#99bfbc}
 .caps-header a:hover{text-decoration:underline}
 @media screen and (min-width: 1147px)
@@ -72,7 +71,7 @@
 }
 #accordionOrder div, #accordion div.inner,.saTxt{font-size:130%}
 #accordionOrder h1, #accordion h1{font-size:110%;text-align:left}
-#readings p, #homilyArea p,#orderOfMass p{margin-top:20px}
+#readings p, #orderOfMass p{margin-top:20px}
 #readings, #orderOfMass{text-align:left}
 #accordionOrder h4 {color:#c00;text-align:right}
 .allPpl,.orTxt,orTxt2,.instTxt{color:#c00}
@@ -144,7 +143,11 @@
     <div class="giant-block-links clearfix" style="margin:0 auto;padding:0">
         <a href="#" onclick="displayDonationArea();return false;" class="bg-dark-brown"><i class="fa fa-heart"></i> {{ "Can you help? Donate Today"|t }}</a>
         <a href="#" onclick="displayWorshipAids();displayReadings();return false;" class="bg-light-blue"><i class="fa fa-plus"></i> {{ "Worship Aids"|t }}</a>
-        <a href="#" onclick="displayHomily();return false;" class="bg-dark-blue"><i class="fa fa-book"></i> {{ "Latest Homily"|t }}</a>     
+        {% if craft.app.language == 'es-US' %}
+            <a href="/es/media/media-library" class="bg-dark-blue"><i class="fa fa-book"></i>Ver Audios de Santa Ana</a>   
+        {% else %}
+            <a href="/media/media-library" class="bg-dark-blue"><i class="fa fa-book"></i>View Media Library</a>        
+        {% endif %}     
     </div>
  
     <div id="donationArea" style="display:none;">
@@ -218,72 +221,10 @@ frameborder="0" allowfullscreen style="width:100%;height:5500px"></iframe>
 
         </div>
     
-    
-    
-    
-    
-
-    
+ 
     </div>
       
 
-      
-    <div id="homilyArea" style="display:none;">
-	{% set topicTitle = "none" %}
-	{% set latest = "none" %}
-	{% set mTitle = "none" %}
-	{% set mLead = "none" %}
-	{% set mBody = "none" %}
-	{% set mDate = "none" %}
-
-	{% set break = 0 %}
-	{% for item in craft.entries.section('media').orderBy('mediaDate DESC').all() %}
-	  {% if break == 0 %}
-		{% set time = item.mediaDate|date('g:ia') %}
-		{% set mediaTopics = item.mediaTopic %}
-		{% for topic in mediaTopics.all() %}
-			{% set topicTitle = topic.title %}
-		{% endfor %}
-		{% if entry.mediaTimeFilter %}
-		    {% if home.mediaTimeFilter in time and topicTitle == entry.mediaTopicFilter and item.body != '' %}
-		    	{% set break = 1 %}
-			    {% set mTitle = item.title %}
-			    {% set mLead = item.lead %}
-			    {% set mBody = item.body %}
-			    {% set mDate = item.mediaDate|date %}
-		    {% endif %}
-		{% else %}
-            {% if topicTitle == home.mediaTopicFilter and item.body != '' %}
-                {% set break = 1 %}
-                {% set mTitle = item.title %}
-			    {% set mLead = item.lead %}
-			    {% set mBody = item.body %}
-			    {% set mDate = item.mediaDate|date %}
-            {% endif %}
-        {% endif %}
-      {% endif %}
-	{% endfor %}
-        <br>
-        {% if home.body %}
-            {{ home.body }}
-        {% elseif mDate != 'none' %}
-            <h3>{{mDate}} - {{mTitle}}</h3>
-            <p>{{ mLead }}</p>
-            <p>{{ mBody }}</p>
-        {% else %}
-            {% set media = craft.entries.section('media').one() %}
-		    <h3>{{media.date|date}} - {{media.title}}</h3>
-            <p>{{ media.lead }}</p>
-            <p>{{ media.body }}</p>
-	    {% endif %}
-        <p>
-        {% if craft.app.language == 'es-US' %}
-            <a href="/es/media/media-library" class="btn btn-light-blue">Ver Audios de Santa Ana</a>   
-        {% else %}
-            <a href="/media/media-library" class="btn btn-light-blue">View Media Library</a>        
-        {% endif %}
-        </p>
-    </div> <!-- #homilyArea -->
       
 
 
@@ -302,7 +243,6 @@ function displayDonation(){
 
 function displayDonationArea(){
   document.getElementById('worshipAidsArea').style.display = 'none';
-  document.getElementById('homilyArea').style.display = 'none';
    if(document.getElementById('donationArea').style.display == 'none'){
        document.getElementById('donationArea').style.display = 'block';
    } else {
@@ -313,7 +253,6 @@ function displayDonationArea(){
 
 function displayWorshipAids(){
    document.getElementById('donationArea').style.display = 'none';
-   document.getElementById('homilyArea').style.display = 'none';
    if(document.getElementById('worshipAidsArea').style.display == 'none'){
        document.getElementById('worshipAidsArea').style.display = 'block';
    } else {
@@ -384,17 +323,6 @@ function displayResources(){
    }
 }
 
-
-
-function displayHomily(){
-   document.getElementById('donationArea').style.display = 'none';
-   document.getElementById('worshipAidsArea').style.display = 'none';
-   if(document.getElementById('homilyArea').style.display == 'none'){
-       document.getElementById('homilyArea').style.display = 'block';
-   } else {
-       document.getElementById('homilyArea').style.display = 'none';
-   }
-}
 function displayLive(){
    document.getElementById('vidTitle2').style.display = 'none';
    document.getElementById('vidTitle1').style.display = 'inline-block';

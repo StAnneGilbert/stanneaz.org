@@ -54,8 +54,7 @@
 #topDonate i {display:inline-block;color:#000}
 #topDonate u {text-decoration:none; color:#c00;font-weight:bold}
 .page-content-container{margin-top:0;padding-top:35px;}
-#donationArea,#vidArea2,#homilyArea,#facebookArea{display:none}
-#homilyArea{display:none;text-align:left;padding:20px 40px;font-size:120%}
+#donationArea,#vidArea2,#facebookArea{display:none}
 .caps-header a{color:#99bfbc}
 .caps-header a:hover{text-decoration:underline}
 @media screen and (min-width: 1147px)
@@ -75,7 +74,7 @@
 }
 #accordionOrder div, #accordion div.inner,.saTxt{font-size:130%}
 #accordionOrder h1, #accordion h1{font-size:110%;text-align:left}
-#readings p, #homilyArea p,#orderOfMass p{margin-top:20px}
+#readings p,#orderOfMass p{margin-top:20px}
 #readings, #orderOfMass{text-align:left}
 #accordionOrder h4 {color:#c00;text-align:right}
 .allPpl,.orTxt,orTxt2,.instTxt{color:#c00}
@@ -187,82 +186,35 @@
     
         {{ entry.topBlock|raw }}  
     
-      <div class="container news-grid">
+        <div class="container news-grid">
       
-        <div class="row news-blocks">
-        
-          <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-          
-          {% set offertoryUp = craft.entries.section('offertoryUpdates').one() %}
-          <style>
-          .oContainer{white-space:nowrap}
-          .offertoryNumTxt{font-size:18px;color:#005f72;font-weight:bold;}
-          .offertoryLabel{font-size:90%;font-weight:bold}
-          .weeklynum,.ytdnum{color:#005f72;}
-          .home-donate-button {text-align:center;margin-top:10px}
-          .home-donate-button .btn-light-blue {margin:0 auto;background-color:#cc0000;font-weight:bold;}
-          {% if offertoryUp %}
-              {% set wGiving = offertoryUp.pewWeeklyGiving + offertoryUp.eWeeklyGiving  %}
-              {% set wBugdet = offertoryUp.pewWeeklyBudget + offertoryUp.eWeeklyBudget  %}
-              {% if wBugdet > wGiving %}
-                .weeklynum{color:#cc0000;}
-              {% endif %}
-              {% if offertoryUp.ytdBudget > offertoryUp.ytdGiving %}
-                .ytdnum{color:#cc0000;}
-              {% endif %}
-          {% endif %}
-          </style>
-              
-          <table>
-            <tr>
-              <td align="left" style="padding-right:15px">  
-		        <a href="#donationArea" onclick="displayDonation();"><img src="/img/general/assets/Give-Icon-60x60{% if craft.app.language == 'es-US' %}_es{% endif %}.png" alt="Give to St. Anne" width="60" height="60" /></a>
-		      </td>
-              <td valign="top">
-                <h5><a href="#donationArea" onclick="displayDonation();">{{ "Offertory Update"|t }}</a></h5>
-		        {% if offertoryUp %}
-		          <div class="excerpt">
-		            {% if craft.app.language == 'es-US' %}
-		               Donaciones para la semana<br>del {{offertoryUp.givingDateEnding|date('d')}} de {{offertoryUp.givingDateEnding|date('F, Y')}}
-		            {% else %}
-		              Family giving for the week<br>ending {{offertoryUp.givingDateEnding|date('F d, Y')}}
-		            {% endif %}
-		          </div>
-		        {% endif %}
-		      </td>
-		    </tr>
-		  </table>
-		  {% if offertoryUp %}
-		    {% if craft.app.language == 'es-US' %}
-		      <div class="oContainer">
-				<span class="offertoryLabel">Esta semana:</span> <span class="offertoryNumTxt weeklynum">{{wGiving|number_format(0, '.', '.')}} $</span>&nbsp; <span class="offertoryLabel">Planeado:</span> <span class="offertoryNumTxt">{{wBugdet|number_format(0, '.', '.')}} $</span> 
-			  </div>
-			  <div class="oContainer">
-				<span class="offertoryLabel">Año a la fecha:</span> <span class="offertoryNumTxt ytdnum">{{offertoryUp.ytdGiving|number_format(0, '.', '.')}} $</span><br><span class="offertoryLabel">Presupuesto de año a día:</span> <span class="offertoryNumTxt">{{offertoryUp.ytdBudget|number_format(0, '.', '.')}} $</span>
-		      </div>
-		    {% else %}
-			  <div class="oContainer">
-				<span class="offertoryLabel">This Week:</span> <span class="offertoryNumTxt weeklynum">${{wGiving|number_format(0, '.', ',')}}</span> &nbsp; <span class="offertoryLabel">Weekly Budget:</span> <span class="offertoryNumTxt">${{wBugdet|number_format(0, '.', ',')}}</span> 
-			  </div>
-			  <div class="oContainer">
-				<span class="offertoryLabel">YTD Giving:</span> <span class="offertoryNumTxt ytdnum">${{offertoryUp.ytdGiving|number_format(0, '.', ',')}}</span> &nbsp; <span class="offertoryLabel">YTD Budget:</span> <span class="offertoryNumTxt">${{offertoryUp.ytdBudget|number_format(0, '.', ',')}}</span>
-		      </div>
-		    {% endif %}
-		  {% else %}
-			<div>No offertory data is available at this time.</div>
-		  {% endif %}
-		  <div class="home-donate-button"><a href="#donationArea" onclick="displayDonation();" class="btn btn-light-blue">{{ "Donate Today"|t }}</a></div>
-		</div>
-		
-        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-            {{ entry.homeBlock1|raw }}
-        </div>  
+<div class="row news-blocks">
+         
+	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+		{{ entry.homeBlock1|raw }}
+	</div>  
  
-        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-            {{ entry.homeBlock2|raw }}
-        </div>
+	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+		{{ entry.homeBlock2|raw }}
+	</div>
+		
+	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+		{{ entry.homeBlock3|raw }}
+	</div>
+		
+	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+		{{ entry.homeBlock4|raw }}
+	</div>
+		
+	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+		{{ entry.homeBlock5|raw }}
+	</div>
+	
+	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+        {{ entry.homeBlock6|raw }}
+    </div>
 
-        </div>  <!-- end row news-blocks -->        
+</div>  <!-- end row news-blocks -->        
 
         <br>
         
@@ -283,7 +235,11 @@
     <div class="giant-block-links clearfix" style="margin:0 auto;padding:0">
         <a href="#" onclick="displayDonationArea();return false;" class="bg-dark-brown"><i class="fa fa-heart"></i> {{ "Can you help? Donate Today"|t }}</a>
         <a href="#" onclick="displayWorshipAids();displayReadings();return false;" class="bg-light-blue"><i class="fa fa-plus"></i> {{ "Worship Aids"|t }}</a>
-        <a href="#" onclick="displayHomily();return false;" class="bg-dark-blue"><i class="fa fa-book"></i> {{ "Latest Homily"|t }}</a>     
+        {% if craft.app.language == 'es-US' %}
+            <a href="/es/media/media-library" class="bg-dark-blue"><i class="fa fa-book"></i>Ver Audios de Santa Ana</a>   
+        {% else %}
+            <a href="/media/media-library" class="bg-dark-blue"><i class="fa fa-book"></i>View Media Library</a>        
+        {% endif %}     
     </div>
  
     <div id="donationArea" style="display:none;">
@@ -355,69 +311,8 @@ frameborder="0" allowfullscreen style="width:100%;height:5500px"></iframe>
         </div>
     
     
-    
-    
-
-    
     </div>
       
-
-      
-    <div id="homilyArea" style="display:none;">
-	{% set topicTitle = "none" %}
-	{% set latest = "none" %}
-	{% set mTitle = "none" %}
-	{% set mLead = "none" %}
-	{% set mBody = "none" %}
-	{% set mDate = "none" %}
-    {% set break = 0 %}
-	{% for item in craft.entries.section('media').orderBy('mediaDate DESC').all() %}
-        {% if break == 0 %}
-		    {% set time = item.mediaDate|date('g:ia') %}
-		    {% set mediaTopics = item.mediaTopic %}
-		    {% for topic in mediaTopics.all() %}
-			    {% set topicTitle = topic.title %}
-		    {% endfor %}
-		    {% if entry.mediaTimeFilter %}
-		        {% if entry.mediaTimeFilter in time and topicTitle == entry.mediaTopicFilter and item.body != '' %}
-		    	    {% set break = 1 %}
-			        {% set mTitle = item.title %}
-			        {% set mLead = item.lead %}
-			        {% set mBody = item.body %}
-			        {% set mDate = item.mediaDate|date %}
-		        {% endif %}
-		    {% else %}
-                {% if topicTitle == entry.mediaTopicFilter and item.body != '' %}
-                    {% set break = 1 %}
-                    {% set mTitle = item.title %}
-			        {% set mLead = item.lead %}
-			        {% set mBody = item.body %}
-			        {% set mDate = item.mediaDate|date %}
-                {% endif %}
-            {% endif %}
-        {% endif %}
-	{% endfor %}
-        <br>
-        {% if entry.body %}
-            {{ entry.body }}
-        {% elseif mDate != 'none' %}
-            <h3>{{mDate}} - {{mTitle}}</h3>
-            <p>{{ mLead }}</p>
-            <p>{{ mBody }}</p>
-        {% else %}
-            {% set media = craft.entries.section('media').one() %}
-		    <h3>{{media.date|date}} - {{media.title}}</h3>
-            <p>{{ media.lead }}</p>
-            <p>{{ media.body }}</p>
-	    {% endif %}
-        <p>
-        {% if craft.app.language == 'es-US' %}
-            <a href="/es/media/media-library" class="btn btn-light-blue">Ver Audios de Santa Ana</a>   
-        {% else %}
-            <a href="/media/media-library" class="btn btn-light-blue">View Media Library</a>        
-        {% endif %}
-        </p>
-    </div> <!-- #homilyArea -->
       
 </div> <!-- .row -->
     
@@ -430,32 +325,18 @@ frameborder="0" allowfullscreen style="width:100%;height:5500px"></iframe>
 
     <div class="row news-blocks">
    
-        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-            {{ entry.homeBlock3|raw }}
-        </div>
-        
-        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-            {{ entry.homeBlock4|raw }}
-        </div>
-        
-        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-            {{ entry.homeBlock5|raw }}
-        </div>          
+                
     
-        {% if entry.homeBlock6 %}
-   
-            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                {{ entry.homeBlock6|raw }}
-            </div>
-        
+        {% if entry.homeBlock7 %}
             <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                 {{ entry.homeBlock7|raw }}
             </div>
+        {% endif %}
         
+        {% if entry.homeBlock8 %}
             <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                 {{ entry.homeBlock8|raw }}
             </div>
-            
         {% endif %}
         
         {% if entry.homeBlock9 %}
@@ -473,6 +354,12 @@ frameborder="0" allowfullscreen style="width:100%;height:5500px"></iframe>
         {% if entry.homeBlock11 %}
             <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                 {{ entry.homeBlock11|raw }}
+            </div>
+        {% endif %}
+        
+        {% if entry.homeBlock12 %}
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                {{ entry.homeBlock12|raw }}
             </div>
         {% endif %}
        
@@ -499,7 +386,6 @@ function displayDonation(){
 
 function displayDonationArea(){
   document.getElementById('worshipAidsArea').style.display = 'none';
-  document.getElementById('homilyArea').style.display = 'none';
    if(document.getElementById('donationArea').style.display == 'none'){
        document.getElementById('donationArea').style.display = 'block';
    } else {
@@ -510,7 +396,6 @@ function displayDonationArea(){
 
 function displayWorshipAids(){
    document.getElementById('donationArea').style.display = 'none';
-   document.getElementById('homilyArea').style.display = 'none';
    if(document.getElementById('worshipAidsArea').style.display == 'none'){
        document.getElementById('worshipAidsArea').style.display = 'block';
    } else {
@@ -583,16 +468,6 @@ function displayResources(){
 }
 
 
-
-function displayHomily(){
-   document.getElementById('donationArea').style.display = 'none';
-   document.getElementById('worshipAidsArea').style.display = 'none';
-   if(document.getElementById('homilyArea').style.display == 'none'){
-       document.getElementById('homilyArea').style.display = 'block';
-   } else {
-       document.getElementById('homilyArea').style.display = 'none';
-   }
-}
 function displayLive(){
    document.getElementById('vidTitle2').style.display = 'none';
    document.getElementById('vidTitle1').style.display = 'inline-block';

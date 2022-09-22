@@ -1,0 +1,115 @@
+{# Homepage Template #}
+{% extends "layouts/_layout" %}
+
+{% block content %}
+  <!-- .sf-content for flex sticky footer -->
+  <div class="sf-content nav-slide-element">
+
+<div class="page-content-container">
+    <div class="container standard-container">
+    
+        <table width="100%">
+            <tr>
+                <td>
+        			<h3>St. Anne Scheduler</h3>
+        		</td>
+        		<td style="text-align:right">
+        		    <a href="https://facilities.stanneaz.us/Web/view-calendar.php" class="btn btn-sm btn-dark-blue">View Calendar</a> <a href="https://facilities.stanneaz.us/Web/view-schedule.php" class="btn btn-sm btn-dark-blue">View Schedule</a>
+        		</td>
+        	</tr>
+        </table>
+        
+
+        {% set feedurl = 'https://extras.stanneaz.org/scheduler-list/index.xml' %}
+        {% set limit = 1000 %}
+        {% set cache = P0M %}
+        {% set items = craft.app.feeds.getFeedItems(feedurl, limit, 0, cache) %}
+        {% set curDate = '' %}
+              
+        {% for item in items %}
+            {% set iTitle = item.title|replace("\\\'", '&rsquo;') %}
+            {% set iDesc = item.summary|replace("\\\'", '&rsquo;')|replace("\<div\>", '')|replace("\<\/div\>", '')  %}
+
+            {% set iContent = iTitle ~ " - " ~ iDesc %}
+            
+ 
+            {% if item.date|date('l') starts with 'Sunday' %}
+                {% if curDate != item.date|date('F d') %}
+                    <br><div><strong>{{ item.date|date('l, F d, Y') }}</strong></div>
+                    {% set curDate = item.date|date('F d') %}
+                {% endif %}
+                <div>
+                    {{ iContent|raw }}
+                </div>
+            {% endif %}
+            
+            {% if item.date|date('l') starts with 'Monday' %}
+                {% if curDate != item.date|date('F d') %}
+                    <br><div><strong>{{ item.date|date('l, F d, Y') }}</strong></div>
+                    {% set curDate = item.date|date('F d') %}
+                {% endif %}
+                <div>
+                    {{ iContent|raw }}
+                </div>
+            {% endif %}
+            
+            {% if item.date|date('l') starts with 'Tuesday' %}
+                {% if curDate != item.date|date('F d') %}
+                    <br><div><strong>{{ item.date|date('l, F d, Y') }}</strong></div>
+                    {% set curDate = item.date|date('F d') %}
+                {% endif %}
+                <div>
+                    {{ iContent|raw }}
+                </div>
+            {% endif %}
+            
+            {% if item.date|date('l') starts with 'Wed' %}
+                {% if curDate != item.date|date('F d') %}
+                    <br><div><strong>{{ item.date|date('l, F d, Y') }}</strong></div>
+                    {% set curDate = item.date|date('F d') %}
+                {% endif %}
+                <div>
+                    {{ iContent|raw }}
+                </div>
+            {% endif %}
+            
+            {% if item.date|date('l') starts with 'Thur' %}
+                {% if curDate != item.date|date('F d') %}
+                    <br><div><strong>{{ item.date|date('l, F d, Y') }}</strong></div>
+                    {% set curDate = item.date|date('F d') %}
+                {% endif %}
+                <div>
+                    {{ iContent|raw }}
+                </div>
+            {% endif %}
+            
+            {% if item.date|date('l') starts with 'Fri' %}
+                {% if curDate != item.date|date('F d') %}
+                    <br><div><strong>{{ item.date|date('l, F d, Y') }}</strong></div>
+                    {% set curDate = item.date|date('F d') %}
+                {% endif %}
+                <div>
+                    {{ iContent|raw }}
+                </div>
+            {% endif %}
+            
+            {% if item.date|date('l') starts with 'Sat' %}
+                {% if curDate != item.date|date('F d') %}
+                    <br><div><strong>{{ item.date|date('l, F d, Y') }}</strong></div>
+                    {% set curDate = item.date|date('F d') %}
+                {% endif %}
+                <div>
+                    {{ iContent|raw }}
+                </div>
+            {% endif %}
+           
+        {% endfor %}
+        <br><br><br>
+        
+        {{ entry.body }}   
+        
+
+   </div> <!-- .container -->
+  </div> <!-- .page-content-container -->
+</div> <!-- .sf-content -->
+{% endblock %}
