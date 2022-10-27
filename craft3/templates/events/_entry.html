@@ -41,7 +41,7 @@
         {% else %}
 		    {% set displayETime = entry.eventStartDate|date('g:i a') ~ timeSeparator ~ entry.eventEndDate|date('g:i a') %}
         {% endif %}  
-    {% elseif (entry.eventEndDate is not empty) and (eventEndDate|date('g:i') != '12:00') %}
+    {% elseif (entry.eventEndDate is not empty) and (entry.eventEndDate|date('g:i') != '12:00') %}
         {% if entry.showDatesOnly | length %}
             {% if craft.app.language == 'es-US' %}
                 {% set displayEDate = entry.eventStartDate|date('\\D\\e \\l\\a\\s d \\d\\e F') ~ " del " ~  entry.eventEndDate|date('d \\d\\e F, Y') %}
@@ -68,6 +68,22 @@
 			     
     <div style="font-size:28px">
         {% if entry.tbdTba | length %}
+        {% elseif (entry.afterMass | length) and (entry.eventEndDate is not empty) %}
+            {% if entry.eventStartDate|date('F d') == endDate|date('F d') %}
+	            {% if craft.app.language == 'es-US' %}
+                    {% set displayEDate = entry.eventStartDate|date('l, d \\d\\e F') ~ ", despues la Misa" %}  
+                {% else %}
+                    {% set displayEDate = entry.eventStartDate|date('l, F d') ~ ", after Mass" %}   
+                {% endif %} 
+	        {% else %}
+		        {% if craft.app.language == 'es-US' %}
+                    {% set displayEDate = "El Sábado y Domingo, " ~ entry.eventStartDate|date('F d') ~ "-" ~ entry.eventEndDate|date('d') ~ ", despues la Misa" %}  
+                {% else %}
+                    {% set displayEDate = "Saturday & Sunday, " ~ entry.eventStartDate|date('F d') ~ "-" ~ entry.eventEndDate|date('d') ~ ", after Mass" %}      
+                {% endif %}
+		    {% endif %}
+		    {% set displayEDate = displayEDate|replace(' 01', ' 1')|replace(' 02', ' 2')|replace(' 03', ' 3')|replace(' 04', ' 4')|replace(' 05', ' 5')|replace(' 06', ' 6')|replace(' 07', ' 7')|replace(' 08', ' 8')|replace(' 09', ' 9')|replace('-01', '-1')|replace('-02', '-2')|replace('-03', '-3')|replace('-04', '-4')|replace('-05', '-5')|replace('-06', '-6')|replace('-07', '-7')|replace('-08', '-8')|replace('-09', '-9') %}
+		    {{ displayEDate }}  
         {% else %}
             {{ displayEDate }}
         {% endif %}
