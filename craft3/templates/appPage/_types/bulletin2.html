@@ -77,7 +77,7 @@
 
 	{% if (entry.eventEndDate|date('Ymd') >= now|date('Ymd')) and (not entry.hideFromBulletin | length) %}
 
-	    <div style="font-weight:bold">{{ macros.date_time_options(entry.afterMass, craft.app.language, entry.eventStartDate, entry.eventEndDate, entry.tbdTba, entry.showDatesOnly) }}</div>
+	    <div style="font-weight:bold">{{ macros.date_time_options(entry.afterMass, craft.app.language, entry.eventStartDate, entry.eventEndDate, entry.eventCustomDate, entry.tbdTba, entry.showDatesOnly) }}</div>
 		<div style="margin: 0 0 15px 0">{{ entry.title }}</div>
 	    
 	    {% set eMarker = eMarker + 1 %} 

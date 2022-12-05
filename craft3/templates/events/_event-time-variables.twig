@@ -1,6 +1,8 @@
-{%- macro date_time_options(afterMass, language, startDate, endDate, tbdTba, showDatesOnly) -%}
+{%- macro date_time_options(afterMass, language, startDate, endDate, eventCustomDate, tbdTba, showDatesOnly) -%}
 {% if language == 'es-US' %}			
-	{% if tbdTba | length %}
+	{% if eventCustomDate | length %}
+        {% set displayDT = eventCustomDate ~ " " ~ startDate|date('g:i') ~ " a " ~ endDate|date('g:i a') %}	
+	{% elseif tbdTba | length %}
 	    {% set displayDT = "Horario: por determinar" %}   
 	{% elseif startDate|date('F d') == endDate|date('F d') %}
 	    {% if startDate|date('a') == endDate|date('a') %}
@@ -22,7 +24,9 @@
 	    {% endif %}             
 	{% endif %}			
 {% else %}
-	{% if tbdTba | length %}
+	{% if eventCustomDate | length %}
+        {% set displayDT = eventCustomDate ~ " " ~ startDate|date('g:i') ~ "-" ~ endDate|date('g:i a') %}	
+	{% elseif tbdTba | length %}
 	    {% set displayDT = "Date/Time: TBD/TBA" %}
 	{% elseif (afterMass | length) and (endDate is not empty) %}
 	    {% if startDate|date('F d') == endDate|date('F d') %}

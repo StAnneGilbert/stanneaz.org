@@ -21,7 +21,7 @@
 	        {% endif %}
 	  
             <item>
-                <title><![CDATA[{{ macros.date_time_options(entry.afterMass, craft.app.language, entry.eventStartDate, entry.eventEndDate, entry.tbdTba, entry.showDatesOnly) }}                                {{ entry.title }}]]></title>
+                <title><![CDATA[{{ macros.date_time_options(entry.afterMass, craft.app.language, entry.eventStartDate, entry.eventEndDate, entry.eventCustomDate, entry.tbdTba, entry.showDatesOnly) }}                                {{ entry.title }}]]></title>
                 <link>{{ eventLink }}</link>
                 <pubDate>{{ entry.eventStartDate|rss }}</pubDate>
                 <guid>{{ eventLink }}</guid>
