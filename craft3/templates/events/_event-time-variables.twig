@@ -1,7 +1,11 @@
 {%- macro date_time_options(afterMass, language, startDate, endDate, eventCustomDate, tbdTba, showDatesOnly) -%}
 {% if language == 'es-US' %}			
 	{% if eventCustomDate | length %}
-        {% set displayDT = eventCustomDate ~ " " ~ startDate|date('g:i') ~ " a " ~ endDate|date('g:i a') %}	
+        {% if showDatesOnly | length %}
+		    {% set displayDT = eventCustomDate %}
+	    {% else %}
+		    {% set displayDT = eventCustomDate ~ " " ~ startDate|date('g:i') ~ " a " ~ endDate|date('g:i a') %}
+	    {% endif %}	
 	{% elseif tbdTba | length %}
 	    {% set displayDT = "Horario: por determinar" %}   
 	{% elseif startDate|date('F d') == endDate|date('F d') %}
@@ -25,7 +29,11 @@
 	{% endif %}			
 {% else %}
 	{% if eventCustomDate | length %}
-        {% set displayDT = eventCustomDate ~ " " ~ startDate|date('g:i') ~ "-" ~ endDate|date('g:i a') %}	
+	    {% if showDatesOnly | length %}
+		    {% set displayDT = eventCustomDate %}
+	    {% else %}
+            {% set displayDT = eventCustomDate ~ " " ~ startDate|date('g:i') ~ "-" ~ endDate|date('g:i a') %}
+        {% endif %}  	
 	{% elseif tbdTba | length %}
 	    {% set displayDT = "Date/Time: TBD/TBA" %}
 	{% elseif (afterMass | length) and (endDate is not empty) %}
@@ -42,9 +50,9 @@
 		{% endif %}  
 	{% elseif (endDate is not empty) and (endDate|date('g:i') != '12:00') %}  
 		{% if showDatesOnly | length %}
-		    {% set displayDT = startDate|date('l, F d') ~ " to " ~ endDate|date('F d, Y') %}
+		    {% set displayDT = startDate|date('l, F d') ~ " to " ~ endDate|date('l, F d, Y') %}
 		{% else %}
-		    {% set displayDT = startDate|date('l, F d, Y g:i a') ~ " to " ~  endDate|date('F d, Y g:i a') %}
+		    {% set displayDT = startDate|date('l, F d, Y g:i a') ~ " to " ~  endDate|date('l, F d, Y g:i a') %}
 		{% endif %}             
 	{% else %}
 		{% if showDatesOnly | length %}
