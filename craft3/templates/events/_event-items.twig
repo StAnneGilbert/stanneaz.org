@@ -21,7 +21,7 @@
 		<a href="{{ eventLink }}" style="cursor:pointer;cursor:hand"><img src="{{ entry.eventListingImage.one().url }}" alt="" width="321" height="200" style="margin-bottom:20px" /></a>
 		<div class="postBody" style="height:85px">{% if entry.shortDescription|length %}{{ entry.shortDescription|chop(limit=140, unit='c')}}{% else %}{{ entry.body|chop(limit=140, unit='c')}}{% endif %}</div>
 		<p class="more muted">
-		    {{ macros.date_time_options(entry.afterMass, craft.app.language, entry.eventStartDate, entry.eventEndDate, entry.tbdTba, entry.showDatesOnly) }}<br>
+		    {{ macros.date_time_options(entry.afterMass, craft.app.language, entry.eventStartDate, entry.eventEndDate, entry.eventCustomDate, entry.tbdTba, entry.showDatesOnly) }}<br>
 		    <a href="{{ eventLink }}" target='_blank'>{{ "Read More"|t }}</a>
 		</p>
     </div>

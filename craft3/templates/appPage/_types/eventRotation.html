@@ -60,7 +60,7 @@
 	{% if (entry.eventStartDate|date('Ymd') >= now|date('Ymd')) and (not entry.hideFromDigitalMediaBoards | length) %}
 
 		<div class="slide{% if eMarker == 1 %} showing{% endif %}">
-	        <div class="zDate">{{ macros.date_time_options(entry.afterMass, craft.app.language, entry.eventStartDate, entry.eventEndDate, entry.tbdTba, entry.showDatesOnly)|replace(' &amp; ',' & ') }}</div>
+	        <div class="zDate">{{ macros.date_time_options(entry.afterMass, craft.app.language, entry.eventStartDate, entry.eventEndDate, entry.customEventDate, entry.tbdTba, entry.showDatesOnly)|replace(' &amp; ',' & ') }}</div>
 	        <div class="zTitle">{{ entry.title }}</div>
 	        {% if entry.rotationImage.exists() %}
 	            <img src="{{ entry.rotationImage.one().url }}" alt="" height="200" />
