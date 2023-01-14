@@ -1,0 +1,26 @@
+
+{% paginate craft.entries.section('holyDays').orderBy('title ASC').limit(2) as entries %} 
+        
+{% for post in entries %}
+ 
+  <!-- .sf-content for flex sticky footer -->
+  <div class="sf-content nav-slide-element" data-swiftype-name="body" data-swiftype-type="text">
+    <div class="page-photo-title" {% if post.pageImage.exists() %}style=" background-image:url({{ post.pageImage.one().url }})" {% endif %}>
+      <div class="overlay" style="background:none !important">
+        <div class="container">
+          <h1 class="caps-header">{{ post.heading }}</h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-content-container">
+      <div class="container standard-container">
+        {{ post.body }}
+        
+        {{ post.scriptarea|raw }}
+        
+      </div> <!-- .container -->
+    </div> <!-- .page-content-container -->
+  </div> <!-- .sf-content -->
+
+{% endfor %}
