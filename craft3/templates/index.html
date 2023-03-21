@@ -165,15 +165,11 @@
         <div class="container news-grid">
       
 <div class="row news-blocks">
-         
-	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-		{{ entry.homeBlock1|raw }}
-	</div>  
  
 	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
 	
-		{% if entry.homeBlock2 %}
-			{{ entry.homeBlock2|raw }}
+		{% if entry.homeBlock1 %}
+			{{ entry.homeBlock1|raw }}
 		{% else %}
 		
 			{% if craft.app.language == 'es-US' %}
@@ -189,7 +185,7 @@
 			{% for post in entries %}
 
 				{% if post.massCancellationMessage%}
-					<b class="cancelledItem">{{ post.massCancellationMessage }}</b><br>
+					<b class="cancelledItem">{{ post.massCancellationMessage|raw }}</b><br>
 				{% endif %}
 	
 				{% if post.sundayMassTimes.exists() %}
@@ -253,7 +249,7 @@
 					{% if post.saturdayVigilMassTimes.exists() %}
 						{% for block in post.saturdayVigilMassTimes.all() %}
 							{% set cDate = block.dateCancelledOrChanged %}
-							{{ block.hourName|replace('in English', '(English)')|replace('in Spanish', '(Spanish)')|replace('en inglés', '(inglés)')|replace('en español', '(español)')|raw}}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{cancelledOn}} {% if craft.app.language == 'es-US' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span>{% endif %}{% endif %}{% if loop.index == 1 %}, {% endif %}
+							{{ block.hourName|replace('in English', '(Vigil in English)')|replace('in Spanish', '(Vigil in Spanish)')|replace('en inglés', '(inglés)')|replace('en español', '(español)')|raw}}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{cancelledOn}} {% if craft.app.language == 'es-US' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span>{% endif %}{% endif %}{% if loop.index == 1 %}, {% endif %}
 						{% endfor %}
 					{% endif %}
 				{% endif %}
@@ -273,8 +269,8 @@
 		
 	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
 		
-    {% if entry.homeBlock3 %}
-        {{ entry.homeBlock3|raw }}
+    {% if entry.homeBlock2 %}
+        {{ entry.homeBlock2|raw }}
     {% else %}
 	
 		{% if craft.app.language == 'es-US' %}
@@ -288,13 +284,13 @@
 		{% for post in entries %}
 
 			{% if post.confessionCancellationMessage%}
-				<b class="cancelledItem">{{ post.confessionCancellationMessage }}</b><br>
+				<b class="cancelledItem">{{ post.confessionCancellationMessage|raw }}</b><br>
 			{% endif %}
 
 		    {% if post.confessionTimes.exists() %}
 				{% for block in post.confessionTimes.all() %}
 					{% set cDate = block.dateCancelledOrChanged %}
-					{{ block.dayAndTimes|replace('Saturday:', '<b>Saturday:</b>')|replace('Sunday:', '<b>Sunday:</b>')|replace('Monday:', '<b>Monday:</b>')|replace('Tuesday:', '<b>Tuesday:</b>')|replace('Wednesday:', '<b>Wednesday:</b>')|replace('Thursday:', '<b>Thursday:</b>')|replace('Friday:', '<b>Friday:</b>')|replace('Lunes:', '<b>Lunes:</b>')|replace('Martes:', '<b>Martes:</b>')|replace('Miércoles:', '<b>Miércoles:</b>')|replace('Jueves:', '<b>Jueves:</b>')|replace('Viernes:', '<b>Viernes:</b>')|replace('Sábado:', '<b>Sábado:</b>')|raw }}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{cancelledOn}} {% if craft.app.language == 'es-US' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span>{% endif %}{% endif %}<br>
+					{{ block.dayAndTimes|replace('Saturday:', '<b>Saturday:</b>')|replace('Sunday:', '<b>Sunday:</b>')|replace('Monday:', '<b>Monday:</b>')|replace('Tuesday:', '<b>Tuesday:</b>')|replace('Wednesday:', '<b>Wednesday:</b>')|replace('Thursday:', '<b>Thursday:</b>')|replace('Friday:', '<b>Friday:</b>')|replace('Domingo:', '<b>Domingo:</b>')|replace('Lunes:', '<b>Lunes:</b>')|replace('Martes:', '<b>Martes:</b>')|replace('Miércoles:', '<b>Miércoles:</b>')|replace('Jueves:', '<b>Jueves:</b>')|replace('Viernes:', '<b>Viernes:</b>')|replace('Sábado:', '<b>Sábado:</b>')|raw }}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{cancelledOn}} {% if craft.app.language == 'es-US' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span>{% endif %}{% endif %}<br>
 				{% endfor %}
 		    {% endif %}
 
@@ -309,6 +305,10 @@
     {% endif %}
     
 	</div>
+	
+	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+		{{ entry.homeBlock3|raw }}
+	</div>  
 		
 	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
 		{{ entry.homeBlock4|raw }}

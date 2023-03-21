@@ -33,15 +33,20 @@
         {% endif %}
         
 <div class="massConfessionPage">
-    <div id="topMessageArea">
+
 {% if post.topOfPageMessage | length %}
-        {% if craft.app.language == 'es-US' %}
-            <p class="cancelledItem">Hay cambios en el horario. Desplácese hacia abajo para ver los cambios.</p>
-        {% else %}
-            <p class="cancelledItem">There are changes to the schedule.  Scroll down to see the changes.</p>
-        {% endif %}
+    </div>
+    {% if post.massCancellationMessage%}
+		<p class="cancelledItem">
+			{{ post.massCancellationMessage|raw }}
+		</p>
+	{% endif %}
+	{% if post.confessionCancellationMessage%}
+		<p class="cancelledItem">
+			{{ post.confessionCancellationMessage|raw }}
+		</p>
+	{% endif %}  
 {% endif %}
-    </div>     
         
 {{ post.body }}
         
@@ -144,7 +149,7 @@
     <ul>
         {% for block in post.confessionTimes.all() %}
             {% set cDate = block.dateCancelledOrChanged %}
-            <li>{{ block.dayAndTimes }}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{cancelledOn}} {% if craft.app.language == 'es-US' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span><script>topMessageDateActive=true</script>{% endif %}{% endif %}</li>
+            <li>{{ block.dayAndTimes|replace('Saturday:', '<b>Saturday:</b>')|replace('Sunday:', '<b>Sunday:</b>')|replace('Monday:', '<b>Monday:</b>')|replace('Tuesday:', '<b>Tuesday:</b>')|replace('Wednesday:', '<b>Wednesday:</b>')|replace('Thursday:', '<b>Thursday:</b>')|replace('Friday:', '<b>Friday:</b>')|replace('Domingo:', '<b>Domingo:</b>')|replace('Lunes:', '<b>Lunes:</b>')|replace('Martes:', '<b>Martes:</b>')|replace('Miércoles:', '<b>Miércoles:</b>')|replace('Jueves:', '<b>Jueves:</b>')|replace('Viernes:', '<b>Viernes:</b>')|replace('Sábado:', '<b>Sábado:</b>')|raw }}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{cancelledOn}} {% if craft.app.language == 'es-US' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span><script>topMessageDateActive=true</script>{% endif %}{% endif %}</li>
         {% endfor %}
     </ul>
 {% endif %}
