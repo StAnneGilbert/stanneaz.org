@@ -1,0 +1,97 @@
+{%- macro date_options(afterMass, language, startDate, endDate, eventCustomDate, tbdTba, showDatesOnly) -%}
+{% if language == 'es-US' %}			
+	{% if eventCustomDate | length %}
+        {% set displayD = eventCustomDate %}
+	{% elseif tbdTba | length %}
+	    {% set displayD = "Horario: por determinar" %}  
+	{% elseif startDate|date('F d') == endDate|date('F d') %}
+	    {% set displayD = startDate|date('d F, Y') %}
+	{% elseif (endDate is not empty) and (endDate|date('g:i') != '12:00') %}  
+	    {% if showDatesOnly | length %}
+		    {% set displayD = startDate|date('d F') ~ " a " ~ endDate|date('d F, Y') %}
+	    {% else %}
+		    {% set displayD = startDate|date('d F, Y') ~ " al " ~  endDate|date('d F, Y') %}
+	    {% endif %}             
+	{% else %}
+	    {% set displayD = startDate|date('d F, Y') %}          
+	{% endif %}			
+{% else %}
+	{% if eventCustomDate | length %}
+	    {% set displayD = eventCustomDate %}	
+	{% elseif tbdTba | length %}
+	    {% set displayD = "Date/Time: TBD/TBA" %}
+	{% elseif (afterMass | length) and (endDate is not empty) %}
+	    {% if startDate|date('F d') == endDate|date('F d') %}
+	        {% set displayD = startDate|date('l, F d') %}
+	    {% else %}
+		    {% set displayD = "Saturday & Sunday, " ~ startDate|date('F d') ~ "-" ~ endDate|date('d') %}
+		{% endif %}    
+	{% elseif startDate|date('F d') == endDate|date('F d') %}
+		{% set displayD = startDate|date('l, F d, Y') %}
+	{% elseif (endDate is not empty) and (endDate|date('g:i') != '12:00') %}  
+		{% if showDatesOnly | length %}
+		    {% set displayD = startDate|date('l, F d') ~ " to " ~ endDate|date('l, F d, Y') %}
+		{% else %}
+		    {% set displayD = startDate|date('l, F d, Y g:i A') ~ " to " ~  endDate|date('l, F d, Y g:i A') %}
+		{% endif %}             
+	{% else %}
+		{% set displayD = startDate|date('l, F d, Y') %}          
+	{% endif %}
+{% endif %}
+{% set displayD =  displayD|replace(' 01', ' 1')|replace(' 02', ' 2')|replace(' 03', ' 3')|replace(' 04', ' 4')|replace(' 05', ' 5')|replace(' 06', ' 6')|replace(' 07', ' 7')|replace(' 08', ' 8')|replace(' 09', ' 9')|replace('-01', '-1')|replace('-02', '-2')|replace('-03', '-3')|replace('-04', '-4')|replace('-05', '-5')|replace('-06', '-6')|replace('-07', '-7')|replace('-08', '-8')|replace('-09', '-9') %}
+{{ displayD }}
+{%- endmacro -%}
+{%- macro time_options(afterMass, language, startDate, endDate, eventCustomDate, tbdTba, showDatesOnly) -%}
+{% if language == 'es-US' %}			
+	{% if eventCustomDate | length %}
+        {% if showDatesOnly | length %}
+		    {% set displayT = "0" %}
+	    {% else %}
+		    {% set displayT = startDate|date('g:i') ~ " a " ~ endDate|date('g:i A') %}
+	    {% endif %}	
+	{% elseif tbdTba | length %}
+	    {% set displayT = "0" %}  
+	{% elseif startDate|date('F d') == endDate|date('F d') %}
+	    {% if startDate|date('a') == endDate|date('a') %}
+		    {% set displayT = startDate|date('g:i') ~ " a " ~ endDate|date('g:i A') %}
+	    {% else %}
+		    {% set displayT = startDate|date('g:i A') ~ " a " ~ endDate|date('g:i A') %}
+	    {% endif %}  
+	{% elseif (endDate is not empty) and (endDate|date('g:i') != '12:00') %}  
+	    {% if showDatesOnly | length %}
+		    {% set displayT = "0" %}
+	    {% else %}
+		    {% set displayT = startDate|date('g:i A') ~ " a " ~  endDate|date('g:i A') %}
+	    {% endif %}             
+	{% else %}
+	    {% if showDatesOnly | length %}
+		    {% set displayT = "0" %} 
+	    {% else %}
+		    {% set displayT = startDate|date('g:i A') %}
+	    {% endif %}             
+	{% endif %}			
+{% else %}
+	{% if eventCustomDate | length %}
+	    {% if showDatesOnly | length %}
+		    {% set displayT = "0" %} 
+	    {% else %}
+            {% set displayT = startDate|date('g:i A') ~ " to " ~ endDate|date('g:i A') %}
+        {% endif %}  	
+	{% elseif tbdTba | length %}
+	    {% set displayT = "0" %}
+	{% elseif (afterMass | length) and (endDate is not empty) %}
+	    {% set displayT = "After Mass" %} 
+	{% elseif startDate|date('F d') == endDate|date('F d') %}
+		{% set displayT = startDate|date('g:i A') ~ " to " ~ endDate|date('g:i A') %}
+	{% elseif (endDate is not empty) and (endDate|date('g:i') != '12:00') %}  
+		{% set displayT = "0" %}
+	{% else %}
+		{% if showDatesOnly | length %}
+		    {% set displayT = "0" %}
+		{% else %}
+		    {% set displayT = startDate|date('\\a\\t g:i A') %}
+		{% endif %}             
+	{% endif %}
+{% endif %}
+{{displayT}}
+{%- endmacro -%}

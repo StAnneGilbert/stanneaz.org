@@ -35,7 +35,7 @@
 					{% else %}
 						Note:
 					{% endif %}
-					{{ post.massCancellationMessage }}
+					{{ post.massCancellationMessage|raw }}
 				</b><br><br>
 			{% endif %}
 
@@ -134,14 +134,14 @@
 					{% else %}
 						Note:
 					{% endif %}
-					{{ post.confessionCancellationMessage }}
+					{{ post.confessionCancellationMessage|raw }}
 				</b><br><br>
 			{% endif %}
 
 		    {% if post.confessionTimes.exists() %}
 				{% for block in post.confessionTimes.all() %}
 					{% set cDate = block.dateCancelledOrChanged %}
-					{{ block.dayAndTimes|replace('Saturday:', '<b>Saturday:</b>')|replace('Sunday:', '<b>Sunday:</b>')|replace('Monday:', '<b>Monday:</b>')|replace('Tuesday:', '<b>Tuesday:</b>')|replace('Wednesday:', '<b>Wednesday:</b>')|replace('Thursday:', '<b>Thursday:</b>')|replace('Friday:', '<b>Friday:</b>')|replace('Lunes:', '<b>Lunes:</b>')|replace('Martes:', '<b>Martes:</b>')|replace('Miércoles:', '<b>Miércoles:</b>')|replace('Jueves:', '<b>Jueves:</b>')|replace('Viernes:', '<b>Viernes:</b>')|replace('Sábado:', '<b>Sábado:</b>')|raw }}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{cancelledOn}} {% if craft.app.language == 'es-US' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span>{% endif %}{% endif %}<br>
+					{{ block.dayAndTimes|replace('Saturday:', '<b>Saturday:</b>')|replace('Sunday:', '<b>Sunday:</b>')|replace('Monday:', '<b>Monday:</b>')|replace('Tuesday:', '<b>Tuesday:</b>')|replace('Wednesday:', '<b>Wednesday:</b>')|replace('Thursday:', '<b>Thursday:</b>')|replace('Friday:', '<b>Friday:</b>')|replace('Domingo:', '<b>Domingo:</b>')|replace('Lunes:', '<b>Lunes:</b>')|replace('Martes:', '<b>Martes:</b>')|replace('Miércoles:', '<b>Miércoles:</b>')|replace('Jueves:', '<b>Jueves:</b>')|replace('Viernes:', '<b>Viernes:</b>')|replace('Sábado:', '<b>Sábado:</b>')|raw }}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{cancelledOn}} {% if craft.app.language == 'es-US' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span>{% endif %}{% endif %}<br>
 				{% endfor %}
 		    {% endif %}
 
