@@ -1,0 +1,193 @@
+{# Homepage Template #}
+{% extends "layouts/_layout" %}
+
+{% block pagetype %}{% endblock %}
+
+{% block content %} 
+ <!-- .sf-content for flex sticky footer -->
+  <div class="sf-content nav-slide-element">
+    <div class="page-content-container">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-10 col-lg-offset-1">
+            
+
+            <div class="row">
+              <div class="col-md-8 col-sm-7">
+                <h3>{{ entry.title }}</h3>
+
+
+                <div class="blog-post standard-container">
+                  {% if entry.body|length %}
+                      {{ entry.body|raw }}
+                  {% else %}
+                      {% if entry.shortDescription|length %}
+                          {{ entry.shortDescription|raw }}
+                      {% endif %}
+                  {% endif %}
+                  
+                  
+                  
+                  {% if craft.app.language == 'es-US' %}
+			{% set cancelledOn = "Canceladas el " %}
+		{% else %}
+			{% set cancelledOn = "Canceled on " %}
+		{% endif %}
+
+		{% paginate craft.entries.section('times').orderBy('title ASC').limit(2) as entries %} 
+	
+		{% for post in entries %}
+
+			{% if post.massCancellationMessage%}
+				<b class="cancelledItem">
+					{% if craft.app.language == 'es-US' %}
+						Nota: 
+					{% else %}
+						Note:
+					{% endif %}
+					{{ post.massCancellationMessage }}
+				</b><br><br>
+			{% endif %}
+
+			{% if post.sundayMassTimes.exists() %}
+				<strong>{{ "Sunday"|t }}:</strong>
+				{% for block in post.sundayMassTimes.all() %}
+						{% set cDate = block.dateCancelledOrChanged %}
+						{{ block.hourName|replace('High Mass in English', '(High Mass)')|replace('in English', '(English)')|replace('in Spanish', '(Spanish)')|replace('Tridentine Low Mass in Latin', '(Tridentine)')|replace('tridentina en latín', '(tridentina)')|replace('en inglés/latín', '(inglés/latín)')|replace('en inglés', '(inglés)')|replace('en español', '(español)')|raw }}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{cancelledOn}} {% if craft.app.language == 'es-US' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span>{% endif %}{% endif %}{% if loop.index != 6 %}, {% endif %}
+				{% endfor %}  
+			{% endif %}
+			{% if post.weekdayMassTimes.exists() %} 
+				{% if post.weekdayMassTimes|length >= 7 %}
+					<br><strong>{{ "Monday"|t }}:</strong> 
+					{% for block in post.weekdayMassTimes.all() %}
+						{% set cDate = block.dateCancelledOrChanged %}
+						{% if (block.dayOfWeek == 'Monday') or (block.dayOfWeek == 'Lunes') %}
+						   {{ block.hourName|raw }} {% if block.languageOfMass != 'none' %}({{ block.languageOfMass }}){% endif %}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{cancelledOn}} {% if craft.app.language == 'es-US' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span>{% endif %}{% endif %}{% if loop.index == 1 %}, {% endif %}
+						{% endif %}
+					{% endfor %}
+					<br><strong>{{ "Tuesday"|t }}:</strong> 
+					{% for block in post.weekdayMassTimes.all() %}
+						{% set cDate = block.dateCancelledOrChanged %}
+						{% if (block.dayOfWeek == 'Tuesday') or (block.dayOfWeek == 'Martes') %}
+						   {{ block.hourName|raw }} {% if block.languageOfMass != 'none' %}({{ block.languageOfMass }}){% endif %}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{cancelledOn}} {% if craft.app.language == 'es-US' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span>{% endif %}{% endif %}{% if loop.index != 5 %}, {% endif %}
+						{% endif %}
+					{% endfor %}
+					<br><strong>{{ "Wednesday"|t }}:</strong> 
+					{% for block in post.weekdayMassTimes.all() %}
+						{% set cDate = block.dateCancelledOrChanged %}
+						{% if (block.dayOfWeek == 'Wednesday') or (block.dayOfWeek == 'Miércoles') %}
+						   {{ block.hourName|raw }} {% if block.languageOfMass != 'none' %}{% if block.languageOfMass != 'none' %}({{ block.languageOfMass }}){% endif %}{% endif %}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{cancelledOn}} {% if craft.app.language == 'es-US' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span>{% endif %}{% endif %}{% if loop.index != 7 %}, {% endif %}
+						{% endif %}
+					{% endfor %}
+					<br><strong>{{ "Thursday"|t }}:</strong> 
+					{% for block in post.weekdayMassTimes.all() %}
+						{% set cDate = block.dateCancelledOrChanged %}
+						{% if (block.dayOfWeek == 'Thursday') or (block.dayOfWeek == 'Jueves') %}
+						   {{ block.hourName|raw }} {% if block.languageOfMass != 'none' %}({{ block.languageOfMass }}){% endif %}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{cancelledOn}} {% if craft.app.language == 'es-US' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span>{% endif %}{% endif %}{% if loop.index != 10 %}, {% endif %}
+						{% endif %}
+					{% endfor %}
+					<br><strong>{{ "Friday"|t }}:</strong> 
+					{% for block in post.weekdayMassTimes.all() %}
+						{% set cDate = block.dateCancelledOrChanged %}
+						{% if (block.dayOfWeek == 'Friday') or (block.dayOfWeek == 'Viernes') %}
+						   {{ block.hourName|raw }} {% if block.languageOfMass != 'none' %}({{ block.languageOfMass }}){% endif %}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{cancelledOn}} {% if craft.app.language == 'es-US' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span>{% endif %}{% endif %}{% if loop.index != 12 %}, {% endif %}
+						{% endif %}
+					{% endfor %}
+					<br id="saturdayMTA"><strong>{{ "Saturday"|t }}:</strong> 
+					{% for block in post.weekdayMassTimes.all() %}
+						{% set cDate = block.dateCancelledOrChanged %}
+						{% if (block.dayOfWeek == 'Saturday') or (block.dayOfWeek == 'Sábado') %}
+						   {{ block.hourName|raw }} {% if block.languageOfMass != 'none' %}({{ block.languageOfMass }}){% endif %}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{cancelledOn}} {% if craft.app.language == 'es-US' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span>{% endif %}{% endif %}
+						   <script>displaySaturdayMTA=true</script>
+						{% endif %}
+					{% endfor %}
+				{% else %}
+					{% for block in post.weekdayMassTimes.all() %}
+						{% set cDate = block.dateCancelledOrChanged %}
+						{{ block.dayOfWeek|capitalize }}: {{ block.hourName }} {% if block.languageOfMass != 'none' %}({{ block.languageOfMass }}){% endif %}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{cancelledOn}} {% if craft.app.language == 'es-US' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span>{% endif %}{% endif %}, 
+					{% endfor %}
+				{% endif %}
+				{% if post.saturdayVigilMassTimes.exists() %}
+					{% for block in post.saturdayVigilMassTimes.all() %}
+						{% set cDate = block.dateCancelledOrChanged %}
+						{{ block.hourName|replace('in English', '(Vigil in English)')|replace('in Spanish', '(Vigil in Spanish)')|replace('en inglés', '(inglés)')|replace('en español', '(español)')|raw}}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{cancelledOn}} {% if craft.app.language == 'es-US' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span>{% endif %}{% endif %}{% if loop.index == 1 %}, {% endif %}
+					{% endfor %}
+				{% endif %}
+			{% endif %}
+		
+		{% endfor %}
+
+		<br>
+		{% if craft.app.language == 'es-US' %}
+			<a href="/es/about/times">Leer Mas</a>
+		{% else %}
+			<a href="/about/times">Read More</a>
+		{% endif %}
+        <br><br>
+
+
+                  
+                  {{ entry.scriptarea|raw }}
+                    
+                </div>
+              </div>
+
+              <div class="col-md-4 col-sm-5 blog-sidebar">
+              
+              {% if entry.eventListingImage.exists() %}
+                <div class="featured-image-container">
+                  <img src="{{ entry.eventListingImage.one().url }}" alt="" />
+                </div>
+              {% endif %}
+              
+                
+                <div style="margin:20px 0 40px"><a href="{{ siteUrl }}connect/{% if craft.app.language == 'es-US' %}anuncios{% else %}announcements{% endif %}">{{ "View more announcements"|t }} &rsaquo;</a>
+                </div>
+                
+                <hr>
+                
+                {% if siteWideSocialLinks.socialLinks.exists() %}
+                  <h6>{{ "Connect with us"|t }}</h6>
+                  <ul class="social-circles">
+                    {% for service in siteWideSocialLinks.socialLinks.all() %}
+                      {% set link = service.serviceUrl %}
+                        <li>
+                          <a href="{{ link.url }}" class="bg-{{ service.service }}">
+                            <i class='fa fa-{{ service.service }}'></i>
+                          </a>
+                        </li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+
+                <hr>
+                
+                
+                <h6>{{ "Subscribe"|t }}</h6>
+                <p>{{ "Get the latest news and updates from St. Anne in your RSS feed or email inbox"|t }}!</p>
+                {% if craft.app.language == 'es-US' %}
+                
+                    <a href="http://feeds.feedburner.com/AnunciosParaStaAna" class="btn btn-light-brown-border" target="_blank"><i class="fa fa-rss"></i> {{"Announcements RSS"|t }}</a><br/>
+                    <a href="http://feeds.feedburner.com/EventosStaAna" class="btn btn-light-brown-border" target="_blank"><i class="fa fa-rss"></i> {{"Events RSS"|t }}</a><br/>
+                    <a href="http://feeds.feedburner.com/AudiosdeParroquiaStaAna" class="btn btn-light-brown-border" target="_blank"><i class="fa fa-rss"></i> {{ "Podcasts RSS"|t }}</a>
+                    
+                {% else %}
+                
+                    <a href="http://feeds.feedburner.com/StAnneAnnouncements" class="btn btn-light-brown-border" target="_blank"><i class="fa fa-rss"></i> {{"Announcements RSS"|t }}</a><br/>
+                    <a href="http://feeds.feedburner.com/StAnneEvents" class="btn btn-light-brown-border"><i class="fa fa-rss" target="_blank"></i> {{"Events RSS"|t }}</a><br/>
+                    <a href="http://feeds.feedburner.com/stannecatholicpodcast" class="btn btn-light-brown-border" target="_blank"><i class="fa fa-rss"></i> {{ "Podcasts RSS"|t }}</a>
+                
+                {% endif %}
+                
+                
+
+              </div> <!-- .col -->
+            </div> <!-- .row -->
+          </div> <!-- .col -->
+        </div> <!-- .row -->
+      </div> <!-- .container -->
+    </div> <!-- .page-content-container -->
+  </div> <!-- .sf-content -->
+  
+  
+{% endblock %}
