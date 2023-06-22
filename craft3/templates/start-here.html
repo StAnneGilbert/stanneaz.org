@@ -3,10 +3,19 @@
 
 {% block content %}
   <!-- .sf-content for flex sticky footer -->
-  <div class="sf-content nav-slide-element">
+  <div class="sf-content nav-slide-element" data-swiftype-name="body" data-swiftype-type="text">
+  
+  
+  <div class="page-photo-title" {% if entry.pageImage.exists() %}style=" background-image:url({{ entry.pageImage.one().url }})" {% endif %}>
+      <div class="overlay" style="background:none !important">
+        <div class="container">
+          <h1 class="caps-header"></h1>
+        </div>
+      </div>
+    </div>
 
 
-<div class="featured-content-hero">
+<!--div class="featured-content-hero">
   <div class="container">
     <h2 class="caps-header">{{ entry.title }}</h2>
 
@@ -29,6 +38,9 @@
   </div>
 </div> <!-- .block-featured-content -->
 
+
+
+
 <div class="page-content-container">
   <div class="container standard-container">
 
@@ -45,6 +57,7 @@
       <p class="lead">{{ entry.lead }}</p>
     {% endif %}
     {{ entry.body }}
+    {{ entry.scriptarea|raw }}
 
    </div> <!-- .container -->
   </div> <!-- .page-content-container -->
