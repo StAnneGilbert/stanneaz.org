@@ -7,12 +7,13 @@
   
   {% for entry in eventItems %}
       
-	
-	  {% if entry.customEventUrl is not empty %}
-		  {% set eventLink = entry.customEventUrl.url %}  
-	  {% else %}
-		  {% set eventLink = entry.url %}  
-	  {% endif %}
+	    {% if entry.entryLocation.exists() %}
+			{% set eventLink = entry.entryLocation.one().url %}  
+		{% elseif entry.webUrl|length %}
+			{% set eventLink = entry.webUrl %} 
+		{% else %}
+			{% set eventLink = entry.url %} 
+		{% endif %}
 
 {% if entry.eventStartDate|date('Ymd') >= now|date('Ymd') %}
 <div class="featured-media-box">   

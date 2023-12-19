@@ -14,11 +14,13 @@
         </image>
         {% for entry in craft.entries.section('events').orderBy('eventStartDate ASC').limit('80').all() %}
         
-            {% if entry.customEventUrl is not empty %}
-		        {% set eventLink = entry.customEventUrl.url %}  
-	        {% else %}
-		        {% set eventLink = entry.url %}  
-	        {% endif %}
+            {% if entry.entryLocation.exists() %}
+			    {% set eventLink = entry.entryLocation.one().url %}  
+		    {% elseif entry.webUrl|length %}
+			    {% set eventLink = entry.webUrl %} 
+		    {% else %}
+			    {% set eventLink = entry.url %} 
+		    {% endif %}
 	  
             <item>
                 <title><![CDATA[{{ macros.date_time_options(entry.afterMass, craft.app.language, entry.eventStartDate, entry.eventEndDate, entry.eventCustomDate, entry.tbdTba, entry.showDatesOnly) }}                                {{ entry.title }}]]></title>

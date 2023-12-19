@@ -36,10 +36,12 @@
     
   {% for post in announcements %}
 
-      {% if post.customEventUrl is not empty %}
-		  {% set announceLink = post.customEventUrl.url %}  
-	  {% else %}
-		  {% set announceLink = post.url %}  
+      {% if post.entryLocation.exists() %}
+			{% set announceLink = post.entryLocation.one().url %}  
+		{% elseif post.webUrl|length %}
+			{% set announceLink = post.webUrl %} 
+		{% else %}
+			{% set announceLink = post.url %} 
 	  {% endif %}
   
 
