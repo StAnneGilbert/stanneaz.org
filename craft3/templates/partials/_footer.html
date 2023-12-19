@@ -25,15 +25,13 @@
 
         <div class="links">
             {% for item in siteWideContent.footerLinks.all() %}
-              {% set link = item.footerLink %}
               <span class="dot">&middot;</span>
-              <a href='{{ link.url }}' {{ link.target ? ' target="_blank"' }}>{{ link.text }}</a>
+              <a href='{{ item.footerLink }}'>{{ item.footerText }}</a>
             {% endfor %}
           <ul class="social-circles" style="display:inline-block">
             {% for service in siteWideSocialLinks.socialLinks.all() %}
-              {% set link = service.serviceUrl %}
               <li class="socialSm">
-                <a href='{{ link.url }}' class='bg-{{ service.service | lower }} social__link'>
+                <a href='{{ service.serviceUrl }}' class='bg-{{ service.service | lower }} social__link' target="_blank">
                   <i class='fa fa-{{ service.service | lower }}'></i>
                 </a>
               </li>

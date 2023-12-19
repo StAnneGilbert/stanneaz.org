@@ -19,14 +19,12 @@
         	</tr>
         </table>
         
+        {% set calFeed = craft.feedreader.getFeed("https://extras.stanneaz.org/scheduler-list/index.xml", 43200, true) %}
 
-        {% set feedurl = 'https://extras.stanneaz.org/scheduler-list/index.xml' %}
-        {% set limit = 1000 %}
-        {% set cache = P0M %}
-        {% set items = craft.app.feeds.getFeedItems(feedurl, limit, 0, cache) %}
+
         {% set curDate = '' %}
               
-        {% for item in items %}
+        {% for item in calFeed.items %}
             {% set iTitle = item.title|replace("\\\'", '&rsquo;') %}
             {% set iDesc = item.summary|replace("\\\'", '&rsquo;')|replace("\<div\>", '')|replace("\<\/div\>", '')  %}
 
