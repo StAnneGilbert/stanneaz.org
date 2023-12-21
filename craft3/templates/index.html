@@ -164,7 +164,9 @@
 		{% if entry.homeBlock1 %}
 			{{ entry.homeBlock1|raw }}
 		{% else %}
-
+			
+			<h5>{{ "Mass Schedule"|t }}</h5>
+	
 			{% paginate craft.entries.section('times').orderBy('title ASC').limit(2) as entries %} 
 		
 			{% for post in entries %}
@@ -258,11 +260,7 @@
         {{ entry.homeBlock2|raw }}
     {% else %}
 	
-		{% if craft.app.language == 'es-US' %}
-            <h5>Horario de confesiones</h5>
-        {% else %}
-            <h5>Confession Schedule</h5>
-        {% endif %}
+        <h5>{{ "Confession Schedule"|t }}</h5>
         
 		{% paginate craft.entries.section('times').orderBy('title ASC').limit(2) as entries %} 
 		
