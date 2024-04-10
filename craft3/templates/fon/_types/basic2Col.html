@@ -1,0 +1,73 @@
+<style>
+.topBBar{background-color:#005F72;border-bottom:2px #895022 solid; color:#fff;text-align:center;height:15px;line-height:15px;font-size:8px}
+.underTopBBar{background-color:#F6ECDF;color:#895022;text-align:center;height:23px;line-height:23px;font-size:90%}
+.btmBBar{background-color:#005F72;color:#fff;font-size:90%;font-weight:bold;height:30px;line-height:30px;text-align:center;width:720px;margin:0 auto}
+.underTopBBar span ,.btmBBar span{display:inline-block; width:48%; text-align:center;}
+.bulletinPage{ 
+    color: #333;
+    overflow:auto;
+}
+.bulletinContainer{
+    margin: 0;
+    overflow:auto;
+}
+#bulletinArea1 {
+    background: #fff url('https://stanneaz.org/img/general/assets/logo-stanne-bg-light3.png');
+    width:720px;
+    padding: 0px;
+    margin: 0 auto;
+    list-style-type: none;
+    text-align:center;
+}
+.bulletinContentTable{margin:0 auto;font-size:90%;}
+.bulletinContentTable td{text-align:left;vertical-align: top;}
+.staffTile{float:left;display:block;width:187px;height:147px;font-size:70%;text-align:left;}
+.staffinfo{line-height:16px}
+.bulletinHeader{text-align:center}
+#bulletinArea1 img{width:100%;margin-bottom:18px}
+
+</style>
+
+<div class="bulletinPage">
+    <div class="bulletinContainer">
+        <div id="bulletinArea1">
+        
+            <div class="topBBar">&nbsp;</div>
+            <div class="underTopBBar">
+                <span>{{ entry.heading }}</span>
+	            <span>{{ entry.subHeading }}</span>
+	        </div>
+	        <div style="clear:both"></div>
+
+<table width="720" class="bulletinContentTable">
+    <tr>
+        <td style="width:20px">
+        </td>
+        
+        <td style="padding:25px 20px 0 0">
+            {{ entry.body }}
+        </td>
+        
+        <td style="height:845px;width:1px;border-right:#895022 2px solid;"></td>
+        
+        <td style="padding:25px 0 0 20px">
+            {{ entry.bodyb }}
+        </td>
+        
+        <td style="width:20px">
+        </td>
+
+    </tr>
+</table>
+
+
+        </div>
+    
+        <div class="btmBBar">
+	        <span>www.stanneaz.org</span>
+	        <span>stanneaz.flocknote.com</span>
+	    </div>
+	
+    </div> 
+</div>
+

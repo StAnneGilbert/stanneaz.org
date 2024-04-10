@@ -12,7 +12,7 @@
             <link>{{ siteUrl }}</link>
         </image>
         {% for entry in craft.entries.section('events').orderBy('eventStartDate ASC').limit('80').all() %}
-            {% if entry.entryLocation.exists() %}
+	        {% if entry.entryLocation.exists() %}
 			    {% set eventLink = entry.entryLocation.one().url %}  
 		    {% elseif entry.webUrl|length %}
 			    {% set eventLink = entry.webUrl %} 

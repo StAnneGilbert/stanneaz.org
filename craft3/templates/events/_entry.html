@@ -37,7 +37,7 @@
     
     {% if entry.eventStartDate|date('F d, Y') == entry.eventEndDate|date('F d, Y') %}
         {% if entry.eventStartDate|date('a') == entry.eventEndDate|date('a') %}
-		    {% set displayETime = entry.eventStartDate|date('g:i') ~ timeSeparator ~ entry.eventEndDate|date('g:i a') %} 
+		    {% set displayETime = entry.eventStartDate|date('g:i a') ~ timeSeparator ~ entry.eventEndDate|date('g:i a') %} 
         {% else %}
 		    {% set displayETime = entry.eventStartDate|date('g:i a') ~ timeSeparator ~ entry.eventEndDate|date('g:i a') %}
         {% endif %}  
@@ -110,6 +110,7 @@
                 
                   {% if entry.body|length %}
                       {{ entry.body|raw }}
+                      {{ entry.description|raw }}
                   {% else %}
                       {% if entry.shortDescription|length %}
                           {{ entry.shortDescription|raw }}

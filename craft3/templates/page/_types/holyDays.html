@@ -36,9 +36,10 @@
 	            {% set curTimeVar = macros.time_options(entry.afterMass, craft.app.language, entry.eventStartDate, entry.eventEndDate, entry.eventCustomDate, entry.tbdTba, entry.showDatesOnly)|replace(' &amp; ',' & ')|replace('\n','')|replace('\t','')|replace('\s','')  %}
 				<p><b>{% if (curTimeVar != '0') %}{{curTimeVar}}{% endif %}</b></p>
 				{% if entry.useLongDescription|length  %}
-				    <p>
+				    <div>
 				        {{ entry.body|raw }}
-					</p>
+				        {{ entry.description|raw }}
+					</div>
 				{% elseif entry.shortDescription|length  %}
 					<p>{{ entry.shortDescription|raw }}</p>
 				{% else %}

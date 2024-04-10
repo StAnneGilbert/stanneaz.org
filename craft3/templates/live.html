@@ -3,13 +3,11 @@
 
 {% block content %}
 
-{% spaceless %}
-    {% if entry.title is defined %}
-        {% set websiteTitle %}{{ entry.title }} | St. Anne{% endset %}
-    {% else %}
-        {% set websiteTitle %}St. Anne Roman Catholic Parish{% endset %}
-    {% endif %}
-{% endspaceless %}
+{% if entry.title is defined %}
+    {% set websiteTitle %}{{ entry.title }} | St. Anne{% endset %}
+{% else %}
+    {% set websiteTitle %}St. Anne Roman Catholic Parish{% endset %}
+{% endif %}
 {% set currentURL = craft.app.request.absoluteUrl() %}
 
 <meta property="og:type" content="website">
@@ -131,7 +129,7 @@
 
 <div style="text-align:center">     
     <h4 class="caps-header text-center">
-          <span id="vidTitle1">{{ "Live"|t }}</span>&nbsp;/&nbsp;<a href="https://www.youtube.com/c/StAnneRomanCatholicParish/videos" target="_blank">YouTube</a>&nbsp;/&nbsp;<a href="https://www.facebook.com/Stannegilbert/videos/" target="_blank">{{ "Facebook"|t }}</a>
+          <span id="vidTitle1">{{ "Live"|t }}</span>&nbsp;/&nbsp;<a href="https://www.youtube.com/@StAnneRomanCatholicParish" target="_blank">YouTube</a>&nbsp;/&nbsp;<a href="https://www.facebook.com/Stannegilbert/videos/" target="_blank">{{ "Facebook"|t }}</a>
     </h4>
   
     {{ liveBroadcastSettings.liveBroadcastVideoEmbed | raw }}

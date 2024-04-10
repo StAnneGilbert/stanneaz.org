@@ -1,0 +1,157 @@
+  <!-- .sf-content for flex sticky footer -->
+  <div class="sf-content nav-slide-element" data-swiftype-name="body" data-swiftype-type="text">
+    <div class="page-photo-title" {% if entry.pageImage|length %}style=" background-image:url({{ entry.pageImage[0].url }})" {% endif %}>
+      <div class="overlay">
+        <div class="container">
+          <h1 class="caps-header">{{ entry.title }}</h1>
+
+        </div>
+      </div>
+    </div>
+    
+
+
+    <div class="page-content-container">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+            <div class="section-title">
+              <h3>{{ entry.heading }}</h3>
+              <h3 class="small">{{ entry.subHeading }}</h3>
+              <p>{{ "All bulletin submissions need to be made AT LEAST 10 days prior to the weekend you would like your article/announcement to be published. Otherwise, we won’t be able to include it in that issue. Thank you for your understanding. God Bless."|t }}</p>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-8">
+
+                <div class="contact-form">
+                  {% macro errorList(errors) %}
+                        {% if errors %}
+                            <ul class="errors">
+                                {% for error in errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    {% endmacro %}
+
+                  {% from _self import errorList %}
+                  <form method="post" action="" enctype="multipart/form-data" accept-charset="UTF-8" class='general'>
+                    {{ getCsrfInput() }}
+                    <input type="hidden" name="action" value="contactForm/sendMessage">
+                    <input type="hidden" name="redirect" value="/">
+                    <input type='text' name='shivermetimbers' id='shivermetimbers' style='display:none;'/>
+                    <input type="hidden" name="toEmail" value="{{'moniques@stanneaz.org'|hash}}"/>
+                    <input type='hidden' name='subject' value="Bulletin Submission" />
+                    <input type='hidden' name='message[body]' value="" />
+                    <div class="form-group">
+                      <h5>{{ "Bulletin Text"|t }}</h5>
+                      <div class="form-row">
+                        <textarea name="message[BulletinText]" id="message[BulletinText]" rows="8" class="input-full-width" placeholder='* {{ "Type your message for the bulletin here"|t }} ...' required>{% if message is defined %}{{ message[BulletinText] }}{% endif %}</textarea>
+                        <span class="field-error">{% if message is defined %}{{ errorList(message.getErrors('message')) }}{% endif %}</span>
+                      </div>
+                    </div> <!-- .form-group -->
+                    
+                    
+                    <div class="form-group">
+                      <h5>{{ "If desired, send a related photo or file"|t }}</h5>
+                      <div class="form-row">
+                        <input type="file" name="attachment[]" multiple>
+                      </div>
+                    </div> <!-- .form-group -->
+                    
+                    <div class="form-group">
+                      <h5>{{ "Other instructions or information"|t }}</h5>
+                      <div class="form-row">
+                        <textarea name="message[Special Instructions or Info]" id="message[Special Instructions or Info]" rows="8" class="input-full-width" placeholder='{{ "(optional) Share any other information or instructions"|t }} ...'></textarea>
+                      </div>
+                    </div> <!-- .form-group -->
+
+                    <div class="form-group">
+                      <h5>{{ "Please share your contact info below"|t }}:</h5>
+                      <div class="form-row {% if message is defined %} form-error {% endif %}">
+                        <div class="input-wrap">
+                          <input type="text" name="fromName" id="fromName" class="input-full-width" placeholder='{{ "First and Last Name"|t }} *' value="{% if message is defined %}{{ message.fromName }}{% endif %}" required>
+                        </div>
+                        <span class="field-error">{% if message is defined %}{{ errorList(message.getErrors('fromName')) }}{% endif %}</span>
+                      </div> <!-- .form-row -->
+
+                      <div class="form-row {% if message is defined %} form-error {% endif %}">
+                        <input type="email" name="fromEmail" id="" class="input-full-width" value="{% if message is defined %}{{ message.fromEmail }}{% endif %}" placeholder="{{ "Email"|t }} *" required>
+                        <span class="field-error">{% if message is defined %}{{ errorList(message.getErrors('fromEmail')) }}{% endif %}</span>
+                      </div>
+                      <div class="form-row">
+                        <input type="text" name="message[Bulletin Submitter's Phone]" id="message[Bulletin Submitter's Phone]" class="input-full-width" placeholder="{{ "Phone Number"|t }}">
+                      </div>
+
+                    </div> <!-- .form-group -->
+
+                    <button type="submit" class="btn btn-lg btn-light-blue btn-full-width"><span class='button__text'>{{ "Send Now"|t }}</span></button>
+                    
+                  </form>
+                </div> <!-- .contact-form -->
+
+              </div> <!-- .col -->
+
+              <div class="col-sm-4 contact-options">
+                <p>
+                  {{ siteWideContent.parishAddress }}<span class="dot">&middot;</span> <a href="{{ helpers.map_link(siteWideContent.parishAddress) }}" target="_blank">{{ "Map"|t }}</a><br>
+                  <strong>{{ "OFFICE"|t }}</strong> {{ siteWideContent.parishPhoneNumber }}<br>
+                  <strong>{{ "FAX"|t }}</strong> {{ siteWideContent.parishFaxNumber }}
+                </p>
+
+                {% if siteWideSocialLinks.socialLinks|length %}
+                  <ul class="social-circles">
+                    {% for service in siteWideSocialLinks.socialLinks %}
+                      {% set link = service.serviceUrl %}
+                        <li>
+                          <a href="{{ link.url }}" class="bg-{{ service.service | slugify }}">
+                            <i class='fa fa-{{ service.service | slugify }}'></i>
+                          </a>
+                        </li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+
+                <hr>
+                
+                {% if craft.locale == "es_us" %}
+                
+                    <b>La Aplicación móvil de <br/>Sta. Ana</b> para <a href="https://itunes.apple.com/us/app/parroquia-catolica-sta.-ana/id978905589" target="_blank">iPhone</a>, <a href="https://play.google.com/store/apps/details?id=com.subsplash.thechurchapp.s_4G33NG" target="_blank">Android</a>, y <a href="http://www.windowsphone.com/en-us/store/app/parroquia-católica-de-sta-ana/d4bbdfb9-510e-498c-b81a-8eb7fe523127" target="_blank">Windows</a>.
+                    
+                {% else %}
+                
+                    <b>St. Anne Mobile App</b> for <a href="https://itunes.apple.com/us/app/st.-anne-roman-catholic-parish/id962170758?mt=8&amp;ign-mpt=uo%3D4" target="_blank">iPhone</a>, <a href="https://play.google.com/store/apps/details?id=com.subsplash.thechurchapp.s_X3BW7W" target="_blank">Android</a>, and <a href="http://www.windowsphone.com/en-us/store/app/st-anne-roman-catholic-parish/2a195917-7357-4d24-ab52-7d511b8ae6a4" target="_blank">Windows</a>.
+                
+                {% endif %}
+                
+                <hr>
+                
+                <h6>{{ "Parish office hours"|t }}</h6>
+                {% if siteWideContent.parishOfficeHours|length %}
+                  <p>
+                    {% for item in siteWideContent.parishOfficeHours[0].hoursTable %}
+                      {% spaceless %}
+                        <strong>{{ item.dayOfTheWeek }}</strong>
+                        {% if item.redLabel == 1 %}
+                          <span class="red"> {{ item.times }} </span>
+                        {% else %}
+                            {{ item.times }}
+                        {% endif %}
+                        {% if item.exception == 1 %}<span class="muted">*</span> {% endif %} {% if not loop.last %}<br>{% endif %}
+                      {% endspaceless %}
+                    {% endfor %}
+                  </p>
+                  {% if siteWideContent.parishOfficeHours[0].exceptionReference is not empty %}
+                    <p class="muted">*{{ siteWideContent.parishOfficeHours[0].exceptionReference }}</p>
+                  {% endif %}
+                {% endif %}
+              </div>
+            </div>
+
+          </div> <!-- .col -->
+        </div> <!-- .row -->
+      </div> <!-- .container -->
+    </div> <!-- .page-content-container -->
+  </div> <!-- .sf-content -->
