@@ -1,0 +1,240 @@
+<div class="page-content-container">
+  <div class="container standard-container">
+    <style>
+      #parishioneraddress{display:none}
+    </style>
+{% cache globally for 2 weeks %}
+    {% set staff = craft.categories.group('staffGroup') %}
+    {% for pos in staff.all() %}
+      <h3 class="bottom-border">{{ pos.title }}</h3>
+      {% set people = craft.entries.section('people').relatedTo(pos).orderBy('personLastName').all() %}
+      <div class="staff-group">
+      {% for person in people %}
+      
+          <a name="{{ person.slug }}" id="{{ person.slug }}"></a>
+          <div class="staff-member" id="staff-{{ person.slug }}">
+            
+              {% if person.profileImage is not empty %}
+              <div class="col col-avatar">
+                <img src="{{ person.profileImage[0].getUrl('tf160') }}" alt="" class="avatar round-avatar" />
+                </div>
+              {% endif %}
+            
+            <div class="col col-name">
+              <h6>{{ person.title }}</h6>
+              <span class="job-title">{{ person.professionalTitle }}</span>
+            </div>
+            {% if person.emailAddress is not empty %}
+              <span id="i-{{ person.slug }}" style="display:none">{{ person.emailAddress|hash }}</span>
+            {% endif %}
+            {% if (person.phoneNumber is not empty) and (not person.hidePhone | length) %}
+              <div class="col col-phone">
+                <a href="tel:{{ person.phoneNumber }}" class="btn btn-sm btn-light-blue"><i class="fa fa-phone"></i> {{ person.phoneNumber }}</a>
+              </div>
+            {% endif %}
+            {% if (person.emailAddress is not empty) and (not person.hideEmail | length) %}
+              <div class="col col-email" id="close-{{ person.slug }}" style="display:none">
+                <a href="#" onclick="hideForm();return false;" class="btn btn-sm btn-light-blue">{{ "Close Email Form"|t }}</a>
+              </div>
+              <div class="col col-email" id="e-{{ person.slug }}">
+                <a href="#" onclick="displayForm('{{ person.slug }}','{{ person.title }}');return false;" class="btn btn-sm btn-light-blue"><i class="fa fa-envelope"></i> {{ "Email"|t }}</a>
+              </div>
+            {% endif %}
+            
+          </div> <!-- .staff-member -->
+      
+          {% if person.bio is not empty %}
+            <div class='staff-member'>
+              <div class='col col-name'>
+              {{ person.bio }}
+              </div>
+            </div>   
+          {% endif %}
+      {% endfor %}
+      </div> <!-- .staff-group -->
+    {% endfor %}
+{% endcache %}
+
+{% cache globally for 2 weeks %}
+    {% set leader = craft.categories.group('leadershipGroup') %}
+    {% for pos in leader.all() %}
+      <h3 class="bottom-border">
+          {{ pos.title }}
+          
+           {% if (pos.title == 'Finance Council') or (pos.title == 'Pastoral Council') or (pos.title == 'Stewardship & Development Committee') %}
+                {% if pos.title == 'Finance Council' %}
+                    {% set thecontactemail = 'financecouncil@stanneaz.org' %}
+                    {% set thecontactslug = 'finance-council' %}
+                {% endif %}
+                {% if pos.title == 'Pastoral Council' %}
+                    {% set thecontactemail = 'pastoralcouncil@stanneaz.org' %}
+                    {% set thecontactslug = 'pastoral-council' %}
+                {% endif %}
+                {% if pos.title == 'Stewardship & Development Committee' %}
+                    {% set thecontactemail = 'stewardship@stanneaz.org' %}
+                    {% set thecontactslug = 'stewardship' %}
+                {% endif %}
+                <a name="{{thecontactslug}}" id="{{thecontactslug}}"></a>
+              <div style="display:inline-block;float:right;padding:0;margin:12px 0 0 0" id="staff-{{thecontactslug}}">
+                  <span id="i-{{thecontactslug}}" style="display:none">{{ thecontactemail|hash }}</span>
+                  <div class="col col-email" id="close-{{thecontactslug}}" style="display:none">
+                    <a href="#" onclick="hideForm();return false;" class="btn btn-sm btn-light-blue">{{ "Close Email Form"|t }}</a>
+                  </div>
+                  <div class="col col-email" id="e-{{thecontactslug}}">
+                    <a href="#" onclick="displayForm('{{thecontactslug}}','The {{pos.title}}');return false;" class="btn btn-sm btn-light-blue"><i class="fa fa-envelope"></i> {{ "Email"|t }}</a>
+                  </div>
+              </div>
+          {% endif %}
+      </h3>
+      {% set people = craft.entries.section('people').relatedTo(pos).orderBy('personLastName').all() %}
+      <div class="staff-group">
+      {% for person in people %}
+      
+          <a name="{{ person.slug }}{% if person.staffMember is not empty %}2{% endif %}" id="{{ person.slug }}{% if person.staffMember is not empty %}2{% endif %}"></a>
+          <div class="staff-member" id="staff-{{ person.slug }}{% if person.staffMember is not empty %}2{% endif %}">
+            
+              {% if person.profileImage is not empty %}
+              <div class="col col-avatar">
+                <img src="{{ person.profileImage[0].getUrl('tf160') }}" alt="" class="avatar round-avatar" />
+                </div>
+              {% endif %}
+            
+            <div class="col col-name">
+              <h6>{{ person.title }}</h6>
+              <span class="job-title">{{ person.professionalTitle }}</span>
+            </div>
+            
+            
+          </div> <!-- .staff-member -->
+      
+          {# % if person.bio is not empty %}
+            <div class='staff-member'>
+              <div class='col col-name'>
+              {{ person.bio }}
+              </div>
+            </div>   
+          {% endif % #}
+          
+      {% endfor %}
+      </div> <!-- .staff-group -->
+    {% endfor %}
+{% endcache %}  
+    
+    <br><br><br><br><br><br><br><br><br>
+    <div id="formArea" style="display:none">
+        <div class="staff-group">
+            <div class="staff-member" id="personArea">
+            </div>
+        </div>
+        <h3 id="pNameArea"></h3>
+        <div class="contact-form">
+    {% macro errorList(errors) %}
+		{% if errors %}
+			<ul class="errors">
+				{% for error in errors %}
+					<li>{{ error }}</li>
+				{% endfor %}
+			</ul>
+		{% endif %}
+    {% endmacro %}
+    {% import _self as macros %}
+
+<form method="post" action="" accept-charset="UTF-8">
+  {{ csrfInput() }}
+  <input type="hidden" name="action" value="contact-form/send">
+  {{ redirectInput('contact-thankyou') }}
+  <input type='hidden' name='message[Subject]' value="Contact from Leadership Page" />
+  <input type="hidden" name="toEmail" id="iSlug" value="" />
+  <div class="form-group">
+	  <div class="form-row">
+		  <textarea name="message[body]" id="messageBody" rows="8" class="input-full-width" placeholder="{{ "Type your message here"|t }} ...">{% if message is defined %}{{ message.message }}{% endif %}</textarea>
+		  <span class="field-error">{% if message is defined %}{{ macros.errorList(message.getErrors('message')) }}{% endif %}</span>
+	  </div>
+  </div> <!-- .form-group -->
+
+  <div class="form-group">
+	  <h5>{{ "Please share your contact info below"|t }}:</h5>
+	  <div class="form-row {% if message is defined %} form-error {% endif %}">
+		<div class="input-wrap">
+		  <input type="text" name="fromName" id="fromName" class="input-full-width" placeholder="{{ "First & Last Name"|t }} *" value="{% if message is defined %}{{ message.fromName }}{% endif %}" required>
+		</div>
+		<span class="field-error">{% if message is defined %}{{ macros.errorList(message.getErrors('fromName')) }}{% endif %}</span>
+	  </div> <!-- .form-row -->
+      <input type="text" name="parishioneraddress" id="parishioneraddress"/>
+	  <div class="form-row {% if message is defined %} form-error {% endif %}">
+		<input type="email" name="fromEmail" id="" class="input-full-width" value="{% if message is defined %}{{ message.fromEmail }}{% endif %}" placeholder="{{ "Email"|t }} *" required>
+		<span class="field-error">{% if message is defined %}{{ macros.errorList(message.getErrors('fromEmail')) }}{% endif %}</span>
+	  </div>
+	  <div class="form-row">
+		<input type="text" name="message[Phone]" id="message[Phone]" class="input-full-width" placeholder="{{ "Phone Number"|t }}">
+	  </div>
+	  
+	  
+	  <div class="form-row">
+		  {{ craft.recaptcha.render() }}
+	  </div>
+
+</div> <!-- .form-group -->
+<button type="submit" class="btn btn-lg btn-light-blue btn-full-width"><span class='button__text'>{{ "Send Now"|t }}</span></button>
+<p class="text-center muted">{{ "We are usually able to respond within 1-3 days."|t }}</p>
+  
+</form>
+<span id="personSlug" style="display:none"></span>
+
+
+    </div>
+    <br>
+<a href="#" onclick="hideForm();return false;" class="btn btn-light-blue">Close This Form</a>
+</div>
+<br><br>
+    
+    
+    
+    
+    </div>
+
+
+    </div> <!-- .container -->
+  </div> <!-- .page-content-container -->
+</div> <!-- .sf-content -->
+
+
+
+
+
+<script>
+function displayForm(idSlug,pName) {
+    var iSlugVal = document.getElementById('i-'+idSlug).innerHTML;
+    document.getElementById('pNameArea').innerHTML = 'Contact ' + pName;
+    document.getElementById('close-'+idSlug).style.display = 'block';
+    document.getElementById('e-'+idSlug).style.display = 'none';
+    document.getElementById('personArea').innerHTML = document.getElementById('staff-'+idSlug).innerHTML;
+    document.getElementById('personSlug').innerHTML = idSlug;
+    document.getElementById('iSlug').value = document.getElementById('i-'+idSlug).innerHTML;
+    document.getElementById('formArea').style.display = 'block';
+    // element which needs to be scrolled to
+    var element = document.querySelector("#formArea");
+    // scroll to element
+    element.scrollIntoView();
+    document.getElementById('messageBody').focus();
+}
+function hideForm() {
+    var personSlugVal = document.getElementById('personSlug').innerHTML;
+    document.getElementById('personArea').innerHTML = '';
+    document.getElementById('close-'+personSlugVal).style.display = 'none';
+    document.getElementById('e-'+personSlugVal).style.display = 'block';
+    document.getElementById('formArea').style.display = 'none';
+    location.href = "#"+personSlugVal;
+}
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+var stSlug = getParameterByName('sl');
+var staffMember = getParameterByName('st');
+if(stSlug && staffMember){
+    displayForm(stSlug,staffMember);
+}
+</script>

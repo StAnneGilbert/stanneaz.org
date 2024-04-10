@@ -1,0 +1,91 @@
+{# Homepage Template #}
+{% extends "layouts/_layout" %}
+
+{% block content %}
+  <!-- .sf-content for flex sticky footer -->
+  <div class="sf-content nav-slide-element">
+
+<div class="page-content-container">
+    <div class="container standard-container">
+    
+
+        <h3>Mass Intentions For This Week</h3>
+
+        {% set feedurl = 'https://extras.stanneaz.org/MassIntentionsThisWeek/index.xml' %}
+        {% set limit = 100 %}
+        {% set cache = P1D %}
+        {% set items = craft.app.feeds.getFeedItems(feedurl, limit, 0, cache) %}
+        {% set counter = 1 %}
+              
+        {% for item in items %}
+ 
+            {% if item.date|date('l') starts with 'Sunday' %}
+                {% if counter == 1 %}<div><strong>{{ item.date|date('l, F d, Y') }}</strong></div>{% endif %}
+                <div>
+                    {{ item.title }}
+                </div>
+                {% set counter = counter + 1 %}
+                {% if counter == 7 %}<br>{% set counter = 1 %}{% endif %}
+            {% endif %}
+            
+            
+            
+            {% if item.date|date('l') starts with 'Monday' %}
+                {% if counter == 1 %}<div><strong>{{ item.date|date('l, F d, Y') }}</strong></div>{% endif %}
+                <div>
+                    {{ item.title }}
+                </div>
+                {% set counter = counter + 1 %}
+                {% if counter == 4 %}<br>{% set counter = 1 %}{% endif %}
+            {% endif %}
+            {% if item.date|date('l') starts with 'Tuesday' %}
+                {% if counter == 1 %}<div><strong>{{ item.date|date('l, F d, Y') }}</strong></div>{% endif %}
+                <div>
+                    {{ item.title }}
+                </div>
+                {% set counter = counter + 1 %}
+                {% if counter == 4 %}<br>{% set counter = 1 %}{% endif %}
+            {% endif %}
+            {% if item.date|date('l') starts with 'Wed' %}
+                {% if counter == 1 %}<div><strong>{{ item.date|date('l, F d, Y') }}</strong></div>{% endif %}
+                <div>
+                    {{ item.title }}
+                </div>
+                {% set counter = counter + 1 %}
+                {% if counter == 3 %}<br>{% set counter = 1 %}{% endif %}
+            {% endif %}
+            {% if item.date|date('l') starts with 'Thur' %}
+                {% if counter == 1 %}<div><strong>{{ item.date|date('l, F d, Y') }}</strong></div>{% endif %}
+                <div>
+                    {{ item.title }}
+                </div>
+                {% set counter = counter + 1 %}
+                {% if counter == 4 %}<br>{% set counter = 1 %}{% endif %}
+            {% endif %}
+            {% if item.date|date('l') starts with 'Fri' %}
+                {% if counter == 1 %}<div><strong>{{ item.date|date('l, F d, Y') }}</strong></div>{% endif %}
+                <div>
+                    {{ item.title }}
+                </div>
+                {% set counter = counter + 1 %}
+                {% if counter == 4 %}<br>{% set counter = 1 %}{% endif %}
+            {% endif %}
+            {% if item.date|date('l') starts with 'Sat' %}
+                {% if counter == 1 %}<div><strong>{{ item.date|date('l, F d, Y') }}</strong></div>{% endif %}
+                <div>
+                    {{ item.title }}
+                </div>
+                {% set counter = counter + 1 %}
+                {% if counter == 4 %}<br>{% set counter = 1 %}{% endif %}
+            {% endif %}
+           
+        {% endfor %}
+        <br><br>
+        
+        
+        
+
+   </div> <!-- .container -->
+  </div> <!-- .page-content-container -->
+</div> <!-- .sf-content -->
+{% endblock %}

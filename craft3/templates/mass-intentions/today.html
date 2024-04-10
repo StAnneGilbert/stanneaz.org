@@ -1,0 +1,40 @@
+{# Homepage Template #}
+{% extends "layouts/_layout" %}
+
+{% block content %}
+  <!-- .sf-content for flex sticky footer -->
+  <div class="sf-content nav-slide-element">
+
+<div class="page-content-container">
+    <div class="container standard-container">
+    
+        
+        {% set adateinenglish = "Today"|date("l, F d, Y") %}
+
+        <h3>Mass Intentions For {{adateinenglish}}</h3>
+
+        {% set feedurl = 'https://extras.stanneaz.org/MassIntentionsToday/index.xml' %}
+        {% set limit = 100 %}
+        {% set cache = "PT1H" %}
+        {% set items = craft.app.feeds.getFeedItems(feedurl, limit,0, cache) %}
+              
+        {% for item in items %}
+            <div>
+                {{ item.title }}
+            </div>
+        {% endfor %}
+        <br><br>
+        
+        <h3>Mass intentions with Descriptions</h3>
+        {% for item in items %}
+            <div>
+                <b>{{ item.title }}</b> 
+                {{ item.summary|raw }}
+            </div>
+            <br>
+        {% endfor %}
+
+   </div> <!-- .container -->
+  </div> <!-- .page-content-container -->
+</div> <!-- .sf-content -->
+{% endblock %}

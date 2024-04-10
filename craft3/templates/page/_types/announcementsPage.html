@@ -35,8 +35,8 @@
 
     
   {% for post in announcements %}
-
-      {% if post.entryLocation.exists() %}
+	  
+	  {% if post.entryLocation.exists() %}
 			{% set announceLink = post.entryLocation.one().url %}  
 		{% elseif post.webUrl|length %}
 			{% set announceLink = post.webUrl %} 

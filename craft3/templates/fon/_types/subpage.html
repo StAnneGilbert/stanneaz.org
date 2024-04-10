@@ -1,0 +1,122 @@
+
+  <header class="site-header">
+    <div class="container clearfix">
+      <div class="logo" style="float:left">
+      {% if craft.app.language == 'en-US' %}
+        <a href="/"><img src="/assets/img/logo.svg" alt="St. Anne Roman Catholic Parish" /></a>
+      {% elseif craft.app.language == 'es-US' %}
+        <a href="/es/"><img src="/assets/img/logo.svg" alt="St. Anne Roman Catholic Parish" /></a>
+      {% endif %}
+      </div>
+      
+      <div class="mobile-menu-toggle visible-xs" data-toggle="mobile-menu">
+        <i class="icon-mobile-menu"></i>
+      </div>
+      
+      <form {% if craft.app.language == 'es-US' %}action="https://stanneaz.org/es/buscar"{% else %}action="https://stanneaz.org/search"{% endif %} id="nav-search-small">
+            <div class="search-input-wrap">
+                <input type="text" name="q" id="nav-search-query3" />
+                <input type="submit" value="{{ "Search"|t }}" class="btn btn-light-blue nav-search-btn-small"/>
+            </div>
+      </form>
+      
+      <div class="site-menu hidden-xs">
+      
+<ul {% if craft.app.language == 'es-US' %} class="es_us"{% endif %}>
+
+{% cache globally for 2 days %}
+{# Get top-level entries in pages structure (exclude home page)  #}
+{% set pages = craft.entries.section('fon').id('not 1').level(1).all() %}
+
+{# Loop through top-level entries #}
+{% for page in fon %}
+
+	{# Check if entry has descendants #}
+	{% if not page.hasDescendants %}
+
+		{# List navigation item if entry has NO child entries #}
+		<li>
+			<a href="{{ page.getUrl }}">{{ page.title }}</a>
+		</li>
+
+	{% else %}
+
+		{# List navigation item if entry does have child entries #}
+		<li class="has-menu">
+			<a href="{{ page.getUrl }}">{{ page.title }}</a>
+			<ul class="sub-menu">
+
+				{# Get child entries of current iteration's top-level entry #}
+				{% set subPages = page.getChildren().all() %}
+				
+				{# Loop through those 2nd-level entries #}
+				{% for subPage in subPages %}
+
+					{# List sub-menu navigation item #}
+					<li {% if subPage.hasDescendants and subPage.title != 'Community of Ministries' and subPage.title != 'Comunidad de Ministerios' %}class="has-menu2"{% endif %}>
+						<a href="{{ subPage.getUrl }}">{{ subPage.title }}</a>
+						{% if subPage.hasDescendants %}
+							{% set thirdLevels = subPage.getChildren().all() %}
+							<ul class="sub-menu2">
+							{% for level3 in thirdLevels %}
+								{% if not level3.menuIndent.exists() %}
+									<li>
+									<a href="{{ level3.getUrl }}">{{ level3.title }}</a>
+									</li>
+								{% endif %}
+							{% endfor %}
+							</ul>
+						{% endif %}
+					</li>
+					{% for level3a in thirdLevels %}
+						{% if level3a.menuIndent.exists() %}
+						<li class="menuIndent{% if level3a.hasDescendants %} has-menu2{% endif %}">
+							<a href="{{ level3a.getUrl }}">{{ level3a.title }}</a>
+							{% if level3a.hasDescendants %}
+								{% set fourthLevels = level3a.getChildren().all() %}
+								<ul class="sub-menu2">
+									{% for level4 in fourthLevels %}
+										<li>
+										<a href="{{ level4.getUrl }}">{{ level4.title }}</a>
+										</li>
+									{% endfor %}
+								</ul>
+							{% endif %}
+						</li>
+						{% endif %}
+					{% endfor %}				
+						
+				{% endfor %} {# end 'subPage in subPages loop' #}
+			</ul>
+		</li>
+	{% endif %}
+{% endfor %} {# end 'for page in pages loop' #}
+{% endcache %}
+    
+</ul>
+
+      </div>
+    </div>
+  </header>
+  
+  
+  <!-- .sf-content for flex sticky footer -->
+  <div class="sf-content nav-slide-element" data-swiftype-name="body" data-swiftype-type="text">
+    <div class="page-photo-title" {% if entry.pageImage.exists() %}style=" background-image:url({{ entry.pageImage.one().url }})" {% endif %}>
+      <div class="overlay">
+        <div class="container">
+          <h1 class="caps-header">&nbsp;</h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-content-container">
+      <div class="container standard-container">
+
+        {{ entry.body }}
+        
+        
+      </div> <!-- .container -->
+    </div> <!-- .page-content-container -->
+  </div> <!-- .sf-content -->
+  

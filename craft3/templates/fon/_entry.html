@@ -1,0 +1,10 @@
+{# FON Template #}
+{% extends "layouts/_layout" %}
+
+{% block pagetype %}
+  <meta class='swiftype' name='type' data-type='enum' content='fon' />
+{% endblock %}
+
+{% block content %}
+  {% include "fon/_types/" ~ entry.type %}
+{% endblock %}

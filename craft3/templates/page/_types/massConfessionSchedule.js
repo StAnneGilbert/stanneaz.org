@@ -1,0 +1,7 @@
+
+var extCont = '';
+{% paginate craft.entries.section("times").orderBy("title ASC").limit(2) as entries %}{% for post in entries %}
+extCont = extCont + '{% set cancelledOn = "Cancelled on " %}'
+extCont = extCont + '{{ post.body|raw|replace({"\n": "", "\r": "", "\t": ""})}}';
+extCont = extCont + '{% if post.saturdayVigilMassTimes.exists() %}<p><strong>{{ "Saturday Vigil Mass"|t }}:</strong><br></p><ul>{% for block in post.saturdayVigilMassTimes.all() %}{% set cDate = block.dateCancelledOrChanged %}<li>{{ block.hourName|raw }}{% if cDate|length %}{% if cDate|date("Ymd") >= now|date("Ymd") %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{cancelledOn}}{{ cDate|date("F d, Y") }}{% endif %})</span></li>{% endif %}{% endif %}{% endfor %}</ul>{% endif %}{% endfor %}{% if post.sundayMassTimes.exists() %}<p><strong>{{ "Sunday Mass"|t }}:</strong></p><ul> {% for block in post.sundayMassTimes.all() %}{% set cDate = block.dateCancelledOrChanged %}<li>{{ block.hourName|raw }}{% if cDate|length %}{% if cDate|date("Ymd") >= now|date("Ymd") %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{cancelledOn}}{{ cDate|date("F d, Y") }}{% endif %})</span>{% endif %}{% endif %}</li> {% endfor %}</ul>{% endif %}';
+extCont = extCont + '{{ post.bodyBetweenSundayAndWeekdayMass|raw|replace({"\n": "", "\r": "", "\t": ""})}}';

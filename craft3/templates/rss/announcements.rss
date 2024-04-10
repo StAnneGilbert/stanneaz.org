@@ -13,8 +13,8 @@
             <link>{{ siteUrl }}</link>
         </image>
         {% for entry in craft.entries.section('announcements').limit('80').all() %}
-			
-			{% if entry.entryLocation.exists() %}
+        
+            {% if entry.entryLocation.exists() %}
 			    {% set announceLink = entry.entryLocation.one().url %}  
 		    {% elseif entry.webUrl|length %}
 			    {% set announceLink = entry.webUrl %} 
