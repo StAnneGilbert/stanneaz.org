@@ -2,8 +2,6 @@
     {% redirect entry.entryLocation.one().url %}
 {% elseif entry.webUrl|length %}
     {% redirect entry.webUrl %}
-{% elseif entry.redirectUrl|length %}
-    {% redirect entry.redirectUrl.url %}
 {% else %}
     {% redirect '/start-here' %}
 {% endif %}

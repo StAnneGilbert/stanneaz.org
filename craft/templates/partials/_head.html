@@ -22,14 +22,14 @@
   {% set pageImage = entry.pageImage.one().getUrl('tf280') %}
 {% endif %}
 <meta property="og:type" content="website">
-<meta property="og:description" content="St. Anne Roman Catholic Parish is located in Gilbert, Arizona. Fiat Voluntas Tua (May God's will be done).">
+<meta property="og:description" content="{{ siteWideContent.siteDescription }}">
 <meta property="og:image" content="https://stanneaz.org/img/general/Mosaic-1920x1080.jpg">
 <meta property='og:url' content='{{ currentURL }}'/>
 
 <meta name="twitter:card" content="summary" /> 
 <meta name="twitter:site" content="{{ currentURL }}" /> 
 <meta name="twitter:title" content="{{ websiteTitle }}" /> 
-<meta name="twitter:description" content="St. Anne Roman Catholic Parish is located in Gilbert, Arizona. Fiat Voluntas Tua (May God's will be done)." /> 
+<meta name="twitter:description" content="{{ siteWideContent.siteDescription }}" /> 
 <meta name=twitter:image content="https://stanneaz.org/img/general/Mosaic-1920x1080.jpg" />
 
 
