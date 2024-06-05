@@ -44,11 +44,10 @@
 
     <p class="links">
       {% cache globally for 1 month %}
-        {% for item in siteWideContent.footerLinks.all() %}
-          {% set link = item.footerLink %}
-          <span class="dot">&middot;</span>
-          <a href='{{ link.url }}' {{ link.target ? ' target="_blank"' }}>{{ link.text }}</a>
-        {% endfor %}
+          {% for item in siteWideContent.footerLinks.all() %}
+              <span class="dot">&middot;</span>
+              <a href='{{ item.footerLink }}'>{{ item.footerText }}</a>
+          {% endfor %}
       {% endcache %}
     </p>
   </div>

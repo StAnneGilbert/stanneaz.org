@@ -10,17 +10,8 @@
 {% endif %}
 {% set currentURL = craft.app.request.absoluteUrl() %}
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="{{ websiteTitle }}">
-<meta property="og:description" content="St. Anne Roman Catholic Parish is located in Gilbert, Arizona. Fiat Voluntas Tua (May God's will be done).">
-<meta property="og:image" content="https://stanneaz.org/img/general/Mosaic-1920x1080.jpg">
-<meta property='og:url' content='{{ currentURL }}'/>
-
-<meta name="twitter:card" content="summary" /> 
-<meta name="twitter:site" content="{{ currentURL }}" /> 
-<meta name="twitter:title" content="{{ websiteTitle }}" /> 
-<meta name="twitter:description" content="St. Anne Roman Catholic Parish is located in Gilbert, Arizona. Fiat Voluntas Tua (May God's will be done)." /> 
-<meta name=twitter:image content="https://stanneaz.org/img/general/Mosaic-1920x1080.jpg" />
+  <meta property='og:url' content='{{ currentURL }}'/>
+  <meta name="twitter:site" content="{{ currentURL }}" /> 
 
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/cupertino/jquery-ui.css">
         <script src="//code.jquery.com/jquery-2.2.3.min.js"></script>
