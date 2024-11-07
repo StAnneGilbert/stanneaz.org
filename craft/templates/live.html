@@ -1,0 +1,170 @@
+{# Homepage Template #}
+{% extends "layouts/_layout" %}
+
+{% block content %}
+
+{% if entry.title is defined %}
+    {% set websiteTitle %}{{ entry.title }} | St. Anne{% endset %}
+{% else %}
+    {% set websiteTitle %}St. Anne Roman Catholic Parish{% endset %}
+{% endif %}
+{% set currentURL = craft.app.request.absoluteUrl() %}
+
+  <meta property='og:url' content='{{ currentURL }}'/>
+  <meta name="twitter:site" content="{{ currentURL }}" /> 
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/cupertino/jquery-ui.css">
+        <script src="//code.jquery.com/jquery-2.2.3.min.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<style>
+.ycontainer {position: relative;width: 100%;height: 0;padding-bottom: 56.25%}
+
+/* The current embedded video is not playing well with .ycontainer and .yvideo */
+@media screen and (max-width: 991px){
+  .ycontainer{padding-bottom: 30%}
+}
+@media screen and (max-width: 628px){
+  .ycontainer{padding-bottom: 36%}
+}
+@media screen and (max-width: 498px){
+  .ycontainer{padding-bottom: 46%}
+}
+@media screen and (max-width: 413px){
+  .ycontainer{padding-bottom: 56.25%}
+}
+/* end weird padding corrections. */
+
+.yvideo {position: absolute;top: 0;left: 0;width: 100%; height: 100%}
+#topDonate{display:block; text-align:center; width:70%; margin:15px auto 15px auto; padding:2px 3px 3px; border: 1px #000 solid; background-color:#fdea60; color:#000}
+#topDonate b {display:block; padding:0 0 1px 0; font-size:130%; color:#c00}
+#topDonate i {display:inline-block;color:#000}
+#topDonate u {text-decoration:none; color:#c00;font-weight:bold}
+.page-content-container{margin-top:0;padding-top:35px;}
+#donationArea,#vidArea2,#facebookArea{display:none}
+.caps-header a{color:#99bfbc}
+.caps-header a:hover{text-decoration:underline}
+@media screen and (min-width: 1147px)
+{
+    .worship-links a {font-size: 20px;line-height: 24px;padding: 15px 0;float: left; width: 25%;
+    }
+}
+@media screen and (max-width: 1146px){
+.worship-links a {padding: 15px 12px;}
+#topDonate{width:92%}
+}
+.worship-links a {display: block;color: #000;background-color:#fff;text-decoration: none;text-align: center;border: 1px #000 solid}
+.worship-links a:hover, .worship-links a.active {background-color:#eee}
+.besideBtns{display:inline !important;padding-right:10px}
+@media screen and (max-width: 768px){
+  .besideBtns{display:block !important;padding-right:0}
+}
+#accordionOrder div, #accordion div.inner,.saTxt{font-size:130%}
+#accordionOrder h1, #accordion h1{font-size:110%;text-align:left}
+#readings p, #orderOfMass p{margin-top:20px}
+#readings, #orderOfMass{text-align:left}
+#accordionOrder h4 {color:#c00;text-align:right}
+.allPpl,.orTxt,orTxt2,.instTxt{color:#c00}
+.allPpl{font-weight:bold}
+.orTxt{font-size:120%; font-weight:bold; font-style: italic; padding:20px 0}
+.orTxt2{font-weight:bold; font-style: italic;}
+.instTxt{display:block;text-align:right}
+.rubrica { color: #CC0000; font-style: italic; text-align:right }
+.pueblo { font-weight: bold; }
+
+
+.ui-widget{font-family: "Open Sans", "Helvetica", "Arial", sans-serif;font-size: 100%;}
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
+        color: #4A4A4A;
+		font-family: "Open Sans", "Helvetica", "Arial", sans-serif;
+		font-size: 16px;
+		line-height: 22px;
+		margin-top:5px;
+		padding: 8px 8px;
+		outline: none;
+		font-weight: 200;
+		resize: none;
+    }
+.ui-widget-content{background:#ffffff !important;-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);border-radius: 2px;padding: 28px 20px}
+.ui-widget-content a{color:#6aa29d;}
+.ui-widget-content a:hover{text-decoration:underline;}
+.ui-widget-content a.btn:hover{text-decoration:none;}
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited{color:#005F72}
+.ui-state-hover a:hover, .ui-state-hover a:link, .ui-state-hover a:visited, .ui-state-focus a, .ui-state-focus a:hover, .ui-state-focus a:link, .ui-state-focus a:visited{color:#895022}
+.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited{color:#ffffff}
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active{border: 1px solid #99BFBC;background: #99BFBC;-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);}
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus{border: 1px solid #99BFBC;-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25)}
+}
+@media only screen and (max-width: 768px) {
+  .ui-accordion .ui-accordion-content {padding:1em 25px}
+}
+@media screen and (max-width: 600px) { 
+    .ui-accordion .ui-accordion-content {padding:1em 20px}
+    .ui-accordion .ui-accordion-header{padding-right:0} 
+}
+
+</style>
+
+
+  <div class="sf-content nav-slide-element">
+
+    <div class="page-content-container">
+       <div class="container news-grid">
+      
+      
+      {% if entry.lead is not empty %}
+          <p class="lead">{{ entry.lead }}</p>
+        {% endif %}
+        {{ entry.body }}
+
+        {% set home = craft.entries.section('homepage').one() %}
+
+<div style="text-align:center">     
+    <h4 class="caps-header text-center">
+          <span id="vidTitle1">{{ "Live"|t }}</span>&nbsp;/&nbsp;<a href="https://www.youtube.com/@StAnneRomanCatholicParish" target="_blank">YouTube</a>&nbsp;/&nbsp;<a href="https://www.facebook.com/Stannegilbert/videos/" target="_blank">{{ "Facebook"|t }}</a>
+    </h4>
+  
+    {{ liveBroadcastSettings.liveBroadcastVideoEmbed | raw }}
+    
+    <div id="vidArea2">
+       
+    </div>
+
+    
+ 
+</div>
+      
+
+      
+
+
+
+
+      </div>
+    </div> <!-- .page-content-container -->
+  </div> <!-- .sf-content -->
+  
+  
+  <script>
+
+function displayLive(){
+   document.getElementById('vidTitle2').style.display = 'none';
+   document.getElementById('vidTitle1').style.display = 'inline-block';
+   document.getElementById('vidArea2').style.display = 'none';
+   document.getElementById('vidArea1').style.display = 'block';
+   document.getElementById('vidArea1').focus();
+}
+function displayPrevStream(){
+   document.getElementById('vidTitle1').style.display = 'none';
+   document.getElementById('vidTitle2').style.display = 'inline-block';
+   document.getElementById('vidArea1').style.display = 'none';
+   document.getElementById('vidArea2').style.display = 'block';
+   document.getElementById('vidArea2').focus();
+}
+function displayFacebook() {
+    document.getElementById('youTubeArea').style.display = 'none';
+    document.getElementById('facebookArea').style.display = 'block';
+    document.getElementById('facebookArea').focus();
+}
+
+</script>
+{% endblock %}

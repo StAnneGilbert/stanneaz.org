@@ -14,12 +14,14 @@
       </div>
       <div class="col-lg-7 col-md-7 col-sm-7 action-links" style="text-align:right">
         {% if craft.app.language == "en-US" %}
-            <a style="display:inline-block" href="http://feeds.feedburner.com/StAnneEvents" target="_blank"><i class="fa fa-rss"></i> {{ "Event Notifications"|t }}</a>
+            <a style="display:inline-block" href="https://stanneaz.flocknote.com/EventsActivities" target="_blank"><i class="fa fa-rss"></i> {{ "Event Notifications"|t }}</a> &nbsp;
+             <a style="display:inline-block" class="btn btn-sm btn-dark-blue" href="https://stanneaz.flocknote.com/EventsActivities" target="_blank">Sign Me Up!</a>
+            
         {% elseif craft.app.language == "es-US" %}
-            <a style="display:inline-block" href="http://feeds.feedburner.com/EventosStaAna" target="_blank"><i class="fa fa-rss"></i> {{ "Event Notifications"|t }}</a>
+            <a style="display:inline-block" href="https://stanneaz.flocknote.com/Eventos" target="_blank"><i class="fa fa-rss"></i> {{ "Event Notifications"|t }}</a> &nbsp;
+            <a style="display:inline-block" class="btn btn-sm btn-dark-blue" href="https://stanneaz.flocknote.com/Eventos" target="_blank">Inscríbete</a>
         {% endif %}
               
-        <form style="display:inline-block" action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open('https://feedburner.google.com/fb/a/mailverify?uri={% if craft.app.language == 'es-US' %}EventosStaAna{% else %}StAnneEvents{% endif %}', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true"> <input type="text" style="margin:0 10px 0 5px;vertical-align:middle;width:160px" name="email" placeholder="{{ "Enter your email"|t }}...." title="{{ "Enter your email address"|t }}"/><input type="hidden" value="{% if craft.app.language == 'es-US' %}EventosStaAna{% else %}StAnneEvents{% endif %}" name="uri"/><input type="hidden" name="loc" value="en_US"/><button type="submit" class="btn btn-sm btn-light-blue" style="vertical-align:middle;"><i class="fa fa-check"></i> {{ "Subscribe"|t }}</button></form>
               
         </div>
     </div>
