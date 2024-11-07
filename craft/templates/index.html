@@ -34,7 +34,7 @@
 .cancelledItem{color:#c00;font-weight:bold}
 @media screen and (min-width: 1147px)
 {
-    .worship-links a {font-size: 20px;line-height: 24px;padding: 15px 0;float: left; width: 25%}
+    .worship-links a {font-size: 20px;line-height: 24px;padding: 15px 0;float: left; width: 33.3%}
 }
 @media screen and (max-width: 1146px){
 .worship-links a {padding: 15px 12px}
@@ -48,8 +48,8 @@
 }
 #accordionOrder div, #accordion div.inner,.saTxt{font-size:130%}
 #accordionOrder h1, #accordion h1{font-size:110%;text-align:left}
-#readings p,#orderOfMass p{margin-top:20px}
-#readings, #orderOfMass{text-align:left}
+#orderOfMass p{margin-top:20px}
+#orderOfMass{text-align:left}
 #accordionOrder h4 {color:#c00;text-align:right}
 .allPpl,.orTxt,orTxt2,.instTxt{color:#c00}
 .allPpl{font-weight:bold}
@@ -179,7 +179,7 @@
 					<strong>{{ "Sunday"|t }}:</strong>
 					{% for block in post.sundayMassTimes.all() %}
 						{% set cDate = block.dateCancelledOrChanged %}
-						{{ block.hourName|replace('High Mass in English', '(High Mass)')|replace('in English', '(English)')|replace('in Spanish', '(Spanish)')|replace('Tridentine Low Mass in Latin', '(Tridentine)')|replace('tridentina en latín', '(tridentina)')|replace('en inglés/latín', '(inglés/latín)')|replace('en inglés', '(inglés)')|replace('en español', '(español)')|raw }}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{ "Cancelled on"|t }} {% if craft.app.language == 'es-US' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span>{% endif %}{% endif %}{% if loop.index != 6 %}, {% endif %}
+						{{ block.hourName|replace('High Mass in English', '(High Mass)')|replace('in English', '(English)')|replace('in Spanish', '(Spanish)')|replace('Tridentine Low Mass in Latin', '(Tridentine)')|replace('tridentina en latín', '(tridentina)')|replace('en inglés/latín', '(inglés/latín)')|replace('en inglés', '(inglés)')|replace('en español', '(español)')|raw }}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{ "Cancelled on"|t }} {% if craft.app.language == 'es-US' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span> {% endif %}{% endif %}{% if loop.index != 6 %}, {% endif %}
 					{% endfor %}   
 				{% endif %}
 				{% if post.weekdayMassTimes.exists() %} 
@@ -188,55 +188,55 @@
 						{% for block in post.weekdayMassTimes.all() %}
 							{% set cDate = block.dateCancelledOrChanged %}
 							{% if (block.dayOfWeek == 'Monday') or (block.dayOfWeek == 'Lunes') %}
-							   {{ block.hourName|raw }} {% if block.languageOfMass != 'none' %}({{ block.languageOfMass }}){% endif %}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{ "Cancelled on"|t }} {% if craft.app.language == 'es-US' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span>{% endif %}{% endif %}{% if loop.index == 1 %}, {% endif %}
+							   {{ block.hourName|raw }} {% if block.languageOfMass != 'none' %}({{ block.languageOfMass }}){% endif %}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{ "Cancelled on"|t }} {% if craft.app.language == 'es-US' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span> {% endif %}{% endif %}{% if loop.index == 1 %}, {% endif %}
 							{% endif %}
 						{% endfor %}
 						<br><strong>{{ "Tuesday"|t }}:</strong> 
 						{% for block in post.weekdayMassTimes.all() %}
 							{% set cDate = block.dateCancelledOrChanged %}
 							{% if (block.dayOfWeek == 'Tuesday') or (block.dayOfWeek == 'Martes') %}
-							   {{ block.hourName|raw }} {% if block.languageOfMass != 'none' %}({{ block.languageOfMass }}){% endif %}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{ "Cancelled on"|t }}{% if craft.app.language == 'es-US' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span>{% endif %}{% endif %}{% if loop.index != 5 %}, {% endif %}
+							   {{ block.hourName|raw }} {% if block.languageOfMass != 'none' %}({{ block.languageOfMass }}){% endif %}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{ "Cancelled on"|t }} {% if craft.app.language == 'es-US' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span> {% endif %}{% endif %}{% if loop.index != 5 %}, {% endif %}
 							{% endif %}
 						{% endfor %}
 						<br><strong>{{ "Wednesday"|t }}:</strong> 
 						{% for block in post.weekdayMassTimes.all() %}
 							{% set cDate = block.dateCancelledOrChanged %}
 							{% if (block.dayOfWeek == 'Wednesday') or (block.dayOfWeek == 'Miércoles') %}
-							   {{ block.hourName|raw }} {% if block.languageOfMass != 'none' %}{% if block.languageOfMass != 'none' %}({{ block.languageOfMass }}){% endif %}{% endif %}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{ "Cancelled on"|t }} {% if craft.app.language == 'es-US' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span>{% endif %}{% endif %}{% if loop.index != 7 %}, {% endif %}
+							   {{ block.hourName|raw }} {% if block.languageOfMass != 'none' %}{% if block.languageOfMass != 'none' %}({{ block.languageOfMass }}){% endif %}{% endif %}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{ "Cancelled on"|t }} {% if craft.app.language == 'es-US' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span> {% endif %}{% endif %}{% if loop.index != 7 %}, {% endif %}
 							{% endif %}
 						{% endfor %}
 						<br><strong>{{ "Thursday"|t }}:</strong> 
 						{% for block in post.weekdayMassTimes.all() %}
 							{% set cDate = block.dateCancelledOrChanged %}
 							{% if (block.dayOfWeek == 'Thursday') or (block.dayOfWeek == 'Jueves') %}
-							   {{ block.hourName|raw }} {% if block.languageOfMass != 'none' %}({{ block.languageOfMass }}){% endif %}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{ "Cancelled on"|t }} {% if craft.app.language == 'es-US' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span>{% endif %}{% endif %}{% if loop.index != 10 %}, {% endif %}
+							   {{ block.hourName|raw }} {% if block.languageOfMass != 'none' %}({{ block.languageOfMass }}){% endif %}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{ "Cancelled on"|t }} {% if craft.app.language == 'es-US' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span> {% endif %}{% endif %}{% if loop.index != 10 %}, {% endif %}
 							{% endif %}
 						{% endfor %}
 						<br><strong>{{ "Friday"|t }}:</strong> 
 						{% for block in post.weekdayMassTimes.all() %}
 							{% set cDate = block.dateCancelledOrChanged %}
 							{% if (block.dayOfWeek == 'Friday') or (block.dayOfWeek == 'Viernes') %}
-							   {{ block.hourName|raw }} {% if block.languageOfMass != 'none' %}({{ block.languageOfMass }}){% endif %}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{ "Cancelled on"|t }} {% if craft.app.language == 'es-US' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span>{% endif %}{% endif %}{% if loop.index != 12 %}, {% endif %}
+							   {{ block.hourName|raw }} {% if block.languageOfMass != 'none' %}({{ block.languageOfMass }}){% endif %}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{ "Cancelled on"|t }} {% if craft.app.language == 'es-US' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span> {% endif %}{% endif %}{% if loop.index != 12 %}, {% endif %}
 							{% endif %}
 						{% endfor %}
 						<br id="saturdayMTA"><strong>{{ "Saturday"|t }}:</strong> 
 						{% for block in post.weekdayMassTimes.all() %}
 							{% set cDate = block.dateCancelledOrChanged %}
 							{% if (block.dayOfWeek == 'Saturday') or (block.dayOfWeek == 'Sábado') %}
-							   {{ block.hourName|raw }} {% if block.languageOfMass != 'none' %}({{ block.languageOfMass }}){% endif %}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{ "Cancelled on"|t }} {% if craft.app.language == 'es-US' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span>{% endif %}{% endif %}
+							   {{ block.hourName|raw }} {% if block.languageOfMass != 'none' %}({{ block.languageOfMass }}){% endif %}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{ "Cancelled on"|t }} {% if craft.app.language == 'es-US' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span> {% endif %}{% endif %}
 							   <script>displaySaturdayMTA=true</script>
 							{% endif %}
 						{% endfor %}
 					{% else %}
 						{% for block in post.weekdayMassTimes.all() %}
 							{% set cDate = block.dateCancelledOrChanged %}
-							{{ block.dayOfWeek|capitalize }}: {{ block.hourName }} {% if block.languageOfMass != 'none' %}({{ block.languageOfMass }}){% endif %}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{ "Cancelled on"|t }} {% if craft.app.language == 'es-US' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span>{% endif %}{% endif %}, 
+							{{ block.dayOfWeek|capitalize }}: {{ block.hourName }} {% if block.languageOfMass != 'none' %}({{ block.languageOfMass }}){% endif %}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{ "Cancelled on"|t }} {% if craft.app.language == 'es-US' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span> {% endif %}{% endif %}, 
 						{% endfor %}
 					{% endif %}
 					{% if post.saturdayVigilMassTimes.exists() %}
 						{% for block in post.saturdayVigilMassTimes.all() %}
 							{% set cDate = block.dateCancelledOrChanged %}
-							{{ block.hourName|replace('in English', '(Vigil in English)')|replace('in Spanish', '(Vigil in Spanish)')|replace('en inglés', '(inglés)')|replace('en español', '(español)')|raw}}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{ "Cancelled on"|t }} {% if craft.app.language == 'es-US' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span>{% endif %}{% endif %}{% if loop.index == 1 %}, {% endif %}
+							{{ block.hourName|replace('in English', '(Vigil in English)')|replace('in Spanish', '(Vigil in Spanish)')|replace('en inglés', '(inglés)')|replace('en español', '(español)')|raw}}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{ "Cancelled on"|t }} {% if craft.app.language == 'es-US' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span> {% endif %}{% endif %}{% if loop.index == 1 %}, {% endif %}
 						{% endfor %}
 					{% endif %}
 				{% endif %}
@@ -273,7 +273,7 @@
 		    {% if post.confessionTimes.exists() %}
 				{% for block in post.confessionTimes.all() %}
 					{% set cDate = block.dateCancelledOrChanged %}
-					{{ block.dayAndTimes|replace('Saturday:', '<b>Saturday:</b>')|replace('Sunday:', '<b>Sunday:</b>')|replace('Monday:', '<b>Monday:</b>')|replace('Tuesday:', '<b>Tuesday:</b>')|replace('Wednesday:', '<b>Wednesday:</b>')|replace('Thursday:', '<b>Thursday:</b>')|replace('Friday:', '<b>Friday:</b>')|replace('Domingo:', '<b>Domingo:</b>')|replace('Lunes:', '<b>Lunes:</b>')|replace('Martes:', '<b>Martes:</b>')|replace('Miércoles:', '<b>Miércoles:</b>')|replace('Jueves:', '<b>Jueves:</b>')|replace('Viernes:', '<b>Viernes:</b>')|replace('Sábado:', '<b>Sábado:</b>')|raw }}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{ "Cancelled on"|t }} {% if craft.app.language == 'es-US' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span>{% endif %}{% endif %}<br>
+					{{ block.dayAndTimes|replace('Saturday:', '<b>Saturday:</b>')|replace('Sunday:', '<b>Sunday:</b>')|replace('Monday:', '<b>Monday:</b>')|replace('Tuesday:', '<b>Tuesday:</b>')|replace('Wednesday:', '<b>Wednesday:</b>')|replace('Thursday:', '<b>Thursday:</b>')|replace('Friday:', '<b>Friday:</b>')|replace('Domingo:', '<b>Domingo:</b>')|replace('Lunes:', '<b>Lunes:</b>')|replace('Martes:', '<b>Martes:</b>')|replace('Miércoles:', '<b>Miércoles:</b>')|replace('Jueves:', '<b>Jueves:</b>')|replace('Viernes:', '<b>Viernes:</b>')|replace('Sábado:', '<b>Sábado:</b>')|raw }}{% if cDate|length %}{% if cDate|date('Ymd') >= now|date('Ymd') %} <span class="cancelledItem">({% if block.customMessage|length %}{{ block.customMessage }}{% else %}{{ "Cancelled on"|t }} {% if craft.app.language == 'es-US' %}{{ cDate|date('d \\d\\e F, Y') }}{% else %}{{ cDate|date('F d, Y') }}{% endif %}{% endif %})</span> {% endif %}{% endif %}<br>
 				{% endfor %}
 		    {% endif %}
 
@@ -320,87 +320,6 @@
     
     <div id="vidArea2">
            
-    </div>
-    
-
-    <div class="giant-block-links clearfix" style="margin:0 auto;padding:0">
-        <a href="#" onclick="displayDonationArea();return false;" class="bg-dark-brown"><i class="fa fa-heart"></i> {{ "Can you help? Donate Today"|t }}</a>
-        <a href="#" onclick="displayWorshipAids();displayReadings();return false;" class="bg-light-blue"><i class="fa fa-plus"></i> {{ "Worship Aids"|t }}</a>
-        {% if craft.app.language == 'es-US' %}
-            <a href="/es/media/media-library" class="bg-dark-blue"><i class="fa fa-book"></i>Ver Audios de Santa Ana</a>   
-        {% else %}
-            <a href="/media/media-library" class="bg-dark-blue"><i class="fa fa-book"></i>View Media Library</a>        
-        {% endif %}     
-    </div>
- 
-    <div id="donationArea" style="display:none;">
-        {% if craft.app.language == 'es-US' %}
-            <script src="https://forms.ministryforms.net/embed.aspx?formId=daa6ef40-de28-4594-98da-4f3a8039614c"></script>
-        {% else %}
-            <script src="https://forms.ministryforms.net/embed.aspx?formId=00efe358-ad9e-41ea-86a0-1695fa41eed0"></script>
-        {% endif %} 
-    </div>
-    
-    <div id="worshipAidsArea" style="display:none">
-        <div class="worship-links clearfix" style="margin:0 auto;padding:0">
-            <a href="#" id="hOrderOfMass" onclick="displayOrderOfMass();return false;"><i class="fa fa-life-ring"></i> {{ "Order of Mass"|t }}</a>
-            <a href="#" id="hReadings" onclick="displayReadings();return false;"><i class="fa fa-book"></i> {{ "Readings"|t }}</a>
-            <a href="#" id="hCommunion" onclick="displaySpiritualCommunion();return false;"><i class="fa fa-plus"></i> {{ "Spiritual Communion"|t }}</a>
-            <a href="#" id="hResources" onclick="displayResources();return false;"><i class="fa fa-wrench"></i> {{ "Resources"|t }}</a>
-        </div>
-    
-        <div id="orderOfMass" style="display:none">
-            <br>
-            <h3>{{ "The Order of Mass"|t }}</h3>
-
-			{{ entry.bodyb }}
-
-        </div><!--end orderOfMass-->
-        
-        
-        
-        <div id="readings" style="display:none">
-            <br>
-            <h3>{{ "Readings"|t }}</h3>
-            <div class="saTxt">
-			    {% if craft.app.language == 'es-US' %}
-				    <p>(<a href="https://stanneaz.org/?pg=readings">Click here for English / Haga clic aquí para inglés</a>)</p>
-				    {% set readingFeedUrl = "/es/usccb-readings" %}
-			    {% else %}
-				    <p>(<a href="https://stanneaz.org/es/?pg=readings">Haga clic aquí para español / Click here for Spanish</a>)</p>
-				    {% set readingFeedUrl = "/usccb-readings" %}
-			    {% endif %}
-			</div>
-            <iframe src="{{ readingFeedUrl }}" 
-frameborder="0" allowfullscreen style="width:100%;height:5500px"></iframe>
-        </div><!--end readings-->
-        
-        
-        
-        
-        <div id="spiritualCommunionArea" style="display:none;">
-       
-            {% if craft.app.language == 'es-US' %}
-                <img src="https://stanneaz.org/img/general/resources/spiritualCommunion_es.jpg" width="100%" alt="COMUNION ESPIRITUAL (para los que NO pueden comulgar) - Jesus mío, creo que estás en el santísimo sacramento del altar, te amo sobre todas las cosas y deseo tenerte en mi alma. Ya que ahora no puedo recibirte sacramentalmente,  ven espiritualmente a mi corazón. Como si ya hubieses venido, me uno todo  a tí, no te apartes jamás de mí. Así sea. Amen." />
-            {% else %}
-                <img src="https://stanneaz.org/img/general/resources/spiritualCommunion.jpg" width="100%" alt="Spiritual Communion - My Jesus, I believe that You are present in the Most Holy Sacrament.  I love You above all things, and desire to receive You into my soul.  Since I cannot at this moment receive You sacramentally, come at least spiritually into my heart. I embrace You as if You were already there and unite myself wholly to You.  Never permit me to be separated from you. Amen." />
-            {% endif %} 
-      
-          <br><br>
-        </div>
-        
-        
-        
-        
-        <div id="resources" style="display:none;">
-            <br>
-            <h3>{{ "Resources"|t}}</h3>      
-        
-            {{ entry.worshipAidResources|raw }}
-
-        </div>
-    
-    
     </div>
       
       
@@ -468,94 +387,6 @@ frameborder="0" allowfullscreen style="width:100%;height:5500px"></iframe>
     </div> <!-- .page-content-container -->
   </div> <!-- .sf-content -->
   <script>
-function displayDonation(){
-  document.getElementById('donationArea').style.display = 'block';
-  document.getElementById('donationArea').focus();
-}
-
-function displayDonationArea(){
-  document.getElementById('worshipAidsArea').style.display = 'none';
-   if(document.getElementById('donationArea').style.display == 'none'){
-       document.getElementById('donationArea').style.display = 'block';
-   } else {
-       document.getElementById('donationArea').style.display = 'none';
-   }
-}
-
-
-function displayWorshipAids(){
-   document.getElementById('donationArea').style.display = 'none';
-   if(document.getElementById('worshipAidsArea').style.display == 'none'){
-       document.getElementById('worshipAidsArea').style.display = 'block';
-   } else {
-       document.getElementById('worshipAidsArea').style.display = 'none';
-   }
-}
-
-function clearWorshipPanels(idName){
-    if (idName != 'orderOfMass'){
-        document.getElementById('orderOfMass').style.display = 'none';
-        document.getElementById('hOrderOfMass').classList.remove('active');
-    }
-    if (idName != 'readings'){
-        document.getElementById('readings').style.display = 'none';
-        document.getElementById('hReadings').classList.remove('active');
-    }
-    if (idName != 'spiritualCommunionArea'){
-        document.getElementById('spiritualCommunionArea').style.display = 'none';
-        document.getElementById('hCommunion').classList.remove('active');
-    }
-    if (idName != 'resources'){
-        document.getElementById('resources').style.display = 'none';
-        document.getElementById('hResources').classList.remove('active');
-    }
-}
-
-function displayOrderOfMass(){
-    clearWorshipPanels('orderOfMass');
-    if(document.getElementById('orderOfMass').style.display == 'none'){
-        document.getElementById('orderOfMass').style.display = 'block';
-        document.getElementById('hOrderOfMass').classList.add("active");
-    } else {
-        document.getElementById('orderOfMass').style.display = 'none';
-        document.getElementById('hOrderOfMass').classList.remove('active');
-    }
-}
-
-function displayReadings(){
-   clearWorshipPanels('readings');
-   if(document.getElementById('readings').style.display == 'none'){
-       document.getElementById('readings').style.display = 'block';
-       document.getElementById('hReadings').classList.add('active');
-   } else {
-       document.getElementById('readings').style.display = 'none';
-        document.getElementById('hReadings').classList.remove('active');
-   }
-}
-
-
-function displaySpiritualCommunion(){
-   clearWorshipPanels('spiritualCommunionArea');
-   if(document.getElementById('spiritualCommunionArea').style.display == 'none'){
-       document.getElementById('spiritualCommunionArea').style.display = 'block';
-       document.getElementById('hCommunion').classList.add("active");
-   } else {
-       document.getElementById('spiritualCommunionArea').style.display = 'none';
-       document.getElementById('hCommunion').classList.remove('active');
-   }
-}
-
-function displayResources(){
-   clearWorshipPanels('resources');
-   if(document.getElementById('resources').style.display == 'none'){
-       document.getElementById('resources').style.display = 'block';
-       document.getElementById('hResources').classList.add('active');
-   } else {
-       document.getElementById('resources').style.display = 'none';
-       document.getElementById('hResources').classList.remove('active');
-   }
-}
-
 
 function displayLive(){
    document.getElementById('vidTitle2').style.display = 'none';
@@ -575,47 +406,6 @@ function displayFacebook() {
     document.getElementById('youTubeArea').style.display = 'none';
     document.getElementById('facebookArea').style.display = 'block';
     document.getElementById('facebookArea').focus();
-}
-
-
-$("#accordion").accordion({ header: "h1", collapsible: true, active: false, heightStyle: "content", animate: 300 });
-$("#accordion").accordion("option", "active", $("#firstReading").index("#accordion div"));
-$('#accordion h1').bind('click',function(){
-    var self = this;
-    setTimeout(function() {
-         theOffset = $(self).offset();
-         $('body,html').animate({ scrollTop: theOffset.top - 25 });
-    }, 310); // ensure the collapse animation is done
-});
-$("#accordionOrder").accordion({ header: "h1", collapsible: true, active: false, heightStyle: "content", animate: 300 });
-$('#accordionOrder h1').bind('click',function(){
-    var self = this;
-    setTimeout(function() {
-         theOffset = $(self).offset();
-         $('body,html').animate({ scrollTop: theOffset.top - 25 });
-    }, 310); // ensure the collapse animation is done
-});
-$("#accordionOpen").accordion({ header: "h1", collapsible: false, active: false, heightStyle: "content", animate: 300 });
-
-
-function getParameterByName(name) {
-    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-        results = regex.exec(location.search);
-    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-}
-var pageArea = getParameterByName('pg');
-if (pageArea == 'readings'){
-    displayWorshipAids();
-    displayReadings();
-    document.getElementById('readings').focus();
-    $('body,html').animate({ scrollTop: 1900 });
-} else if (pageArea == 'resources'){
-    displayWorshipAids();
-    displayResources();
-    document.getElementById('resources').focus();
-    $('body,html').animate({ scrollTop: 1900 });
-} else {
 }
 
 

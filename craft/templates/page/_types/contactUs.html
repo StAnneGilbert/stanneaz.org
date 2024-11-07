@@ -121,15 +121,15 @@
                 <p>
                   {{ siteWideContent.parishAddress }}<span class="dot">&middot;</span> <a href="{{ helpers.map_link(siteWideContent.parishAddress) }}" target="_blank">{{ "Map"|t }}</a><br>
                   <strong>{{ "OFFICE"|t }}</strong> {{ siteWideContent.parishPhoneNumber }}<br>
-                  <strong>{{ "FAX"|t }}</strong> {{ siteWideContent.parishFaxNumber }}
+                  <strong>{{ "FAX"|t }}</strong> {{ siteWideContent.parishFaxNumber }}<br>
+                  <strong><a href="https://stanneaz.org/img/general/resources/St-Anne-Campus-Map.jpg" target="_blank">Campus Map</a></strong>
                 </p>
                 {% cache globally for 1 year %}
                 {% if siteWideSocialLinks.socialLinks.exists() %}
                   <ul class="social-circles">
                     {% for service in siteWideSocialLinks.socialLinks.all() %}
-                      {% set link = service.serviceUrl %}
                         <li>
-                          <a href="{{ link.url }}" class="bg-{{ service.service }}">
+                          <a href="{{ service.serviceUrl }}" class="bg-{{ service.service }}">
                             <i class='fa fa-{{ service.service }}'></i>
                           </a>
                         </li>
@@ -142,11 +142,14 @@
                 
                 {% if craft.app.language == "es-US" %}
                 
-                    <b>La Aplicación móvil de <br/>Sta. Ana</b> para <a href="https://itunes.apple.com/us/app/parroquia-catolica-sta.-ana/id978905589" target="_blank">iPhone</a>, <a href="https://play.google.com/store/apps/details?id=com.subsplash.thechurchapp.s_4G33NG" target="_blank">Android</a>, y <a href="http://www.windowsphone.com/en-us/store/app/parroquia-católica-de-sta-ana/d4bbdfb9-510e-498c-b81a-8eb7fe523127" target="_blank">Windows</a>.
+                    <b>La Aplicación móvil de <br/>Sta. Ana</b><br>
+                    <a href="https://parishsoft.ministryone.com/landing/GOo" target="_blank" class="btn btn-light-blue">Descargar la App</a>
+                
                     
                 {% else %}
                 
-                    <b>St. Anne Mobile App</b> for <a href="https://itunes.apple.com/us/app/st.-anne-roman-catholic-parish/id962170758?mt=8&amp;ign-mpt=uo%3D4" target="_blank">iPhone</a>, <a href="https://play.google.com/store/apps/details?id=com.subsplash.thechurchapp.s_X3BW7W" target="_blank">Android</a>, and <a href="http://www.windowsphone.com/en-us/store/app/st-anne-roman-catholic-parish/2a195917-7357-4d24-ab52-7d511b8ae6a4" target="_blank">Windows</a>.
+                    <b>St. Anne Mobile App</b><br>
+                    <a href="https://parishsoft.ministryone.com/landing/GOo" target="_blank" class="btn btn-light-blue">Download the App</a>
                 
                 {% endif %}
                 
