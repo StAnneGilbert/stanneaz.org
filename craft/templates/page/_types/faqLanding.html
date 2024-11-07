@@ -1,8 +1,5 @@
 {% import '_helpers/index' as helpers %}
-<style>
-    #parishioneraddress{display:none}
-    .cancelledItem{color:#c00;font-weight:bold}
-</style>
+
   <!-- .sf-content for flex sticky footer -->
   <div class="sf-content nav-slide-element" data-swiftype-name="body" data-swiftype-type="text">
     <div class="page-photo-title" {% if entry.pageImage.exists() %}style=" background-image:url({{ entry.pageImage.one().url }})" {% endif %}>
@@ -17,24 +14,14 @@
       <div class="container standard-container">
         
         {{ entry.body }}
-		
         
         {{ entry.bodyb }}
         
-        
-        {{ entry.bodyc }}
-        
         {{ entry.scriptarea|raw }}
         
-        {{ entry.bodyd }}
-        
-                
-        {{ entry.bodyBelowEverything }}
-
         
       </div> <!-- .container -->
     </div> <!-- .page-content-container -->
   </div> <!-- .sf-content -->
   
-
-  
+ 

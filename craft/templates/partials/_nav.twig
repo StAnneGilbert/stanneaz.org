@@ -79,7 +79,7 @@
 				{% for subPage in subPages %}
 
 					{# List sub-menu navigation item #}
-					<li {% if subPage.hasDescendants and subPage.title != 'Community of Ministries' and subPage.title != 'Comunidad de Ministerios' and subPage.title != 'Events and Activities' and subPage.title != 'Eventos' and subPage.title != 'Give' and subPage.title != 'Donar por Internet' and subPage.title != 'Serve' and subPage.title != 'Servir' %}class="has-menu2"{% endif %}>
+					<li {% if subPage.hasDescendants and subPage.title != 'Events and Activities' and subPage.title != 'Eventos' and subPage.title != 'Give' and subPage.title != 'Donar por Internet' and subPage.title != 'Serve' and subPage.title != 'Servir' and subPage.title != 'Ways to Contribute' and subPage.title != 'Faith Formation' and subPage.title != 'Ministries' %}class="has-menu2"{% endif %}>
 						<a href="{{ subPage.getUrl }}">{{ subPage.title }}</a>
 						{% if subPage.hasDescendants %}
 							{% set thirdLevels = subPage.getChildren().all() %}
