@@ -18,11 +18,22 @@
           {% if post.mediaSeason.exists() %}
             <a href="?q=season:{{ post.mediaSeason.one().id }}" class="item-url">{{ post.mediaSeason.one().title }}</a>
           {% endif %}
-          <div class="excerpt">
-            <p>{{ post.body | chop(limit=120, unit='c') }} <a href="{{ post.url }}">{{ "Read more"|t }}</a></p>
-            <p class="muted">{{ post.mediaDate|date('F d, Y') }} {% if post.speaker.exists() %} &nbsp;&middot;&nbsp;{{ post.speaker.one().title }} {% endif %}</p>
+          <p class="muted">{{ post.mediaDate|date('F d, Y') }} {% if post.speaker.exists() %} &nbsp;&middot;&nbsp;{{ post.speaker.one().title }} {% endif %}</p>
           </div>
-        </div>
+          <div class="excerpt">
+            <p>{% if post.lead %}{{ post.lead | chop(limit=140, unit='c') }} ... <a href="{{ post.url }}">{{ "Read more"|t }}</a>{% endif %}</p>
+          </div>
+          {% if post.audio.exists() %}
+              <div style="font-size:120%">
+                  <div style="margin:5px 0">
+                    <a class="action-icon" data-audio data-id='{{ post.id }}' data-title="{{ entry.title }}">
+                        <i class="fa fa-volume-up"> &nbsp;Listen</i>
+                    </a>
+                  </div>
+                
+                  <a href="{{ post.audio.one().url }}" target="_blank" download><i class="fa fa-download"> &nbsp;Download</i></a>
+               </div>
+           {% endif %}
       </div> <!-- .content-summary-block -->
     {% endfor %}
 

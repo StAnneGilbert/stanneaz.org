@@ -3,22 +3,11 @@
 /**
  * Craft web bootstrap file
  */
- 
-// Project root path
-$root = dirname(__DIR__, 2);
 
-define('CRAFT_SITE', 'es_us');
+// Load shared bootstrap
+require dirname(__DIR__, 2) . '/bootstrap.php';
 
-// Load Composer's autoloader
-require_once $root.'/vendor/autoload.php';
-
-// Load dotenv?
-if (file_exists($root.'/.env')) {
-    $dotenv = new Dotenv\Dotenv($root);
-    $dotenv->load();
-}
-
-// Craft
-define('CRAFT_BASE_PATH', $root);
-$app = require CRAFT_BASE_PATH.'/vendor/craftcms/cms/bootstrap/web.php';
+// Load and run Craft
+/** @var craft\web\Application $app */
+$app = require CRAFT_VENDOR_PATH . '/craftcms/cms/bootstrap/web.php';
 $app->run();

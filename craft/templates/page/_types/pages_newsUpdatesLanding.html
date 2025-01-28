@@ -1,0 +1,22 @@
+  <!-- .sf-content for flex sticky footer -->
+  <div class="sf-content nav-slide-element">
+
+    <div class="page-content-container">
+      <div class="container standard-container">
+
+        
+        <h3>{{ entry.title }}</h3>
+        {{ entry.body }}
+        <h3 class="small">{{ "Find and filter posts below"|t }}</h3>
+            
+
+        {% include "partials/filters/_news-updates-filters" %}
+        
+        {% if craft.app.request.getParam('q') %}
+          {% include "news/_filtered" %}
+        {% else %}
+          {% include "news/_landing" %}
+        {% endif %} 
+      </div> <!-- .container -->
+    </div> <!-- .page-content-container -->
+  </div> <!-- .sf-content -->
