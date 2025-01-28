@@ -37,7 +37,7 @@
     {% for bulletin in bulletins %}
       <p class="bulletinItem">
         {% if bulletin.bulletinDate is not empty %}
-          <a href="{% if bulletin.bulletinPdf is not empty %}{{ bulletin.bulletinPdf.one().getUrl() }}{% elseif bulletin.bulletinInsertUrl is not empty %}{{ bulletin.bulletinInsertUrl.url }}{% endif %}" target="_blank"><img alt="" src="{% if bulletin.bulletinImage is not empty %}{{ bulletin.bulletinImage.one().getUrl() }}{% elseif bulletin.bulletinInsertUrl is not empty %}/bulletins/bulletinInsert.jpg{% else %}/bulletins/cover-main.png{% endif %}" border="0" /> {% if bulletin.heading is not empty %}{{bulletin.heading }}{% elseif craft.app.language == 'es-US' %}{{ bulletin.bulletinDate|date('d F, Y') }}{% else %}{{ bulletin.bulletinDate|date('F d, Y') }}{% endif %}</a>
+          <a href="{% if bulletin.bulletinPdf is not empty %}{{ bulletin.bulletinPdf.one().getUrl() }}{% elseif bulletin.bulletinInsertUrl is not empty %}{{ bulletin.bulletinInsertUrl.url }}{% endif %}" target="_blank"><img alt="" src="{% if bulletin.bulletinImage is not empty %}{{ bulletin.bulletinImage.one().getUrl() }}{% elseif bulletin.bulletinInsertUrl is not empty %}/bulletins/bulletinInsert.jpg{% else %}https://stanneaz.org/bulletins/cover-main.png{% endif %}" border="0" /> {% if bulletin.heading is not empty %}{{bulletin.heading }}{% elseif craft.app.language == 'es-US' %}{{ bulletin.bulletinDate|date('d F, Y') }}{% else %}{{ bulletin.bulletinDate|date('F d, Y') }}{% endif %}</a>
           
         {% endif %}
       </p> <!-- .bulletinItem -->

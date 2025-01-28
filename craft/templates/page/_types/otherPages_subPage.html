@@ -1,0 +1,81 @@
+
+{%- set parent = craft.entries.section('pages').slug(craft.app.request.getSegment(1)).one() -%}
+{%- set children = entry.getDescendants(1) -%}
+
+{% macro recursiveChildren(page) %}
+  {% if page.hasDescendants and page.slug == craft.app.request.getSegment(page.level) %}
+    <ul>
+      {% for subpage in page.children.all() %}
+          <li{% if subpage.slug == craft.app.request.getSegment(subpage.level) %} class="selected"{% endif %}>
+            {{ subpage.link }}
+            {{ _self.recursiveChildren(subpage) }}
+          </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endmacro %}
+  <!-- .sf-content for flex sticky footer -->
+  <div class="sf-content nav-slide-element" data-swiftype-name="body" data-swiftype-type="text">
+    <div class="page-photo-title" {% if entry.pageImage.exists() %}style=" background-image:url({{ entry.pageImage.one().url }})"{% endif %}>
+      <div class="overlay">
+        <div class="container">
+          <h1 class="caps-header">{{ entry.heading }}</h1>
+        </div>
+      </div>
+    </div>
+    {% if children.exists() %}
+      <div class="section-navigation fixedsticky">
+        <div class="container">
+          <ul>
+            {% if entry.parent %}
+              <li style='font-weight:600;'> {{ entry.parent.link }} </li>
+            {% endif %}
+              {% nav page in children.all() %}
+                <li {% if page.id == entry.id or entry.isDescendantOf(page) %}class="selected"{% endif %}>
+                    {% if page.id == entry.id %}
+                      <span>{{page.title}}</span>
+                    {% else %}
+                      {{ page.getLink() }}
+                    {% endif %}
+                </li>
+              {% endnav %}
+          </ul>
+        </div>
+      </div>
+    {% else %}
+      {% set children = entry.getSiblings() %}
+       <div class="section-navigation fixedsticky">
+        <div class="container">
+          <ul>
+          {% if entry.parent %}
+            <li style='font-weight:600;'> {{ entry.parent.link }} </li>
+          {% endif %}
+              {% nav page in children.all() %}
+                <li {% if page.id == entry.id or entry.isDescendantOf(page) %}class="selected"{% endif %}>
+                    {% if page.id == entry.id %}
+                      <span>{{page.title}}</span>
+                    {% else %}
+                      {{ page.getLink() }}
+                    {% endif %}
+                </li>
+              {% endnav %}
+          </ul>
+        </div>
+      </div> 
+    {% endif %}
+
+
+    <div class="page-content-container">
+      <div class="container standard-container">
+        {{ entry.body }}
+        
+        {{ entry.scriptarea|raw }}
+        
+        {{ entry.lead|raw }}
+        
+      </div> <!-- .container -->
+    </div> <!-- .page-content-container -->
+  </div> <!-- .sf-content -->
+  
+
+  
