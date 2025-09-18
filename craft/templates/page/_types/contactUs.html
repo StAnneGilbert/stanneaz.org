@@ -155,7 +155,13 @@
                 
                 <hr>
                 
-                <h6>{{ "Parish office hours"|t }}</h6>
+                <!--h6>{{ "Parish office hours"|t }}</h6-->
+                {% if craft.app.language == "es-US" %}
+                    <h6>Horario de oficina de la parroquia en agosto</h6>
+                {% else %}
+                    <h6>August Parish Office Hours</h6>
+                {% endif %}
+
                 {% if siteWideContent.parishOfficeHours.exists() %}
                   <p>
                     {% cache globally for 1 month %}

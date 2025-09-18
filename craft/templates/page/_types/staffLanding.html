@@ -43,13 +43,14 @@
             
           </div> <!-- .staff-member -->
       
-          {% if person.bio is not empty %}
-            <div class='staff-member'>
+          {#% if person.bio is not empty %}
+            <!--div class='staff-member'>
               <div class='col col-name'>
               {{ person.bio }}
               </div>
-            </div>   
-          {% endif %}
+            </div-->   
+          {% endif % #}
+          
       {% endfor %}
       </div> <!-- .staff-group -->
     {% endfor %}
@@ -108,11 +109,11 @@
           </div> <!-- .staff-member -->
       
           {# % if person.bio is not empty %}
-            <div class='staff-member'>
+            <!--div class='staff-member'>
               <div class='col col-name'>
               {{ person.bio }}
               </div>
-            </div>   
+            </div-->   
           {% endif % #}
           
       {% endfor %}

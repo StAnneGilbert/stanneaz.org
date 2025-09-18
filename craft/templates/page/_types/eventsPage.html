@@ -36,6 +36,46 @@
         
         </div>
     </div> <!-- .row -->
+    
+    
+    
+    <br>
+    <h3>{{ "St. Anne Community Events, Announcements, and Information"|t }}</h3>
+    
+    <p>
+        These promotions are provided by members of the St. Anne Community and are not necessarily sponsored by St. Anne Roman Catholic Parish. Official St. Anne events will also be displayed in this area, along with other information promoted by our community.  You can subscribe to these promotions by joining <a href="https://stanneaz.flocknote.com/GeneralOpenForum" target="_blank">the St. Anne General Open Forum group on Flocknote</a>.
+    </p>
+    
+    {% set flockFeed = craft.feedreader.getFeed("https://rss.flocknote.com/271167", 43200, true) %}
+    
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="featured-media-grid clearfix">
+    
+    
+    {% for item in flockFeed.items %}
+     
+            <div class="featured-media-box">
+              <div class="details">
+                <h4 class="seth"><a href="{{ item.permalink }}" target="_blank">{{ item.title }}</a></h4>
+                <a href="{{ item.permalink }}" target="_blank"><span class="postBody" style="height:130px;display:block;color:#333;">{{ item.summary }}</span>
+                  <span style="height:50px;display:block;color:#333">
+                    <strong>Date this was published on Flocknote:</strong><br>
+                    {{ item.date|date("l, M d, Y") }}
+                  </span>
+                </a>
+                <p class="more muted">
+                  <a href="{{ item.permalink }}" target="_blank">{{ "Read More"|t }}</a>
+                </p>
+              </div>
+            </div>
+        
+    {% endfor %}
+    
+        </div>
+      </div>
+    </div> <!-- .row -->
+    
         <br>
         {% if craft.app.language == 'es-US' %}
             <h3><a href="http://dphx.org/events/?lang=es" target="_blank">Haga clic aquí para eventos en la Diócesis de Phoenix</a></h3>
