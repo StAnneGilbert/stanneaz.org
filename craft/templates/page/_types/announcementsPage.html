@@ -12,7 +12,7 @@
     
      <div class="row">
       <div class="col-lg-7 col-md-7 col-sm-7">
-        <h3>{{ "Announcements from Flocknote"|t }}</h3>
+        <h3>{{ "Announcements"|t }}</h3>
       </div>
       <div class="col-lg-5 col-md-5 col-sm-5 action-links" style="text-align:right">
         {% if craft.app.language == "en-US" %}
@@ -25,6 +25,63 @@
               
        </div>
     </div>
+    
+    
+{% if craft.app.language == "es-US" %}
+    <div class="row">
+        <div class="col-lg-12">
+            <p>
+        Estos anuncios son publicados por miembros del personal de St. Anne en <a href="https://stanneaz.flocknote.com/Announcements" target="_blank">el grupo «Anuncios» de Flocknote</a>.
+            </p>
+        </div>
+    </div> <!-- .row -->
+    
+    
+    
+     {% set spFeed = craft.feedreader.getFeed("https://rss.flocknote.com/272873", 43200, true) %}
+    
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="featured-media-grid clearfix">
+    
+    
+    {% for item in spFeed.items %}
+     
+            <div class="featured-media-box">
+              <div class="details">
+                <h4 class="seth"><a href="{{ item.permalink }}" target="_blank">{{ item.title }}</a></h4>
+                <a href="{{ item.permalink }}" target="_blank"><span class="postBody" style="height:130px;display:block;color:#333;">{{ item.summary }}</span>
+                  <span style="height:50px;display:block;color:#333">
+                    <strong>Fecha en que se publicó en Flocknote:</strong><br>
+                    {{ item.date|date("l, M d, Y") }}
+                  </span>
+                </a>
+                <p class="more muted">
+                  <a href="{{ item.permalink }}" target="_blank">{{ "Read More"|t }}</a>
+                </p>
+              </div>
+            </div>
+        
+    {% endfor %}
+    
+        </div>
+      </div>
+    </div> <!-- .row -->
+    
+    
+    
+    <div class="row">
+      <div class="col-lg-7 col-md-7 col-sm-7">
+        <h3>{{ "Announcements in English"|t }}</h3>
+      </div>
+      <div class="col-lg-5 col-md-5 col-sm-5 action-links" style="text-align:right">
+            <a style="display:inline-block" href="https://stanneaz.flocknote.com/Announcements" target="_blank"><i class="fa fa-rss"></i> Announcement Notifications</a> &nbsp; 
+             <a style="display:inline-block" class="btn btn-sm btn-dark-blue" href="https://stanneaz.flocknote.com/Announcements" target="_blank">Sign Me Up!</a>
+       </div>
+    </div>
+    
+    
+{% endif %}
     
     
     <div class="row">
